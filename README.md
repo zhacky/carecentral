@@ -17,21 +17,24 @@ Example http requests can be found in the `api-tests.http` file.
 carecentral/
 ├── src/
 │   ├── app/
-│   │   ├── app.component.ts
-│   │   ├── app.component.html
-│   │   ├── app.component.cs
-│   ├── app/
 │   │   ├──core/
 │   │   │   ├── interceptors/ 
 │   │   │   ├── models/ 
 │   │   │   ├── services/
+
+│   │   ├──features/ 
+│   │   │   ├──dashboard/
+
 │   │   ├──shared/
 │   │   │   ├──components/
-│   │   ├──features/ 
-│   │   │   ├──dashboards/
+
+│   │   ├── app.component.ts
+│   │   ├── app.component.html
+│   │   ├── app.component.css
+
 │   ├── environments/
 │   │   ├── environment.ts
-│   │   └── environment.prod.ts
+│   │   └── environment.development.ts
 │   ├── index.html
 │   ├── main.ts
 │   ├── styles.css
@@ -47,6 +50,8 @@ carecentral/
 ✅ Make sure all shared or common components are created in the `src/app/shared/components` directory.
 
 ✅ Make sure all standalone components (pages) are created in the `src/app/features/` directory.
+
+✅ Make sure to add routes for all components in the `src/app/app-routes.ts` file.
 
 ### Models (or interfaces):
 Models are used to define the structure of the data that is being passed around in the application.
