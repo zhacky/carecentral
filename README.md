@@ -1,6 +1,61 @@
-# Carecentral
+# Care Central HMS
 
+## This is the frontend for the Carecentral project. It is built using Angular.
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
+
+To test this against an API, you can download the [Carecentral API](https://drive.google.com/file/d/18CdljW7tFoE6GR_S52H1C2RMZLEHIWf_/view?usp=sharing) and run it using the following command:
+```bash
+java -jar api-runner.jar
+```
+_You must have Java with minimum version 17 installed on your machine to run the API._
+
+Example http requests can be found in the `api-tests.http` file.
+
+## Instructions
+### Structure:
+```
+carecentral/
+├── src/
+│   ├── app/
+│   │   ├── app.component.ts
+│   │   ├── app.component.html
+│   │   ├── app.component.cs
+│   ├── app/
+│   │   ├──core/
+│   │   │   ├── interceptors/ 
+│   │   │   ├── models/ 
+│   │   │   ├── services/
+│   │   ├──shared/
+│   │   │   ├──components/
+│   │   ├──features/ 
+│   │   │   ├──dashboards/
+│   ├── environments/
+│   │   ├── environment.ts
+│   │   └── environment.prod.ts
+│   ├── index.html
+│   ├── main.ts
+│   ├── styles.css
+│   └── test.ts
+├── angular.json
+├── package.json
+├── tsconfig.json
+└── tslint.json
+
+```
+
+### Components:
+✅ Make sure all shared or common components are created in the `src/app/shared/components` directory.
+
+✅ Make sure all standalone components (pages) are created in the `src/app/features/` directory.
+
+### Models (or interfaces):
+Models are used to define the structure of the data that is being passed around in the application.
+In Typescript, they are called interfaces.
+
+✅ Make sure all models are created in the `src/app/core/models` directory.
+
+
+
 
 ## Development server
 

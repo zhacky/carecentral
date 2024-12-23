@@ -1,0 +1,49 @@
+### GET Authorization request to localhost
+@token =eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MzQ5MjUxNjYsInN1YiI6InRlc3RAZXhhbXBsZS5jb20iLCJpc3MiOiJLb3RsaW4mU3ByaW5nIiwiZXhwIjoxNzM1Nzg5MTY2fQ.P43Mz7kuKBo2u18_NWKvotA21RuAN5GE-NB6gpucE5s
+GET http://localhost:8080/api/user
+Authorization: Token {{token}}
+
+### POST Login request to localhost
+POST http://localhost:8080/api/users/login
+Content-Type: application/json
+
+{
+  "user": {
+    "email": "test@example.com",
+    "password": "password"
+  }
+}
+
+### POST Register request to localhost
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "user": {
+    "email": "test@example.com",
+    "username": "test",
+    "password": "password"
+  }
+}
+
+### GET Articles request to localhost
+GET http://localhost:8080/api/articles
+Authorization: Token {{token}}
+
+### POST Articles request to localhost
+POST http://localhost:8080/api/articles
+Authorization: Token {{token}}
+Content-Type: application/json
+
+{
+  "article": {
+    "title": "How to train your dragon",
+    "description": "Ever wonder how?",
+    "body": "You have to believe",
+    "tagList": ["reactjs", "angularjs", "dragons"]
+  }
+}
+
+### GET Tags request to localhost
+GET http://localhost:8080/api/tags
+Authorization: Token {{token}}
