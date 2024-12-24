@@ -1,0 +1,21 @@
+.horizontal-nav {
+    display: flex; /* Use flexbox for horizontal layout */
+    flex-direction: row; /* Arrange items in a row */
+    align-items: center; /* Align items vertically in the center */
+    gap: 10px; /* Space between items */
+    border: rgb(13, 5, 59) 1px solid; /* Optional: Add a border */
+    border-radius: 5px; /* Optional: Add rounded corners */
+
+  }
+  
+  mat-list-item {
+    display: inline-flex; /* Ensure the list items do not stack vertically */
+    align-items: center;
+  }
+  
+  mat-list-item a {
+    text-decoration: none; /* Optional: Remove underline from links */
+    color: inherit; /* Optional: Use the default text color */
+    padding: 5px 10px; /* Optional: Add padding for clickable area */
+  }
+  
