@@ -1,0 +1,44 @@
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ccb1b1;
+  }
+  
+  mat-card {
+    width: 100%;
+    max-width: 600px;
+    max-height: 600px;
+    padding: 20px;
+  }
+
+  span {
+    color: purple
+  }
+
+  p {
+    position: relative;
+    left: 40%;
+    font-weight: 405;
+  }
+  
+  mat-form-field.full-width {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    position: relative;
+    margin-top: 10px;
+    left: 18%;
+    font-size: 25px;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: rgb(54, 34, 54)
+  }
+  
+  button {
+    width: 100%;
+  }
+  
