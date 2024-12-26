@@ -1,0 +1,62 @@
+<div class="profile-container">
+    <mat-card class="profile-card">
+      <div class="profile-header">
+        <img src="images/img.jpg" alt="Profile Image" class="profile-image" loading="lazy" />
+        <div class="profile-info">
+          <h2>John Doe</h2>
+          <p>Software Developer</p>
+          <button mat-flat-button (click)="openEditProfileDialog()">Edit Profile</button>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="profile-details">
+        <mat-grid-list cols="2" rowHeight="150px" gutterSize="16px">
+          <mat-grid-tile>
+            <mat-card class="detail-card">
+              <mat-card-header>
+                <mat-icon>email</mat-icon>
+                <mat-card-title>Email</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p>johndoe&#64;example.com</p>
+              </mat-card-content>
+            </mat-card>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-card class="detail-card">
+              <mat-card-header>
+                <mat-icon>phone</mat-icon>
+                <mat-card-title>Phone</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p>+123 456 7890</p>
+              </mat-card-content>
+            </mat-card>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-card class="detail-card">
+              <mat-card-header>
+                <mat-icon>location_on</mat-icon>
+                <mat-card-title>Location</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p>San Francisco, CA</p>
+              </mat-card-content>
+            </mat-card>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-card class="detail-card">
+              <mat-card-header>
+                <mat-icon>work</mat-icon>
+                <mat-card-title>Position</mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p>Frontend Developer</p>
+              </mat-card-content>
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </mat-card>
+  </div>
+  

@@ -1,0 +1,64 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #acacad, #ffffff);
+  }
+  
+  .profile-card {
+    width: 900px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+  }
+  
+  .profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 16px;
+  }
+  
+  .profile-info h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .profile-info p {
+    margin: 4px 0;
+    color: gray;
+  }
+  
+  .profile-details {
+    margin-top: 16px;
+  }
+  
+  .detail-card {
+    text-align: center;
+    background: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .detail-card mat-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  mat-card {
+    border: 1px solid #9ba39b; /* Add border with a specific color */
+    border-radius: 10px; /* Optional: Add rounded corners */
+  }
+  
+  mat-icon {
+    margin-right: 8px;
+    color: #3f51b5;
+  }
+  
