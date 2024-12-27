@@ -1,23 +1,43 @@
 .profile-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     height: 100vh;
+    padding-left: 75px;
     background: linear-gradient(135deg, #acacad, #ffffff);
   }
   
   .profile-card {
-    width: 900px;
+    width: 400px;
+    height: 500px;
+    display: flex;
     padding: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
   }
+
+  .profile-card2 {
+    width: 950px;
+    height: 500px;
+    display: flex;
+    padding: 16px;
+    margin-left: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+  }
+
+  .profile-card2 mat-divider {
+    width: 100%;
+    margin: 0;
+  }
+  
   
   .profile-header {
     display: flex;
     align-items: center;
     margin-bottom: 16px;
   }
+
   
   .profile-image {
     width: 80px;
@@ -51,6 +71,45 @@
     align-items: center;
     justify-content: center;
   }
+  
+  .bio {
+    width: 50%;
+    position: relative;
+  }
+
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 240px;
+  }
+
+  .info {
+    font-weight: 405;
+    font-family: 'Roboto', sans-serif;
+    color: rgb(75, 70, 70);
+  }
+
+  .profile-info2 {
+    display: flex;
+    flex-direction: column; /* Default is row, but you can specify it explicitly */
+    align-items: self-start; /* Align items vertically if needed */
+    gap: 8px; /* Add spacing between items */
+    margin-top: 20px;
+    font-size: small;
+    color: #554e4e;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  }
+
+  .profile-info2 mat-chip {
+    width: 100%; 
+  }
+
+  .description {
+    color: #554e4e; 
+  }
+
 
   mat-card {
     border: 1px solid #9ba39b; /* Add border with a specific color */
@@ -60,5 +119,9 @@
   mat-icon {
     margin-right: 8px;
     color: #3f51b5;
+  }
+
+  h2 {
+    color: #554e4e;
   }
   

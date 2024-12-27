@@ -7,6 +7,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { EditProfileDialogComponent } from '../../shared/components/edit-profile-dialog/dialog.component';
 import { Component } from '@angular/core';
+import {MatListModule} from '@angular/material/list';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 @Component({
@@ -17,7 +20,10 @@ import { Component } from '@angular/core';
         MatButtonModule,
         MatDividerModule,
         MatGridListModule,  
-        MatDialogModule 
+        MatDialogModule, 
+        MatListModule,
+        MatChipsModule,
+        MatProgressBarModule
     ],
     templateUrl: './profile.component.html',
     standalone: true,

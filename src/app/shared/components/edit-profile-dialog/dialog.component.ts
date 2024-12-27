@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -12,6 +13,7 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatDialogModule,
     FormsModule,
+    MatButtonModule
   ],  
   selector: 'app-edit-profile-dialog',
   templateUrl: './dialog.component.html',
