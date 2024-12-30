@@ -5,6 +5,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,8 @@ import { MatListModule } from '@angular/material/list';
     MatFormFieldModule,
     MatButtonModule,
     ReactiveFormsModule,
-    MatListModule
+    MatListModule,
+    RouterModule
   ],
   templateUrl: './app.component.html',
   standalone: true,
