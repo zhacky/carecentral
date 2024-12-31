@@ -74,7 +74,7 @@
   
   .bio {
     width: 50%;
-    position: relative;
+    position: absolute
   }
 
   .center {
@@ -107,7 +107,8 @@
   }
 
   .description {
-    color: #554e4e; 
+    color: #554e4e;
+    text-align: justify;
   }
 
 
