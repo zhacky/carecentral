@@ -4,6 +4,7 @@ import {RegisterComponent} from './core/auth/register/register.component';
 import {DashboardComponent} from './features/dashboard/dashboard.component';
 import {ProfileComponent} from './features/profile/profile.component';
 import { Sidenav } from './shared/components/sidenav/sidenav.component';
+import { PatientInformationComponent } from './features/patient-information/patient-information.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -16,6 +17,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'profile', pathMatch: 'full' },
       { path: 'profile', component: ProfileComponent },
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'patient',component: PatientInformationComponent }
     ],
   },
 
