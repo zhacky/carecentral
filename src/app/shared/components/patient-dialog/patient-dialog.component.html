@@ -1,0 +1,39 @@
+<h2 mat-dialog-title class="title">Add Patient</h2>
+<mat-dialog-content>
+  <form>
+    <mat-form-field class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="profile.name" name="name" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Last Name</mat-label>
+      <input matInput type="email" [(ngModel)]="profile.email" name="email" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Birthday</mat-label>
+        <input matInput [(ngModel)]="profile.birtday" name="phone" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Phone</mat-label>
+      <input matInput [(ngModel)]="profile.phone" name="phone" />
+    </mat-form-field>
+   
+    <mat-form-field class="full-width">
+        <mat-label>Address</mat-label>
+        <input matInput [(ngModel)]="profile.address" name="phone" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+        <mat-label>Gender</mat-label>
+        <input matInput [(ngModel)]="profile.gender" name="phone" />
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button (click)="save()">Save</button>
+</mat-dialog-actions>
