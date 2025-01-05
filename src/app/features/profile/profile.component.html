@@ -1,37 +1,34 @@
 <div class="flex">
   <div class="profile-container">
-      <mat-card class="profile-card">
-        <div class="profile-header">
-          <img src="images/img.jpg" alt="Profile Image" class="profile-image" loading="lazy" />
-          <div class="profile-info">
-            <h2>John Doe</h2>
-            <p>Software Developer</p>
-          </div>
+    <mat-card class="profile-card">
+      <div class="profile-header">
+        <img src="images/img.jpg" alt="Profile Image" class="profile-image" loading="lazy" />
+        <div class="profile-info">
+          <h2>{{ profile.name }}</h2>
+          <p>{{ profile.position }}</p>
         </div>
-        <mat-divider></mat-divider>
-        <p class="description">Hi! I'm a software developer at Antajia Software Development Services. I'm an introvert type of person but really good in solving complex problem</p>
-        <div class="center">
-          <button class="bio" mat-flat-button (click)="openEditProfileDialog()">Edit Profile</button>
-        </div> 
-      </mat-card>
+      </div>
+      <mat-divider></mat-divider>
+      <p class="description">Hi! I'm a software developer at Antajia Software Development Services. I'm an introvert type of person but really good in solving complex problem</p>
+      <div class="center">
+        <button class="bio" mat-flat-button (click)="openEditProfileDialog()">Edit Profile</button>
+      </div> 
+    </mat-card>
 
-      <mat-card class="profile-card2">
-        <mat-card-title class="info">Personal Information</mat-card-title>
-        <div class="profile-info2">
-          <span>FullName</span>
-          <mat-chip>John Doe</mat-chip>
-          <span>Email</span>
-          <mat-chip>john&#64;gmail.com</mat-chip>
-          <span>Phone</span>
-          <mat-chip>(555) 123-6789</mat-chip>
-          <span>Address</span>
-          <mat-chip>(555) 123-6789</mat-chip>
-          <span>Address</span>
-          <mat-chip>123 Maple Street, Springfield, IL 62704, USA</mat-chip>
-          <span>Position</span>
-          <mat-chip>Software Developer</mat-chip>
-        </div>
-      </mat-card>
-    </div>
+    <mat-card class="profile-card2">
+      <mat-card-title class="info">Personal Information</mat-card-title>
+      <div class="profile-info2">
+        <span>Full Name</span>
+        <mat-chip>{{ profile.name }}</mat-chip>
+        <span>Email</span>
+        <mat-chip>{{ profile.email }}</mat-chip>
+        <span>Phone</span>
+        <mat-chip>{{ profile.phone }}</mat-chip>
+        <span>Address</span>
+        <mat-chip>{{ profile.address }}</mat-chip>
+        <span>Position</span>
+        <mat-chip>{{ profile.position }}</mat-chip>
+      </div>
+    </mat-card>
+  </div>
 </div>
-  

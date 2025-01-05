@@ -30,18 +30,27 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     styleUrl: './profile.component.css'
   })
   export class ProfileComponent {
+    profile = {
+      name: 'John Doe',
+      email: 'john@gmail.com',
+      phone: '(555) 123-6789',
+      address: '123 Maple Street, Springfield, IL 62704, USA',
+      position: 'Software Developer'
+    };
+
     constructor(private dialog: MatDialog) {}
 
     openEditProfileDialog(): void {
         console.log('Opening edit profile dialog');
         const dialogRef = this.dialog.open(EditProfileDialogComponent, {
         width: '400px',
+        data: { profile: this.profile }
         });
 
         dialogRef.afterClosed().subscribe((result: any) => {
         if (result) {
             console.log('Updated profile:', result);
-            // Update the profile on the main page
+            this.profile = result;
         }
         });
     }

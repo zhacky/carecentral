@@ -29,18 +29,25 @@ export class PatientInformationComponent implements AfterViewInit {
   }
 
   openPatientDialog(): void {
-          console.log('Opening edit profile dialog');
-          const dialogRef = this.dialog.open(AddPatientDialogComponent, {
-          width: '400px',
-          });
-  
-          dialogRef.afterClosed().subscribe((result: any) => {
-          if (result) {
-              console.log('Updated profile:', result);
-              // Update the profile on the main page
-          }
-          });
+    console.log('Opening add patient dialog');
+    const dialogRef = this.dialog.open(AddPatientDialogComponent, {
+      width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        console.log('Updated profile:', result);
+        // Update the data source with the new patient data
+        const newPatient: PeriodicElement = {
+          position: this.dataSource.data.length + 1,
+          name: result.name,
+          lastName: result.lastName,
+          gender: result.gender
+        };
+        this.dataSource.data = [...this.dataSource.data, newPatient];
       }
+    });
+  }
 }
 
 

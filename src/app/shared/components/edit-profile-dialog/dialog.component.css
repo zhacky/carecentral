@@ -6,3 +6,8 @@
   .title {
     color: #554e4e; 
   }
+
+  .snackbar-success {
+    background-color: #4caf50; /* Green */
+    color: white;
+  }
