@@ -5,6 +5,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   imports: [
@@ -21,20 +23,24 @@ import { FormsModule } from '@angular/forms';
 })
 export class AddPatientDialogComponent {
   profile = {
-    name: '',
-    email: '',
-    phone: '',
+    name: 'adsad',
+    lastName: 'asdasd',
+    birtday: '01/01/1990',
+    phone: '12321',
     address: '123 Main St., Anytown, USA',
     position: 'Software Developer',
-    birtday: '01/01/1990',
-    gender: ''
+    gender: 'Female'
   };
 
-  constructor(public dialogRef: MatDialogRef<AddPatientDialogComponent>) {}
+  constructor(public dialogRef: MatDialogRef<AddPatientDialogComponent>, private snackBar: MatSnackBar) {}
 
   save(): void {
     // Save the profile changes (send to API or update local data)
     console.log('Profile saved:', this.profile);
     this.dialogRef.close(this.profile);
+    this.snackBar.open('Added Patient successfully!', 'Close', {
+      duration: 5000,
+      panelClass: ['snackbar-success']
+    });
   }
 }

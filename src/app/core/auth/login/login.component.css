@@ -49,6 +49,11 @@
     font-family: Arial, Helvetica, sans-serif;
   }
 
+  .mat-mdc-snack-bar-container.mat-mdc-snackbar-surface {
+    background-color: #f44336; /* Red */
+    color: white;
+  }
+
 
 
 
