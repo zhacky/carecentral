@@ -8,8 +8,8 @@
       <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
         <mat-form-field>
           <mat-label>Email</mat-label>
-          <input matInput formControlName="email" type="email" />
-          <mat-error *ngIf="loginForm.get('email')?.invalid">
+          <input matInput formControlName="username" type="email" />
+          <mat-error *ngIf="loginForm.get('username')?.invalid">
             Please enter a valid email.
           </mat-error>
         </mat-form-field>
