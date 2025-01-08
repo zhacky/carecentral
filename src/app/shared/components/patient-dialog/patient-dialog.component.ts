@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import {provideNativeDateAdapter} from '@angular/material/core';
+import {MatDatepickerModule, MatCalendarCellClassFunction} from '@angular/material/datepicker';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
+
 
 @Component({
   imports: [
@@ -15,21 +18,37 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatInputModule,
     MatDialogModule,
     FormsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    ReactiveFormsModule
   ],  
+  providers: [provideNativeDateAdapter()],
   selector: 'app-patient-dialog',
   templateUrl: './patient-dialog.component.html',
   styleUrls: ['./patient-dialog.component.css'],
 })
 export class AddPatientDialogComponent {
   profile = {
-    name: 'adsad',
-    lastName: 'asdasd',
-    birtday: '01/01/1990',
-    phone: '12321',
-    address: '123 Main St., Anytown, USA',
-    position: 'Software Developer',
-    gender: 'Female'
+    name: '',
+    lastName: '',
+    birthday: '',
+    phone: '',
+    address: '',
+    position: '',
+    gender: ''
+  };
+
+  dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
+    // Only highligh dates inside the month view.
+    if (view === 'month') {
+      const date = cellDate.getDate();
+
+      // Highlight the 1st and 20th day of each month.
+      return date === 1 || date === 20 ? 'example-custom-date-class' : '';
+    }
+
+    return '';
   };
 
   constructor(public dialogRef: MatDialogRef<AddPatientDialogComponent>, private snackBar: MatSnackBar) {}
