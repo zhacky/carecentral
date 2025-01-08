@@ -1,0 +1,112 @@
+table {
+    width: 100%;
+    height: 100%;
+  }
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #554e4e;
+}
+
+.button {
+  margin-bottom: 10px;
+
+}
+
+.page-content {
+  border: 1px solid grey;
+  border-radius: 20px;
+  width: 90%;
+  overflow: hidden;
+  box-sizing: border-box; /* Includes border in the width */         
+  }
+
+ .parent {
+  margin-left: 130px;
+  padding: 20px;
+  flex-direction: column;
+  height: 100vh;
+ } 
+
+ /* Wrapper styles */
+.icon-wrapper {
+  display: inline-flex; /* Align icon centrally */
+  justify-content: center; /* Center the icon horizontally */
+  align-items: center; /* Center the icon vertically */
+  width: 30px; /* Set circle width */
+  height: 30px; /* Set circle height (same as width for a perfect circle) */
+  background-color: transparent; /* Default background */
+  border-radius: 50%; /* Make it a circle */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  text-decoration: none; /* Remove underline if using <a> */
+  color: #24924ea6; /* Default icon color */
+}
+
+/* Hover effect */
+.icon-wrapper:hover {
+  background-color: #f0f0f0; /* Light grey background on hover */
+  color: #195030; /* Change icon color on hover */
+  cursor: pointer; /* Show hand cursor */
+}
+
+/* Icon styling (optional) */
+.icon-wrapper i {
+  font-size: 16px; /* Adjust icon size */
+}
+
+.icon-wrapper2 {
+  display: inline-flex; /* Align icon centrally */
+  justify-content: center; /* Center the icon horizontally */
+  align-items: center; /* Center the icon vertically */
+  width: 30px; /* Set circle width */
+  height: 30px; /* Set circle height (same as width for a perfect circle) */
+  background-color: transparent; /* Default background */
+  border-radius: 50%; /* Make it a circle */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  text-decoration: none; /* Remove underline if using <a> */
+  color: #ff0d0db0; /* Default icon color */
+}
+
+/* Hover effect */
+.icon-wrapper2:hover {
+  background-color: #f0f0f0; /* Light grey background on hover */
+  color: #df7b7b; /* Change icon color on hover */
+  cursor: pointer; /* Show hand cursor */
+}
+
+/* Icon styling (optional) */
+.icon-wrapper2 i {
+  font-size: 16px; /* Adjust icon size */
+}
+
+.nurse {
+  color: #32CD32;
+  font-weight: 500;
+}
+
+.admin {
+  color: #1c65ad;
+  font-weight: 500;
+}
+
+.doctor {
+  color:#006400;
+  font-weight: 500;
+}
+
+.receptionist {
+  color:#0cb4b4da;
+  font-weight: 500;
+}
+
+.billing-staff {
+  color:#1E90FF;
+  font-weight: 500;
+}
+
+
+
+  
+  
