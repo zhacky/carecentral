@@ -1,0 +1,24 @@
+
+<div class="dialog-container">
+<h1 mat-dialog-title class="dialog-title">Set Role</h1>
+<div mat-dialog-content>
+  <form [formGroup]="editForm" class="edit-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name"/>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Role</mat-label>
+      <mat-select formControlName="role" placeholder="Select a role">
+        <mat-option *ngFor="let role of roles" [value]="role">{{ role }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-button mat-dialog-close class="cancel-button">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="editForm.invalid">
+    Save
+  </button>
+</div>
+</div>

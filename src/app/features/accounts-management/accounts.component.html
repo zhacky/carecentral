@@ -38,7 +38,7 @@
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef> Action </th>
           <td mat-cell *matCellDef="let element">
-            <a class="icon-wrapper" aria-label="Edit">
+            <a class="icon-wrapper" aria-label="Edit" (click)="openEditDialog(element)">
               <i class="fa-solid fa-pen-to-square"></i>
             </a>
             <a class="icon-wrapper2" aria-label="Edit">

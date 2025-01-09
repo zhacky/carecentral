@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import { AddPatientDialogComponent } from '../../shared/components/patient-dialog/patient-dialog.component';
+import { SetRoleDialogComponent } from '../../shared/components/set-role-dialog/set-role-dialog.component';
 
 /**
  * @title Table with pagination
@@ -20,6 +20,7 @@ import { AddPatientDialogComponent } from '../../shared/components/patient-dialo
 
 export class AccountsManagementComponent implements AfterViewInit {
   constructor(private dialog: MatDialog) {}
+  
   displayedColumns: string[] = ['position', 'name', 'lastName', 'role', 'action'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
@@ -29,23 +30,21 @@ export class AccountsManagementComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  openPatientDialog(): void {
-    console.log('Opening add patient dialog');
-    const dialogRef = this.dialog.open(AddPatientDialogComponent, {
+  openEditDialog(element: PeriodicElement): void {
+    const dialogRef = this.dialog.open(SetRoleDialogComponent, {
       width: '400px',
+      data: { name: `${element.name} ${element.lastName}`, role: element.role },
     });
 
-    dialogRef.afterClosed().subscribe((result: any) => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log('Updated profile:', result);
-        // Update the data source with the new patient data
-        const newPatient: PeriodicElement = {
-          position: this.dataSource.data.length + 1,
-          name: result.name,
-          lastName: result.lastName,
-          role: result.role,
-        };
-        this.dataSource.data = [...this.dataSource.data, newPatient];
+        console.log('Updated role:', result);
+        // Update the data source with the new role
+        const index = this.dataSource.data.findIndex((item) => item.position === element.position);
+        if (index !== -1) {
+          this.dataSource.data[index].role = result.role;
+          this.dataSource.data = [...this.dataSource.data]; // Refresh the data source
+        }
       }
     });
   }
