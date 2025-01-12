@@ -7,6 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-set-role-dialog',
@@ -22,6 +23,7 @@ export class SetRoleDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<SetRoleDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private snackBar: MatSnackBar,
     private fb: FormBuilder
   ) {
     this.editForm = this.fb.group({
@@ -33,6 +35,10 @@ export class SetRoleDialogComponent {
   onSave(): void {
     if (this.editForm.valid) {
       this.dialogRef.close(this.editForm.value);
+      this.snackBar.open(`Role Succesfully Updated for ${this.data.name}`, 'Close', {
+        duration: 5000,
+        panelClass: ['snackbar-success']
+      });
     }
   }
 
