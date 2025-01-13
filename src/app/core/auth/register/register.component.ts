@@ -1,10 +1,11 @@
-import {Component, inject} from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators, AbstractControl} from '@angular/forms';
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import {NgIf} from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -24,13 +25,16 @@ import {NgIf} from '@angular/common';
 })
 export class RegisterComponent {
   registerForm: FormGroup;
+  router: any;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
     this.registerForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]],
+      firstName: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
     },
     {
       validator: this.passwordMatchValidator
@@ -49,9 +53,17 @@ export class RegisterComponent {
 
   }
 
-  register() {
+  register(): void {
     if (this.registerForm.valid) {
-      console.log('Registration successful!', this.registerForm.value);
+      this.authService.register(this.registerForm.value).subscribe({
+        next: (response: any) => {
+          console.log('Registration successful!', response);
+          this.router.navigate(['/login']);
+        },
+        error: (error: any) => {
+          console.error('Registration failed!', error);
+        }
+      });
     } else {
       console.error('Form is invalid');
     }

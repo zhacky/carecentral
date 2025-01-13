@@ -23,4 +23,14 @@ export class AuthService {
       })
     );
   }
+
+  register(userData: any): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<any>(`${environment.apiUrl}/register`, userData, { headers }).pipe(
+      catchError((error) => {
+        console.error('Registration error', error);
+        throw error;
+      })
+    );
+  }
 }
