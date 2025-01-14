@@ -6,6 +6,9 @@ import {MatButton} from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import {NgIf} from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +20,8 @@ import { AuthService } from '../../services/auth.service';
     NgIf,
     MatError,
     MatLabel,
-    MatCardModule
+    MatCardModule,
+    RouterModule
   ],
   templateUrl: './register.component.html',
   standalone: true,
@@ -25,9 +29,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class RegisterComponent {
   registerForm: FormGroup;
-  router: any;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
     this.registerForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -59,6 +62,10 @@ export class RegisterComponent {
         next: (response: any) => {
           console.log('Registration successful!', response);
           this.router.navigate(['/login']);
+          this.snackBar.open('Successfully Registered!', 'Close', {
+            duration: 3000,
+            panelClass: ['snackbar-error']
+          });
         },
         error: (error: any) => {
           console.error('Registration failed!', error);

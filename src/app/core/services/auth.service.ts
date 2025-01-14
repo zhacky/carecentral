@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment.development';
 
 @Injectable({
@@ -9,6 +9,7 @@ import { environment } from '../../../environments/environment.development';
 })
 export class AuthService {
    private readonly apiUrl = `${environment.apiUrl}/authenticate`;
+   private currentUser: any;
 
   constructor(private http: HttpClient) {}
 
@@ -17,6 +18,10 @@ export class AuthService {
     const body = { username: username.trim(), password: password.trim() };
     console.log('Current API URL:', environment.apiUrl);
     return this.http.post<any>(this.apiUrl, body, { headers }).pipe(
+      tap((response) => {
+        this.currentUser = response.user; // Assuming the response contains user information
+        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+      }),
       catchError((error) => {
         console.error('Login error', error);
         throw error;
@@ -32,5 +37,12 @@ export class AuthService {
         throw error;
       })
     );
+  }
+
+  getCurrentUser(): any {
+    if (!this.currentUser) {
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    }
+    return this.currentUser;
   }
 }

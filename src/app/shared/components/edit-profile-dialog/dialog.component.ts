@@ -22,11 +22,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EditProfileDialogComponent {
   profile = {
-    name: 'John Doe',
-    email: 'johndoe@example.com',
-    phone: '+123 456 7890',
-    address: '123 Main St., Anytown, USA',
-    position: 'Software Developer',
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    address: '',
+    position: '',
   };
 
   constructor(
