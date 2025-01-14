@@ -6,10 +6,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { EditProfileDialogComponent } from '../../shared/components/edit-profile-dialog/dialog.component';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {MatListModule} from '@angular/material/list';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { AuthService } from '../../core/services/auth.service';
 
 
 @Component({
@@ -29,16 +30,15 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     standalone: true,
     styleUrl: './profile.component.css'
   })
-  export class ProfileComponent {
-    profile = {
-      name: 'John Doe',
-      email: 'john@gmail.com',
-      phone: '(555) 123-6789',
-      address: '123 Maple Street, Springfield, IL 62704, USA',
-      position: 'Software Developer'
-    };
+  export class ProfileComponent implements OnInit {
+    profile: any;
 
-    constructor(private dialog: MatDialog) {}
+    constructor(private dialog: MatDialog, private authService: AuthService) {}
+
+    ngOnInit(): void {
+      this.profile = this.authService.getCurrentUser();
+    }
+  
 
     openEditProfileDialog(): void {
         console.log('Opening edit profile dialog');
@@ -51,6 +51,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
         if (result) {
             console.log('Updated profile:', result);
             this.profile = result;
+            localStorage.setItem('currentUser', JSON.stringify(this.profile));
         }
         });
     }

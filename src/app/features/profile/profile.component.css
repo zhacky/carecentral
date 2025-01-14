@@ -111,6 +111,11 @@
     text-align: justify;
   }
 
+  .custom-text {
+    font-weight: lighter;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  }
+
 
   mat-card {
     border: 1px solid #9ba39b; /* Add border with a specific color */
