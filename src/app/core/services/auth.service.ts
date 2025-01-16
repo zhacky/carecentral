@@ -45,4 +45,13 @@ export class AuthService {
     }
     return this.currentUser;
   }
-}
+
+  getUsers(): Observable<any[]> {
+    return this.http.get<any[]>(`${environment.apiUrl}/users`).pipe(
+      catchError((error) => {
+        console.error('Error fetching users', error);
+        throw error;
+      })
+    );
+  }
+} 
