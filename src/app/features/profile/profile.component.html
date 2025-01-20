@@ -4,7 +4,7 @@
       <div class="profile-header">
         <img src="images/img.jpg" alt="Profile Image" class="profile-image" loading="lazy" />
         <div class="profile-info">
-          <h2><span class="custom-text">Welcome!</span> {{ profile.firstName }}</h2>
+          <h2><span class="custom-text">Welcome!</span> {{ profile.username }}</h2>
           <p>&#64;{{ profile.username }}</p>
         </div>
       </div>
@@ -19,13 +19,13 @@
       <mat-card-title class="info">Personal Information</mat-card-title>
       <div class="profile-info2">
         <span>First Name</span>
-        <mat-chip>{{ profile.firstName }}</mat-chip>
+        <mat-chip>{{ profile.email }}</mat-chip>
         <span>Last Name</span>
-        <mat-chip>{{ profile.lastName }}</mat-chip>
+        <mat-chip>{{ profile.email }}</mat-chip>
         <span>Phone</span>
         <mat-chip>{{ profile.email }}</mat-chip>
         <span>Address</span>
-        <mat-chip>{{ profile.address }}</mat-chip>
+        <mat-chip>{{ profile.email }}</mat-chip>
         <span>Position</span>
         <mat-chip>{{ profile.position }}</mat-chip>
       </div>
