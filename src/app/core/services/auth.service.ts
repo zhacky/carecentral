@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment.development';
   providedIn: 'root',
 })
 export class AuthService {
-   private readonly apiUrl = `${environment.apiUrl}/authenticate`;
+   private readonly apiUrl = `${environment.apiUrl}/api/auth/login`;
    private currentUser: any;
 
   constructor(private http: HttpClient) {}
@@ -19,7 +19,7 @@ export class AuthService {
     console.log('Current API URL:', environment.apiUrl);
     return this.http.post<any>(this.apiUrl, body, { headers }).pipe(
       tap((response) => {
-        this.currentUser = response.user; // Assuming the response contains user information
+        this.currentUser = response.userDetails; // Assuming the response contains user information
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
       }),
       catchError((error) => {
