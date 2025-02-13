@@ -1,19 +1,29 @@
 .example-container {
-    width: auto;
-    height: auto;
+  height: 100vh; /* Ensures the container takes full screen height */
+  overflow: hidden; /* Prevent scrolling on the container */
   }
-  
-  .example-sidenav-content {
-    width: 130px;
-    
-  }
-  
-  .example-sidenav {
-    padding: 10px;
-    width: 200px;
-    background-color: rgb(83, 21, 133);
-   
-  }
+
+.example-sidenav-content {
+  position: sticky; /* Fix the content button's position */
+  top: 0; /* Position the button */
+  left: 20px; /* Adjust this value as needed */
+  z-index: 200; /* Ensure the button is above other elements */
+  background: white;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow: horizontal, vertical, blur, color */
+}
+
+
+.example-sidenav {
+  padding: 10px;
+  width: 200px; /* Sidebar width */
+  height: 100vh; /* Full height of the screen */
+  background-color: rgb(83, 21, 133); /* Sidebar color */
+  position: fixed; /* Fix the sidenav to the left side */
+  top: 0;
+  left: 0; /* Position at the top-left of the screen */
+  z-index: 100; /* Ensure it's above the content */
+}
+
 
   .mat-drawer-content.mat-sidenav-content.page-content {
     margin-left: 0px !important;
@@ -27,4 +37,3 @@
   .mat-drawer.example-sidenav.mat-drawer-side.ng-tns-c197257872-0.ng-trigger.ng-trigger-transform.mat-drawer-opened {
     border-radius: 0px !important;
   }
-  
