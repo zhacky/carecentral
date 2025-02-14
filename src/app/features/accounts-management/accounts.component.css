@@ -20,7 +20,7 @@ table {
   border-radius: 20px;
   width: 90%;
   overflow: hidden;
-  box-sizing: border-box; /* Includes border in the width */         
+  box-sizing: border-box; /* Includes border in the width */
   }
 
  .parent {
@@ -28,7 +28,7 @@ table {
   padding: 20px;
   flex-direction: column;
   height: 100vh;
- } 
+ }
 
  /* Wrapper styles */
 .icon-wrapper {
@@ -108,5 +108,4 @@ table {
 
 
 
-  
-  
+

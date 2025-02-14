@@ -1,6 +1,6 @@
 <mat-drawer-container class="example-container" autosize>
   <!-- Sidebar -->
-  <mat-drawer #drawer class="example-sidenav" mode="side">
+  <mat-drawer #drawer class="example-sidenav" mode="side" [opened]="isDrawerOpen">
     <mat-nav-list>
       <a mat-list-item routerLink="profile" routerLinkActive="active" class="profile-link">
         <i class="fas fa-user icon"></i> Profile
@@ -8,7 +8,7 @@
       <a mat-list-item routerLink="accounts" routerLinkActive="active" class="accounts-link">
         <i class="fa-solid fa-users"></i> Accounts
       </a>
-      <a mat-list-item routerLink="profile" routerLinkActive="active" class="dashboard-link">
+      <a mat-list-item routerLink="dashboard" routerLinkActive="active" class="dashboard-link ">
         <i class="fa-solid fa-chess-board"></i> Dashboard
       </a>
       <a mat-list-item routerLink="patient" routerLinkActive="active" class="patient-link">
@@ -25,7 +25,7 @@
   </div>
 
   <!-- Page Content -->
-  <mat-sidenav-content class="page-content">
+  <mat-sidenav-content class="page-content bg-gray-200">
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-drawer-container>

@@ -17,7 +17,6 @@
   padding: 10px;
   width: 200px; /* Sidebar width */
   height: 100vh; /* Full height of the screen */
-  background-color: rgb(83, 21, 133); /* Sidebar color */
   position: fixed; /* Fix the sidenav to the left side */
   top: 0;
   left: 0; /* Position at the top-left of the screen */
@@ -30,10 +29,10 @@
   }
 
   ::ng-deep .mdc-list-item__primary-text {
-    color: #ffffff !important; /* Replace #ff5722 with your desired color */
+    color: purple !important; /* Replace #ff5722 with your desired color */
   }
 
 
-  .mat-drawer.example-sidenav.mat-drawer-side.ng-tns-c197257872-0.ng-trigger.ng-trigger-transform.mat-drawer-opened {
-    border-radius: 0px !important;
-  }
+.mat-drawer.example-sidenav {
+  border-radius: 0px !important; /* Ensure no border-radius on the sidenav */
+}
