@@ -1,8 +1,17 @@
 <mat-drawer-container class="example-container" autosize>
   <!-- Sidebar -->
+
   <mat-drawer #drawer class="example-sidenav" mode="side" [opened]="isDrawerOpen">
     <mat-nav-list>
-      <a mat-list-item routerLink="profile" routerLinkActive="active" class="profile-link">
+      <!-- Hospital Icon and Name -->
+      <div class="hospital-item" style="display: flex; align-items: center; padding: 16px;">
+        <i class="fa-solid fa-hospital-user" style="font-size: 24px; margin-right: 8px; color: purple;"></i>
+        <span class="hospital-name" style="font-size: 18px; font-weight: bold;">Mindalano</span>
+      </div>
+
+      <mat-divider class="pb-5"></mat-divider>
+
+      <a mat-list-item routerLink="profile" routerLinkActive="active" class="profile-link ">
         <i class="fas fa-user icon"></i> Profile
       </a>
       <a mat-list-item routerLink="accounts" routerLinkActive="active" class="accounts-link">
@@ -17,12 +26,30 @@
     </mat-nav-list>
   </mat-drawer>
 
+
+
   <!-- Fixed Menu Icon -->
-  <div class="example-sidenav-content">
+  <div class="example-sidenav-content p-2" style="display: flex; justify-content: space-between; align-items: center;">
     <button type="button" mat-icon-button (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
+
+    <!-- Account name and circular logo -->
+    <div class="account-container" style="display: flex; align-items: center;">
+
+
+      <!-- Account name -->
+      <span class="account-name px-3">{{ accountName }}</span>
+
+      <!-- Circle with first letter of account name -->
+      <div class="account-logo"
+           style="width: 40px; height: 40px; border-radius: 50%; background-color: #007bff; color: white; display: flex; justify-content: center; align-items: center; margin-right: 8px;">
+        {{ accountName?.charAt(0)?.toUpperCase() || 'A' }}
+      </div>
+
+    </div>
   </div>
+
 
   <!-- Page Content -->
   <mat-sidenav-content class="page-content bg-gray-200">

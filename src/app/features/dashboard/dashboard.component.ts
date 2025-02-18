@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
-import {NgClass, NgForOf} from '@angular/common';
+import { NgClass, NgForOf } from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [
-    NgClass,
-    NgForOf
-  ],
+  imports: [NgClass, NgForOf, FormsModule],
   templateUrl: './dashboard.component.html',
   standalone: true,
-  styleUrl: './dashboard.component.css'
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  searchQuery: string = ''; // Store the search query
+  filterStatus: string = ''; // Store the selected filter status
+
   tableItems = [
     { patientId: "P001", name: "John Doe", dob: "1985-06-15", gender: "Male", phone: "(555) 123-4567", medicalCondition: "Hypertension" },
     { patientId: "P002", name: "Jane Smith", dob: "1990-11-20", gender: "Female", phone: "(555) 234-5678", medicalCondition: "Diabetes" },
@@ -48,7 +49,6 @@ export class DashboardComponent {
       email: 'markjohnson@example.com',
       status: 'Active'
     }
-    // Add more doctor entries here
   ];
 
   popupIndex: number | null = null; // Track which row's popup should be displayed
@@ -75,4 +75,36 @@ export class DashboardComponent {
     this.popupIndex = null;
   }
 
+  // Getter for filtered items based on search query
+  get filteredItems() {
+    return this.tableItems.filter(item =>
+      item.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      item.patientId.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+      item.medicalCondition.toLowerCase().includes(this.searchQuery.toLowerCase())
+    );
+  }
+
+  get filteredDoctors() {
+    return this.doctorList.filter(doctor => {
+      const matchesSearchQuery = doctor.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        doctor.doctorId.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+        doctor.specialization.toLowerCase().includes(this.searchQuery.toLowerCase());
+
+      const matchesStatusFilter = this.filterStatus ? doctor.status.toLowerCase() === this.filterStatus.toLowerCase() : true;
+
+      return matchesSearchQuery && matchesStatusFilter;
+    });
+  }
+
+  // Handle edit action
+  editDoctor(doctor: any): void {
+    console.log('Edit doctor:', doctor);
+    // Implement edit logic here
+  }
+
+  // Handle delete action
+  deleteDoctor(doctor: any): void {
+    console.log('Delete doctor:', doctor);
+    // Implement delete logic here
+  }
 }

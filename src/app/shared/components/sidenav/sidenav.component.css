@@ -24,6 +24,8 @@
 }
 
 
+
+
   .mat-drawer-content.mat-sidenav-content.page-content {
     margin-left: 0px !important;
   }
@@ -36,3 +38,4 @@
 .mat-drawer.example-sidenav {
   border-radius: 0px !important; /* Ensure no border-radius on the sidenav */
 }
+
