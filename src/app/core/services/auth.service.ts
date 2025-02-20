@@ -39,12 +39,12 @@ export class AuthService {
     );
   }
 
-  getCurrentUser(): any {
-    if (!this.currentUser) {
-      this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    getCurrentUser(): any {
+      if (!this.currentUser) {
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+      }
+      return this.currentUser;
     }
-    return this.currentUser;
-  }
 
   getUsers(): Observable<any[]> {
     return this.http.get<any[]>(`${environment.apiUrl}/users`).pipe(
@@ -54,4 +54,4 @@ export class AuthService {
       })
     );
   }
-} 
+}
