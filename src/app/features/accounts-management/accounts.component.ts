@@ -21,8 +21,8 @@ import { AuthService } from '../../core/services/auth.service';
 
 export class AccountsManagementComponent implements AfterViewInit, OnInit {
   constructor(private dialog: MatDialog, private authService: AuthService) {}
-  
-  displayedColumns: string[] = ['position', 'firstName', 'lastName', 'role', 'action'];
+
+  displayedColumns: string[] = ['position', 'username', 'email', 'role', 'action'];
   dataSource = new MatTableDataSource<PeriodicElement>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -40,8 +40,8 @@ export class AccountsManagementComponent implements AfterViewInit, OnInit {
       next: (users) => {
         this.dataSource.data = users.map((user, index) => ({
           position: index + 1,
-          firstName: user.firstName,
-          lastName: user.lastName,
+          username: user.username,
+          email: user.email,
           role: user.role
         }));
         console.log(users)
@@ -55,7 +55,7 @@ export class AccountsManagementComponent implements AfterViewInit, OnInit {
   openEditDialog(element: PeriodicElement): void {
     const dialogRef = this.dialog.open(SetRoleDialogComponent, {
       width: '400px',
-      data: { name: `${element.firstName} ${element.lastName}`, role: element.role },
+      data: { name: `${element.username} ${element.email}`, role: element.role },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -78,10 +78,10 @@ export class AccountsManagementComponent implements AfterViewInit, OnInit {
 
 
 export interface PeriodicElement {
-  firstName: string;
+  username: string;
   position: number;
-  lastName: string;
-  role: string;  
+  email: string;
+  role: string;
 }
 
 // const ELEMENT_DATA: PeriodicElement[] = [
