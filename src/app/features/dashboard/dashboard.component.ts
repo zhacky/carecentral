@@ -10,7 +10,8 @@ import {FormsModule} from '@angular/forms';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  searchQuery: string = ''; // Store the search query
+  searchQueryPatient: string = ''; // Store the search query
+  searchQueryDoctor: string = '';
   filterStatus: string = ''; // Store the selected filter status
 
   tableItems = [
@@ -78,17 +79,17 @@ export class DashboardComponent {
   // Getter for filtered items based on search query
   get filteredItems() {
     return this.tableItems.filter(item =>
-      item.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      item.patientId.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-      item.medicalCondition.toLowerCase().includes(this.searchQuery.toLowerCase())
+      item.name.toLowerCase().includes(this.searchQueryPatient.toLowerCase()) ||
+      item.patientId.toLowerCase().includes(this.searchQueryPatient.toLowerCase()) ||
+      item.medicalCondition.toLowerCase().includes(this.searchQueryPatient.toLowerCase())
     );
   }
 
   get filteredDoctors() {
     return this.doctorList.filter(doctor => {
-      const matchesSearchQuery = doctor.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        doctor.doctorId.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        doctor.specialization.toLowerCase().includes(this.searchQuery.toLowerCase());
+      const matchesSearchQuery = doctor.name.toLowerCase().includes(this.searchQueryDoctor.toLowerCase()) ||
+        doctor.doctorId.toLowerCase().includes(this.searchQueryDoctor.toLowerCase()) ||
+        doctor.specialization.toLowerCase().includes(this.searchQueryDoctor.toLowerCase());
 
       const matchesStatusFilter = this.filterStatus ? doctor.status.toLowerCase() === this.filterStatus.toLowerCase() : true;
 
