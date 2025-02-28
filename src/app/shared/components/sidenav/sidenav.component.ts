@@ -14,7 +14,10 @@ import {MatIconModule} from '@angular/material/icon';
   templateUrl: 'sidenav.component.html',
   styleUrl: 'sidenav.component.css',
   imports: [MatSidenavModule, MatButtonModule, MatListModule, RouterModule, MatIconModule],
+  standalone: true
 })
 export class Sidenav {
   showFiller = false;
+  isDrawerOpen = true;
+  accountName: string = 'John Doe'; // You can replace this with your dynamic value
 }
