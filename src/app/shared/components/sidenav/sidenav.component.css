@@ -1,41 +1,199 @@
-.example-container {
-  height: 100vh; /* Ensures the container takes full screen height */
-  overflow: hidden; /* Prevent scrolling on the container */
-  }
+.fullscreen-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+/*:host * {*/
+/*  transition: all 500ms ease-in-out;*/
+/*}*/
+.sidenav-header {
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+}
 
-.example-sidenav-content {
-  position: sticky; /* Fix the content button's position */
-  top: 0; /* Position the button */
-  left: 20px; /* Adjust this value as needed */
-  z-index: 200; /* Ensure the button is above other elements */
-  background: white;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow: horizontal, vertical, blur, color */
+.logo-image {
+  transition: all 500ms ease-in-out; /* Smooth transition for size changes */
+  display: block; /* Ensures the image is properly aligned */
 }
 
 
-.example-sidenav {
-  padding: 10px;
-  width: 200px; /* Sidebar width */
-  height: 100vh; /* Full height of the screen */
-  position: fixed; /* Fix the sidenav to the left side */
+mat-sidenav,
+mat-sidenav-content {
+  transition: all 500ms ease-in-out;
+}
+
+.sidenav-header {
+  padding-top: 24px;
+  text-align: center;
+}
+
+.sidenav-header img {
+  border-radius: 100%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.page-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  background-color: #F0F3FB;
+}
+
+mat-toolbar {
+  position: sticky;
   top: 0;
-  left: 0; /* Position at the top-left of the screen */
-  z-index: 100; /* Ensure it's above the content */
+  z-index: 2;
+}
+
+mat-icon {
+  cursor: pointer;
+  color: #000;
+}
+
+.content {
+  padding: 16px;
+}
+
+mat-toolbar {
+  display: flex;
+  align-items: center;
+  margin-left: 0 !important;
+}
+
+.toolbar-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.right-icon {
+  margin-left: 16px;
+  cursor: pointer;
+}
+
+/* Ensure full height for sidenav and no overflow */
+mat-sidenav {
+  height: 100vh;
+  overflow: hidden; /* Remove scrolling */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main list structure */
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Use entire height of sidenav */
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Disable any scrolling for the entire list */
+}
+
+/* Main menu items */
+.main-menu {
+  flex: 1; /* Occupy all available space */
+  overflow-y: auto; /* Enable scrolling if too many items, otherwise avoid */
+}
+
+/* Bottom settings menu */
+.bottom-menu {
+  margin-top: auto; /* Push this section to the bottom */
+}
+
+/* General styling for list items */
+mat-list-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+  overflow: hidden; /* Ensure no body scroll */
+}
+
+.brand-name {
+  font-size: 21px;
+  font-weight: bold;
+  position: relative;
+  display: flex; /* Use flexbox */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  width: auto;
+  transition: width 0.3s ease-in-out;
+  overflow: hidden; /* Prevents text overflow */
+  text-align: center;
+}
+
+.brand-name.collapsed {
+  width: 30px; /* Fit only 'CC' */
+}
+
+/* Text transition */
+.text {
+  display: inline-block;
+  white-space: nowrap;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.short-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Perfect centering */
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.blue {
+  color: #3371EB;
 }
 
 
+/* Hide full text smoothly */
+.brand-name.collapsed .text {
+  opacity: 0;
+  transform: scale(0);
+}
 
+/* Show 'CC' smoothly */
+.brand-name.collapsed .short-text {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
 
-  .mat-drawer-content.mat-sidenav-content.page-content {
-    margin-left: 0px !important;
-  }
+/*--------------*/
 
-  ::ng-deep .mdc-list-item__primary-text {
-    color: purple !important; /* Replace #ff5722 with your desired color */
-  }
+mat-list-item {
+  background: none !important; /* Default state background */
+  border-radius: 0 !important; /* Default border radius */
+  color: inherit; /* Ensure default color is inherited */
+  transition: background 0.3s, border-radius 0.3s, color 0.3s; /* Smooth transition */
+}
 
+mat-list-item span{
+  font-family: "Poppins", sans-serif;
+}
 
-.mat-drawer.example-sidenav {
-  border-radius: 0px !important; /* Ensure no border-radius on the sidenav */
+mat-list-item.selected-menu-item {
+  background: #3371eb !important; /* Highlight color */
+  border-radius: 12px !important; /* Rounded corners */
+  color: white !important; /* Text and icon color for active state */
+}
+
+mat-list-item.selected-menu-item img[matListItemIcon] {
+  filter: brightness(0) invert(1); /* Turns the icon white */
+}
+
+mat-list-item.selected-menu-item span[matListItemTitle] {
+  color: white !important; /* Ensures the title text is white */
 }
 
