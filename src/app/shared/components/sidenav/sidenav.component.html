@@ -1,58 +1,62 @@
-<mat-drawer-container class="example-container" autosize>
-  <!-- Sidebar -->
+<mat-sidenav-container autosize class="fullscreen-container">
+  <mat-sidenav #drawer [style.width]="sidenavWidth()" mode="side" opened style="
+  background-color: white;">
+    <!--    <div class="sidenav-header">-->
+    <!--      <img class="logo-image"  src="assets/Images/login-image.jpg" [style.width]="logoPicSize()" [style.height]="logoPicSize()" />-->
+    <!--    </div>-->
+    <mat-nav-list class="nav-list">
+      <div class="sidenav-header">
+        <!--        <img class="logo-image"  src="assets/Images/login-image.jpg" [style.width]="logoPicSize()" [style.height]="logoPicSize()"/>-->
+        <span [class.collapsed]="collapsed()" class="brand-name">
+         <span class="text">
+           <span class="blue">Care</span><span>C</span>entral
+         </span>
+         <span class="short-text">
+           <span class="blue">C</span><span>C</span>
+         </span>
+      </span>
 
-  <mat-drawer #drawer class="example-sidenav" mode="side" [opened]="isDrawerOpen">
-    <mat-nav-list>
-      <!-- Hospital Icon and Name -->
-      <div class="hospital-item" style="display: flex; align-items: center; padding: 16px;">
-        <i class="fa-solid fa-hospital-user" style="font-size: 24px; margin-right: 8px; color: purple;"></i>
-        <span class="hospital-name" style="font-size: 18px; font-weight: bold;">Mindalano</span>
+      </div>
+      <!-- Main menu items -->
+      <div class="main-menu mt-5">
+        <mat-list-item
+          #rla="routerLinkActive"
+          *ngFor="let item of menuItems().slice(0, menuItems().length - 1)"
+          [activated]="rla.isActive"
+          [routerLink]="item.route"
+          routerLinkActive="selected-menu-item"
+        >
+          <img [src]="item.icon" alt="Icon" matListItemIcon/>
+          <span matListItemTitle style="color: #A9A9A9;">{{ item.label }}</span>
+        </mat-list-item>
       </div>
 
-      <mat-divider class="pb-5"></mat-divider>
-
-      <a mat-list-item routerLink="profile" routerLinkActive="active" class="profile-link ">
-        <i class="fas fa-user icon"></i> Profile
-      </a>
-      <a mat-list-item routerLink="accounts" routerLinkActive="active" class="accounts-link">
-        <i class="fa-solid fa-users"></i> Accounts
-      </a>
-      <a mat-list-item routerLink="dashboard" routerLinkActive="active" class="dashboard-link ">
-        <i class="fa-solid fa-chess-board"></i> Dashboard
-      </a>
-      <a mat-list-item routerLink="patient" routerLinkActive="active" class="patient-link">
-        <i class="fa-solid fa-hospital-user"></i> Patient
-      </a>
+      <!-- Settings item -->
+      <div class="bottom-item">
+        <mat-list-item
+          [routerLink]="menuItems()[menuItems().length - 1].route"
+        >
+          <img [src]="menuItems()[menuItems().length - 1].icon" alt="Settings Icon" matListItemIcon/>
+          <span matListItemTitle style="color: #A9A9A9;">{{ menuItems()[menuItems().length - 1].label }}</span>
+        </mat-list-item>
+      </div>
     </mat-nav-list>
-  </mat-drawer>
+  </mat-sidenav>
 
-
-
-  <!-- Fixed Menu Icon -->
-  <div class="example-sidenav-content p-2" style="display: flex; justify-content: space-between; align-items: center;">
-    <button type="button" mat-icon-button (click)="drawer.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-
-    <!-- Account name and circular logo -->
-    <div class="account-container" style="display: flex; align-items: center;">
-
-
-      <!-- Account name -->
-      <span class="account-name px-3">{{ accountName }}</span>
-
-      <!-- Circle with first letter of account name -->
-      <div class="account-logo"
-           style="width: 40px; height: 40px; border-radius: 50%; background-color: #007bff; color: white; display: flex; justify-content: center; align-items: center; margin-right: 8px;">
-        {{ accountName?.charAt(0)?.toUpperCase() || 'A' }}
-      </div>
-
+  <!-- Main content -->
+  <mat-sidenav-content [style.margin-left]="sidenavWidth()" class="page-content">
+    <app-header (toggleSidenav)="collapsed.set(!collapsed())"></app-header>
+<!--    <mat-toolbar color="primary" style="background-color: white;">-->
+<!--      <button (click)="collapsed.set(!collapsed())" mat-icon-button>-->
+<!--        <mat-icon>menu</mat-icon>-->
+<!--      </button>-->
+<!--      <span class="toolbar-title"></span>-->
+<!--      <span class="spacer"></span>-->
+<!--      <img class="right-icon" src="assets/Icons/icon_notifications.svg"/>-->
+<!--      <div class="right-icon" style="width: 30px; height: 30px; background-color: #D9D9D9; border-radius: 50%"></div>-->
+<!--    </mat-toolbar>-->
+    <div class="content">
+      <router-outlet></router-outlet>
     </div>
-  </div>
-
-
-  <!-- Page Content -->
-  <mat-sidenav-content class="page-content bg-gray-200">
-    <router-outlet></router-outlet>
   </mat-sidenav-content>
-</mat-drawer-container>
+</mat-sidenav-container>

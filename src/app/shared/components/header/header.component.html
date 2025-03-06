@@ -1,1 +1,16 @@
-<p>header works!</p>
+<header>
+<mat-toolbar color="primary" style="background-color: white;">
+    <button (click)="onToggle()" mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+  <nav>
+    <span *ngIf="activeRoute === '/common/dashboard'">Dashboard</span>
+    <span *ngIf="activeRoute === '/common/appointment'">Appointments</span>
+    <span *ngIf="activeRoute === '/common/doctor'">Doctors</span>
+    <span *ngIf="activeRoute === '/common/patient'">Patients</span>
+    <span *ngIf="activeRoute === '/common/report'">Reports</span>
+    <span *ngIf="activeRoute === '/common/settings'">Settings</span>
+  </nav>
+
+</mat-toolbar>
+</header>

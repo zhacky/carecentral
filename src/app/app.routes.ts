@@ -3,9 +3,13 @@ import {LoginComponent} from './core/auth/login/login.component';
 import {RegisterComponent} from './core/auth/register/register.component';
 import {DashboardComponent} from './features/dashboard/dashboard.component';
 import {ProfileComponent} from './features/profile/profile.component';
-import { Sidenav } from './shared/components/sidenav/sidenav.component';
-import { PatientInformationComponent } from './features/patient-information/patient-information.component';
-import { AccountsManagementComponent } from './features/accounts-management/accounts.component';
+import {SidenavComponent} from './shared/components/sidenav/sidenav.component';
+import {PatientInformationComponent } from './features/patient-information/patient-information.component';
+import {AccountsManagementComponent } from './features/accounts-management/accounts.component';
+import {AppointmentComponent} from './features/appointment/appointment.component';
+import {DoctorComponent} from './features/doctor/doctor.component';
+import {SettingsComponent} from './features/settings/settings.component';
+import {ReportComponent} from './features/report/report.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -13,13 +17,18 @@ export const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {
     path: 'common',
-    component: Sidenav,
+    component: SidenavComponent,
     children: [
-      { path: '', redirectTo: 'profile', pathMatch: 'full' },
-      { path: 'profile', component: ProfileComponent },
-      { path: 'accounts', component: AccountsManagementComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'patient',component: PatientInformationComponent }
+      { path: 'profile', component: ProfileComponent },
+      { path: 'appointment', component: AppointmentComponent},
+      { path: 'doctor', component: DoctorComponent},
+      { path: 'patient',component: PatientInformationComponent },
+      { path: 'report', component: ReportComponent },
+      { path: 'settings',component: SettingsComponent },
+      { path: 'accounts', component: AccountsManagementComponent },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
     ],
   },
 
