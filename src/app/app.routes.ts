@@ -10,6 +10,7 @@ import {AppointmentComponent} from './features/appointment/appointment.component
 import {DoctorComponent} from './features/doctor/doctor.component';
 import {SettingsComponent} from './features/settings/settings.component';
 import {ReportComponent} from './features/report/report.component';
+import { InventoryComponent } from './features/inventory/inventory.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -28,6 +29,7 @@ export const routes: Routes = [
       { path: 'report', component: ReportComponent },
       { path: 'settings',component: SettingsComponent },
       { path: 'accounts', component: AccountsManagementComponent },
+      { path: 'inventory', component: InventoryComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
     ],
   },

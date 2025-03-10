@@ -1,0 +1,159 @@
+<!-- src/app/inventory/inventory.component.html -->
+<div class="p-6">
+  <h2 class="text-2xl font-bold mb-4">Inventory List</h2>
+
+  <!-- Button to open the Add Product modal -->
+  <button
+    class="bg-green-500 text-white px-4 py-2 rounded mb-4"
+    (click)="openAddProductModal()">
+    Add Product
+  </button>
+
+  <!-- Inventory Table -->
+  <table class="min-w-full table-auto border-collapse border border-gray-300">
+    <thead>
+    <tr class="bg-gray-200">
+      <th class="px-4 py-2 border">ID</th>
+      <th class="px-4 py-2 border">Name</th>
+      <th class="px-4 py-2 border">Quantity</th>
+      <th class="px-4 py-2 border">Price</th>
+      <th class="px-4 py-2 border">Expiration Date</th>
+      <th class="px-4 py-2 border">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of inventoryItems">
+      <td class="px-4 py-2 border">{{ item.id }}</td>
+      <td class="px-4 py-2 border">{{ item.name }}</td>
+      <td class="px-4 py-2 border">{{ item.quantity }}</td>
+      <td class="px-4 py-2 border">{{ item.price | currency }}</td>
+      <td class="px-4 py-2 border">{{ item.expirationDate | date: 'MM/dd/yyyy' }}</td>
+      <td class="px-4 py-2 border">
+        <button
+          class="bg-yellow-500 text-white px-4 py-2 rounded ml-2"
+          (click)="openEditProductModal(item)">
+          Edit
+        </button>
+        <button
+          class="bg-red-500 text-white px-4 py-2 rounded ml-2"
+          (click)="deleteProduct(item.id)">
+          Delete
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Add Product Modal -->
+  <div *ngIf="showAddProductModal" class="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white p-6 rounded-lg w-96">
+      <h3 class="text-xl font-semibold mb-4">Add New Product</h3>
+      <div class="mb-4">
+        <label for="productName" class="block text-sm font-medium text-gray-700">Product Name:</label>
+        <input
+          id="productName"
+          type="text"
+          [(ngModel)]="newProduct.name"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+        />
+      </div>
+      <div class="mb-4">
+        <label for="productQuantity" class="block text-sm font-medium text-gray-700">Quantity:</label>
+        <input
+          id="productQuantity"
+          type="number"
+          [(ngModel)]="newProduct.quantity"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+        />
+      </div>
+      <div class="mb-4">
+        <label for="productPrice" class="block text-sm font-medium text-gray-700">Price:</label>
+        <input
+          id="productPrice"
+          type="number"
+          [(ngModel)]="newProduct.price"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+        />
+      </div>
+      <div class="mb-4">
+        <label for="productExpirationDate" class="block text-sm font-medium text-gray-700">Expiration Date:</label>
+        <input
+          id="productExpirationDate"
+          type="date"
+          [(ngModel)]="newProduct.expirationDate"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+        />
+      </div>
+      <div class="flex justify-end space-x-2">
+        <button
+          class="bg-gray-300 px-4 py-2 rounded"
+          (click)="closeAddProductModal()">
+          Cancel
+        </button>
+        <button
+          class="bg-green-500 text-white px-4 py-2 rounded"
+          (click)="addProduct()">
+          Add Product
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Product Modal -->
+  <div *ngIf="showEditProductModal" class="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white p-6 rounded-lg w-96">
+      <h3 class="text-xl font-semibold mb-4">Edit Product</h3>
+      <div class="mb-4">
+        <label for="editProductName" class="block text-sm font-medium text-gray-700">Product Name:</label>
+        <input
+          id="editProductName"
+          type="text"
+          [(ngModel)]="productToEdit.name"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+        />
+      </div>
+      <div class="mb-4">
+        <label for="editProductQuantity" class="block text-sm font-medium text-gray-700">Quantity:</label>
+        <input
+          id="editProductQuantity"
+          type="number"
+          [(ngModel)]="productToEdit.quantity"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+        />
+      </div>
+
+      <div class="mb-4">
+        <label for="editProductExpirationDate" class="block text-sm font-medium text-gray-700">Expiration Date:</label>
+        <input
+          id="editProductExpirationDate"
+          type="date"
+          [(ngModel)]="productToEdit.expirationDate"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+        />
+      </div>
+
+
+      <div class="mb-4">
+        <label for="editProductPrice" class="block text-sm font-medium text-gray-700">Price:</label>
+        <input
+          id="editProductPrice"
+          type="number"
+          [(ngModel)]="productToEdit.price"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"
+        />
+      </div>
+      <div class="flex justify-end space-x-2">
+        <button
+          class="bg-gray-300 px-4 py-2 rounded"
+          (click)="closeEditProductModal()">
+          Cancel
+        </button>
+        <button
+          class="bg-yellow-500 text-white px-4 py-2 rounded"
+          (click)="editProduct()">
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<!-- src/app/restock/restock.component.html -->
+<div>
+  <label for="itemId">Item ID:</label>
+  <input type="number" [(ngModel)]="itemId" id="itemId" />
+
+  <label for="restockQuantity">Restock Quantity:</label>
+  <input type="number" [(ngModel)]="restockQuantity" id="restockQuantity" />
+
+  <button (click)="restockItem()">Restock</button>
+</div>
