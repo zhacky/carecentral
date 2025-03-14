@@ -1,49 +1,39 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { InventoryItem } from '../models/inventory-item.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class InventoryService {
-  private inventory: InventoryItem[] = [
-    { id: 1, name: 'Neozep', quantity: 10, price: 100, expirationDate: new Date('2025-12-31') },
-    { id: 2, name: 'Co-Aleva', quantity: 5, price: 200, expirationDate: new Date('2025-06-30') },
-    { id: 3, name: 'Biogesic', quantity: 20, price: 150, expirationDate: new Date('2025-09-15') },
+  private apiUrl = 'http://localhost:8083/inventories';  // URL of the Spring Boot API
 
-  ];
-
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   // Get all inventory items
-  getInventory(): InventoryItem[] {
-    return this.inventory;
+  getInventory(): Observable<InventoryItem[]> {
+    return this.http.get<InventoryItem[]>(this.apiUrl);
   }
 
-  // Add a new product
-  addProduct(newProduct: InventoryItem): void {
-    const newId = this.inventory.length > 0 ? Math.max(...this.inventory.map(item => item.id)) + 1 : 1;
-    newProduct.id = newId;
-    this.inventory.push(newProduct);
+  // Add a new inventory item
+  addInventory(newInventory: InventoryItem): Observable<InventoryItem> {
+    return this.http.post<InventoryItem>(this.apiUrl, newInventory);
   }
 
-  // Restock an item by its id
-  restockItem(id: number, quantity: number): void {
-    const item = this.inventory.find((item) => item.id === id);
-    if (item) {
-      item.quantity += quantity;
-    }
+  // Get a single inventory item by ID
+  getInventoryById(id: number): Observable<InventoryItem> {
+    return this.http.get<InventoryItem>(`${this.apiUrl}/${id}`);
   }
 
-  // Edit an existing product
-  editProduct(updatedProduct: InventoryItem): void {
-    const index = this.inventory.findIndex((item) => item.id === updatedProduct.id);
-    if (index !== -1) {
-      this.inventory[index] = updatedProduct;
-    }
+  // Edit an existing inventory item
+  updateInventory(id: number, updatedInventory: InventoryItem): Observable<InventoryItem> {
+    return this.http.put<InventoryItem>(`${this.apiUrl}/${id}`, updatedInventory);
   }
 
-  // Delete a product by its id
-  deleteProduct(id: number): void {
-    this.inventory = this.inventory.filter(item => item.id !== id);
+  // Delete an inventory item by its ID
+  deleteInventory(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
+

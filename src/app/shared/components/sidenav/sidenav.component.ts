@@ -72,7 +72,7 @@ export class SidenavComponent {
     {
       icon: 'assets/Icons/icon_report.svg',
       label: 'Reports',
-      route: 'report',
+      route: 'inventory',
     },
     {
       icon: 'assets/Icons/icon_settings.svg',

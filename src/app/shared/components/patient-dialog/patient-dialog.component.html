@@ -2,31 +2,31 @@
 <mat-dialog-content>
   <form>
     <mat-form-field class="full-width">
-      <mat-label>Name</mat-label>
-      <input matInput [(ngModel)]="profile.name" name="name" />
+      <mat-label>First Name</mat-label>
+      <input matInput [(ngModel)]="profile.firstName" name="firstName" />
     </mat-form-field>
 
     <mat-form-field class="full-width">
       <mat-label>Last Name</mat-label>
-      <input matInput type="email" [(ngModel)]="profile.lastName" name="lastName" />
+      <input matInput [(ngModel)]="profile.lastName" name="lastName" />
     </mat-form-field>
 
     <mat-form-field class="full-width">
       <mat-label>Date of Birth</mat-label>
-      <input [(ngModel)]="profile.birthday" name="birthday" matInput [matDatepicker]="picker">
+      <input [(ngModel)]="profile.dateOfBirth" name="birthday" matInput [matDatepicker]="picker">
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker [dateClass]="dateClass" #picker></mat-datepicker>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="full-width">
       <mat-label>Phone</mat-label>
-      <input matInput [(ngModel)]="profile.phone" name="phone" />
+      <input matInput [(ngModel)]="profile.contactNumber" name="phone" />
     </mat-form-field>
-   
+
     <mat-form-field class="full-width">
-        <mat-label>Address</mat-label>
-        <input matInput [(ngModel)]="profile.address" name="address" />
+      <mat-label>Address</mat-label>
+      <input matInput [(ngModel)]="profile.address" name="address" />
     </mat-form-field>
 
     <mat-form-field class="full-width">
@@ -39,6 +39,7 @@
     </mat-form-field>
   </form>
 </mat-dialog-content>
+
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
   <button mat-flat-button (click)="save()">Save</button>
