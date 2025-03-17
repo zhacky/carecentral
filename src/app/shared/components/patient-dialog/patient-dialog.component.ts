@@ -11,6 +11,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { PatientDto } from '../../../core/models/patient.model';
 import { PatientService } from '../../../core/services/patient.service';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [
@@ -37,7 +39,11 @@ export class AddPatientDialogComponent {
 
   profile: PatientDto = new PatientDto(0, 0, '', '', '', '', '', '', '', 1); // Default assignedDoctorId is set to 1
 
-  constructor(private patientService: PatientService, private snackBar: MatSnackBar) {
+  constructor(
+    private patientService: PatientService,
+    private snackBar: MatSnackBar,
+    private location: Location,
+    private router: Router) {
     this.loadPatients(); // Load existing patients when the component is initialized
   }
 
@@ -54,23 +60,26 @@ export class AddPatientDialogComponent {
 
   // Save the patient and hide the form after submission
   save(): void {
-    // Ensure the assignedDoctorId is always set to 1 before saving
-    this.profile.assignedDoctorId = 1;
+    this.profile.assignedDoctorId = 1; // Ensure the doctor is always set
 
-    // Call the service to save the new patient
     this.patientService.createPatient(this.profile).subscribe(newPatient => {
-      // Update the data source with the new patient data
-      this.dataSource = [...this.dataSource, newPatient];
-      this.showAddPatientForm = false; // Hide the form after saving
+      this.dataSource = [...this.dataSource, newPatient]; // Update the list
       this.snackBar.open('Added Patient successfully!', 'Close', {
         duration: 5000,
         panelClass: ['snackbar-success']
       });
+
+      // ✅ Redirect to the Patient List Page
+      this.router.navigate(['/common/patient']);
     });
   }
 
   // Cancel the action and hide the form
   cancel(): void {
     this.showAddPatientForm = false;
+  }
+
+  goBack(): void {
+    this.location.back(); // ⬅️ Navigates to the previous page
   }
 }

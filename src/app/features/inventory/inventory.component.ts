@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { InventoryService } from '../../core/services/inventory.service';
 import { InventoryItem } from '../../core/models/inventory-item.model';
 import { CurrencyPipe, DatePipe, NgForOf, NgIf } from '@angular/common';
-import { RestockInventoryComponent } from '../../shared/components/restock-inventory/restock-inventory.component';
 import { FormsModule } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -14,7 +13,6 @@ import { Router, RouterLink } from '@angular/router';
   styleUrls: ['./inventory.component.css'],
   imports: [
     CurrencyPipe,
-    RestockInventoryComponent,
     NgIf,
     NgForOf,
     FormsModule,

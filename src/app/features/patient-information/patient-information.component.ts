@@ -12,7 +12,8 @@ import { AddPatientDialogComponent } from '../../shared/components/patient-dialo
 import { PatientDto } from '../../core/models/patient.model';
 import { PatientService } from '../../core/services/patient.service';
 import { DatePipe } from '@angular/common';
-import { MatButton } from '@angular/material/button';  // Import the service
+import { MatButton } from '@angular/material/button';
+import {RouterLink} from '@angular/router';  // Import the service
 
 @Component({
   selector: 'app-patient-information',
@@ -31,7 +32,8 @@ import { MatButton } from '@angular/material/button';  // Import the service
     MatHeaderCell,
     MatCell,
     MatHeaderRow,
-    MatRow
+    MatRow,
+    RouterLink
   ],
   standalone: true
 })

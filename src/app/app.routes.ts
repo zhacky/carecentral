@@ -11,6 +11,7 @@ import {DoctorComponent} from './features/doctor/doctor.component';
 import {SettingsComponent} from './features/settings/settings.component';
 import {ReportComponent} from './features/report/report.component';
 import { InventoryComponent } from './features/inventory/inventory.component';
+import {AddPatientDialogComponent} from './shared/components/patient-dialog/patient-dialog.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -23,13 +24,14 @@ export const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'appointment', component: AppointmentComponent},
-      { path: 'doctor', component: DoctorComponent},
-      { path: 'patient',component: PatientInformationComponent },
+      { path: 'appointment', component: AppointmentComponent },
+      { path: 'doctor', component: DoctorComponent },
+      { path: 'patient', component: PatientInformationComponent },
       { path: 'report', component: ReportComponent },
-      { path: 'settings',component: SettingsComponent },
+      { path: 'settings', component: SettingsComponent },
       { path: 'accounts', component: AccountsManagementComponent },
       { path: 'inventory', component: InventoryComponent },
+      { path: 'patient/add', component: AddPatientDialogComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
     ],
   },
