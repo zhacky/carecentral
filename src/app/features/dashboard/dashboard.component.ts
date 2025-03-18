@@ -1,26 +1,63 @@
-import { Component } from '@angular/core';
-import { NgClass, NgForOf } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { DatePipe, NgClass, NgForOf } from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { PatientService } from '../../core/services/patient.service';
+import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
+  MatHeaderRow,
+  MatHeaderRowDef, MatRow,
+  MatRowDef,
+  MatTable,
+  MatTableDataSource
+} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { PatientDto } from '../../core/models/patient.model';
+import { MatButton } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [NgClass, NgForOf, FormsModule],
+  imports: [NgClass, NgForOf, FormsModule, MatPaginator, DatePipe, MatHeaderCell, MatCell, MatTable, MatRowDef, MatHeaderCellDef, MatCellDef, MatButton, MatColumnDef, MatHeaderRow, MatHeaderRowDef, MatRow, RouterLink],
   templateUrl: './dashboard.component.html',
   standalone: true,
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
+  constructor(private patientService: PatientService) {}
   searchQueryPatient: string = ''; // Store the search query
   searchQueryDoctor: string = '';
   filterStatus: string = ''; // Store the selected filter status
 
-  tableItems = [
-    { patientId: "P001", name: "John Doe", dob: "1985-06-15", gender: "Male", phone: "(555) 123-4567", medicalCondition: "Hypertension" },
-    { patientId: "P002", name: "Jane Smith", dob: "1990-11-20", gender: "Female", phone: "(555) 234-5678", medicalCondition: "Diabetes" },
-    { patientId: "P003", name: "Michael Johnson", dob: "1982-07-30", gender: "Male", phone: "(555) 345-6789", medicalCondition: "Asthma" },
-    { patientId: "P004", name: "Emily Davis", dob: "1975-03-10", gender: "Female", phone: "(555) 456-7890", medicalCondition: "Chronic Fatigue" },
-    { patientId: "P005", name: "David Lee", dob: "2000-05-25", gender: "Male", phone: "(555) 567-8901", medicalCondition: "Allergy" },
-  ];
+
+
+  displayedColumns: string[] = ['position', 'firstName', 'lastName', 'dateOfBirth', 'gender'];
+
+  dataSource = new MatTableDataSource<PatientDto>([]);
+
+  ngOnInit(): void {
+    this.loadPatients();
+  }
+
+  loadPatients(): void {
+    this.patientService.getPatients().subscribe(
+      (patients) => {
+        // Add position dynamically
+        this.dataSource.data = patients.map((patient, index) => ({
+          ...patient,
+          position: index + 1,  // Position starts at 1 and increments
+        }));
+      },
+      (error) => {
+        console.error('Error fetching patients:', error);
+      }
+    );
+  }
+
 
   doctorList = [
     {
@@ -59,11 +96,6 @@ export class DashboardComponent {
     this.popupIndex = this.popupIndex === index ? null : index;
   }
 
-  // Handle edit action
-  editPatient(patient: any): void {
-    console.log('Edit patient:', patient);
-    // Implement edit logic here
-  }
 
   // Handle delete action
   deletePatient(patient: any): void {
@@ -76,14 +108,18 @@ export class DashboardComponent {
     this.popupIndex = null;
   }
 
-  // Getter for filtered items based on search query
-  get filteredItems() {
-    return this.tableItems.filter(item =>
-      item.name.toLowerCase().includes(this.searchQueryPatient.toLowerCase()) ||
-      item.patientId.toLowerCase().includes(this.searchQueryPatient.toLowerCase()) ||
-      item.medicalCondition.toLowerCase().includes(this.searchQueryPatient.toLowerCase())
-    );
+  get filteredData() {
+    return this.dataSource.data.filter(patient => {
+      return (
+        patient.firstName.toLowerCase().includes(this.searchQueryPatient.toLowerCase()) ||
+        patient.lastName.toLowerCase().includes(this.searchQueryPatient.toLowerCase()) ||
+        patient.patientId.toString().toLowerCase().includes(this.searchQueryPatient.toLowerCase())
+      );
+    });
   }
+
+
+  // Getter for filtered items based on search query
 
   get filteredDoctors() {
     return this.doctorList.filter(doctor => {
