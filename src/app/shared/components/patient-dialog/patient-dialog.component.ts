@@ -4,12 +4,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import {provideNativeDateAdapter} from '@angular/material/core';
-import {MatDatepickerModule, MatCalendarCellClassFunction} from '@angular/material/datepicker';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatDatepickerModule, MatCalendarCellClassFunction } from '@angular/material/datepicker';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
-
+import { PatientDto } from '../../../core/models/patient.model';
+import { PatientService } from '../../../core/services/patient.service';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [
@@ -22,44 +25,61 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     MatDatepickerModule,
     ReactiveFormsModule
-  ],  
+  ],
   providers: [provideNativeDateAdapter()],
   selector: 'app-patient-dialog',
   templateUrl: './patient-dialog.component.html',
   styleUrls: ['./patient-dialog.component.css'],
+  standalone: true
 })
 export class AddPatientDialogComponent {
-  profile = {
-    name: '',
-    lastName: '',
-    birthday: '',
-    phone: '',
-    address: '',
-    position: '',
-    gender: ''
-  };
+  displayedColumns: string[] = ['position', 'firstName', 'lastName', 'birthday', 'gender'];
+  dataSource: PatientDto[] = [];
+  showAddPatientForm: boolean = false; // Flag to show/hide the form
 
-  dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
-    // Only highligh dates inside the month view.
-    if (view === 'month') {
-      const date = cellDate.getDate();
+  profile: PatientDto = new PatientDto(0, 0, '', '', '', '', '', '', '', 1); // Default assignedDoctorId is set to 1
 
-      // Highlight the 1st and 20th day of each month.
-      return date === 1 || date === 20 ? 'example-custom-date-class' : '';
-    }
+  constructor(
+    private patientService: PatientService,
+    private snackBar: MatSnackBar,
+    private location: Location,
+    private router: Router) {
+    this.loadPatients(); // Load existing patients when the component is initialized
+  }
 
-    return '';
-  };
-
-  constructor(public dialogRef: MatDialogRef<AddPatientDialogComponent>, private snackBar: MatSnackBar) {}
-
-  save(): void {
-    // Save the profile changes (send to API or update local data)
-    console.log('Profile saved:', this.profile);
-    this.dialogRef.close(this.profile);
-    this.snackBar.open('Added Patient successfully!', 'Close', {
-      duration: 5000,
-      panelClass: ['snackbar-success']
+  loadPatients(): void {
+    this.patientService.getPatients().subscribe(patients => {
+      this.dataSource = patients;
     });
+  }
+
+  // Show the form when the "Add Patient" button is clicked
+  showForm(): void {
+    this.showAddPatientForm = true;
+  }
+
+  // Save the patient and hide the form after submission
+  save(): void {
+    this.profile.assignedDoctorId = 1; // Ensure the doctor is always set
+
+    this.patientService.createPatient(this.profile).subscribe(newPatient => {
+      this.dataSource = [...this.dataSource, newPatient]; // Update the list
+      this.snackBar.open('Added Patient successfully!', 'Close', {
+        duration: 5000,
+        panelClass: ['snackbar-success']
+      });
+
+      // ✅ Redirect to the Patient List Page
+      this.router.navigate(['/common/patient']);
+    });
+  }
+
+  // Cancel the action and hide the form
+  cancel(): void {
+    this.showAddPatientForm = false;
+  }
+
+  goBack(): void {
+    this.location.back(); // ⬅️ Navigates to the previous page
   }
 }

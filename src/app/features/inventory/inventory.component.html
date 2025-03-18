@@ -1,0 +1,51 @@
+<div class="p-6 w-full bg-white shadow-lg rounded-lg overflow-hidden">
+  <h2 class="text-2xl font-bold mb-4">Inventory List</h2>
+
+  <!-- Button to open the Add Product modal -->
+  <div class="flex justify-end mb-4">
+    <button
+      class="bg-blue-500 text-white px-4 py-2 rounded mb-4"
+      [routerLink]="['/common/inventory/add']">
+      Add Product
+    </button>
+  </div>
+
+  <!-- Inventory Table -->
+  <table class="min-w-full table-auto border-collapse border border-gray-300">
+    <thead>
+    <tr class="bg-gray-200">
+      <th class="px-4 py-2 border">ID</th>
+      <th class="px-4 py-2 border">Name</th>
+      <th class="px-4 py-2 border">Quantity</th>
+      <th class="px-4 py-2 border">Price</th>
+      <th class="px-4 py-2 border">Expiration Date</th>
+      <th class="px-4 py-2 border">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of inventoryItems">
+      <td class="px-4 py-2 border">{{ item.inventoryId }}</td>
+      <td class="px-4 py-2 border">{{ item.inventoryName }}</td>
+      <td class="px-4 py-2 border">{{ item.quantity }}</td>
+      <td class="px-4 py-2 border">{{ item.price | currency }}</td>
+      <td class="px-4 py-2 border">{{ item.expirationDate | date: 'MM/dd/yyyy' }}</td>
+      <<td class="px-4 py-2 border">
+      <button
+        class="text-blue-500 p-1 rounded"
+        [routerLink]="['/common/inventory/edit', item.inventoryId]"
+      >
+        <mat-icon>edit_outlined</mat-icon>
+      </button>
+      <button
+        class="text-red-500 p-1 rounded"
+        (click)="deleteInventory(item.inventoryId)"
+      >
+        <mat-icon>delete_outlined</mat-icon>
+      </button>
+    </td>
+
+    </tr>
+    </tbody>
+  </table>
+
+</div>

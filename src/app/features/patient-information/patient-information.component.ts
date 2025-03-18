@@ -1,27 +1,50 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
+import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import {
+  MatCell,
+  MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatHeaderRow,
+  MatHeaderRowDef, MatRow, MatRowDef,
+  MatTable,
+  MatTableDataSource
+} from '@angular/material/table';
 import { AddPatientDialogComponent } from '../../shared/components/patient-dialog/patient-dialog.component';
+import { PatientDto } from '../../core/models/patient.model';
+import { PatientService } from '../../core/services/patient.service';
+import { DatePipe } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import {RouterLink} from '@angular/router';  // Import the service
 
-/**
- * @title Table with pagination
- */
 @Component({
   selector: 'app-patient-information',
-  styleUrl: 'patient-information.component.css',
-  templateUrl: 'patient-information.component.html',
-  standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, CommonModule],
+  styleUrls: ['./patient-information.component.css'],
+  templateUrl: './patient-information.component.html',
+  imports: [
+    MatTable,
+    MatPaginator,
+    DatePipe,
+    MatHeaderRowDef,
+    MatRowDef,
+    MatCellDef,
+    MatHeaderCellDef,
+    MatButton,
+    MatColumnDef,
+    MatHeaderCell,
+    MatCell,
+    MatHeaderRow,
+    MatRow,
+    RouterLink
+  ],
+  standalone: true
 })
+export class PatientInformationComponent implements AfterViewInit, OnInit {
+  constructor(private dialog: MatDialog, private patientService: PatientService) {}
 
-export class PatientInformationComponent implements AfterViewInit {
-  constructor(private dialog: MatDialog) {}
-  displayedColumns: string[] = ['position', 'name', 'weight', 'birthday', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  // Define the columns for the table (including position, first name, last name, etc.)
+  displayedColumns: string[] = ['position', 'firstName', 'lastName', 'birthday', 'gender', 'actions'];
+
+  // DataSource for the table (initially empty)
+  dataSource = new MatTableDataSource<PatientDto>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -29,57 +52,118 @@ export class PatientInformationComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  // Fetch patients when the component initializes
+  ngOnInit(): void {
+    this.loadPatients();
+  }
+
+  // Load the patients using the service
+  loadPatients(): void {
+    this.patientService.getPatients().subscribe(
+      (patients) => {
+        // Add position dynamically
+        this.dataSource.data = patients.map((patient, index) => ({
+          ...patient,
+          position: index + 1,  // Position starts at 1 and increments
+        }));
+      },
+      (error) => {
+        console.error('Error fetching patients:', error);
+      }
+    );
+  }
+
+  // Function to open the dialog for adding a new patient
   openPatientDialog(): void {
     console.log('Opening add patient dialog');
     const dialogRef = this.dialog.open(AddPatientDialogComponent, {
       width: '400px',
     });
 
+    // Handle the dialog result when it's closed
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result) {
-        console.log('Updated profile:', result);
-        // Update the data source with the new patient data
-        const newPatient: PeriodicElement = {
-          position: this.dataSource.data.length + 1,
-          name: result.name,
-          lastName: result.lastName,
-          gender: result.gender,
-          birthday: result.birthday
-        };
-        this.dataSource.data = [...this.dataSource.data, newPatient];
+        console.log('New patient profile:', result);
+
+        // Create a new PatientDto object with the added patient data
+        const newPatient = new PatientDto(
+          0,  // The position is not required when creating a patient
+          result.patientId,
+          result.firstName,
+          result.lastName,
+          result.dateOfBirth,
+          result.gender,
+          result.contactNumber,
+          result.email,
+          result.address,
+          result.assignedDoctorId
+        );
+
+        // Call the service to add the new patient
+        this.patientService.createPatient(newPatient).subscribe(
+          (patient) => {
+            // Add the new patient to the data source
+            this.dataSource.data = [...this.dataSource.data, patient];
+          },
+          (error) => {
+            console.error('Error adding patient:', error);
+          }
+        );
+      }
+    });
+  }
+
+  // Function to delete a patient
+  deletePatient(patientId: number): void {
+    if (confirm('Are you sure you want to delete this patient?')) {
+      this.patientService.deletePatient(patientId).subscribe(
+        () => {
+          // Remove the patient from the data source after successful deletion
+          this.dataSource.data = this.dataSource.data.filter(patient => patient.patientId !== patientId);
+        },
+        (error) => {
+          console.error('Error deleting patient:', error);
+        }
+      );
+    }
+  }
+
+  // Function to update a patient
+  updatePatient(patient: PatientDto): void {
+    const dialogRef = this.dialog.open(AddPatientDialogComponent, {
+      width: '400px',
+      data: patient,  // Pass existing patient data to the dialog for editing
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result) {
+        // Update the patient object with new data
+        const updatedPatient = new PatientDto(
+          patient.position, // Keep the position the same
+          result.patientId,
+          result.firstName,
+          result.lastName,
+          result.dateOfBirth,
+          result.gender,
+          result.contactNumber,
+          result.email,
+          result.address,
+          result.assignedDoctorId
+        );
+
+        // Call the service to update the patient
+        this.patientService.updatePatient(patient.patientId, updatedPatient).subscribe(
+          (patient) => {
+            // Update the patient data in the table
+            this.dataSource.data = this.dataSource.data.map(p =>
+              p.patientId === patient.patientId ? patient : p
+            );
+          },
+          (error) => {
+            console.error('Error updating patient:', error);
+          }
+        );
       }
     });
   }
 }
-
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  lastName: string;
-  gender: string;
-  birthday: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'James', lastName: "Anderson", gender: 'Male', birthday: ''},
-  {position: 2, name: 'Liam', lastName: "Carter", gender: 'Male', birthday: ''},
-  {position: 3, name: 'Ethan', lastName: "Johnson", gender: 'Male', birthday: ''},
-  {position: 4, name: 'Noah', lastName: "Davis", gender: 'Male', birthday: ''},
-  {position: 5, name: 'Mason Wilson', lastName: "Wilson", gender: 'Male', birthday: ''},
-  {position: 6, name: 'Emma Brown', lastName: "Brown", gender: 'Female', birthday: ''},
-  {position: 7, name: 'Olivia Garcia', lastName: "Garcia", gender: 'Female', birthday: ''},
-  {position: 8, name: 'Ava Martinez', lastName: "Martinez", gender: 'Female', birthday: ''},
-  {position: 9, name: 'Sophia Thomas', lastName: "Thomas", gender: 'Female', birthday: ''},
-  {position: 10, name: 'Isabella Robinson', lastName: "Robinson", gender: 'Female', birthday: ''},
-  {position: 11, name: 'Alex Taylor', lastName: "Taylor", gender: 'Female', birthday: ''},
-  {position: 12, name: 'Jet', lastName: "Lee", gender: 'Male', birthday: ''},
-  {position: 13, name: 'Jordan Lee', lastName: "Lee", gender: 'Male', birthday: ''},
-  {position: 14, name: 'Casey Morgan', lastName: "Morgan", gender: 'Female', birthday: ''},
-  {position: 15, name: 'Riley Walker', lastName: "Walker", gender: 'Male', birthday: ''},
-  {position: 16, name: 'Taylor Scott', lastName: "Scott", gender: 'Female', birthday: ''},
-  {position: 17, name: 'Jacob Harris', lastName: "Harris", gender: 'Male', birthday: ''},
-  {position: 18, name: 'Argon', lastName: "Ghandalf", gender: 'Male', birthday: ''},
-  {position: 19, name: 'Alexander Wright', lastName: "Wright", gender: 'Male', birthday: ''},
-  {position: 20, name: 'Daniel Perez', lastName: "Perez", gender: 'Male', birthday: ''},
-];
