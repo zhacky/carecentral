@@ -11,9 +11,11 @@ import {
 import { AddPatientDialogComponent } from '../../shared/components/patient-dialog/patient-dialog.component';
 import { PatientDto } from '../../core/models/patient.model';
 import { PatientService } from '../../core/services/patient.service';
-import { DatePipe } from '@angular/common';
+import {CurrencyPipe, DatePipe, NgForOf} from '@angular/common';
 import { MatButton } from '@angular/material/button';
-import {RouterLink} from '@angular/router';  // Import the service
+import {RouterLink} from '@angular/router';
+import {MatIcon} from '@angular/material/icon';
+import {FormsModule} from '@angular/forms';  // Import the service
 
 @Component({
   selector: 'app-patient-information',
@@ -33,7 +35,11 @@ import {RouterLink} from '@angular/router';  // Import the service
     MatCell,
     MatHeaderRow,
     MatRow,
-    RouterLink
+    RouterLink,
+    CurrencyPipe,
+    MatIcon,
+    NgForOf,
+    FormsModule
   ],
   standalone: true
 })
@@ -41,15 +47,30 @@ export class PatientInformationComponent implements AfterViewInit, OnInit {
   constructor(private dialog: MatDialog, private patientService: PatientService) {}
 
   // Define the columns for the table (including position, first name, last name, etc.)
-  displayedColumns: string[] = ['position', 'firstName', 'lastName', 'birthday', 'gender', 'actions'];
+  displayedColumns: string[] = ['patientId', 'firstName', 'lastName', 'dateOfBirth', 'gender', 'actions'];
 
   // DataSource for the table (initially empty)
   dataSource = new MatTableDataSource<PatientDto>([]);
+
+  searchTerm: string = '';
+
+  applyFilter(): void {
+    this.dataSource.filter = this.searchTerm.trim().toLowerCase();
+  }
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.filterPredicate = (data: PatientDto, filter: string) => {
+      return (
+        data.firstName.toLowerCase().includes(filter) ||
+        data.lastName.toLowerCase().includes(filter) ||
+        data.gender.toLowerCase().includes(filter) ||
+        data.patientId.toString().includes(filter)
+      );
+    };
   }
 
   // Fetch patients when the component initializes
@@ -66,6 +87,7 @@ export class PatientInformationComponent implements AfterViewInit, OnInit {
           ...patient,
           position: index + 1,  // Position starts at 1 and increments
         }));
+        this.dataSource.paginator = this.paginator;
       },
       (error) => {
         console.error('Error fetching patients:', error);
