@@ -9,7 +9,7 @@ export class DoctorDto {
   contactNumber: string;
   email: string;
   address: string;
-  status: number;
+  status: DoctorStatus;
 
   constructor(
     position: number,
@@ -22,7 +22,7 @@ export class DoctorDto {
     contactNumber: string,
     email: string,
     address: string,
-    status: number,
+    status: DoctorStatus,
   ) {
     this.position = position;
     this.doctorId = doctorId;
@@ -49,7 +49,12 @@ export class DoctorDto {
       doctor.contactNumber,
       doctor.email,
       doctor.address,
-      doctor.status
+      doctor.status as DoctorStatus
     )
   }
+}
+
+export enum DoctorStatus {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE'
 }

@@ -14,6 +14,7 @@ import { InventoryComponent } from './features/inventory/inventory.component';
 import {AddPatientDialogComponent} from './shared/components/patient-dialog/patient-dialog.component';
 import {AddInventoryComponent} from './shared/components/add-inventory/add-inventory.component';
 import {EditInventoryComponent} from './shared/components/edit-inventory/edit-inventory.component';
+import {AddDoctorComponent} from './shared/components/add-doctor/add-doctor.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -36,6 +37,7 @@ export const routes: Routes = [
       { path: 'patient/add', component: AddPatientDialogComponent },
       { path: 'inventory/add', component: AddInventoryComponent },
       { path: 'inventory/edit/:id', component: EditInventoryComponent },
+      { path: 'doctor/add', component: AddDoctorComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
     ],
   },

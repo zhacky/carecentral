@@ -1,0 +1,147 @@
+<!-- Doctor add-doctor -->
+<div class="p-6 w-full rounded-lg overflow-hidden">
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="px-6 py-4">
+      <h3 class="text-gray-800 text-xl font-bold sm:text-2xl">Add Doctor</h3>
+    </div>
+
+    <form (ngSubmit)="saveDoctor()">
+
+      <!-- field -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">First Name</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="doctorItem.firstName"
+          name="firstName"
+          required
+        />
+      </div>
+
+      <!-- field -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Middle Name</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="doctorItem.middleName"
+          name="middleName"
+          required
+        />
+      </div>
+
+      <!-- field -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Last Name</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="doctorItem.lastName"
+          name="lastName"
+          required
+        />
+      </div>
+
+      <!-- field -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Birth Date</label>
+        <input
+          type="date"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="doctorItem.dateOfBirth"
+          name="dateOfBirth"
+          required
+        />
+      </div>
+
+      <!-- Gender Field -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Gender</label>
+        <div class="flex items-center space-x-4">
+          <label class="inline-flex items-center">
+            <input
+              type="radio"
+              class="form-radio"
+              [(ngModel)]="doctorItem.gender"
+              name="gender"
+              value="Male"
+            />
+            <span class="ml-2">Male</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input
+              type="radio"
+              class="form-radio"
+              [(ngModel)]="doctorItem.gender"
+              name="gender"
+              value="Female"
+            />
+            <span class="ml-2">Female</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input
+              type="radio"
+              class="form-radio"
+              [(ngModel)]="doctorItem.gender"
+              name="gender"
+              value="Other"
+            />
+            <span class="ml-2">Other</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- field -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Contact</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="doctorItem.contactNumber"
+          name="contactNumber"
+          required
+        />
+      </div>
+
+      <!-- field -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Email</label>
+        <input
+          type="email"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="doctorItem.email"
+          name="email"
+          required
+        />
+      </div>
+
+      <!-- field -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Address</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="doctorItem.address"
+          name="address"
+          required
+        />
+      </div>
+
+      <!-- Actions -->
+      <div class="flex justify-end space-x-2 px-6 py-4 border-b">
+        <button
+          type="button"
+          class="bg-gray-400 text-white px-4 py-2 rounded"
+          (click)="cancel()"
+        >
+          Cancel
+        </button>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
