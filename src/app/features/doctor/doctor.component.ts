@@ -12,35 +12,36 @@ import {
 } from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {RouterLink} from "@angular/router";
-import {CurrencyPipe, DatePipe, NgForOf} from '@angular/common';
+import {CurrencyPipe, DatePipe, NgClass, NgForOf} from '@angular/common';
 import {MatButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import {DoctorService} from '../../core/services/doctor.service';
-import {DoctorDto} from '../../core/models/doctor.model';
+import {DoctorDto, DoctorStatus} from '../../core/models/doctor.model';
 import {PatientDto} from '../../core/models/patient.model';
 
 @Component({
   selector: 'app-doctor',
-    imports: [
-      MatTable,
-      MatPaginator,
-      DatePipe,
-      MatHeaderRowDef,
-      MatRowDef,
-      MatCellDef,
-      MatHeaderCellDef,
-      MatButton,
-      MatColumnDef,
-      MatHeaderCell,
-      MatCell,
-      MatHeaderRow,
-      MatRow,
-      RouterLink,
-      CurrencyPipe,
-      MatIcon,
-      NgForOf,
-      FormsModule
-    ],
+  imports: [
+    MatTable,
+    MatPaginator,
+    DatePipe,
+    MatHeaderRowDef,
+    MatRowDef,
+    MatCellDef,
+    MatHeaderCellDef,
+    MatButton,
+    MatColumnDef,
+    MatHeaderCell,
+    MatCell,
+    MatHeaderRow,
+    MatRow,
+    RouterLink,
+    CurrencyPipe,
+    MatIcon,
+    NgForOf,
+    FormsModule,
+    NgClass
+  ],
   templateUrl: './doctor.component.html',
   standalone: true,
   styleUrl: './doctor.component.css'
@@ -49,7 +50,7 @@ export class DoctorComponent implements AfterViewInit, OnInit {
   constructor(private doctorService: DoctorService) {}
 
   // Define the columns for the table (including position, first name, last name, etc.)
-  displayedColumns: string[] = ['doctorId', 'firstName', 'lastName', 'dateOfBirth', 'gender', 'actions'];
+  displayedColumns: string[] = ['doctorId', 'firstName', 'lastName', 'gender', 'status', 'actions'];
 
   // DataSource for the table (initially empty)
   dataSource = new MatTableDataSource<DoctorDto>([]);
@@ -110,4 +111,6 @@ export class DoctorComponent implements AfterViewInit, OnInit {
       );
     }
   }
+
+  protected readonly DoctorStatus = DoctorStatus;
 }
