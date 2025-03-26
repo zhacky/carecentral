@@ -19,7 +19,6 @@ import {AddDoctorComponent} from './shared/components/add-doctor/add-doctor.comp
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
   {
     path: 'common',
     component: SidenavComponent,
@@ -33,6 +32,7 @@ export const routes: Routes = [
       { path: 'report', component: ReportComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'accounts', component: AccountsManagementComponent },
+      { path: 'accounts/register', component: RegisterComponent},
       { path: 'inventory', component: InventoryComponent },
       { path: 'patient/add', component: AddPatientDialogComponent },
       { path: 'inventory/add', component: AddInventoryComponent },
