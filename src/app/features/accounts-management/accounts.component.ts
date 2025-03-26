@@ -7,6 +7,7 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { SetRoleDialogComponent } from '../../shared/components/set-role-dialog/set-role-dialog.component';
 import { AuthService } from '../../core/services/auth.service';
+import { RouterLink } from '@angular/router';
 
 /**
  * @title Table with pagination
@@ -16,7 +17,7 @@ import { AuthService } from '../../core/services/auth.service';
   styleUrl: 'accounts.component.css',
   templateUrl: 'accounts.component.html',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, CommonModule],
+  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, CommonModule, RouterLink],
 })
 
 export class AccountsManagementComponent implements AfterViewInit, OnInit {

@@ -1,16 +1,37 @@
 <header>
-<mat-toolbar color="primary" style="background-color: white;">
+  <mat-toolbar color="primary" style="background-color: white;">
+    <!-- Left side (existing code) -->
     <button (click)="onToggle()" mat-icon-button>
       <mat-icon>menu</mat-icon>
     </button>
-  <nav>
-    <span *ngIf="activeRoute === '/common/dashboard'">Dashboard</span>
-    <span *ngIf="activeRoute === '/common/appointment'">Appointments</span>
-    <span *ngIf="activeRoute === '/common/doctor'">Doctors</span>
-    <span *ngIf="activeRoute === '/common/patient'">Patients</span>
-    <span *ngIf="activeRoute === '/common/report'">Reports</span>
-    <span *ngIf="activeRoute === '/common/settings'">Settings</span>
-  </nav>
+    <nav>
+      <span *ngIf="activeRoute === '/common/dashboard'">Dashboard</span>
+      <span *ngIf="activeRoute === '/common/appointment'">Appointments</span>
+      <span *ngIf="activeRoute === '/common/doctor'">Doctors</span>
+      <span *ngIf="activeRoute === '/common/patient'">Patients</span>
+      <span *ngIf="activeRoute === '/common/report'">Reports</span>
+      <span *ngIf="activeRoute === '/common/settings'">Settings</span>
+    </nav>
 
-</mat-toolbar>
+    <!-- Right side (added elements) -->
+    <div class="flex items-center ml-auto space-x-6">
+      <!-- Time (can be dynamic with Angular if needed) -->
+      <span>{{ currentTime }}</span>
+
+      <!-- Notification icon (assuming you have an icon for notifications) -->
+      <button mat-icon-button>
+        <mat-icon>notifications</mat-icon>
+      </button>
+
+      <!-- Account icon (assuming an account icon here) -->
+      <button mat-icon-button>
+        <mat-icon>account_circle</mat-icon>
+      </button>
+
+      <!-- Logout button -->
+      <button mat-button (click)="onLogout()">
+        Logout
+      </button>
+    </div>
+  </mat-toolbar>
 </header>
