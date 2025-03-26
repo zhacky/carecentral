@@ -40,6 +40,22 @@
       </select>
     </div>
 
+    <!-- Doctor selection -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Assign Doctor</label>
+      <select
+        class="w-full p-2 border rounded-lg focus:ring focus:ring-blue-300"
+        [(ngModel)]="profile.assignedDoctorId"
+        name="assignedDoctorId"
+      >
+        <option value="" disabled>Select a doctor</option>
+        <option *ngFor="let doctor of doctors" [value]="doctor.doctorId">
+          {{ doctor.firstName }} {{ doctor.doctorId }}
+        </option>
+      </select>
+    </div>
+
+
     <div class="flex justify-between mt-4">
       <button type="button" class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400" (click)="goBack()">
         Cancel
