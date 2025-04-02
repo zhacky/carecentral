@@ -1,12 +1,8 @@
 <mat-sidenav-container autosize class="fullscreen-container">
-  <mat-sidenav #drawer [style.width]="sidenavWidth()" mode="side" opened style="
-  background-color: white;">
-    <!--    <div class="sidenav-header">-->
-    <!--      <img class="logo-image"  src="assets/Images/login-image.jpg" [style.width]="logoPicSize()" [style.height]="logoPicSize()" />-->
-    <!--    </div>-->
+  <!-- Left Side Navigation -->
+  <mat-sidenav #drawer [style.width]="sidenavWidth()" mode="side" opened style="background-color: white;">
     <mat-nav-list class="nav-list">
       <div class="sidenav-header">
-        <!--        <img class="logo-image"  src="assets/Images/login-image.jpg" [style.width]="logoPicSize()" [style.height]="logoPicSize()"/>-->
         <span [class.collapsed]="collapsed()" class="brand-name">
          <span class="text">
            <span class="blue">Care</span><span>C</span>entral
@@ -14,9 +10,9 @@
          <span class="short-text">
            <span class="blue">C</span><span>C</span>
          </span>
-      </span>
-
+        </span>
       </div>
+
       <!-- Main menu items -->
       <div class="main-menu mt-5">
         <mat-list-item
@@ -33,9 +29,7 @@
 
       <!-- Settings item -->
       <div class="bottom-item">
-        <mat-list-item
-          [routerLink]="menuItems()[menuItems().length - 1].route"
-        >
+        <mat-list-item [routerLink]="menuItems()[menuItems().length - 1].route">
           <img [src]="menuItems()[menuItems().length - 1].icon" alt="Settings Icon" matListItemIcon/>
           <span matListItemTitle style="color: #A9A9A9;">{{ menuItems()[menuItems().length - 1].label }}</span>
         </mat-list-item>
@@ -43,20 +37,72 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <!-- Main content -->
-  <mat-sidenav-content [style.margin-left]="sidenavWidth()" class="page-content">
+  <!-- Main Content -->
+  <mat-sidenav-content [style.margin-left]="sidenavWidth()" class="page-content no-scrollbar">
     <app-header (toggleSidenav)="collapsed.set(!collapsed())"></app-header>
-<!--    <mat-toolbar color="primary" style="background-color: white;">-->
-<!--      <button (click)="collapsed.set(!collapsed())" mat-icon-button>-->
-<!--        <mat-icon>menu</mat-icon>-->
-<!--      </button>-->
-<!--      <span class="toolbar-title"></span>-->
-<!--      <span class="spacer"></span>-->
-<!--      <img class="right-icon" src="assets/Icons/icon_notifications.svg"/>-->
-<!--      <div class="right-icon" style="width: 30px; height: 30px; background-color: #D9D9D9; border-radius: 50%"></div>-->
-<!--    </mat-toolbar>-->
     <div class="content">
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
+
+  <!-- Right Side Navigation (Only on Dashboard) -->
+  <mat-sidenav
+    *ngIf="isDashboardRoute()"
+    mode="side"
+    position="end"
+    class="w-72 bg-white shadow-md overflow-auto !m-0 !p-0"
+    opened
+  >
+    <div class="p-4 bg-white h-full">
+      <div class="flex flex-col justify-center items-center pt-5">
+        <img src="assets/Images/login-image.jpg" class="w-20 h-20 object-cover">
+        <p class="mt-2 text-md">Admin</p>
+      </div>
+
+      <div class="stats-container mt-5">
+        <div class="stat-item">
+          <span class="stat-title">Appointment</span>
+          <span class="stat-value">4250</span>
+        </div>
+        <div class="divider"></div>
+        <div class="stat-item">
+          <span class="stat-title">Total Patients</span>
+          <span class="stat-value">32.1k</span>
+        </div>
+        <div class="divider"></div>
+        <div class="stat-item">
+          <span class="stat-title">Rate</span>
+          <span class="stat-value">4.8</span>
+        </div>
+      </div>
+      <div class="bottom-line"></div>
+
+      <h3>Doctors Availability Status</h3>
+      <div class="flex justify-center items-center my-4">
+        <div class="w-64 h-60 rounded-lg p-4 overflow-y-auto no-scrollbar">
+          <div class="grid grid-cols-4 grid-rows-4 gap-4 place-items-center">
+            <div
+              class="relative group w-12 h-12 rounded-full border-2 bg-cover bg-center transition-all"
+              *ngFor="let doctor of doctors()"
+              [style.backgroundImage]="'url(https://i.pravatar.cc/50?img=' + doctor.id + ')'"
+              [ngClass]="{
+          'border-green-500': doctor.status === 'present',
+          'border-red-500': doctor.status === 'absent'
+        }"
+            >
+              <!-- Hover Name Tooltip -->
+              <span
+                class="absolute top-0 left-1/2 transform -translate-x-1/2 translate-y-[-100%] scale-0 group-hover:scale-100 bg-gray-700 text-white text-xs rounded-lg px-2 py-1 transition-all"
+              >
+          {{ doctor.name }}
+        </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <app-patientchart></app-patientchart>
+    </div>
+  </mat-sidenav>
 </mat-sidenav-container>

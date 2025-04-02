@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbar } from '@angular/material/toolbar';
 import { HeaderComponent } from '../header/header.component';
+import { PatientchartComponent } from '../../../features/dashboard/patientchart/patientchart.component';
 
 export type MenuItem = {
   icon: string;
@@ -27,21 +28,43 @@ export type MenuItem = {
     MatIconModule,
     MatToolbar,
     HeaderComponent,
+    PatientchartComponent,
   ],
   standalone: true,
 })
 export class SidenavComponent {
-  showFiller = false;
+  constructor(private router: Router) {}
 
   collapsed = signal(false);
-  sidenavWidth = computed(() => (this.collapsed() ? '60px' : '250px'));
+  sidenavWidth = computed(() => (this.collapsed() ? '60px' : '200px'));
 
-  // sideNavCollapsed = signal(false);
-  // @Input() set collapse(val: boolean) {
-  //   this.sideNavCollapsed.set(val);
-  // }
-  sideNavCollapsed = signal(false);
-  logoPicSize = computed(() => (this.collapsed() ? '40px' : '150px'));
+  // Detect if the current route is 'dashboard'
+  isDashboardRoute = computed(() => this.router.url.includes('dashboard'));
+
+  doctors = signal([
+    { id: 1, name: 'Dr. Smith', status: 'present' },
+    { id: 2, name: 'Dr. Johnson', status: 'absent' },
+    { id: 3, name: 'Dr. Williams', status: 'present' },
+    { id: 4, name: 'Dr. Brown', status: 'absent' },
+    { id: 5, name: 'Dr. Garcia', status: 'present' },
+    { id: 6, name: 'Dr. Martinez', status: 'absent' },
+    { id: 7, name: 'Dr. Anderson', status: 'present' },
+    { id: 8, name: 'Dr. Thomas', status: 'absent' },
+    { id: 9, name: 'Dr. Clark', status: 'present' },
+    { id: 10, name: 'Dr. Walker', status: 'absent' },
+    { id: 11, name: 'Dr. Lewis', status: 'present' },
+    { id: 12, name: 'Dr. Lee', status: 'absent' },
+    { id: 13, name: 'Dr. Harris', status: 'present' },
+    { id: 14, name: 'Dr. Nelson', status: 'absent' },
+    { id: 15, name: 'Dr. Carter', status: 'present' },
+    { id: 16, name: 'Dr. Mitchell', status: 'absent' },
+    { id: 17, name: 'Dr. Perez', status: 'present' },
+    { id: 18, name: 'Dr. Robinson', status: 'absent' },
+    { id: 19, name: 'Dr. Lee', status: 'present' },
+    { id: 20, name: 'Dr. Young', status: 'absent' },
+    { id: 21, name: 'Dr. King', status: 'present' },
+    { id: 22, name: 'Dr. Scott', status: 'absent' },
+  ]);
 
   menuItems = signal<MenuItem[]>([
     {
@@ -49,21 +72,12 @@ export class SidenavComponent {
       label: 'Dashboard',
       route: 'dashboard',
     },
-    // {
-    //   icon: 'assets/Icons/icon_dashboard.svg',
-    //   label: 'Profile',
-    //   route: 'profile',
-    // },
     {
       icon: 'assets/Icons/icon_appointment.svg',
       label: 'Appointments',
       route: 'appointment',
     },
-    {
-      icon: 'assets/Icons/icon_doctor.svg',
-      label: 'Doctor',
-      route: 'doctor',
-    },
+    { icon: 'assets/Icons/icon_doctor.svg', label: 'Doctor', route: 'doctor' },
     {
       icon: 'assets/Icons/icon_patient.svg',
       label: 'Patients',
@@ -79,11 +93,6 @@ export class SidenavComponent {
       label: 'Settings',
       route: 'settings',
     },
-
-    {
-      icon: 'assets/Icons/icon_logout.svg',
-      label: 'Logout',
-      route: '',
-    },
+    { icon: 'assets/Icons/icon_logout.svg', label: 'Logout', route: '' },
   ]);
 }
