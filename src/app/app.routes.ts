@@ -14,11 +14,11 @@ import { InventoryComponent } from './features/inventory/inventory.component';
 import {AddPatientDialogComponent} from './shared/components/patient-dialog/patient-dialog.component';
 import {AddInventoryComponent} from './shared/components/add-inventory/add-inventory.component';
 import {EditInventoryComponent} from './shared/components/edit-inventory/edit-inventory.component';
+import {AddDoctorComponent} from './shared/components/add-doctor/add-doctor.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
   {
     path: 'common',
     component: SidenavComponent,
@@ -32,10 +32,12 @@ export const routes: Routes = [
       { path: 'report', component: ReportComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'accounts', component: AccountsManagementComponent },
+      { path: 'accounts/register', component: RegisterComponent},
       { path: 'inventory', component: InventoryComponent },
       { path: 'patient/add', component: AddPatientDialogComponent },
       { path: 'inventory/add', component: AddInventoryComponent },
       { path: 'inventory/edit/:id', component: EditInventoryComponent },
+      { path: 'doctor/add', component: AddDoctorComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
     ],
   },

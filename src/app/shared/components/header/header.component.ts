@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 import { MatToolbar } from '@angular/material/toolbar';
@@ -12,11 +12,28 @@ import { NgIf } from '@angular/common';
   imports: [MatIcon, MatIconButton, MatToolbar, NgIf],
   styleUrl: './header.component.css',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   // collapsed = signal(false);
   // sidenavWidth = computed(() => (this.collapsed() ? '60px' : '250px'));
   @Output() toggleSidenav = new EventEmitter<void>(); // Create event emitter
   activeRoute: string = '';
+  currentTime: string = '';
+
+  ngOnInit() {
+    this.updateTime();
+    setInterval(() => {
+      this.updateTime();
+    }, 1000);
+  }
+
+  onLogout() {
+    // Add logout functionality here
+  }
+
+  updateTime() {
+    const now = new Date();
+    this.currentTime = now.toLocaleTimeString();
+  }
 
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {

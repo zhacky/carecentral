@@ -25,7 +25,8 @@ import { PatientdataComponent } from './patientdata/patientdata.component';
   standalone: true,
   styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
+  constructor(private patientService: PatientService) {}
   searchQueryPatient: string = ''; // Store the search query
   searchQueryDoctor: string = '';
   filterStatus: string = ''; // Store the selected filter status
@@ -149,11 +150,6 @@ export class DashboardComponent {
     this.popupIndex = this.popupIndex === index ? null : index;
   }
 
-  // Handle edit action
-  editPatient(patient: any): void {
-    console.log('Edit patient:', patient);
-    // Implement edit logic here
-  }
 
   // Handle delete action
   deletePatient(patient: any): void {

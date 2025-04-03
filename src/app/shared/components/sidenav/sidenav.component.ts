@@ -73,6 +73,16 @@ export class SidenavComponent {
       route: 'dashboard',
     },
     {
+      icon: 'assets/Icons/icon_dashboard.svg',
+      label: 'Profile',
+      route: 'profile',
+    },
+    {
+      icon: 'assets/Icons/icon_dashboard.svg',
+      label: 'Accounts',
+      route: 'accounts',
+    },
+    {
       icon: 'assets/Icons/icon_appointment.svg',
       label: 'Appointments',
       route: 'appointment',
