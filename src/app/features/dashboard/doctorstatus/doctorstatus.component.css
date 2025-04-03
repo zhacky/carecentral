@@ -1,0 +1,82 @@
+.doctor-status-container {
+  background: white;
+  max-height: 280px; /* Adjust as needed */
+  overflow-y: auto; /* Enables vertical scrolling */
+  overflow-x: hidden; /* Hides horizontal scrolling */
+  scrollbar-width: none; /* Hides scrollbar in Firefox */
+  -ms-overflow-style: none; /* Hides scrollbar in IE & Edge */
+}
+
+/* Hide scrollbar for WebKit browsers (Chrome, Safari) */
+.doctor-status-container::-webkit-scrollbar {
+  display: none;
+}
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.header h3 {
+  margin: 0;
+}
+
+.header a {
+  text-decoration: none;
+  color: #377DFF;
+  font-weight: bold;
+}
+
+table {
+  width: 100%;
+}
+
+.doctor-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.doctor-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.name {
+  font-weight: bold;
+  color: #377DFF;
+}
+
+.degree {
+  font-size: 10px;
+  color: gray;
+}
+
+.status-chip {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 5px;
+  text-align: center;
+  min-width: 80px;
+}
+
+/* Green (Available) */
+.chip-available {
+  background-color: rgba(14, 210, 0, 0.1); /* 5% opacity green */
+  color: #0ED200; /* Solid green text */
+}
+
+/* Red (Absent) */
+.chip-absent {
+  background-color: rgba(217, 4, 4, 0.1); /* 5% opacity red */
+  color: #D90404; /* Solid red text */
+}
+
+
+

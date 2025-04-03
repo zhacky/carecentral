@@ -1,0 +1,32 @@
+<div class="chart-container">
+  <h3>Patient Satisfaction</h3>
+
+  <div class="chart-content">
+    <!-- Chart Section -->
+    <div class="chart-wrapper">
+      <ngx-charts-pie-chart
+        [view]="view"
+        [results]="patientSatisfactionData"
+        [scheme]="colorScheme"
+        [legend]="showLegend"
+        [explodeSlices]="explodeSlices"
+        [doughnut]="doughnut"
+        [arcWidth]="0.3">
+      </ngx-charts-pie-chart>
+
+      <!-- Centered Total Value -->
+      <div class="chart-center">
+        <p>Total</p>
+        <h2>{{ totalPatients | number }}</h2>
+      </div>
+    </div>
+
+    <!-- Custom Legend (Right Side) -->
+    <div class="chart-legend">
+      <div *ngFor="let item of patientSatisfactionData; let i = index" class="legend-item">
+        <span class="legend-color" [style.background]="colorScheme.domain?.[i]"></span>
+        <span class="legend-text">{{ item.name }}</span>
+      </div>
+    </div>
+  </div>
+</div>

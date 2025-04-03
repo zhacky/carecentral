@@ -1,0 +1,42 @@
+.stats-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-title {
+  font-size: 10px;
+  color: #A9A9A9;
+  font-weight: lighter;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-size: 15px;
+  font-weight: normal;
+}
+
+.divider {
+  width: 1px;
+  height: 40px;
+  background-color: #A9A9A9;
+  opacity: 0.5;
+}
+
+.bottom-line {
+  width: 100%;
+  height: 1px;
+  background-color: #A9A9A9;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  opacity: 0.5;
+}
+
