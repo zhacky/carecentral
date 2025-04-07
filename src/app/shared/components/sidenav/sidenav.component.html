@@ -82,7 +82,7 @@
         <div class="w-64 h-60 rounded-lg p-4 overflow-y-auto no-scrollbar">
           <div class="grid grid-cols-4 grid-rows-4 gap-4 place-items-center">
             <div
-              class="relative group w-12 h-12 rounded-full border-2 bg-cover bg-center transition-all"
+              class="relative group w-12 h-12 rounded-full border-4 bg-cover bg-center transition-all"
               *ngFor="let doctor of doctors()"
               [style.backgroundImage]="'url(https://i.pravatar.cc/50?img=' + doctor.id + ')'"
               [ngClass]="{

@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import { NgClass, NgForOf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BaseChartDirective } from 'ng2-charts';
@@ -7,6 +7,7 @@ import { DoctorstatusComponent } from './doctorstatus/doctorstatus.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { PatientvisitComponent } from './patientvisit/patientvisit.component';
 import { PatientdataComponent } from './patientdata/patientdata.component';
+import {PatientService} from '../../core/services/patient.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,6 +28,10 @@ import { PatientdataComponent } from './patientdata/patientdata.component';
 })
 export class DashboardComponent implements OnInit {
   constructor(private patientService: PatientService) {}
+
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
   searchQueryPatient: string = ''; // Store the search query
   searchQueryDoctor: string = '';
   filterStatus: string = ''; // Store the selected filter status
@@ -149,7 +154,6 @@ export class DashboardComponent implements OnInit {
   togglePopup(index: number): void {
     this.popupIndex = this.popupIndex === index ? null : index;
   }
-
 
   // Handle delete action
   deletePatient(patient: any): void {

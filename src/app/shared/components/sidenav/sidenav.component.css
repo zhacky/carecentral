@@ -4,10 +4,6 @@
   display: flex;
 }
 
-/*:host * {*/
-/*  transition: all 500ms ease-in-out;*/
-/*}*/
-
 .logo-image {
   transition: all 500ms ease-in-out; /* Smooth transition for size changes */
   display: block; /* Ensures the image is properly aligned */
@@ -207,6 +203,37 @@ body, html {
 .no-scrollbar {
   -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
   scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+/*Right-sidenav transition*/
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+
+.right-sidenav {
+  animation: slideInRight 0.3s ease-out;
+}
+
+.right-sidenav.hidden {
+  animation: slideOutRight 0.2s ease-in;
 }
 
 /* Hide full text smoothly */

@@ -39,7 +39,9 @@ export class SidenavComponent {
   sidenavWidth = computed(() => (this.collapsed() ? '60px' : '200px'));
 
   // Detect if the current route is 'dashboard'
-  isDashboardRoute = computed(() => this.router.url.includes('dashboard'));
+  isDashboardRoute(): boolean {
+    return this.router.url === '/common/dashboard';
+  }
 
   doctors = signal([
     { id: 1, name: 'Dr. Smith', status: 'present' },
