@@ -1,3 +1,4 @@
+
 import {Component, OnInit, signal} from '@angular/core';
 import { NgClass, NgForOf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -28,7 +29,6 @@ import {PatientService} from '../../core/services/patient.service';
 })
 export class DashboardComponent implements OnInit {
   constructor(private patientService: PatientService) {}
-
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
