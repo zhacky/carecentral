@@ -1,34 +1,15 @@
-<div class="flex">
-  <div class="profile-container">
-    <mat-card class="profile-card">
-      <div class="profile-header">
-        <img src="images/img.jpg" alt="Profile Image" class="profile-image" loading="lazy" />
-        <div class="profile-info">
-          <h2><span class="custom-text">Welcome!</span> {{ profile.username }}</h2>
-          <p>&#64;{{ profile.username }}</p>
-        </div>
-      </div>
-      <mat-divider></mat-divider>
-      <p class="description">Hi! I'm a software developer at Antajia Software Development Services. I'm an introvert type of person but really good in solving complex problem</p>
-      <div class="center">
-        <button class="bio" mat-flat-button (click)="openEditProfileDialog()">Edit Profile</button>
-      </div> 
-    </mat-card>
+<div class="grid grid-cols-[400px_1fr] gap-4 m-6">
 
-    <mat-card class="profile-card2">
-      <mat-card-title class="info">Personal Information</mat-card-title>
-      <div class="profile-info2">
-        <span>First Name</span>
-        <mat-chip>{{ profile.email }}</mat-chip>
-        <span>Last Name</span>
-        <mat-chip>{{ profile.email }}</mat-chip>
-        <span>Phone</span>
-        <mat-chip>{{ profile.email }}</mat-chip>
-        <span>Address</span>
-        <mat-chip>{{ profile.email }}</mat-chip>
-        <span>Position</span>
-        <mat-chip>{{ profile.position }}</mat-chip>
-      </div>
-    </mat-card>
+  <!-- Left Side - Fixed Width -->
+  <div class="flex flex-col gap-4">
+    <app-doctor-profile></app-doctor-profile>
+    <app-about-skills></app-about-skills>
   </div>
+
+  <!-- Right Side - Fills Remaining Space -->
+  <div>
+    <app-user-profile></app-user-profile>
+  </div>
+
 </div>
+
