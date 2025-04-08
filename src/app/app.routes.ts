@@ -16,6 +16,10 @@ import {AddInventoryComponent} from './shared/components/add-inventory/add-inven
 import {EditInventoryComponent} from './shared/components/edit-inventory/edit-inventory.component';
 import {AddDoctorComponent} from './shared/components/add-doctor/add-doctor.component';
 import {AuthGuard} from './core/auth/login/route.guard';
+import {RoomComponent} from './features/room/room.component';
+import {AddRoomComponent} from './shared/components/add-room/add-room.component';
+import {RoomAssignComponent} from './features/room-assign/room-assign.component';
+import {AddRoomAssignComponent} from './shared/components/add-room-assign/add-room-assign.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -39,6 +43,10 @@ export const routes: Routes = [
       { path: 'patient/add', component: AddPatientDialogComponent },
       { path: 'inventory/add', component: AddInventoryComponent },
       { path: 'inventory/edit/:id', component: EditInventoryComponent },
+      { path: 'room', component: RoomComponent },
+      { path: 'room/add', component: AddRoomComponent },
+      { path: 'roomAssign', component: RoomAssignComponent },
+      { path: 'roomAssign/add', component: AddRoomAssignComponent },
       { path: 'doctor/add', component: AddDoctorComponent },
     ],
   },

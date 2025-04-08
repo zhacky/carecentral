@@ -4,10 +4,6 @@
   display: flex;
 }
 
-/*:host * {*/
-/*  transition: all 500ms ease-in-out;*/
-/*}*/
-
 .logo-image {
   transition: all 500ms ease-in-out; /* Smooth transition for size changes */
   display: block; /* Ensures the image is properly aligned */
@@ -209,6 +205,37 @@ body, html {
   scrollbar-width: none; /* Hide scrollbar for Firefox */
 }
 
+/*Right-sidenav transition*/
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+
+.right-sidenav {
+  animation: slideInRight 0.3s ease-out;
+}
+
+.right-sidenav.hidden {
+  animation: slideOutRight 0.2s ease-in;
+}
+
 /* Hide full text smoothly */
 .brand-name.collapsed .text {
   opacity: 0;
@@ -247,4 +274,33 @@ mat-list-item.selected-menu-item img[matListItemIcon] {
 mat-list-item.selected-menu-item span[matListItemTitle] {
   color: white !important; /* Ensures the title text is white */
 }
+
+.child-items {
+  padding-left: 30px;
+}
+
+.parent-item {
+  cursor: pointer;
+}
+
+.expand-icon {
+  margin-left: auto;
+}
+
+.list-item-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.item-label {
+  flex-grow: 1;
+}
+
+.expand-icon {
+  color: #A9A9A9;
+}
+
+
 
