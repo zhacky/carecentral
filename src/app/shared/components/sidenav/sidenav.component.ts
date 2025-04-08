@@ -37,15 +37,15 @@ export class SidenavComponent {
   constructor(private router: Router) {}
 
   collapsed = signal(false);
-  sidenavWidth = computed(() => (this.collapsed() ? '60px' : '200px'));
+  sidenavWidth = computed(() => (this.collapsed() ? '60px' : '230px'));
 
   expandedItems = signal<Record<string, boolean>>({});
 
   toggleExpand(label: string) {
     const current = this.expandedItems();
-    this.expandedItems.update(items => ({
+    this.expandedItems.update((items) => ({
       ...items,
-      [label]: !items[label]
+      [label]: !items[label],
     }));
   }
 
@@ -55,11 +55,11 @@ export class SidenavComponent {
   // }
   sideNavCollapsed = signal(false);
   logoPicSize = computed(() => (this.collapsed() ? '40px' : '150px'));
+
   // Detect if the current route is 'dashboard'
   isDashboardRoute(): boolean {
     return this.router.url === '/common/dashboard';
   }
-
 
   doctors = signal([
     { id: 1, name: 'Dr. Smith', status: 'present' },
@@ -93,12 +93,7 @@ export class SidenavComponent {
       route: 'dashboard',
     },
     {
-      icon: 'assets/Icons/icon_dashboard.svg',
-      label: 'Profile',
-      route: 'profile',
-    },
-    {
-      icon: 'assets/Icons/icon_dashboard.svg',
+      icon: 'assets/Icons/icon_account.svg',
       label: 'Accounts',
       route: 'accounts',
     },
@@ -124,14 +119,14 @@ export class SidenavComponent {
         {
           icon: 'assets/Icons/icon_dot.svg',
           label: 'Room List',
-          route: 'room'
+          route: 'room',
         },
         {
           icon: 'assets/Icons/icon_dot.svg',
           label: 'Room Assignment',
-          route: 'roomAssign'
-        }
-      ]
+          route: 'roomAssign',
+        },
+      ],
     },
     {
       icon: 'assets/Icons/icon_report.svg',
@@ -142,11 +137,6 @@ export class SidenavComponent {
       icon: 'assets/Icons/icon_settings.svg',
       label: 'Settings',
       route: 'settings',
-    },
-    {
-      icon: 'assets/Icons/icon_logout.svg',
-      label: 'Logout',
-      route: ''
     },
   ]);
 }
