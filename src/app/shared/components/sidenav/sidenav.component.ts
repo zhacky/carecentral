@@ -11,7 +11,8 @@ import { HeaderComponent } from '../header/header.component';
 export type MenuItem = {
   icon: string;
   label: string;
-  route: string;
+  route?: string;
+  children?: MenuItem[];
 };
 
 @Component({
@@ -35,6 +36,16 @@ export class SidenavComponent {
 
   collapsed = signal(false);
   sidenavWidth = computed(() => (this.collapsed() ? '60px' : '250px'));
+
+  expandedItems = signal<Record<string, boolean>>({});
+
+  toggleExpand(label: string) {
+    const current = this.expandedItems();
+    this.expandedItems.update(items => ({
+      ...items,
+      [label]: !items[label]
+    }));
+  }
 
   // sideNavCollapsed = signal(false);
   // @Input() set collapse(val: boolean) {
@@ -61,13 +72,29 @@ export class SidenavComponent {
     },
     {
       icon: 'assets/Icons/icon_doctor.svg',
-      label: 'Doctor',
+      label: 'Doctors',
       route: 'doctor',
     },
     {
       icon: 'assets/Icons/icon_patient.svg',
       label: 'Patients',
       route: 'patient',
+    },
+    {
+      icon: 'assets/Icons/icon_room.svg',
+      label: 'Rooms',
+      children: [
+        {
+          icon: 'assets/Icons/icon_dot.svg',
+          label: 'Room List',
+          route: 'room'
+        },
+        {
+          icon: 'assets/Icons/icon_dot.svg',
+          label: 'Room Assignment',
+          route: 'roomAssign'
+        }
+      ]
     },
     {
       icon: 'assets/Icons/icon_report.svg',
@@ -79,7 +106,6 @@ export class SidenavComponent {
       label: 'Settings',
       route: 'settings',
     },
-
     {
       icon: 'assets/Icons/icon_logout.svg',
       label: 'Logout',
