@@ -60,6 +60,7 @@ export class SidenavComponent {
     return this.router.url === '/common/dashboard';
   }
 
+
   doctors = signal([
     { id: 1, name: 'Dr. Smith', status: 'present' },
     { id: 2, name: 'Dr. Johnson', status: 'absent' },

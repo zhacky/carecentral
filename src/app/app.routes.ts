@@ -15,6 +15,7 @@ import {AddPatientDialogComponent} from './shared/components/patient-dialog/pati
 import {AddInventoryComponent} from './shared/components/add-inventory/add-inventory.component';
 import {EditInventoryComponent} from './shared/components/edit-inventory/edit-inventory.component';
 import {AddDoctorComponent} from './shared/components/add-doctor/add-doctor.component';
+import {AuthGuard} from './core/auth/login/route.guard';
 import {RoomComponent} from './features/room/room.component';
 import {AddRoomComponent} from './shared/components/add-room/add-room.component';
 import {RoomAssignComponent} from './features/room-assign/room-assign.component';
@@ -22,10 +23,11 @@ import {AddRoomAssignComponent} from './shared/components/add-room-assign/add-ro
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
   {
     path: 'common',
     component: SidenavComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
@@ -46,8 +48,7 @@ export const routes: Routes = [
       { path: 'roomAssign', component: RoomAssignComponent },
       { path: 'roomAssign/add', component: AddRoomAssignComponent },
       { path: 'doctor/add', component: AddDoctorComponent },
-      { path: '', redirectTo: 'login', pathMatch: 'full' },
     ],
   },
-
+  { path: '**', redirectTo: 'login' }, 
 ];

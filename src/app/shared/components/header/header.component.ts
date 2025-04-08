@@ -27,7 +27,13 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout() {
-    // Add logout functionality here
+    console.log('Logout initiated.');
+    localStorage.removeItem('currentUser'); 
+    this.router.navigate(['/login']).then(() => {
+      console.log('User logged out and redirected to login page.');
+    }).catch((error) => {
+      console.error('Logout redirection failed:', error);
+    });
   }
 
   updateTime() {
