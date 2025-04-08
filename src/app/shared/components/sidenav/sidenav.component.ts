@@ -111,10 +111,6 @@ export class SidenavComponent {
       label: 'Doctors',
       route: 'doctor',
     },
-    { 
-      icon: 'assets/Icons/icon_doctor.svg', 
-      label: 'Doctor', 
-      route: 'doctor' },
     {
       icon: 'assets/Icons/icon_patient.svg',
       label: 'Patients',
@@ -149,12 +145,7 @@ export class SidenavComponent {
     {
       icon: 'assets/Icons/icon_logout.svg',
       label: 'Logout',
-      route: '',
-    },
-    { 
-      icon: 'assets/Icons/icon_logout.svg', 
-      label: 'Logout', 
-      route: '' 
+      route: ''
     },
   ]);
 }
