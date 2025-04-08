@@ -41,6 +41,7 @@ export class SidenavComponent {
   // Detect if the current route is 'dashboard'
   isDashboardRoute = computed(() => this.router.url.includes('dashboard'));
 
+
   doctors = signal([
     { id: 1, name: 'Dr. Smith', status: 'present' },
     { id: 2, name: 'Dr. Johnson', status: 'absent' },

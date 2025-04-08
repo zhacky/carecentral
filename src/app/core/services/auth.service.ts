@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment.development';
 
@@ -10,6 +10,9 @@ import { environment } from '../../../environments/environment.development';
 export class AuthService {
    private readonly apiUrl = `${environment.apiUrl}/api/auth/login`;
    private currentUser: any;
+   private loggedIn = new BehaviorSubject<boolean>(this.isLoggedIn());
+   private loggedIn$ = this.loggedIn.asObservable();
+  router: any;
 
   constructor(private http: HttpClient) {}
 
@@ -19,8 +22,9 @@ export class AuthService {
     console.log('Current API URL:', environment.apiUrl);
     return this.http.post<any>(this.apiUrl, body, { headers }).pipe(
       tap((response) => {
-        this.currentUser = response.userDetails; // Assuming the response contains user information
-        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+        console.log('Login response:', response);
+        this.currentUser = { token: response.token, ...response.userDetails }; // Include token and user details
+        localStorage.setItem('currentUser', JSON.stringify(this.currentUser)); // Store in localStorage
       }),
       catchError((error) => {
         console.error('Login error', error);
@@ -54,4 +58,16 @@ export class AuthService {
       })
     );
   }
+
+  isLoggedIn(): boolean {
+    const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    return !!user.token;
+  }
+
+  logout(): void {
+    localStorage.removeItem('currentUser');
+    this.currentUser = null;
+    this.loggedIn.next(false);
+  }
+  
 }

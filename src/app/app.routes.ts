@@ -15,13 +15,15 @@ import {AddPatientDialogComponent} from './shared/components/patient-dialog/pati
 import {AddInventoryComponent} from './shared/components/add-inventory/add-inventory.component';
 import {EditInventoryComponent} from './shared/components/edit-inventory/edit-inventory.component';
 import {AddDoctorComponent} from './shared/components/add-doctor/add-doctor.component';
+import {AuthGuard} from './core/auth/login/route.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent, canActivate: [AuthGuard]},
   {
     path: 'common',
     component: SidenavComponent,
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
@@ -38,8 +40,7 @@ export const routes: Routes = [
       { path: 'inventory/add', component: AddInventoryComponent },
       { path: 'inventory/edit/:id', component: EditInventoryComponent },
       { path: 'doctor/add', component: AddDoctorComponent },
-      { path: '', redirectTo: 'login', pathMatch: 'full' },
     ],
   },
-
+  { path: '**', redirectTo: 'login' }, 
 ];
