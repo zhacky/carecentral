@@ -1,0 +1,29 @@
+<div class="bg-white shadow-lg rounded-lg p-4 my-10">
+  <div class="flex justify-between items-center mb-5 mt-2">
+    <h3 class="text-lg font-semibold">Patient Visit</h3>
+    <div class="relative">
+      <select class="border rounded px-2 py-1 text-sm">
+        <option>Monthly</option>
+        <option>Weekly</option>
+        <option>Daily</option>
+      </select>
+    </div>
+  </div>
+
+  <ngx-charts-line-chart
+    [view]="[850, 300]"
+    [results]="patientVisitData"
+    [scheme]="colorScheme"
+    [gradient]="true"
+    [xAxis]="true"
+    [yAxis]="true"
+    [legend]="false"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    [xAxisLabel]="'Month'"
+    [yAxisLabel]="'Patients'"
+    [autoScale]="true"
+    [curve]="curveBasis"
+  >
+  </ngx-charts-line-chart>
+</div>

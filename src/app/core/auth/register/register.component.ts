@@ -9,6 +9,8 @@ import { AuthService } from '../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { MatOption } from '@angular/material/core';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +23,9 @@ import { RouterModule } from '@angular/router';
     MatError,
     MatLabel,
     MatCardModule,
-    RouterModule
+    RouterModule,
+    MatOption,
+    MatSelect
   ],
   templateUrl: './register.component.html',
   standalone: true,

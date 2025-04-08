@@ -3,14 +3,6 @@
   width: 100vw;
   display: flex;
 }
-/*:host * {*/
-/*  transition: all 500ms ease-in-out;*/
-/*}*/
-.sidenav-header {
-  display: flex;
-  justify-content: center; /* Centers horizontally */
-  align-items: center; /* Centers vertically */
-}
 
 .logo-image {
   transition: all 500ms ease-in-out; /* Smooth transition for size changes */
@@ -24,6 +16,9 @@ mat-sidenav-content {
 }
 
 .sidenav-header {
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
   padding-top: 24px;
   text-align: center;
 }
@@ -157,6 +152,89 @@ body, html {
   color: #3371EB;
 }
 
+/*--rightdienav---*/
+
+.stats-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-title {
+  font-size: 13px;
+  color: #A9A9A9;
+  font-weight: lighter;
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-size: 15px;
+  font-weight: normal;
+}
+
+.divider {
+  width: 1px;
+  height: 40px;
+  background-color: #A9A9A9;
+  opacity: 0.5;
+}
+
+.bottom-line {
+  width: 100%;
+  height: 1px;
+  background-color: #A9A9A9;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  opacity: 0.5;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+/*Right-sidenav transition*/
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+
+.right-sidenav {
+  animation: slideInRight 0.3s ease-out;
+}
+
+.right-sidenav.hidden {
+  animation: slideOutRight 0.2s ease-in;
+}
 
 /* Hide full text smoothly */
 .brand-name.collapsed .text {
@@ -179,7 +257,7 @@ mat-list-item {
   transition: background 0.3s, border-radius 0.3s, color 0.3s; /* Smooth transition */
 }
 
-mat-list-item span{
+mat-list-item span {
   font-family: "Poppins", sans-serif;
 }
 
