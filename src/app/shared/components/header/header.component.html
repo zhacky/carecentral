@@ -6,6 +6,8 @@
     </button>
     <nav>
       <span *ngIf="activeRoute === '/common/dashboard'">Dashboard</span>
+      <span *ngIf="activeRoute === '/common/profile'">Profile</span>
+      <span *ngIf="activeRoute === '/common/accounts'">Accounts</span>
       <span *ngIf="activeRoute === '/common/appointment'">Appointments</span>
       <span *ngIf="activeRoute === '/common/doctor'">Doctors</span>
       <span *ngIf="activeRoute === '/common/patient'">Patients</span>
@@ -24,14 +26,53 @@
       </button>
 
       <!-- Account icon (assuming an account icon here) -->
-      <button mat-icon-button>
-        <mat-icon>account_circle</mat-icon>
-      </button>
+      <div class="relative" #profileMenuContainer>
+        <button mat-icon-button (click)="toggleProfileMenu()">
+          <mat-icon>account_circle</mat-icon>
+        </button>
+
+        <!-- Dropdown Menu -->
+        <div *ngIf="isProfileMenuOpen"
+             class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+
+          <div class="px-4 py-2 border-b">
+            <p class="font-medium text-gray-800">Dr. John Doe</p>
+            <p class="text-sm text-gray-500">Cardiologist</p>
+          </div>
+
+          <ul class="py-2">
+            <li>
+              <button (click)="navigateTo('/common/profile')"
+                      class="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm text-gray-700">
+                My Profile
+              </button>
+            </li>
+            <li>
+              <button (click)="navigateTo('/common/settings')"
+                      class="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm text-gray-700">
+                Settings
+              </button>
+            </li>
+            <li>
+              <button (click)="navigateTo('/common/change-password')"
+                      class="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm text-gray-700">
+                Change Password
+              </button>
+            </li>
+          </ul>
+
+          <div class="border-t">
+            <button (click)="logout()" class="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm text-red-600">
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
 
       <!-- Logout button -->
-      <button mat-button (click)="onLogout()">
-        Logout
-      </button>
+      <!--      <button mat-button (click)="onLogout()">-->
+      <!--        Logout-->
+      <!--      </button>-->
     </div>
   </mat-toolbar>
 </header>

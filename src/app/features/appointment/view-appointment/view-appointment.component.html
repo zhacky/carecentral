@@ -1,0 +1,76 @@
+<div class="p-6">
+  <h1 class="text-2xl font-bold text-gray-800 mb-6">Appointment</h1>
+
+  <div class="bg-white rounded-lg shadow overflow-hidden">
+    <!-- Table Header -->
+    <div class="grid grid-cols-9 bg-gray-100 p-4 font-medium text-gray-700">
+      <div class="col-span-2">Name</div>
+      <div>Doctor</div>
+      <div>Gender</div>
+      <div>Date</div>
+      <div>Time</div>
+      <div>Mobile</div>
+      <div>Email</div>
+      <div>Status</div>
+      <div>Visit Type</div>
+    </div>
+
+    <!-- Appointment Rows -->
+    <div *ngFor="let appointment of appointments"
+         class="grid grid-cols-9 p-4 border-b border-gray-200 hover:bg-gray-50">
+      <!-- Name -->
+      <div class="col-span-2 font-medium text-gray-800 truncate">
+        {{ appointment.name }}
+      </div>
+
+      <!-- Doctor -->
+      <div class="text-gray-600 truncate">
+        {{ appointment.doctor }}
+      </div>
+
+      <!-- Gender -->
+      <div class="text-gray-600">
+        {{ appointment.gender }}
+      </div>
+
+      <!-- Date -->
+      <div class="text-gray-600">
+        {{ appointment.date }}
+      </div>
+
+      <!-- Time -->
+      <div class="text-gray-600 flex items-center">
+        <span class="mr-1">💬</span>
+        {{ appointment.time }}
+      </div>
+
+      <!-- Mobile -->
+      <div class="text-gray-600 flex items-center truncate">
+        <span class="mr-1">📞</span>
+        {{ appointment.mobile }}
+      </div>
+
+      <!-- Email -->
+      <div class="text-gray-600 flex items-center truncate">
+        <span class="mr-1">💬</span>
+        {{ appointment.email }}
+      </div>
+
+      <!-- Status -->
+      <div>
+        <span [ngClass]="{
+          'bg-green-100 text-green-800': appointment.status === 'Completed',
+          'bg-blue-100 text-blue-800': appointment.status === 'Scheduled',
+          'bg-red-100 text-red-800': appointment.status === 'Canceled'
+        }" class="px-2 py-1 rounded-full text-xs font-medium">
+          {{ appointment.status }}
+        </span>
+      </div>
+
+      <!-- Visit Type -->
+      <div class="text-gray-600">
+        {{ appointment.visitType }}
+      </div>
+    </div>
+  </div>
+</div>

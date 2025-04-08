@@ -20,7 +20,7 @@
           <!-- Item with children (e.g., "Rooms") -->
           <ng-container *ngIf="item.children?.length; else singleItem">
             <mat-list-item disableRipple (click)="toggleExpand(item.label)" class="parent-item">
-              <img [src]="item.icon" alt="Icon" matListItemIcon />
+              <img [src]="item.icon" alt="Icon" matListItemIcon/>
               <span matListItemTitle class="item-label" style="color: #A9A9A9;">
                 {{ item.label }}
                 <mat-icon class="expand-icon align-bottom">
@@ -36,7 +36,7 @@
                 [routerLink]="child.route"
                 routerLinkActive="selected-menu-item"
               >
-                <img [src]="child.icon" alt="Icon" matListItemIcon />
+                <img [src]="child.icon" alt="Icon" matListItemIcon/>
                 <span matListItemTitle style="color: #A9A9A9;">{{ child.label }}</span>
               </mat-list-item>
             </div>
@@ -50,7 +50,7 @@
               [routerLink]="item.route"
               routerLinkActive="selected-menu-item"
             >
-              <img [src]="item.icon" alt="Icon" matListItemIcon />
+              <img [src]="item.icon" alt="Icon" matListItemIcon/>
               <span matListItemTitle style="color: #A9A9A9;">{{ item.label }}</span>
             </mat-list-item>
           </ng-template>
@@ -65,7 +65,7 @@
           <span matListItemTitle style="color: #A9A9A9;">{{ menuItems()[menuItems().length - 1].label }}</span>
         </mat-list-item>
       </div>
-      
+
     </mat-nav-list>
   </mat-sidenav>
 
