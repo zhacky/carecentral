@@ -12,7 +12,8 @@ import { PatientchartComponent } from '../../../features/dashboard/patientchart/
 export type MenuItem = {
   icon: string;
   label: string;
-  route: string;
+  route?: string;
+  children?: MenuItem[];
 };
 
 @Component({
@@ -38,6 +39,22 @@ export class SidenavComponent {
   collapsed = signal(false);
   sidenavWidth = computed(() => (this.collapsed() ? '60px' : '200px'));
 
+  expandedItems = signal<Record<string, boolean>>({});
+
+  toggleExpand(label: string) {
+    const current = this.expandedItems();
+    this.expandedItems.update(items => ({
+      ...items,
+      [label]: !items[label]
+    }));
+  }
+
+  // sideNavCollapsed = signal(false);
+  // @Input() set collapse(val: boolean) {
+  //   this.sideNavCollapsed.set(val);
+  // }
+  sideNavCollapsed = signal(false);
+  logoPicSize = computed(() => (this.collapsed() ? '40px' : '150px'));
   // Detect if the current route is 'dashboard'
   isDashboardRoute(): boolean {
     return this.router.url === '/common/dashboard';
@@ -89,11 +106,35 @@ export class SidenavComponent {
       label: 'Appointments',
       route: 'appointment',
     },
-    { icon: 'assets/Icons/icon_doctor.svg', label: 'Doctor', route: 'doctor' },
+    {
+      icon: 'assets/Icons/icon_doctor.svg',
+      label: 'Doctors',
+      route: 'doctor',
+    },
+    { 
+      icon: 'assets/Icons/icon_doctor.svg', 
+      label: 'Doctor', 
+      route: 'doctor' },
     {
       icon: 'assets/Icons/icon_patient.svg',
       label: 'Patients',
       route: 'patient',
+    },
+    {
+      icon: 'assets/Icons/icon_room.svg',
+      label: 'Rooms',
+      children: [
+        {
+          icon: 'assets/Icons/icon_dot.svg',
+          label: 'Room List',
+          route: 'room'
+        },
+        {
+          icon: 'assets/Icons/icon_dot.svg',
+          label: 'Room Assignment',
+          route: 'roomAssign'
+        }
+      ]
     },
     {
       icon: 'assets/Icons/icon_report.svg',
@@ -105,6 +146,15 @@ export class SidenavComponent {
       label: 'Settings',
       route: 'settings',
     },
-    { icon: 'assets/Icons/icon_logout.svg', label: 'Logout', route: '' },
+    {
+      icon: 'assets/Icons/icon_logout.svg',
+      label: 'Logout',
+      route: '',
+    },
+    { 
+      icon: 'assets/Icons/icon_logout.svg', 
+      label: 'Logout', 
+      route: '' 
+    },
   ]);
 }

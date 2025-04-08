@@ -275,3 +275,32 @@ mat-list-item.selected-menu-item span[matListItemTitle] {
   color: white !important; /* Ensures the title text is white */
 }
 
+.child-items {
+  padding-left: 30px;
+}
+
+.parent-item {
+  cursor: pointer;
+}
+
+.expand-icon {
+  margin-left: auto;
+}
+
+.list-item-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.item-label {
+  flex-grow: 1;
+}
+
+.expand-icon {
+  color: #A9A9A9;
+}
+
+
+
