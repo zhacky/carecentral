@@ -3,30 +3,29 @@
   <mat-sidenav #drawer [style.width]="sidenavWidth()" mode="side" opened style="background-color: white;">
     <mat-nav-list class="nav-list">
       <div class="sidenav-header">
-        <span [class.collapsed]="collapsed()" class="brand-name">
-         <span class="text">
-           <span class="blue">Care</span><span>C</span>entral
-         </span>
-         <span class="short-text">
-           <span class="blue">C</span><span>C</span>
-         </span>
+      <span [class.collapsed]="collapsed()" class="brand-name">
+        <span class="text">
+          <span class="blue">Care</span><span>C</span>entral
         </span>
+        <span class="short-text">
+          <span class="blue">C</span><span>C</span>
+        </span>
+      </span>
       </div>
 
       <!-- Main menu items -->
       <div class="main-menu mt-5">
         <ng-container *ngFor="let item of menuItems().slice(0, menuItems().length - 1)">
-
           <!-- Item with children (e.g., "Rooms") -->
           <ng-container *ngIf="item.children?.length; else singleItem">
             <mat-list-item disableRipple (click)="toggleExpand(item.label)" class="parent-item">
               <img [src]="item.icon" alt="Icon" matListItemIcon/>
-              <span matListItemTitle class="item-label" style="color: #A9A9A9;">
-                {{ item.label }}
+              <span matListItemTitle class="item-label text-[#A9A9A9]">
+              {{ item.label }}
                 <mat-icon class="expand-icon align-bottom">
                 {{ expandedItems()[item.label] ? 'expand_less' : 'expand_more' }}
-                </mat-icon>
-              </span>
+              </mat-icon>
+            </span>
             </mat-list-item>
 
             <!-- Nested child routes -->
@@ -37,7 +36,7 @@
                 routerLinkActive="selected-menu-item"
               >
                 <img [src]="child.icon" alt="Icon" matListItemIcon/>
-                <span matListItemTitle style="color: #A9A9A9;">{{ child.label }}</span>
+                <span matListItemTitle class="text-[#A9A9A9]">{{ child.label }}</span>
               </mat-list-item>
             </div>
           </ng-container>
@@ -51,23 +50,32 @@
               routerLinkActive="selected-menu-item"
             >
               <img [src]="item.icon" alt="Icon" matListItemIcon/>
-              <span matListItemTitle style="color: #A9A9A9;">{{ item.label }}</span>
+              <span matListItemTitle class="text-[#A9A9A9]">{{ item.label }}</span>
             </mat-list-item>
           </ng-template>
-
         </ng-container>
       </div>
 
       <!-- Settings item -->
       <div class="bottom-item">
-        <mat-list-item [routerLink]="menuItems()[menuItems().length - 1].route">
+        <mat-list-item
+          [routerLink]="menuItems()[menuItems().length - 1].route"
+          routerLinkActive="selected-menu-item"
+          class="text-[#A9A9A9] hover:bg-blue-50 group"
+        >
           <img [src]="menuItems()[menuItems().length - 1].icon" alt="Settings Icon" matListItemIcon/>
-          <span matListItemTitle style="color: #A9A9A9;">{{ menuItems()[menuItems().length - 1].label }}</span>
+          <span
+            matListItemTitle
+            class="text-sm text-[#A9A9A9] group-selected:text-blue-600 group-hover:text-blue-600 transition-colors"
+          >
+          {{ menuItems()[menuItems().length - 1].label }}
+        </span>
         </mat-list-item>
       </div>
 
     </mat-nav-list>
   </mat-sidenav>
+
 
   <!-- Main Content -->
   <mat-sidenav-content [style.margin-left]="sidenavWidth()" class="page-content no-scrollbar">

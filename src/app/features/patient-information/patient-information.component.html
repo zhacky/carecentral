@@ -11,6 +11,12 @@
           >
             <i class="fa-solid fa-plus"></i> Add Patient
           </button>
+          <button
+            routerLink="/common/patient/details"
+            class="bg-blue-500 text-white px-4 py-2 rounded ml-5"
+          >
+            Details
+          </button>
         </div>
         <!-- Search Bar -->
         <div class="relative w-64">
@@ -21,8 +27,10 @@
             [(ngModel)]="searchTerm"
             (keyup)="applyFilter()"
           />
-          <svg xmlns="http://www.w3.org/2000/svg" class="absolute right-3 top-2.5 text-gray-400" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a7 7 0 110 14 7 7 0 010-14zm0 0v3m0 4v6"></path>
+          <svg xmlns="http://www.w3.org/2000/svg" class="absolute right-3 top-2.5 text-gray-400" width="16" height="16"
+               fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M11 4a7 7 0 110 14 7 7 0 010-14zm0 0v3m0 4v6"></path>
           </svg>
         </div>
       </div>
@@ -33,39 +41,51 @@
       <table mat-table [dataSource]="dataSource" class="w-full table-auto text-sm text-left border border-gray-200">
 
         <ng-container matColumnDef="patientId">
-          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Patient ID </th>
-          <td *matCellDef="let element" class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium"> {{ element.patientId }} </td>
+          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Patient ID</th>
+          <td *matCellDef="let element"
+              class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium"> {{ element.patientId }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="firstName">
-          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> First Name </th>
-          <td *matCellDef="let element" class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium"> {{ element.firstName }} </td>
+          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> First Name</th>
+          <td *matCellDef="let element"
+              class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium"> {{ element.firstName }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="lastName">
-          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Last Name </th>
-          <td *matCellDef="let element" class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium"> {{ element.lastName }} </td>
+          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Last Name</th>
+          <td *matCellDef="let element"
+              class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium"> {{ element.lastName }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="dateOfBirth">
-          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Birthdate </th>
-          <td *matCellDef="let element" class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium"> {{ element.dateOfBirth }} </td>
+          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Birthdate</th>
+          <td *matCellDef="let element"
+              class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium"> {{ element.dateOfBirth }}
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="gender">
-          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Gender </th>
-          <td *matCellDef="let element" class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium"> {{ element.gender }} </td>
+          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Gender</th>
+          <td *matCellDef="let element"
+              class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium"> {{ element.gender }}
+          </td>
         </ng-container>
 
         <!-- Actions Column -->
         <ng-container matColumnDef="actions">
-          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Action </th>
+          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Action</th>
           <td *matCellDef="let element" class="py-4 px-6 border-b border-gray-200">
             <div class="flex justify-start space-x-2">
-              <a href="javascript:void(0)" (click)="updatePatient(element)" class="text-blue-600 hover:text-blue-500 duration-150">
+              <a href="javascript:void(0)" (click)="updatePatient(element)"
+                 class="text-blue-600 hover:text-blue-500 duration-150">
                 <i class="fas fa-edit w-5 h-5"></i>
               </a>
-              <a href="javascript:void(0)" (click)="deletePatient(element.patientId)" class="text-red-600 hover:text-red-500 duration-150">
+              <a href="javascript:void(0)" (click)="deletePatient(element.patientId)"
+                 class="text-red-600 hover:text-red-500 duration-150">
                 <i class="fas fa-trash w-5 h-5"></i>
               </a>
             </div>
