@@ -20,6 +20,7 @@ import { RoomComponent } from './features/room/room.component';
 import { AddRoomComponent } from './shared/components/add-room/add-room.component';
 import { RoomAssignComponent } from './features/room-assign/room-assign.component';
 import { AddRoomAssignComponent } from './shared/components/add-room-assign/add-room-assign.component';
+import { PatientDetailsComponent } from './shared/components/patient-details/patient-details.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -45,6 +46,7 @@ export const routes: Routes = [
       { path: 'accounts/register', component: RegisterComponent },
       { path: 'inventory', component: InventoryComponent },
       { path: 'patient/add', component: AddPatientDialogComponent },
+      { path: 'patient/details', component: PatientDetailsComponent },
       { path: 'inventory/add', component: AddInventoryComponent },
       { path: 'inventory/edit/:id', component: EditInventoryComponent },
       { path: 'room', component: RoomComponent },

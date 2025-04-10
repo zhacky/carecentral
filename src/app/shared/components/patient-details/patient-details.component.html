@@ -1,0 +1,68 @@
+<div class="m-6 p-6 bg-white rounded-2xl shadow-lg space-y-8">
+
+  <!-- Personal Information -->
+  <div>
+    <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Personal Information</h2>
+
+    <!-- Name Row -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">First Name</p>
+        <p class="font-medium text-gray-700">{{ personalInfo.firstName }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Middle Name</p>
+        <p class="font-medium text-gray-700">{{ personalInfo.middleName }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Last Name</p>
+        <p class="font-medium text-gray-700">{{ personalInfo.lastName }}</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div *ngFor="let item of personalInfoList" class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">{{ item.label }}</p>
+        <p class="font-medium text-gray-700">{{ item.value }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Information -->
+  <div>
+    <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Contact Information</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div *ngFor="let item of contactInfo" class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">{{ item.label }}</p>
+        <p class="font-medium text-gray-700">{{ item.value }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Family Information -->
+  <div>
+    <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Family Information</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div *ngFor="let item of familyInfo" class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">{{ item.label }}</p>
+        <p class="font-medium text-gray-700">{{ item.value }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- In Case of Emergency -->
+  <div>
+    <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">In Case of Emergency</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Full Name</p>
+        <p class="font-medium text-gray-700">{{ emergencyInfo.fullName }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Address</p>
+        <p class="font-medium text-gray-700">{{ emergencyInfo.address }}</p>
+      </div>
+    </div>
+  </div>
+
+</div>
