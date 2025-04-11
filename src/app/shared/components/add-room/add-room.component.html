@@ -6,7 +6,7 @@
       <h3 class="text-gray-800 text-xl font-bold sm:text-2xl">Add Room</h3>
     </div>
 
-    <form (ngSubmit)="saveRoom()">
+    <form #formRef="ngForm" (ngSubmit)="saveRoom(formRef)">
 
       <!-- field -->
       <div class="mb-2 px-6">
@@ -16,8 +16,15 @@
           class="w-full px-3 py-2 border rounded-lg"
           [(ngModel)]="roomItem.roomType"
           name="roomType"
+          #firstNameRef="ngModel"
           required
+          [ngClass]="{
+            'border-red-500': firstNameRef.invalid && firstNameRef.touched
+          }"
         />
+        <p class="text-red-500 text-sm mt-1" *ngIf="firstNameRef.invalid && firstNameRef.touched">
+          Room Type is required.
+        </p>
       </div>
 
       <!-- field -->
@@ -28,8 +35,15 @@
           class="w-full px-3 py-2 border rounded-lg"
           [(ngModel)]="roomItem.roomDescription"
           name="roomDescription"
+          #firstNameRef="ngModel"
           required
+          [ngClass]="{
+            'border-red-500': firstNameRef.invalid && firstNameRef.touched
+          }"
         />
+        <p class="text-red-500 text-sm mt-1" *ngIf="firstNameRef.invalid && firstNameRef.touched">
+          Description is required.
+        </p>
       </div>
 
       <!-- field -->
@@ -40,8 +54,15 @@
           class="w-full px-3 py-2 border rounded-lg"
           [(ngModel)]="roomItem.roomCapacity"
           name="roomCapacity"
+          #firstNameRef="ngModel"
           required
+          [ngClass]="{
+            'border-red-500': firstNameRef.invalid && firstNameRef.touched
+          }"
         />
+        <p class="text-red-500 text-sm mt-1" *ngIf="firstNameRef.invalid && firstNameRef.touched">
+          Capacity is required.
+        </p>
       </div>
 
       <!-- field -->
@@ -52,8 +73,15 @@
           class="w-full px-3 py-2 border rounded-lg"
           [(ngModel)]="roomItem.roomCharge"
           name="roomCharge"
+          #firstNameRef="ngModel"
           required
+          [ngClass]="{
+            'border-red-500': firstNameRef.invalid && firstNameRef.touched
+          }"
         />
+        <p class="text-red-500 text-sm mt-1" *ngIf="firstNameRef.invalid && firstNameRef.touched">
+          Charge is required.
+        </p>
       </div>
 
       <!-- Actions -->

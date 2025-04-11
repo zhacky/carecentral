@@ -5,9 +5,9 @@
       <h3 class="text-gray-800 text-xl font-bold sm:text-2xl">Add Doctor</h3>
     </div>
 
-    <form (ngSubmit)="saveDoctor()">
+    <form #formRef="ngForm" (ngSubmit)="saveDoctor(formRef)">
 
-      <!-- field -->
+      <!-- First Name -->
       <div class="mb-2 px-6">
         <label class="block text-gray-700 py-2">First Name</label>
         <input
@@ -15,11 +15,18 @@
           class="w-full px-3 py-2 border rounded-lg"
           [(ngModel)]="doctorItem.firstName"
           name="firstName"
+          #firstNameRef="ngModel"
           required
+          [ngClass]="{
+            'border-red-500': firstNameRef.invalid && firstNameRef.touched
+          }"
         />
+        <p class="text-red-500 text-sm mt-1" *ngIf="firstNameRef.invalid && firstNameRef.touched">
+          First Name is required.
+        </p>
       </div>
 
-      <!-- field -->
+      <!-- Middle Name -->
       <div class="mb-2 px-6">
         <label class="block text-gray-700 py-2">Middle Name</label>
         <input
@@ -27,11 +34,10 @@
           class="w-full px-3 py-2 border rounded-lg"
           [(ngModel)]="doctorItem.middleName"
           name="middleName"
-          required
         />
       </div>
 
-      <!-- field -->
+      <!-- Last Name -->
       <div class="mb-2 px-6">
         <label class="block text-gray-700 py-2">Last Name</label>
         <input
@@ -39,11 +45,18 @@
           class="w-full px-3 py-2 border rounded-lg"
           [(ngModel)]="doctorItem.lastName"
           name="lastName"
+          #lastNameRef="ngModel"
           required
+          [ngClass]="{
+            'border-red-500': lastNameRef.invalid && lastNameRef.touched
+          }"
         />
+        <p class="text-red-500 text-sm mt-1" *ngIf="lastNameRef.invalid && lastNameRef.touched">
+          Last Name is required.
+        </p>
       </div>
 
-      <!-- field -->
+      <!-- Date of Birth -->
       <div class="mb-2 px-6">
         <label class="block text-gray-700 py-2">Birth Date</label>
         <input
@@ -51,11 +64,18 @@
           class="w-full px-3 py-2 border rounded-lg"
           [(ngModel)]="doctorItem.dateOfBirth"
           name="dateOfBirth"
+          #dobRef="ngModel"
           required
+          [ngClass]="{
+            'border-red-500': dobRef.invalid && dobRef.touched
+          }"
         />
+        <p class="text-red-500 text-sm mt-1" *ngIf="dobRef.invalid && dobRef.touched">
+          Birth Date is required.
+        </p>
       </div>
 
-      <!-- Gender Field -->
+      <!-- Gender -->
       <div class="mb-2 px-6">
         <label class="block text-gray-700 py-2">Gender</label>
         <div class="flex items-center space-x-4">
@@ -66,6 +86,7 @@
               [(ngModel)]="doctorItem.gender"
               name="gender"
               value="Male"
+              required
             />
             <span class="ml-2">Male</span>
           </label>
@@ -76,6 +97,7 @@
               [(ngModel)]="doctorItem.gender"
               name="gender"
               value="Female"
+              required
             />
             <span class="ml-2">Female</span>
           </label>
@@ -86,13 +108,14 @@
               [(ngModel)]="doctorItem.gender"
               name="gender"
               value="Other"
+              required
             />
             <span class="ml-2">Other</span>
           </label>
         </div>
       </div>
 
-      <!-- field -->
+      <!-- Contact -->
       <div class="mb-2 px-6">
         <label class="block text-gray-700 py-2">Contact</label>
         <input
@@ -100,11 +123,18 @@
           class="w-full px-3 py-2 border rounded-lg"
           [(ngModel)]="doctorItem.contactNumber"
           name="contactNumber"
+          #contactRef="ngModel"
           required
+          [ngClass]="{
+            'border-red-500': contactRef.invalid && contactRef.touched
+          }"
         />
+        <p class="text-red-500 text-sm mt-1" *ngIf="contactRef.invalid && contactRef.touched">
+          Contact is required.
+        </p>
       </div>
 
-      <!-- field -->
+      <!-- Email -->
       <div class="mb-2 px-6">
         <label class="block text-gray-700 py-2">Email</label>
         <input
@@ -112,24 +142,38 @@
           class="w-full px-3 py-2 border rounded-lg"
           [(ngModel)]="doctorItem.email"
           name="email"
+          #emailRef="ngModel"
           required
+          [ngClass]="{
+            'border-red-500': emailRef.invalid && emailRef.touched
+          }"
         />
+        <p class="text-red-500 text-sm mt-1" *ngIf="emailRef.invalid && emailRef.touched">
+          A valid email is required.
+        </p>
       </div>
 
-      <!-- field -->
-      <div class="mb-2 px-6">
+      <!-- Address -->
+      <div class="mb-4 px-6">
         <label class="block text-gray-700 py-2">Address</label>
         <input
           type="text"
           class="w-full px-3 py-2 border rounded-lg"
           [(ngModel)]="doctorItem.address"
           name="address"
+          #addressRef="ngModel"
           required
+          [ngClass]="{
+            'border-red-500': addressRef.invalid && addressRef.touched
+          }"
         />
+        <p class="text-red-500 text-sm mt-1" *ngIf="addressRef.invalid && addressRef.touched">
+          Address is required.
+        </p>
       </div>
 
       <!-- Actions -->
-      <div class="flex justify-end space-x-2 px-6 py-4 border-b">
+      <div class="flex justify-end space-x-2 px-6 py-4 border-t">
         <button
           type="button"
           class="bg-gray-400 text-white px-4 py-2 rounded"
@@ -144,4 +188,3 @@
     </form>
   </div>
 </div>
-

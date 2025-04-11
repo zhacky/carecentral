@@ -1,21 +1,23 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {RoomAssignDto, RoomAssignStatus} from '../../../core/models/room-assign.model';
 import {RoomAssignService} from '../../../core/services/room-assign.service';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, NgForm} from '@angular/forms';
 import {PatientService} from '../../../core/services/patient.service';
 import {RoomService} from '../../../core/services/room.service';
 import {PatientDto} from '../../../core/models/patient.model';
 import {RoomDto} from '../../../core/models/room.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {NgForOf} from '@angular/common';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-add-room-assign',
   templateUrl: './add-room-assign.component.html',
   imports: [
     FormsModule,
-    NgForOf
+    NgForOf,
+    NgIf,
+    NgClass
   ],
   standalone: true
 })
@@ -42,6 +44,8 @@ export class AddRoomAssignComponent {
     private snackBar: MatSnackBar,
     private router: Router
   ) {}
+
+  @ViewChild('formRef') formRef!: NgForm;
 
   ngOnInit(): void {
     this.loadPatients();
@@ -72,7 +76,22 @@ export class AddRoomAssignComponent {
     );
   }
 
-  saveRoomAssign(): void {
+  saveRoomAssign(formRef: NgForm): void {
+
+    if (this.formRef.invalid) {
+      // Mark all controls as touched to show validation errors
+      Object.values(this.formRef.controls).forEach(control => {
+        control.markAsTouched();
+      });
+
+      this.snackBar.open('Please fill in all required fields.', 'Close', {
+        duration: 5000,
+        panelClass: ['snackbar-error']
+      });
+
+      return; // Stop here if form is invalid
+    }
+
     if (!this.roomAssignItem.patient) {
       this.snackBar.open('Please assign a patient to the assigned room.', 'Close', {
         duration: 5000,

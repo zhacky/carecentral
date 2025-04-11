@@ -13,7 +13,7 @@ import { PatientDto } from '../../core/models/patient.model';
 import { PatientService } from '../../core/services/patient.service';
 import {CurrencyPipe, DatePipe, NgForOf} from '@angular/common';
 import { MatButton } from '@angular/material/button';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {MatIcon} from '@angular/material/icon';
 import {FormsModule} from '@angular/forms';  // Import the service
 
@@ -35,7 +35,6 @@ import {FormsModule} from '@angular/forms';  // Import the service
     MatCell,
     MatHeaderRow,
     MatRow,
-    RouterLink,
     CurrencyPipe,
     MatIcon,
     NgForOf,
@@ -44,7 +43,7 @@ import {FormsModule} from '@angular/forms';  // Import the service
   standalone: true
 })
 export class PatientInformationComponent implements AfterViewInit, OnInit {
-  constructor(private dialog: MatDialog, private patientService: PatientService) {}
+  constructor(private dialog: MatDialog, private patientService: PatientService, private router: Router) {}
 
   // Define the columns for the table (including position, first name, last name, etc.)
   displayedColumns: string[] = ['patientId', 'firstName', 'lastName', 'dateOfBirth', 'gender', 'actions'];
@@ -58,6 +57,13 @@ export class PatientInformationComponent implements AfterViewInit, OnInit {
     this.dataSource.filter = this.searchTerm.trim().toLowerCase();
   }
 
+  addPatient() {
+    this.router.navigate(['/common/patient/add'])
+  }
+
+  viewPatient(patientId: number) {
+    this.router.navigate(['/common/patient/details', patientId]);
+  }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -95,45 +101,45 @@ export class PatientInformationComponent implements AfterViewInit, OnInit {
     );
   }
 
-  // Function to open the dialog for adding a new patient
-  openPatientDialog(): void {
-    console.log('Opening add patient dialog');
-    const dialogRef = this.dialog.open(AddPatientDialogComponent, {
-      width: '400px',
-    });
-
-    // Handle the dialog result when it's closed
-    dialogRef.afterClosed().subscribe((result: any) => {
-      if (result) {
-        console.log('New patient profile:', result);
-
-        // Create a new PatientDto object with the added patient data
-        const newPatient = new PatientDto(
-          0,  // The position is not required when creating a patient
-          result.patientId,
-          result.firstName,
-          result.lastName,
-          result.dateOfBirth,
-          result.gender,
-          result.contactNumber,
-          result.email,
-          result.address,
-          result.assignedDoctorId
-        );
-
-        // Call the service to add the new patient
-        this.patientService.createPatient(newPatient).subscribe(
-          (patient) => {
-            // Add the new patient to the data source
-            this.dataSource.data = [...this.dataSource.data, patient];
-          },
-          (error) => {
-            console.error('Error adding patient:', error);
-          }
-        );
-      }
-    });
-  }
+  // // Function to open the dialog for adding a new patient
+  // openPatientDialog(): void {
+  //   console.log('Opening add patient dialog');
+  //   const dialogRef = this.dialog.open(AddPatientDialogComponent, {
+  //     width: '400px',
+  //   });
+  //
+  //   // Handle the dialog result when it's closed
+  //   dialogRef.afterClosed().subscribe((result: any) => {
+  //     if (result) {
+  //       console.log('New patient profile:', result);
+  //
+  //       // Create a new PatientDto object with the added patient data
+  //       const newPatient = new PatientDto(
+  //         0,  // The position is not required when creating a patient
+  //         result.patientId,
+  //         result.firstName,
+  //         result.lastName,
+  //         result.dateOfBirth,
+  //         result.gender,
+  //         result.contactNumber,
+  //         result.email,
+  //         result.address,
+  //         result.assignedDoctorId
+  //       );
+  //
+  //       // Call the service to add the new patient
+  //       this.patientService.createPatient(newPatient).subscribe(
+  //         (patient) => {
+  //           // Add the new patient to the data source
+  //           this.dataSource.data = [...this.dataSource.data, patient];
+  //         },
+  //         (error) => {
+  //           console.error('Error adding patient:', error);
+  //         }
+  //       );
+  //     }
+  //   });
+  // }
 
   // Function to delete a patient
   deletePatient(patientId: number): void {
@@ -150,42 +156,42 @@ export class PatientInformationComponent implements AfterViewInit, OnInit {
     }
   }
 
-  // Function to update a patient
-  updatePatient(patient: PatientDto): void {
-    const dialogRef = this.dialog.open(AddPatientDialogComponent, {
-      width: '400px',
-      data: patient,  // Pass existing patient data to the dialog for editing
-    });
-
-    dialogRef.afterClosed().subscribe((result: any) => {
-      if (result) {
-        // Update the patient object with new data
-        const updatedPatient = new PatientDto(
-          patient.position, // Keep the position the same
-          result.patientId,
-          result.firstName,
-          result.lastName,
-          result.dateOfBirth,
-          result.gender,
-          result.contactNumber,
-          result.email,
-          result.address,
-          result.assignedDoctorId
-        );
-
-        // Call the service to update the patient
-        this.patientService.updatePatient(patient.patientId, updatedPatient).subscribe(
-          (patient) => {
-            // Update the patient data in the table
-            this.dataSource.data = this.dataSource.data.map(p =>
-              p.patientId === patient.patientId ? patient : p
-            );
-          },
-          (error) => {
-            console.error('Error updating patient:', error);
-          }
-        );
-      }
-    });
-  }
+  // // Function to update a patient
+  // updatePatient(patient: PatientDto): void {
+  //   const dialogRef = this.dialog.open(AddPatientDialogComponent, {
+  //     width: '400px',
+  //     data: patient,  // Pass existing patient data to the dialog for editing
+  //   });
+  //
+  //   dialogRef.afterClosed().subscribe((result: any) => {
+  //     if (result) {
+  //       // Update the patient object with new data
+  //       const updatedPatient = new PatientDto(
+  //         patient.position, // Keep the position the same
+  //         result.patientId,
+  //         result.firstName,
+  //         result.lastName,
+  //         result.dateOfBirth,
+  //         result.gender,
+  //         result.contactNumber,
+  //         result.email,
+  //         result.address,
+  //         result.assignedDoctorId
+  //       );
+  //
+  //       // Call the service to update the patient
+  //       this.patientService.updatePatient(patient.patientId, updatedPatient).subscribe(
+  //         (patient) => {
+  //           // Update the patient data in the table
+  //           this.dataSource.data = this.dataSource.data.map(p =>
+  //             p.patientId === patient.patientId ? patient : p
+  //           );
+  //         },
+  //         (error) => {
+  //           console.error('Error updating patient:', error);
+  //         }
+  //       );
+  //     }
+  //   });
+  //}
 }
