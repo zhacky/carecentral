@@ -19,10 +19,8 @@ export class AuthService {
   login(username: string, password: string): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const body = { username: username.trim(), password: password.trim() };
-    console.log('Current API URL:', environment.apiUrl);
     return this.http.post<any>(this.apiUrl, body, { headers }).pipe(
       tap((response) => {
-        console.log('Login response:', response);
         this.currentUser = { token: response.token, ...response.userDetails }; // Include token and user details
         localStorage.setItem('currentUser', JSON.stringify(this.currentUser)); // Store in localStorage
       }),

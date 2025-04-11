@@ -44,12 +44,15 @@ export class LoginComponent {
   }
 
   onLogin(): void {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
     const username = this.loginForm.value.username;
     const password = this.loginForm.value.password;
 
     this.authService.login(username, password).subscribe({
-      next: (response) => {
-        console.log('Login successful', response);
+      next: () => {
         this.router.navigate(['/common']).then(success => {
           if (success) {
             this.snackBar.open('Login successful!', 'Close', {
