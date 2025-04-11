@@ -46,7 +46,7 @@ export const routes: Routes = [
       { path: 'accounts/register', component: RegisterComponent },
       { path: 'inventory', component: InventoryComponent },
       { path: 'patient/add', component: AddPatientDialogComponent },
-      { path: 'patient/details', component: PatientDetailsComponent },
+      { path: 'patient/details/:id', component: PatientDetailsComponent },
       { path: 'inventory/add', component: AddInventoryComponent },
       { path: 'inventory/edit/:id', component: EditInventoryComponent },
       { path: 'room', component: RoomComponent },

@@ -39,4 +39,19 @@ export class PatientService {
     return this.http.put<PatientDto>(`${this.apiUrl}/${id}`, patient);
   }
 
+  // Download Patient Data Sheet PDF
+  printPatientDataSheetPdf(id: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/patientPdf/${id}`, { responseType: 'blob' });
+  }
+
+  // Download Emergency Room PDF
+  printEmergencyRoomPdf(id: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/emergencyRoomPatientPdf/${id}`, { responseType: 'blob' });
+  }
+
+  // Download Authorization Surgical Treatment PDF
+  printAuthorizationSurgicalTreatmentPdf(id: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/authorizationSurgicalTreatmentPdf/${id}`, { responseType: 'blob' });
+  }
+
 }

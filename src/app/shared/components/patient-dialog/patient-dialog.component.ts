@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, NgForm, ReactiveFormsModule} from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule, MatCalendarCellClassFunction } from '@angular/material/datepicker';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -35,13 +35,14 @@ import { DoctorDto } from '../../../core/models/doctor.model'; // Import the Doc
   styleUrls: ['./patient-dialog.component.css'],
   standalone: true
 })
+
 export class AddPatientDialogComponent implements OnInit {
   displayedColumns: string[] = ['position', 'firstName', 'lastName', 'birthday', 'gender'];
   dataSource: PatientDto[] = [];
   dataSourceDoc = new MatTableDataSource<DoctorDto>([]);
   showAddPatientForm: boolean = false;
 
-  profile: PatientDto = new PatientDto(0, 0, '', '', '', '', '', '', '', 1); // Default assignedDoctorId is set to 1
+  profile: PatientDto = new PatientDto(0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1); // Default assignedDoctorId is set to 1
 
   doctors: DoctorDto[] = []; // Array to store fetched doctors
 
@@ -52,6 +53,8 @@ export class AddPatientDialogComponent implements OnInit {
     private location: Location,
     private router: Router
   ) {}
+
+  @ViewChild('formRef') formRef!: NgForm;
 
   ngOnInit(): void {
     this.loadPatients(); // Load existing patients when the component is initialized
@@ -81,7 +84,21 @@ export class AddPatientDialogComponent implements OnInit {
   }
 
   // Save the patient and hide the form after submission
-  save(): void {
+  save(formRef: NgForm): void {
+
+    if (this.formRef.invalid) {
+      // Mark all controls as touched to show validation errors
+      Object.values(this.formRef.controls).forEach(control => {
+        control.markAsTouched();
+      });
+
+      this.snackBar.open('Please fill in all required fields.', 'Close', {
+        duration: 5000,
+        panelClass: ['snackbar-error']
+      });
+
+      return; // Stop here if form is invalid
+    }
     // Ensure the doctor is selected (assignedDoctorId is not empty)
     if (!this.profile.assignedDoctorId) {
       this.snackBar.open('Please assign a doctor to the patient.', 'Close', {
@@ -102,13 +119,6 @@ export class AddPatientDialogComponent implements OnInit {
       // Redirect to the Patient List Page
       this.router.navigate(['/common/patient']);
     });
-  }
-
-
-
-  // Cancel the action and hide the form
-  cancel(): void {
-    this.showAddPatientForm = false;
   }
 
   goBack(): void {
