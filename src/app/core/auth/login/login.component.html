@@ -1,40 +1,52 @@
-
-<div class="login-container">
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Care Central HMS</mat-card-title>
-      <mat-card-subtitle class="mat-subtitle-1">Please log in to continue</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-        <mat-form-field>
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="username" type="username" />
-          <mat-error *ngIf="loginForm.get('username')?.invalid">
-            Please enter your username
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="border">
-          <mat-label>Password</mat-label>
-          <input matInput formControlName="password" [type]="showPassword ? 'text' : 'password'" />
-          <mat-error *ngIf="loginForm.get('password')?.invalid">
-            Password is required.
-          </mat-error>
-          
-          <button type="button" mat-icon-button matSuffix (click)="showPassword = !showPassword">
+<div class="two-column-layout">
+  
+  <div class="left-column">
+    <div>
+      <img src="\assets\logo\carecentral.svg" alt="Login" class="login-image" />
+    </div>
+    <div class="text-xl font-medium">
+      Login to your account
+    </div>
+    <div>
+      <form [formGroup]="loginForm" class="example-form" (ngSubmit)="onLogin()">
+        <span class="self-start font-medium">Email</span>
+        <input matInput formControlName="username" type="username" class="example-input" />
+        <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid" class="error-message">
+          Username is required.
+        </div>
+        <span class="self-start font-medium">Password</span>
+        <div class="visibility-container">
+          <input matInput formControlName="password" [type]="showPassword ? 'text' : 'password'" class="example-input" />
+          <button class="visibility-toggle" type="button" mat-icon-button matSuffix (click)="showPassword = !showPassword" tabindex="-1">
             <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
-        </mat-form-field>
-
-        <button mat-stroked-button color="blue">
-          Login
+        </div>
+        <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="error-message">
+          Password is required.
+        </div>     
+        <div>
+          <a routerLink="/forgot-password" class="self-start text-sm underline">
+            I forgot my password
+          </a>
+        </div>
+        <button mat-stroked-button color="blue" class="login-button">
+          Sign In
         </button>
-      </form>
-    </mat-card-content>
-    <mat-card-actions>
-      <mat-card-subtitle>Don't have an account?</mat-card-subtitle>
-      <a mat-button routerLink="/register">Create an account</a>
-    </mat-card-actions>
-  </mat-card>
+      </form> 
+      <div class="action-items">
+        <mat-card-actions>
+          <mat-card-subtitle>Don't have an account?</mat-card-subtitle>
+          <a mat-button routerLink="/register" class="register">Register now!</a>
+        </mat-card-actions>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Column -->
+  <div class="right-column">
+    <div>
+      <img src="\assets\images\hero-logo.svg" alt="hero" class="hero-image" />
+    </div>
+  </div>
 </div>
+

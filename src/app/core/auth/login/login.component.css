@@ -1,60 +1,109 @@
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #ccb1b1;
-  }
-  
-  mat-card {
-    width: 100%;
-    max-width: 600px;
-    max-height: 600px;
-    padding: 20px;
-  }
-  
-  mat-form-field {
-    width: 100%;
-  }
+.two-column-layout {
+  display: flex;
+  height: 100vh; /* Full height */
+}
 
-  button[mat-stroked-button] {
-    width: 100%;
-    margin-top: 20px;
-  }
+.left-column {
+  display: flex;
+  flex-direction: column;
+  width: 550px;
+  background-color: #FFFFFF;
+  justify-content: center;
+  align-items: center;
+  gap: 19px;
+}
 
-  mat-card-title {
-    position: relative;
-    margin-top: 20px;
-    left: 30%;
-    font-size: 40px;
-    font-family: sans-serif;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: purple
-  }
-  
+.right-column {
+  flex: 1; /* Take up half the space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ECFFE5;
+}
 
-  mat-card-actions {
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-  }
+.login-image {
+  width: 203px;
+  height: 120px;
+  border-radius: 10px;
+}
 
-  .mat-subtitle-1 {
-    position: relative;
-    left: 55%;
-    font-weight: bold;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-  }
+.example-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  gap: 10px;         
+}
 
-  .mat-mdc-snack-bar-container.mat-mdc-snackbar-surface {
-    background-color: #f44336; /* Red */
-    color: white;
-  }
+.example-input {
+  width: 330px;
+  margin-bottom: 5px;
+  padding: 8px 12px;         /* Adds space inside the input */
+  border: 1px solid rgb(88, 87, 87);   /* Adds a solid border */
+  border-radius: 20px;        /* Rounds the corners */
+  box-sizing: border-box;    /* Ensures padding doesn't exceed width */
+  font-size: 16px;           /* Optional for better readability */
+}
 
+.login-button {
+  width: 330px;
+  padding: 10px 20px;       /* Adds space inside the button */
+  background-color: #27CD0D; /* Green background */
+  color: white !important;             /* White text */
+  border: none;             /* No border */
+  border-radius: 20px;      /* Rounds the corners */
+  cursor: pointer;          /* Pointer cursor on hover */
+  font-size: 16px;
+}
 
+.action-items {
+  margin-top: 100px;
+}
 
+.self-start {
+  color: rgb(82, 79, 79);
+  margin-right: 180px;
+}
 
-  
+.register {
+  color: #27CD0D !important;
+  text-decoration: underline; 
+}
+
+.register:hover {
+  text-decoration: none;
+}
+
+.visibility-container {
+  position: relative;
+  width: 330px; /* Adjust width as needed */
+}
+
+.password-input {
+  width: 100%;
+  padding: 10px 40px 10px 12px; /* Add padding to leave space for the button */
+  border: 1px solid rgb(88, 87, 87); /* Border styling */
+  border-radius: 20px; /* Rounded corners */
+  font-size: 16px; /* Font size */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.visibility-toggle {
+  position: absolute;
+  top: 45%;
+  right: 10px; /* Position the button inside the input field */
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: -10px; 
+}
+
