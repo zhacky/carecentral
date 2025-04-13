@@ -72,7 +72,7 @@ export class LoginComponent {
         this.errorMessage = 'Invalid username or password.';
         console.error('Login failed!', error);
         this.snackBar.open('Invalid username or password.', 'Close', {
-          duration: 20000,
+          duration: 3000,
           panelClass: ['snackbar-error']
         });
       }

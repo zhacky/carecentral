@@ -12,6 +12,7 @@ import { MatIconButton } from '@angular/material/button';
 import { MatToolbar } from '@angular/material/toolbar';
 import { NavigationEnd, Router } from '@angular/router';
 import { NgIf } from '@angular/common';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -26,6 +27,9 @@ export class HeaderComponent implements OnInit {
   @Output() toggleSidenav = new EventEmitter<void>(); // Create event emitter
   activeRoute: string = '';
   currentTime: string = '';
+  currentUser: any;
+
+  
 
   isProfileMenuOpen = false;
   @ViewChild('profileMenuContainer') profileMenuContainer!: ElementRef;
@@ -60,6 +64,8 @@ export class HeaderComponent implements OnInit {
     setInterval(() => {
       this.updateTime();
     }, 1000);
+
+    this.getUser();
   }
 
   onLogout() {
@@ -77,7 +83,7 @@ export class HeaderComponent implements OnInit {
     this.currentTime = now.toLocaleTimeString();
   }
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.activeRoute = this.router.url; // Get full URL
@@ -89,4 +95,10 @@ export class HeaderComponent implements OnInit {
   onToggle() {
     this.toggleSidenav.emit(); // Emit event when button is clicked
   }
+
+  getUser() {
+    this.currentUser = this.authService.getCurrentUser();
+    console.log('Current User:', this.currentUser); 
+  }
+  
 }

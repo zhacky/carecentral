@@ -11,12 +11,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
-  .mat-mdc-snack-bar-label.mdc-snackbar__label {
-    background-color: #4caf50; /* Green */
-    color: white;
   }
-}
+
+  .mat-mdc-snack-bar-container {
+    &.snackbar-success {
+      --mdc-snackbar-container-color: #4caf50;
+      --mat-mdc-snack-bar-button-color: white;
+      --mdc-snackbar-supporting-text-color: white;
+    }
+    
+    &.snackbar-error {
+      --mdc-snackbar-container-color: red;
+      --mat-mdc-snack-bar-button-color: white;
+      --mdc-snackbar-supporting-text-color: white;
+    }
+  }
+
+
+
+
 
 
 
