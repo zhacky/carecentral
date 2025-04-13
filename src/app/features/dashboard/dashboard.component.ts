@@ -1,27 +1,17 @@
-
-import {Component, OnInit, signal} from '@angular/core';
-import { NgClass, NgForOf } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { BaseChartDirective } from 'ng2-charts';
-import { PatientchartComponent } from './patientchart/patientchart.component';
-import { DoctorstatusComponent } from './doctorstatus/doctorstatus.component';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { PatientvisitComponent } from './patientvisit/patientvisit.component';
-import { PatientdataComponent } from './patientdata/patientdata.component';
+import {Component, OnInit} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {PatientvisitComponent} from './patientvisit/patientvisit.component';
+import {PatientdataComponent} from './patientdata/patientdata.component';
 import {PatientService} from '../../core/services/patient.service';
 
 @Component({
   selector: 'app-dashboard',
   imports: [
-    NgClass,
-    NgForOf,
     FormsModule,
-    BaseChartDirective,
-    PatientchartComponent,
-    DoctorstatusComponent,
     MatSidenavModule,
     PatientvisitComponent,
-    PatientdataComponent,
+    PatientdataComponent
   ],
   templateUrl: './dashboard.component.html',
   standalone: true,
@@ -30,6 +20,7 @@ import {PatientService} from '../../core/services/patient.service';
 export class DashboardComponent implements OnInit {
   constructor(private patientService: PatientService) {}
   ngOnInit(): void {
+    console.log(this.patientService.getPatients());
     throw new Error('Method not implemented.');
   }
   searchQueryPatient: string = ''; // Store the search query
@@ -163,6 +154,7 @@ export class DashboardComponent implements OnInit {
 
   // Close popup when clicking outside
   closePopup(event: any): void {
+    console.log`Event: ${event.detail}`;
     this.popupIndex = null;
   }
 

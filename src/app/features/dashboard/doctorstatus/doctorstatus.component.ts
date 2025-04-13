@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import { NgClass, NgFor } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
-import { MatButtonModule } from '@angular/material/button';
-import { MatChipsModule } from '@angular/material/chips';
+import {Component} from '@angular/core';
+import {NgClass} from '@angular/common';
+import {MatTableModule} from '@angular/material/table';
+import {MatButtonModule} from '@angular/material/button';
+import {MatChipsModule} from '@angular/material/chips';
 
 @Component({
   selector: 'app-doctorstatus',
-  imports: [MatTableModule, MatButtonModule, MatChipsModule, NgFor, NgClass],
+  imports: [MatTableModule, MatButtonModule, MatChipsModule, NgClass],
   templateUrl: './doctorstatus.component.html',
   styleUrl: './doctorstatus.component.css',
   standalone: true,
