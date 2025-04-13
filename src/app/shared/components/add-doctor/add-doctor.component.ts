@@ -4,14 +4,15 @@ import {DoctorDto, DoctorStatus} from '../../../core/models/doctor.model';
 import {DoctorService} from '../../../core/services/doctor.service';
 import {FormsModule, NgForm} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {NgClass} from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-add-doctor',
   templateUrl: './add-doctor.component.html',
   imports: [
     FormsModule,
-    NgClass
+    NgClass,
+    NgIf
   ],
   standalone: true
 })

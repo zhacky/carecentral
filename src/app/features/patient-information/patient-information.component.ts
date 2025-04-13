@@ -1,21 +1,21 @@
-import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {MatPaginator} from '@angular/material/paginator';
 import {
-  MatCell,
-  MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatHeaderRow,
-  MatHeaderRowDef, MatRow, MatRowDef,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCellDef,
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatRow,
+  MatRowDef,
   MatTable,
   MatTableDataSource
 } from '@angular/material/table';
-import { AddPatientDialogComponent } from '../../shared/components/patient-dialog/patient-dialog.component';
-import { PatientDto } from '../../core/models/patient.model';
-import { PatientService } from '../../core/services/patient.service';
-import {CurrencyPipe, DatePipe, NgForOf} from '@angular/common';
-import { MatButton } from '@angular/material/button';
-import {Router, RouterLink} from '@angular/router';
-import {MatIcon} from '@angular/material/icon';
-import {FormsModule} from '@angular/forms';  // Import the service
+import {PatientDto} from '../../core/models/patient.model';
+import {PatientService} from '../../core/services/patient.service';
+import {Router} from '@angular/router';
+import {FormsModule} from '@angular/forms'; // Import the service
 
 @Component({
   selector: 'app-patient-information',
@@ -24,20 +24,13 @@ import {FormsModule} from '@angular/forms';  // Import the service
   imports: [
     MatTable,
     MatPaginator,
-    DatePipe,
     MatHeaderRowDef,
     MatRowDef,
     MatCellDef,
     MatHeaderCellDef,
-    MatButton,
     MatColumnDef,
-    MatHeaderCell,
-    MatCell,
     MatHeaderRow,
     MatRow,
-    CurrencyPipe,
-    MatIcon,
-    NgForOf,
     FormsModule
   ],
   standalone: true
