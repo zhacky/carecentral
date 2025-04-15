@@ -1,13 +1,12 @@
-import { Component, computed, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatListModule } from '@angular/material/list';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { Router, RouterModule } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
-import { MatToolbar } from '@angular/material/toolbar';
-import { HeaderComponent } from '../header/header.component';
-import { PatientchartComponent } from '../../../features/dashboard/patientchart/patientchart.component';
+import {Component, computed, signal} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {MatButtonModule} from '@angular/material/button';
+import {MatListModule} from '@angular/material/list';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {Router, RouterModule} from '@angular/router';
+import {MatIconModule} from '@angular/material/icon';
+import {HeaderComponent} from '../header/header.component';
+import {PatientchartComponent} from '../../../features/dashboard/patientchart/patientchart.component';
 
 export type MenuItem = {
   icon: string;
@@ -27,9 +26,8 @@ export type MenuItem = {
     MatListModule,
     RouterModule,
     MatIconModule,
-    MatToolbar,
     HeaderComponent,
-    PatientchartComponent,
+    PatientchartComponent
   ],
   standalone: true,
 })
@@ -42,7 +40,7 @@ export class SidenavComponent {
   expandedItems = signal<Record<string, boolean>>({});
 
   toggleExpand(label: string) {
-    const current = this.expandedItems();
+    // const current = this.expandedItems();
     this.expandedItems.update((items) => ({
       ...items,
       [label]: !items[label],

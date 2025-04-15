@@ -1,20 +1,19 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {FormsModule} from "@angular/forms";
+import {FormsModule} from '@angular/forms';
 import {
-  MatCell,
   MatCellDef,
-  MatColumnDef, MatHeaderCell, MatHeaderCellDef,
+  MatColumnDef,
+  MatHeaderCellDef,
   MatHeaderRow,
   MatHeaderRowDef,
   MatRow,
   MatRowDef,
-  MatTable, MatTableDataSource
-} from "@angular/material/table";
-import {MatPaginator} from "@angular/material/paginator";
-import {RouterLink} from "@angular/router";
-import {CurrencyPipe, DatePipe, NgClass, NgForOf} from '@angular/common';
-import {MatButton} from '@angular/material/button';
-import {MatIcon} from '@angular/material/icon';
+  MatTable,
+  MatTableDataSource
+} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {RouterLink} from '@angular/router';
+import {NgClass} from '@angular/common';
 import {RoomAssignService} from '../../core/services/room-assign.service';
 import {RoomAssignDto, RoomAssignStatus} from '../../core/models/room-assign.model';
 
@@ -23,21 +22,14 @@ import {RoomAssignDto, RoomAssignStatus} from '../../core/models/room-assign.mod
   imports: [
     MatTable,
     MatPaginator,
-    DatePipe,
     MatHeaderRowDef,
     MatRowDef,
     MatCellDef,
     MatHeaderCellDef,
-    MatButton,
     MatColumnDef,
-    MatHeaderCell,
-    MatCell,
     MatHeaderRow,
     MatRow,
     RouterLink,
-    CurrencyPipe,
-    MatIcon,
-    NgForOf,
     FormsModule,
     NgClass
   ],
