@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { DoctorDto } from '../models/doctor.model';
+import {DoctorDto, DoctorStatus} from '../models/doctor.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +34,18 @@ export class DoctorService {
   }
 
   // Update a doctor
-  updateDoctor(id: number, doctor: DoctorDto): Observable<DoctorDto> {
+  updateDoctor(id: number, doctor: {
+    doctorId: number;
+    firstName: string;
+    lastName: string;
+    address: string;
+    gender: string;
+    contactNumber: string;
+    middleName: string;
+    dateOfBirth: string;
+    email: string;
+    status: DoctorStatus
+  }): Observable<DoctorDto> {
     return this.http.put<DoctorDto>(`${this.apiUrl}/${id}`, doctor);
   }
 

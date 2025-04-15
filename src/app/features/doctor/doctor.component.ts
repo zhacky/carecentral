@@ -10,10 +10,12 @@ import {
   MatRowDef,
   MatTable,
   MatTableDataSource
-} from '@angular/material/table';
-import {MatPaginator} from '@angular/material/paginator';
+} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
+import {CurrencyPipe, DatePipe, NgClass, NgForOf} from '@angular/common';
+import {MatButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
-import {NgClass} from '@angular/common';
 import {DoctorService} from '../../core/services/doctor.service';
 import {DoctorDto, DoctorStatus} from '../../core/models/doctor.model';
 
@@ -38,7 +40,7 @@ import {DoctorDto, DoctorStatus} from '../../core/models/doctor.model';
   styleUrl: './doctor.component.css'
 })
 export class DoctorComponent implements AfterViewInit, OnInit {
-  constructor(private doctorService: DoctorService) {}
+  constructor(private doctorService: DoctorService, private router: Router) {}
 
   // Define the columns for the table (including position, first name, last name, etc.)
   displayedColumns: string[] = ['doctorId', 'firstName', 'lastName', 'gender', 'status', 'actions'];
@@ -47,6 +49,11 @@ export class DoctorComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource<DoctorDto>([]);
 
   searchTerm: string = '';
+
+  editDoctor( doctorId: number ) {
+    this.router.navigate(['/common/doctor/edit', doctorId]);
+  }
+
 
   applyFilter(): void {
     this.dataSource.filter = this.searchTerm.trim().toLowerCase();
