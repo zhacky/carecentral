@@ -15,7 +15,7 @@ import {MatPaginator} from "@angular/material/paginator";
 import {CurrencyPipe, DatePipe, NgClass, NgForOf} from '@angular/common';
 import {MatButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
-import {RouterLink} from '@angular/router';
+import {Router} from '@angular/router';
 import {DoctorService} from '../../core/services/doctor.service';
 import {DoctorDto, DoctorStatus} from '../../core/models/doctor.model';
 
@@ -31,7 +31,6 @@ import {DoctorDto, DoctorStatus} from '../../core/models/doctor.model';
     MatColumnDef,
     MatHeaderRow,
     MatRow,
-    RouterLink,
     FormsModule,
     NgClass
   ],
