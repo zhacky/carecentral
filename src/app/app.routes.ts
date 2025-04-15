@@ -21,6 +21,7 @@ import { AddRoomComponent } from './shared/components/add-room/add-room.componen
 import { RoomAssignComponent } from './features/room-assign/room-assign.component';
 import { AddRoomAssignComponent } from './shared/components/add-room-assign/add-room-assign.component';
 import { PatientDetailsComponent } from './shared/components/patient-details/patient-details.component';
+import {EditDoctorComponent} from './shared/components/edit-doctor/edit-doctor.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -54,6 +55,7 @@ export const routes: Routes = [
       { path: 'roomAssign', component: RoomAssignComponent },
       { path: 'roomAssign/add', component: AddRoomAssignComponent },
       { path: 'doctor/add', component: AddDoctorComponent },
+      { path: 'doctor/edit/:id', component: EditDoctorComponent }
     ],
   },
   { path: '**', redirectTo: 'login' },
