@@ -46,6 +46,10 @@ export class PatientInformationComponent implements AfterViewInit, OnInit {
 
   searchTerm: string = '';
 
+  editPatient( patientId: number ) {
+    this.router.navigate(['/common/patient/edit', patientId]);
+  }
+
   applyFilter(): void {
     this.dataSource.filter = this.searchTerm.trim().toLowerCase();
   }
