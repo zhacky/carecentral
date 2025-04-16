@@ -1,0 +1,347 @@
+<!-- Patient add-patient-assign -->
+<div class="p-6 w-full rounded-lg overflow-hidden">
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+
+    <div class="px-6 py-4">
+      <h3 class="text-gray-800 text-xl font-bold sm:text-2xl">Edit Patient</h3>
+    </div>
+
+    <form #formRef="ngForm" (ngSubmit)="updatePatient(formRef)">
+
+      <!-- field -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">First Name</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.firstName"
+          name="firstName"
+          #firstNameRef="ngModel"
+          required
+          [ngClass]="{
+            'border-red-500': firstNameRef.invalid && firstNameRef.touched
+          }"
+        />
+        <p class="text-red-500 text-sm mt-1" *ngIf="firstNameRef.invalid && firstNameRef.touched">
+          First Name is required.
+        </p>
+      </div>
+
+      <!-- Middle Name -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Middle Name</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.middleName"
+          name="middleName"
+        />
+      </div>
+
+      <!-- Last Name -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Last Name</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.lastName"
+          name="lastName"
+          required
+          #lastNameRef="ngModel"
+          [ngClass]="{ 'border-red-500': lastNameRef.invalid && lastNameRef.touched }"
+        />
+        <p class="text-red-500 text-sm mt-1" *ngIf="lastNameRef.invalid && lastNameRef.touched">
+          Last Name is required.
+        </p>
+      </div>
+
+      <!-- Date of Birth -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Date of Birth</label>
+        <input
+          type="date"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.dateOfBirth"
+          name="dateOfBirth"
+          required
+          #dobRef="ngModel"
+          [ngClass]="{ 'border-red-500': dobRef.invalid && dobRef.touched }"
+        />
+        <p class="text-red-500 text-sm mt-1" *ngIf="dobRef.invalid && dobRef.touched">
+          Date of Birth is required.
+        </p>
+      </div>
+
+      <!-- Gender -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Gender</label>
+        <select
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.gender"
+          name="gender"
+          required
+          #genderRef="ngModel"
+          [ngClass]="{ 'border-red-500': genderRef.invalid && genderRef.touched }"
+        >
+          <option value="" disabled>Select gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+        <p class="text-red-500 text-sm mt-1" *ngIf="genderRef.invalid && genderRef.touched">
+          Gender is required.
+        </p>
+      </div>
+
+      <!-- Contact Number -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Contact Number</label>
+        <input
+          type="tel"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.contactNumber"
+          name="contactNumber"
+          #contactNumberRef="ngModel"
+          required
+          [ngClass]="{
+            'border-red-500': contactNumberRef.invalid && contactNumberRef.touched
+          }"
+        />
+        <p class="text-red-500 text-sm mt-1" *ngIf="contactNumberRef.invalid && contactNumberRef.touched">
+          Contact Number is required.
+        </p>
+      </div>
+
+      <!-- Email -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Email</label>
+        <input
+          type="email"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.email"
+          name="email"
+          #emailRef="ngModel"
+          required
+          [ngClass]="{
+            'border-red-500': emailRef.invalid && emailRef.touched
+          }"
+        />
+        <p class="text-red-500 text-sm mt-1" *ngIf="emailRef.invalid && emailRef.touched">
+          Email is required.
+        </p>
+      </div>
+
+      <!-- Address -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Address</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.address"
+          name="address"
+          #addressRef="ngModel"
+          required
+          [ngClass]="{
+            'border-red-500': addressRef.invalid && addressRef.touched
+          }"
+        />
+        <p class="text-red-500 text-sm mt-1" *ngIf="addressRef.invalid && addressRef.touched">
+          Address is required.
+        </p>
+      </div>
+
+      <!-- Place of Birth -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Place of Birth</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.placeOfBirth"
+          name="placeOfBirth"
+          #placeOfBirthRef="ngModel"
+          required
+          [ngClass]="{
+            'border-red-500': placeOfBirthRef.invalid && placeOfBirthRef.touched
+          }"
+        />
+        <p class="text-red-500 text-sm mt-1" *ngIf="placeOfBirthRef.invalid && placeOfBirthRef.touched">
+          Place Of Birth is required.
+        </p>
+      </div>
+
+      <!-- Occupation -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Occupation</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.occupation"
+          name="occupation"
+        />
+      </div>
+
+      <!-- Nationality -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Nationality</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.nationality"
+          name="nationality"
+          #nationalityRef="ngModel"
+          required
+          [ngClass]="{
+            'border-red-500': nationalityRef.invalid && nationalityRef.touched
+          }"
+        />
+        <p class="text-red-500 text-sm mt-1" *ngIf="nationalityRef.invalid && nationalityRef.touched">
+          Nationality is required.
+        </p>
+      </div>
+
+      <!-- Civil Status -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Civil Status</label>
+        <select
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.civilStatus"
+          name="civilStatus"
+        >
+          <option value="">Select status</option>
+          <option value="Single">Single</option>
+          <option value="Married">Married</option>
+          <option value="Widowed">Widowed</option>
+          <option value="Divorced">Divorced</option>
+        </select>
+      </div>
+
+      <!-- Religion -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Religion</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.religion"
+          name="religion"
+          #religionRef="ngModel"
+          required
+          [ngClass]="{
+            'border-red-500': religionRef.invalid && religionRef.touched
+          }"
+        />
+        <p class="text-red-500 text-sm mt-1" *ngIf="religionRef.invalid && religionRef.touched">
+          Religion is required.
+        </p>
+      </div>
+
+      <!-- Spouse Name -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Spouse Name</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.spouseName"
+          name="spouseName"
+        />
+      </div>
+
+      <!-- Father Name -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Father Name</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.fatherName"
+          name="fatherName"
+        />
+      </div>
+
+      <!-- Father Address -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Father Address</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.fatherAddress"
+          name="fatherAddress"
+        />
+      </div>
+
+      <!-- Mother Name -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Mother Name</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.motherName"
+          name="motherName"
+        />
+      </div>
+
+      <!-- Mother Address -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Mother Address</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.motherAddress"
+          name="motherAddress"
+        />
+      </div>
+
+      <!-- To Notify Name -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Person to Notify</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.toNotifyName"
+          name="toNotifyName"
+        />
+      </div>
+
+      <!-- To Notify Address -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Notification Address</label>
+        <input
+          type="text"
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="patientDto.toNotifyAddress"
+          name="toNotifyAddress"
+        />
+      </div>
+
+      <!-- Doctor selection -->
+      <div class="mb-2 px-6">
+        <label class="block text-gray-700 py-2">Assign Doctor</label>
+        <select
+          class="w-full p-2 border rounded-lg focus:ring focus:ring-blue-300"
+          [(ngModel)]="patientDto.assignedDoctorId"
+          name="assignedDoctorId"
+        >
+          <option value="" disabled>Select a doctor</option>
+          <option *ngFor="let doctor of doctors" [value]="doctor.doctorId">
+            {{ doctor.firstName }} {{ doctor.lastName }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex justify-end space-x-2 px-6 py-4 border-b">
+        <button
+          type="button"
+          class="bg-gray-400 text-white px-4 py-2 rounded"
+          (click)="cancel()"
+        >
+          Cancel
+        </button>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
+          Save
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
