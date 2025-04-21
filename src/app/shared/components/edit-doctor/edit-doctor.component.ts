@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {DoctorDto, DoctorStatus} from '../../../core/models/doctor.model';
 import {DoctorService} from '../../../core/services/doctor.service';
 import {FormsModule, NgForm} from '@angular/forms';
-import {NgClass} from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
@@ -11,7 +11,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   templateUrl: './edit-doctor.component.html',
   imports: [
     FormsModule,
-    NgClass
+    NgClass,
+    NgIf
   ],
   standalone: true
 })

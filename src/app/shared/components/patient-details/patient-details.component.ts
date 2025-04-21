@@ -43,26 +43,33 @@ export class PatientDetailsComponent implements OnInit {
     this.showDropdown = false;
     const patientId = this.patientId; // make sure this ID is available
 
-    const handleBlob = (blob: Blob, filename: string) => {
+    // const handleBlob = (blob: Blob, filename: string) => {
+    //   const url = window.URL.createObjectURL(blob);
+    //   const a = document.createElement('a');
+    //   a.href = url;
+    //   a.download = filename;
+    //   a.click();
+    //   window.URL.revokeObjectURL(url);
+    // };
+    const openPdfPreview = (blob: Blob) => {
       const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      a.click();
-      window.URL.revokeObjectURL(url);
+      window.open(url, '_blank'); // Open PDF in new tab
     };
 
     if (type === 'patient') {
       this.patientService.printPatientDataSheetPdf(patientId).subscribe(blob => {
-        handleBlob(blob, `PatientDataSheet_${this.personalInfo.firstName + this.personalInfo.lastName}.pdf`);
+        // handleBlob(blob, `PatientDataSheet_${this.personalInfo.firstName + this.personalInfo.lastName}.pdf`);
+        openPdfPreview(blob);
       });
     } else if (type === 'emergency') {
       this.patientService.printEmergencyRoomPdf(patientId).subscribe(blob => {
-        handleBlob(blob, `EmergencyRoomPatient_${this.personalInfo.firstName + this.personalInfo.lastName}.pdf`);
+        // handleBlob(blob, `EmergencyRoomPatient_${this.personalInfo.firstName + this.personalInfo.lastName}.pdf`);
+        openPdfPreview(blob);
       });
     } else if (type == 'surgicalTreatment') {
       this.patientService.printAuthorizationSurgicalTreatmentPdf(patientId).subscribe(blob => {
-        handleBlob(blob, `AuthorizationSurgicalTreatment_${this.personalInfo.firstName + this.personalInfo.lastName}.pdf`);
+        // handleBlob(blob, `AuthorizationSurgicalTreatment_${this.personalInfo.firstName + this.personalInfo.lastName}.pdf`);
+        openPdfPreview(blob);
       })
     }
   }
