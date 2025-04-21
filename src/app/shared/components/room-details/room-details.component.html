@@ -1,0 +1,36 @@
+<div class="m-6 p-6 bg-white rounded-2xl shadow-lg space-y-8">
+
+  <!-- Room Details Header -->
+  <div>
+    <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Room Details</h2>
+
+    <!-- Room Info -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Room ID</p>
+        <p class="font-medium text-gray-700">{{ roomInfo.roomId }}</p>
+      </div>
+
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Room Type</p>
+        <p class="font-medium text-gray-700">{{ roomInfo.roomType }}</p>
+      </div>
+
+      <div class="border rounded-lg p-3 md:col-span-2">
+        <p class="text-xs text-gray-500">Room Description</p>
+        <p class="font-medium text-gray-700 break-words">{{ roomInfo.roomDescription }}</p>
+      </div>
+
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Room Capacity</p>
+        <p class="font-medium text-gray-700">{{ roomInfo.roomCapacity }}</p>
+      </div>
+
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Room Charge</p>
+        <p class="font-medium text-gray-700">{{ roomInfo.roomCharge }}</p>
+      </div>
+    </div>
+  </div>
+
+</div>

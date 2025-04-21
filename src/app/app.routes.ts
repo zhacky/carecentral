@@ -21,8 +21,11 @@ import { AddRoomComponent } from './shared/components/add-room/add-room.componen
 import { RoomAssignComponent } from './features/room-assign/room-assign.component';
 import { AddRoomAssignComponent } from './shared/components/add-room-assign/add-room-assign.component';
 import { PatientDetailsComponent } from './shared/components/patient-details/patient-details.component';
-import {EditDoctorComponent} from './shared/components/edit-doctor/edit-doctor.component';
-import {EditPatientComponent} from './shared/components/patient-edit/patient-edit.component';
+import { EditDoctorComponent } from './shared/components/edit-doctor/edit-doctor.component';
+import { EditPatientComponent } from './shared/components/patient-edit/patient-edit.component';
+import { DoctorDetailsComponent } from './shared/components/doctor-details/doctor-details.component';
+import { RoomDetailsComponent } from './shared/components/room-details/room-details.component';
+import { RoomAssignDetailsComponent } from './shared/components/room-assign-details/room-assign-details.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -34,7 +37,7 @@ export const routes: Routes = [
   {
     path: 'common',
     component: SidenavComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
@@ -54,10 +57,13 @@ export const routes: Routes = [
       { path: 'inventory/edit/:id', component: EditInventoryComponent },
       { path: 'room', component: RoomComponent },
       { path: 'room/add', component: AddRoomComponent },
+      { path: 'room/details', component: RoomDetailsComponent },
       { path: 'roomAssign', component: RoomAssignComponent },
       { path: 'roomAssign/add', component: AddRoomAssignComponent },
+      { path: 'roomAssign/details', component: RoomAssignDetailsComponent },
       { path: 'doctor/add', component: AddDoctorComponent },
-      { path: 'doctor/edit/:id', component: EditDoctorComponent }
+      { path: 'doctor/details', component: DoctorDetailsComponent },
+      { path: 'doctor/edit/:id', component: EditDoctorComponent },
     ],
   },
   { path: '**', redirectTo: 'login' },

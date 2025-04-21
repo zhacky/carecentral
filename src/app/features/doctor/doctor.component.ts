@@ -12,14 +12,9 @@ import {
   MatTableDataSource
 } from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
-import {
-  // CurrencyPipe,
-  // DatePipe,
-  NgClass,
-  // NgForOf
-} from '@angular/common';
-// import {MatButton} from '@angular/material/button';
-// import {MatIcon} from '@angular/material/icon';
+import {CurrencyPipe, DatePipe, NgClass, NgForOf} from '@angular/common';
+import {MatButton} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
 import {Router, RouterLink} from '@angular/router';
 import {DoctorService} from '../../core/services/doctor.service';
 import {DoctorDto, DoctorStatus} from '../../core/models/doctor.model';
@@ -38,27 +33,36 @@ import {DoctorDto, DoctorStatus} from '../../core/models/doctor.model';
     MatRow,
     FormsModule,
     NgClass,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './doctor.component.html',
   standalone: true,
-  styleUrl: './doctor.component.css'
+  styleUrl: './doctor.component.css',
 })
 export class DoctorComponent implements AfterViewInit, OnInit {
-  constructor(private doctorService: DoctorService, private router: Router) {}
+  constructor(
+    private doctorService: DoctorService,
+    private router: Router,
+  ) {}
 
   // Define the columns for the table (including position, first name, last name, etc.)
-  displayedColumns: string[] = ['doctorId', 'firstName', 'lastName', 'gender', 'status', 'actions'];
+  displayedColumns: string[] = [
+    'doctorId',
+    'firstName',
+    'lastName',
+    'gender',
+    'status',
+    'actions',
+  ];
 
   // DataSource for the table (initially empty)
   dataSource = new MatTableDataSource<DoctorDto>([]);
 
   searchTerm: string = '';
 
-  editDoctor( doctorId: number ) {
+  editDoctor(doctorId: number) {
     this.router.navigate(['/common/doctor/edit', doctorId]);
   }
-
 
   applyFilter(): void {
     this.dataSource.filter = this.searchTerm.trim().toLowerCase();
@@ -90,13 +94,13 @@ export class DoctorComponent implements AfterViewInit, OnInit {
         // Add position dynamically
         this.dataSource.data = doctors.map((doctor, index) => ({
           ...doctor,
-          position: index + 1,  // Position starts at 1 and increments
+          position: index + 1, // Position starts at 1 and increments
         }));
         this.dataSource.paginator = this.paginator;
       },
       (error) => {
         console.error('Error fetching doctors:', error);
-      }
+      },
     );
   }
 
@@ -106,11 +110,13 @@ export class DoctorComponent implements AfterViewInit, OnInit {
       this.doctorService.deleteDoctor(doctorId).subscribe(
         () => {
           // Remove the patient from the data source after successful deletion
-          this.dataSource.data = this.dataSource.data.filter(doctor => doctor.doctorId !== doctorId);
+          this.dataSource.data = this.dataSource.data.filter(
+            (doctor) => doctor.doctorId !== doctorId,
+          );
         },
         (error) => {
           console.error('Error deleting patient:', error);
-        }
+        },
       );
     }
   }

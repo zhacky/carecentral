@@ -1,0 +1,41 @@
+<div class="m-6 p-6 bg-white rounded-2xl shadow-lg space-y-8">
+
+  <!-- Room Assignment Header -->
+  <div>
+    <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Room Assignment Details</h2>
+
+    <!-- Room Assignment Info -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Assignment ID</p>
+        <p class="font-medium text-gray-700">{{ assignmentInfo.roomAssignId }}</p>
+      </div>
+
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Day of Stay</p>
+        <p class="font-medium text-gray-700">{{ assignmentInfo.dayOfStay }}</p>
+      </div>
+
+      <div class="border rounded-lg p-3 md:col-span-2">
+        <p class="text-xs text-gray-500">Assignment Description</p>
+        <p class="font-medium text-gray-700 break-words">{{ assignmentInfo.roomAssignDescription }}</p>
+      </div>
+
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Assigned Date</p>
+        <p class="font-medium text-gray-700">{{ assignmentInfo.assignedDate }}</p>
+      </div>
+
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Discharge Date</p>
+        <p class="font-medium text-gray-700">{{ assignmentInfo.dischargeDate }}</p>
+      </div>
+
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Status</p>
+        <p class="font-medium text-gray-700">{{ assignmentInfo.status }}</p>
+      </div>
+    </div>
+  </div>
+
+</div>
