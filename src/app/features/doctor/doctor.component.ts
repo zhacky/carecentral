@@ -64,6 +64,10 @@ export class DoctorComponent implements AfterViewInit, OnInit {
     this.router.navigate(['/common/doctor/edit', doctorId]);
   }
 
+  viewDoctor(doctorId: number) {
+    this.router.navigate(['/common/doctor/details', doctorId]);
+  }
+
   applyFilter(): void {
     this.dataSource.filter = this.searchTerm.trim().toLowerCase();
   }
