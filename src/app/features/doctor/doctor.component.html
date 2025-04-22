@@ -11,12 +11,12 @@
           >
             <i class="fa-solid fa-plus"></i> Add Doctor
           </button>
-          <button
-            routerLink="/common/doctor/details"
-            class="bg-blue-500 text-white px-4 py-2 rounded"
-          >
-            <i class="fa-solid fa-plus"></i> details Doctor
-          </button>
+<!--          <button-->
+<!--            routerLink="/common/doctor/details"-->
+<!--            class="bg-blue-500 text-white px-4 py-2 rounded"-->
+<!--          >-->
+<!--            <i class="fa-solid fa-plus"></i> details Doctor-->
+<!--          </button>-->
         </div>
         <!-- Search Bar -->
         <div class="relative w-64">
@@ -91,6 +91,10 @@
           <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Action</th>
           <td *matCellDef="let element" class="py-4 px-6 border-b border-gray-200">
             <div class="flex justify-start space-x-2">
+              <a (click)="viewDoctor(element.doctorId)"
+                 class="text-blue-600 hover:text-blue-500 duration-150 cursor-pointer">
+                <i class="fas fa-eye w-5 h-5"></i>
+              </a>
               <a href="javascript:void(0)" (click)="editDoctor(element.doctorId)"
                  class="text-blue-600 hover:text-blue-500 duration-150">
                 <i class="fas fa-edit w-5 h-5"></i>

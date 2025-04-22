@@ -12,7 +12,7 @@ import {
   MatTableDataSource
 } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {NgClass} from '@angular/common';
 import {RoomService} from '../../core/services/room.service';
 import {RoomDto, RoomStatus} from '../../core/models/room.model';
@@ -29,16 +29,16 @@ import {RoomDto, RoomStatus} from '../../core/models/room.model';
     MatColumnDef,
     MatHeaderRow,
     MatRow,
-    RouterLink,
     FormsModule,
-    NgClass
+    NgClass,
+    RouterLink
   ],
   templateUrl: './room.component.html',
   standalone: true,
   styleUrl: './room.component.css'
 })
 export class RoomComponent implements AfterViewInit, OnInit {
-  constructor(private roomService: RoomService) {}
+  constructor(private roomService: RoomService, private router: Router) {}
 
   displayedColumns: string[] = ['roomId', 'roomType', 'roomCapacity', 'roomCharge', 'status', 'actions'];
 
@@ -46,6 +46,10 @@ export class RoomComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource<RoomDto>([]);
 
   searchTerm: string = '';
+
+  editRoom(roomId: number) {
+    this.router.navigate(['/common/room/edit', roomId]);
+  }
 
   applyFilter(): void {
     this.dataSource.filter = this.searchTerm.trim().toLowerCase();

@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {DoctorDto, DoctorStatus} from '../../../core/models/doctor.model';
+import {DoctorStatus} from '../../../core/models/doctor.model';
 import {DoctorService} from '../../../core/services/doctor.service';
 import {FormsModule, NgForm} from '@angular/forms';
 import {NgClass, NgIf} from '@angular/common';

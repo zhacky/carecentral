@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { RoomDto } from '../models/room.model';
+import {RoomDto, RoomStatus} from '../models/room.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +34,14 @@ export class RoomService {
   }
 
   // Update a room
-  updateRoom(id: number, room: RoomDto): Observable<RoomDto> {
+  updateRoom(id: number, room: {
+    roomId: number;
+    roomType: string;
+    roomDescription: string;
+    roomCapacity: number;
+    roomCharge: string;
+    status: RoomStatus
+  }): Observable<RoomDto> {
     return this.http.put<RoomDto>(`${this.apiUrl}/${id}`, room);
   }
 
