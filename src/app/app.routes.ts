@@ -27,6 +27,7 @@ import { DoctorDetailsComponent } from './shared/components/doctor-details/docto
 import { RoomDetailsComponent } from './shared/components/room-details/room-details.component';
 import { RoomAssignDetailsComponent } from './shared/components/room-assign-details/room-assign-details.component';
 import {EditRoomComponent} from './shared/components/edit-room/edit-room.component';
+import {BillingComponent} from './features/billing/billing.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -42,6 +43,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'billing', component: BillingComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'appointment', component: AppointmentComponent },
       { path: 'doctor', component: DoctorComponent },
