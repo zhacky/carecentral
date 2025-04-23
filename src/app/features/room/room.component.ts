@@ -51,6 +51,10 @@ export class RoomComponent implements AfterViewInit, OnInit {
     this.router.navigate(['/common/room/edit', roomId]);
   }
 
+  viewRoom(roomId: number) {
+    this.router.navigate(['/common/room/details', roomId]);
+  }
+
   applyFilter(): void {
     this.dataSource.filter = this.searchTerm.trim().toLowerCase();
   }

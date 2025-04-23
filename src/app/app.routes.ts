@@ -58,7 +58,7 @@ export const routes: Routes = [
       { path: 'inventory/edit/:id', component: EditInventoryComponent },
       { path: 'room', component: RoomComponent },
       { path: 'room/add', component: AddRoomComponent },
-      { path: 'room/details', component: RoomDetailsComponent },
+      { path: 'room/details/:id', component: RoomDetailsComponent },
       { path: 'room/edit/:id', component: EditRoomComponent },
       { path: 'roomAssign', component: RoomAssignComponent },
       { path: 'roomAssign/add', component: AddRoomAssignComponent },
