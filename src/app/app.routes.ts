@@ -28,6 +28,7 @@ import { RoomDetailsComponent } from './shared/components/room-details/room-deta
 import { RoomAssignDetailsComponent } from './shared/components/room-assign-details/room-assign-details.component';
 import {EditRoomComponent} from './shared/components/edit-room/edit-room.component';
 import {BillingComponent} from './features/billing/billing.component';
+import {PhilhealthComponent} from './features/philhealth/philhealth.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -68,6 +69,7 @@ export const routes: Routes = [
       { path: 'doctor/add', component: AddDoctorComponent },
       { path: 'doctor/details/:id', component: DoctorDetailsComponent },
       { path: 'doctor/edit/:id', component: EditDoctorComponent },
+      { path: 'philhealth', component: PhilhealthComponent }
     ],
   },
   { path: '**', redirectTo: 'login' },
