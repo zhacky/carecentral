@@ -30,6 +30,7 @@ import {EditRoomComponent} from './shared/components/edit-room/edit-room.compone
 import { UnauthorizedComponent } from './core/auth/login/unauthorized.component';
 import { RoleGuard } from './core/auth/login/role.guard';
 import {BillingComponent} from './features/billing/billing.component';
+import {PhilhealthComponent} from './features/philhealth/philhealth.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -70,6 +71,7 @@ export const routes: Routes = [
       { path: 'doctor/add', component: AddDoctorComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },
       { path: 'doctor/details/:id', component: DoctorDetailsComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },
       { path: 'doctor/edit/:id', component: EditDoctorComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },
+      { path: 'philhealth', component: PhilhealthComponent }
       {
         path: 'unauthorized',
         component: UnauthorizedComponent,

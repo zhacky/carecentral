@@ -139,6 +139,11 @@ export class SidenavComponent {
       ],
     },
     {
+      icon: 'assets/Icons/icon_philhealth.svg',
+      label: 'Philhealth',
+      route: 'philhealth',
+    },
+    {
       icon: 'assets/Icons/icon_report.svg',
       label: 'Reports',
       route: 'inventory',
