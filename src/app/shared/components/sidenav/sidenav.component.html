@@ -77,6 +77,17 @@
 
     <mat-nav-list class="nav-list">
       <div class="main-menu mt-5">
+        <div class="sidenav-header">
+          <span [class.collapsed]="collapsed()" class="brand-name">
+            <span class="text">
+              <span class="blue">Care</span><span>C</span>entral
+            </span>
+            <span class="short-text">
+              <span class="blue">C</span><span>C</span>
+            </span>
+          </span>
+        </div>
+
         <ng-container *ngFor="let item of menuItems()">
           <ng-container *ngIf="(item.label === 'Dashboard' && hasRole('ROLE_ADMIN')) || 
                                (item.label === 'Doctors' && hasRole('ROLE_ADMIN')) || 
