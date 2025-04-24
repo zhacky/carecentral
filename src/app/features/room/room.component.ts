@@ -13,9 +13,10 @@ import {
 } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {Router, RouterLink} from '@angular/router';
-import {NgClass} from '@angular/common';
+import {CommonModule, NgClass} from '@angular/common';
 import {RoomService} from '../../core/services/room.service';
 import {RoomDto, RoomStatus} from '../../core/models/room.model';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-room',
@@ -31,14 +32,19 @@ import {RoomDto, RoomStatus} from '../../core/models/room.model';
     MatRow,
     FormsModule,
     NgClass,
-    RouterLink
+    RouterLink,
+    CommonModule
   ],
   templateUrl: './room.component.html',
   standalone: true,
   styleUrl: './room.component.css'
 })
 export class RoomComponent implements AfterViewInit, OnInit {
-  constructor(private roomService: RoomService, private router: Router) {}
+  constructor(private roomService: RoomService, private router: Router, private authService: AuthService) {}
+
+  hasRole(role: string): boolean {
+    return this.authService.hasRole(role);
+  }
 
   displayedColumns: string[] = ['roomId', 'roomType', 'roomCapacity', 'roomCharge', 'status', 'actions'];
 
