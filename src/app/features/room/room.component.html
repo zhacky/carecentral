@@ -5,6 +5,8 @@
     <div class="px-6 py-4 border-b">
       <div class="flex items-center justify-between md:flex-row">
         <div class="max-w-lg">
+          <ng-container *ngIf="hasRole('ROLE_ADMIN')">
+            <h2 class="text-lg font-semibold text-gray-800">Room List</h2>
           <button
             routerLink="/common/room/add"
             class="bg-blue-500 text-white px-4 py-2 rounded"
@@ -17,6 +19,7 @@
 <!--          >-->
 <!--            <i class="fa-solid fa-plus"></i> Details Room-->
 <!--          </button>-->
+         </ng-container>
         </div>
         <!-- Search Bar -->
         <div class="relative w-64">

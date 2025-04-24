@@ -7,6 +7,7 @@ import {Router, RouterModule} from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
 import {HeaderComponent} from '../header/header.component';
 import {PatientchartComponent} from '../../../features/dashboard/patientchart/patientchart.component';
+import { AuthService } from '../../../core/services/auth.service';
 
 export type MenuItem = {
   icon: string;
@@ -32,7 +33,13 @@ export type MenuItem = {
   standalone: true,
 })
 export class SidenavComponent {
-  constructor(private router: Router) {}
+  currentUserRoles: string[] = [];
+
+  constructor(private router: Router, private authService: AuthService) {}
+
+  hasRole(role: string): boolean {
+    return this.authService.hasRole(role);
+  }
 
   collapsed = signal(false);
   sidenavWidth = computed(() => (this.collapsed() ? '60px' : '230px'));
