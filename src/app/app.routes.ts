@@ -71,11 +71,8 @@ export const routes: Routes = [
       { path: 'doctor/add', component: AddDoctorComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },
       { path: 'doctor/details/:id', component: DoctorDetailsComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },
       { path: 'doctor/edit/:id', component: EditDoctorComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },
-      { path: 'philhealth', component: PhilhealthComponent }
-      {
-        path: 'unauthorized',
-        component: UnauthorizedComponent,
-      },
+      { path: 'philhealth', component: PhilhealthComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },
+      { path: 'unauthorized', component: UnauthorizedComponent },
     ],
   },
   { path: '**', redirectTo: 'login' },
