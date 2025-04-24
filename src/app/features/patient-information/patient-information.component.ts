@@ -16,6 +16,8 @@ import {PatientDto} from '../../core/models/patient.model';
 import {PatientService} from '../../core/services/patient.service';
 import {Router} from '@angular/router';
 import {FormsModule} from '@angular/forms'; // Import the service
+import { CommonModule } from '@angular/common';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-patient-information',
@@ -31,13 +33,18 @@ import {FormsModule} from '@angular/forms'; // Import the service
     MatColumnDef,
     MatHeaderRow,
     MatRow,
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   standalone: true
 })
 export class PatientInformationComponent implements AfterViewInit, OnInit {
-  constructor(private dialog: MatDialog, private patientService: PatientService, private router: Router) {}
+  constructor(private dialog: MatDialog, private patientService: PatientService, private router: Router, private authService: AuthService) {}
 
+  hasRole(role: string): boolean {
+    return this.authService.hasRole(role);
+  }
+  
   // Define the columns for the table (including position, first name, last name, etc.)
   displayedColumns: string[] = ['patientId', 'firstName', 'lastName', 'dateOfBirth', 'gender', 'actions'];
 

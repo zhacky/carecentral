@@ -50,23 +50,31 @@ export class LoginComponent {
     }
     const username = this.loginForm.value.username;
     const password = this.loginForm.value.password;
-
     this.authService.login(username, password).subscribe({
       next: () => {
-        this.router.navigate(['/common']).then(success => {
-          if (success) {
-            this.snackBar.open('Login successful!', 'Close', {
-              duration: 3000,
-              panelClass: ['snackbar-success']
-            });
-          } else {
-            console.error('Navigation failed!');
-            this.snackBar.open('Navigation failed!', 'Close', {
-              duration: 3000,
-              panelClass: ['snackbar-error']
-            });
-          }
-        });
+        const currentUser = this.authService.getCurrentUser() as { roles: string[]; username: string };
+        console.log('Logged in user:', currentUser);
+
+        // Check roles and redirect
+        if (currentUser.roles.includes('ROLE_ADMIN')) {
+          this.router.navigate(['/common/dashboard']).then(success => {
+            if (success) {
+              this.snackBar.open(`Welcome ${currentUser.username}!`, 'Close', {
+                duration: 3000,
+                panelClass: ['snackbar-success']
+              });
+            }
+          });
+        } else {
+          this.router.navigate(['/common/profile']).then(success => {
+            if (success) {
+              this.snackBar.open(`Welcome ${currentUser.username}!`, 'Close', {
+                duration: 3000,
+                panelClass: ['snackbar-success']
+              });
+            }
+          });
+        }
       },
       error: (error) => {
         this.errorMessage = 'Invalid username or password.';
@@ -77,5 +85,5 @@ export class LoginComponent {
         });
       }
     });
-  }
+}
 }

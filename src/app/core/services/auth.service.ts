@@ -21,8 +21,14 @@ export class AuthService {
     const body = { username: username.trim(), password: password.trim() };
     return this.http.post<any>(this.apiUrl, body, { headers }).pipe(
       tap((response) => {
-        this.currentUser = { token: response.token, ...response.userDetails }; // Include token and user details
-        localStorage.setItem('currentUser', JSON.stringify(this.currentUser)); // Store in localStorage
+        console.log('Login response from backend:', response);
+        if (response.roles) {
+          this.currentUser = { token: response.token, username: response.username, roles: response.roles };
+          console.log('Current user after login:', this.currentUser); // Debug currentUser
+          localStorage.setItem('currentUser', JSON.stringify(this.currentUser)); // Store in localStorage
+        } else {
+          console.error('Roles missing in backend response');
+        }
       }),
       catchError((error) => {
         console.error('Login error', error);
@@ -44,8 +50,9 @@ export class AuthService {
     getCurrentUser(): any {
       if (!this.currentUser) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+        console.log('Current user from localStorage:', this.currentUser);
       }
-      return this.currentUser;
+      return this.currentUser || {roles: []}; // Return an empty object if not found
     }
 
   getUsers(): Observable<any[]> {
@@ -68,4 +75,13 @@ export class AuthService {
     this.loggedIn.next(false);
   }
   
+  hasRole(role: string): boolean {
+    const user = this.getCurrentUser();
+    return user?.roles?.includes(role);
+  }
+  
+  hasAnyRole(roles: string[]): boolean {
+    const user = this.getCurrentUser();
+    return roles.some((role) => user?.roles?.includes(role));
+  }
 }

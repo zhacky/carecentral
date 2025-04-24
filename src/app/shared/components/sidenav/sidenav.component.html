@@ -1,7 +1,7 @@
 <mat-sidenav-container autosize class="fullscreen-container">
   <!-- Left Side Navigation -->
   <mat-sidenav #drawer [style.width]="sidenavWidth()" mode="side" opened style="background-color: white;">
-    <mat-nav-list class="nav-list">
+    <!-- <mat-nav-list class="nav-list">
       <div class="sidenav-header">
       <span [class.collapsed]="collapsed()" class="brand-name">
         <span class="text">
@@ -13,10 +13,10 @@
       </span>
       </div>
 
-      <!-- Main menu items -->
+   
       <div class="main-menu mt-5">
         <ng-container *ngFor="let item of menuItems().slice(0, menuItems().length - 1)">
-          <!-- Item with children (e.g., "Rooms") -->
+        
           <ng-container *ngIf="item.children?.length; else singleItem">
             <mat-list-item disableRipple (click)="toggleExpand(item.label)" class="parent-item">
               <img [src]="item.icon" alt="Icon" matListItemIcon/>
@@ -28,7 +28,7 @@
             </span>
             </mat-list-item>
 
-            <!-- Nested child routes -->
+   
             <div *ngIf="expandedItems()[item.label]" class="pl-4">
               <mat-list-item
                 *ngFor="let child of item.children"
@@ -41,7 +41,7 @@
             </div>
           </ng-container>
 
-          <!-- Single-level item -->
+       
           <ng-template #singleItem>
             <mat-list-item
               #rla="routerLinkActive"
@@ -56,7 +56,7 @@
         </ng-container>
       </div>
 
-      <!-- Settings item -->
+
       <div class="bottom-item">
         <mat-list-item
           [routerLink]="menuItems()[menuItems().length - 1].route"
@@ -73,6 +73,59 @@
         </mat-list-item>
       </div>
 
+    </mat-nav-list> -->
+
+    <mat-nav-list class="nav-list">
+      <div class="main-menu mt-5">
+        <ng-container *ngFor="let item of menuItems()">
+          <ng-container *ngIf="(item.label === 'Dashboard' && hasRole('ROLE_ADMIN')) || 
+                               (item.label === 'Doctors' && hasRole('ROLE_ADMIN')) || 
+                               (item.label === 'Patients' && (hasRole('ROLE_NURSE') || hasRole('ROLE_DOCTOR'))) || 
+                               (item.label === 'Billing' && hasRole('ROLE_PATIENT')) || 
+                               (item.label === 'Rooms' && hasRole('ROLE_NURSE')) || 
+                               hasRole('ROLE_ADMIN')">
+            <mat-list-item
+              #rla="routerLinkActive"
+              [activated]="rla.isActive"
+              [routerLink]="item.route"
+              routerLinkActive="selected-menu-item"
+              *ngIf="!item.children"
+            >
+              <img [src]="item.icon" alt="Icon" matListItemIcon />
+              <span matListItemTitle class="text-[#A9A9A9]">{{ item.label }}</span>
+            </mat-list-item>
+    
+            <!-- Children Menu Items -->
+            <ng-container *ngIf="item.children">
+              <mat-list-item
+                disableRipple
+                (click)="toggleExpand(item.label)"
+                class="parent-item"
+              >
+                <img [src]="item.icon" alt="Icon" matListItemIcon />
+                <span matListItemTitle class="text-[#A9A9A9]">
+                  {{ item.label }}
+                  <mat-icon class="expand-icon align-bottom">
+                    {{ expandedItems()[item.label] ? 'expand_less' : 'expand_more' }}
+                  </mat-icon>
+                </span>
+              </mat-list-item>
+    
+              <!-- Display Children When Expanded -->
+              <div *ngIf="expandedItems()[item.label]" class="pl-4">
+                <mat-list-item
+                  *ngFor="let child of item.children"
+                  [routerLink]="child.route"
+                  routerLinkActive="selected-menu-item"
+                >
+                  <img [src]="child.icon" alt="Icon" matListItemIcon />
+                  <span matListItemTitle class="text-[#A9A9A9]">{{ child.label }}</span>
+                </mat-list-item>
+              </div>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
     </mat-nav-list>
   </mat-sidenav>
 

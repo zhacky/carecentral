@@ -13,9 +13,10 @@ import {
 } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {RouterLink} from '@angular/router';
-import {NgClass} from '@angular/common';
+import {CommonModule, NgClass} from '@angular/common';
 import {RoomAssignService} from '../../core/services/room-assign.service';
 import {RoomAssignDto, RoomAssignStatus} from '../../core/models/room-assign.model';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-room',
@@ -31,14 +32,19 @@ import {RoomAssignDto, RoomAssignStatus} from '../../core/models/room-assign.mod
     MatRow,
     RouterLink,
     FormsModule,
-    NgClass
+    NgClass,
+    CommonModule
   ],
   templateUrl: './room-assign.component.html',
   standalone: true,
   styleUrl: './room-assign.component.css'
 })
 export class RoomAssignComponent implements AfterViewInit, OnInit {
-  constructor(private roomAssignService: RoomAssignService) {}
+  constructor(private roomAssignService: RoomAssignService, private authService: AuthService) {}
+
+  hasRole(role: string): boolean {
+    return this.authService.hasRole(role);
+  }
 
   displayedColumns: string[] = ['roomAssignId', 'daysOfStay', 'assignedDate', 'dischargeDate', 'status', 'actions'];
 
