@@ -68,7 +68,7 @@ export class RegisterComponent {
           this.router.navigate(['/login']);
           this.snackBar.open('Successfully Registered!', 'Close', {
             duration: 3000,
-            panelClass: ['snackbar-error']
+            panelClass: ['snackbar-success']
           });
         },
         error: (error: any) => {

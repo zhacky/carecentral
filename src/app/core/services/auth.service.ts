@@ -47,13 +47,53 @@ export class AuthService {
     );
   }
 
-    getCurrentUser(): any {
-      if (!this.currentUser) {
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-        console.log('Current user from localStorage:', this.currentUser);
-      }
-      return this.currentUser || {roles: []}; // Return an empty object if not found
-    }
+  getRoles(): Observable<string[]> {
+    const rolesApiUrl = `${environment.apiUrl}/roles`;
+    return this.http.get<string[]>(rolesApiUrl).pipe(
+      tap((roles) => {
+        console.log('Fetched roles from backend:', roles); 
+      }),
+      catchError((error) => {
+        console.error('Error fetching roles:', error);
+        throw error;
+      })
+    );
+  }
+
+  updateUserRole(userId: string, requestBody: any): Observable<any> {
+    const updateUserApiUrl = `${environment.apiUrl}/update/${userId}`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.getToken()}`,
+    });
+  
+    console.log('Request URL:', updateUserApiUrl);
+    console.log('Request Headers:', headers);
+    console.log('Request Body:', requestBody);
+  
+    return this.http.put(updateUserApiUrl, requestBody, { headers }).pipe(
+      tap(() => {
+        console.log(`Updated role for user ${userId} to ${requestBody.roles}`);
+      }),
+      catchError((error) => {
+        console.error('Error updating user role:', error);
+        throw error;
+      })
+    );
+  }
+
+  getToken(): string {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    return currentUser?.token || '';
+  }
+
+  getCurrentUser(): any {
+    if (!this.currentUser) {
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+       console.log('Current user from localStorage:', this.currentUser);
+     }
+    return this.currentUser || {roles: []}; // Return an empty object if not found
+  }
 
   getUsers(): Observable<any[]> {
     return this.http.get<any[]>(`${environment.apiUrl}/users`).pipe(
