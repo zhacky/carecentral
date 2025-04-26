@@ -37,6 +37,11 @@ export class HeaderComponent implements OnInit {
   toggleProfileMenu() {
     this.isProfileMenuOpen = !this.isProfileMenuOpen;
   }
+  
+  get mainRole() {
+    const role = this.currentUser?.roles.find((r: string) => r.startsWith('ROLE_'));
+    return role ? role.replace('ROLE_', '') : '';
+  }
 
   navigateTo(path: string) {
     this.isProfileMenuOpen = false; // Auto hide the menu

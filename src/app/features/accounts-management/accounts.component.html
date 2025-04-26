@@ -28,15 +28,7 @@
 
         <ng-container matColumnDef="role">
           <th mat-header-cell *matHeaderCellDef> Role </th>
-          <td mat-cell *matCellDef="let element"
-          [ngClass]="{
-            'nurse': element.role === 'Nurse',
-            'admin': element.role === 'Admin',
-            'doctor': element.role === 'Doctor',
-            'receptionist': element.role === 'Receptionist',
-            'billing-staff': element.role === 'Billing Staff'}">
-          {{element.role}}
-          </td>
+          <td mat-cell *matCellDef="let element">{{element.role}}</td>
         </ng-container>
 
         <ng-container matColumnDef="action">
