@@ -8,11 +8,12 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-set-role-dialog',
-  imports: [MatFormFieldModule, MatButtonModule, MatDialogModule, ReactiveFormsModule, MatOptionModule, MatSelectModule, CommonModule, MatInputModule ],
+  imports: [MatFormFieldModule, MatButtonModule, MatProgressSpinnerModule, MatDialogModule, ReactiveFormsModule, MatOptionModule, MatSelectModule, CommonModule, MatInputModule ],
   standalone: true,
   templateUrl: './set-role-dialog.component.html',
   styleUrls: ['./set-role-dialog.component.css'],
@@ -20,6 +21,7 @@ import { AuthService } from '../../../core/services/auth.service';
 export class SetRoleDialogComponent {
   editForm: FormGroup;
   roles: { name: string }[] = [];
+  isLoading = false;
 
   constructor(
     public dialogRef: MatDialogRef<SetRoleDialogComponent>,
@@ -67,7 +69,9 @@ export class SetRoleDialogComponent {
         email: this.data.email,      
         roles: updatedRole.id,
       };
-      console.log('Authorization Token:', this.authService.getToken());
+
+      this.isLoading = true,
+      setTimeout(() => {
       this.authService.updateUserRole(userId, requestBody).subscribe({
         next: () => {
           this.dialogRef.close({role: updatedRole.name});
@@ -84,6 +88,7 @@ export class SetRoleDialogComponent {
           });
         },
       });
+    }, 2000);
     }
   }
 

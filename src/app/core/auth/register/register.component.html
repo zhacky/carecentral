@@ -65,11 +65,6 @@
             Passwords do not match
           </mat-error>
         </mat-form-field>
-
-        <mat-form-field appearance="fill" class="col-span-1">
-          <mat-label>Middle Name</mat-label>
-          <input matInput formControlName="middleName" />
-        </mat-form-field>
       </div>
 
       <!-- Email and Role in one row -->
@@ -82,18 +77,6 @@
           </mat-error>
           <mat-error *ngIf="registerForm.get('email')?.hasError('email')">
             Invalid email address
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" class="col-span-1">
-          <mat-label>Role</mat-label>
-          <mat-select formControlName="role">
-            <mat-option value="admin">Admin</mat-option>
-            <mat-option value="user">User</mat-option>
-            <mat-option value="manager">Manager</mat-option>
-          </mat-select>
-          <mat-error *ngIf="registerForm.get('role')?.hasError('required')">
-            Role is required
           </mat-error>
         </mat-form-field>
       </div>
