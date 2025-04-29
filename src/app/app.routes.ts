@@ -42,7 +42,7 @@ export const routes: Routes = [
   {
     path: 'common',
     component: SidenavComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },

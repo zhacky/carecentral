@@ -17,8 +17,14 @@
 </div>
 <div mat-dialog-actions class="dialog-actions">
   <button mat-button mat-dialog-close class="cancel-button">Cancel</button>
-  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="editForm.invalid">
-    Save
+  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="editForm.invalid || isLoading">
+    <mat-progress-spinner
+      *ngIf="isLoading"
+      diameter="20"
+      mode="indeterminate"
+      class="spinner"
+    ></mat-progress-spinner>
+    <span *ngIf="!isLoading">Save</span>
   </button>
 </div>
 </div>

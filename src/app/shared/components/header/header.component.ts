@@ -92,7 +92,6 @@ export class HeaderComponent implements OnInit {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.activeRoute = this.router.url; // Get full URL
-        console.log('Active Route:', this.activeRoute); // Debugging
       }
     });
   }
@@ -102,8 +101,7 @@ export class HeaderComponent implements OnInit {
   }
 
   getUser() {
-    this.currentUser = this.authService.getCurrentUser();
-    console.log('Current User:', this.currentUser); 
+    this.currentUser = this.authService.getCurrentUser(); 
   }
   
 }

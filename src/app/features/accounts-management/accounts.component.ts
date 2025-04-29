@@ -8,6 +8,7 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { SetRoleDialogComponent } from '../../shared/components/set-role-dialog/set-role-dialog.component';
 import { AuthService } from '../../core/services/auth.service';
 import { RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 /**
  * @title Table with pagination
@@ -17,14 +18,16 @@ import { RouterLink } from '@angular/router';
   styleUrl: 'accounts.component.css',
   templateUrl: 'accounts.component.html',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, CommonModule, RouterLink],
+  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, CommonModule, FormsModule, RouterLink],
 })
 
 export class AccountsManagementComponent implements AfterViewInit, OnInit {
   constructor(private dialog: MatDialog, private authService: AuthService) {}
 
-  displayedColumns: string[] = ['position', 'username', 'email', 'role', 'action'];
+  displayedColumns: string[] = ['position', 'lastName', 'firstName', 'email', 'username', 'status', 'role', 'action'];
   dataSource = new MatTableDataSource<PeriodicElement>([]);
+
+  searchTerm: string = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -43,10 +46,12 @@ export class AccountsManagementComponent implements AfterViewInit, OnInit {
           id: user.id, 
           position: index + 1,
           username: user.username,
+          firstName: user.firstName,
+          lastName: user.lastName,
           email: user.email,
-          role: user.role
+          status: user.status,
+          role: user.roles.map((r: any) => r.name).join(', ')
         }));
-        console.log(users)
       },
       error: (error) => {
         console.error('Error fetching users', error);
@@ -62,13 +67,15 @@ export class AccountsManagementComponent implements AfterViewInit, OnInit {
         name: `${element.username} ${element.email}`,
         role: element.role,
         username: element.username,
+        firstName: element.firstName,
+        lastName: element.lastName,
+        status: element.status,
         email: element.email, 
       },
     });
   
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log('Updated role:', result);
         const index = this.dataSource.data.findIndex((item) => item.position === element.position);
         if (index !== -1) {
           this.dataSource.data[index].role = result.role;
@@ -78,8 +85,8 @@ export class AccountsManagementComponent implements AfterViewInit, OnInit {
     });
   }
 
-  performAction(element: any): void {
-    console.log('Action performed for:', element);
+  applyFilter(): void {
+    this.dataSource.filter = this.searchTerm.trim().toLowerCase();
   }
 }
 
@@ -89,6 +96,9 @@ export interface PeriodicElement {
   username: string;
   position: number;
   email: string;
+  firstName: string;
+  lastName: string;
+  status: string;
   role: string;
 }
 

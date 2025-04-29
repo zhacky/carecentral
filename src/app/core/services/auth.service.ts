@@ -21,10 +21,8 @@ export class AuthService {
     const body = { username: username.trim(), password: password.trim() };
     return this.http.post<any>(this.apiUrl, body, { headers }).pipe(
       tap((response) => {
-        console.log('Login response from backend:', response);
         if (response.roles) {
           this.currentUser = { token: response.token, username: response.username, roles: response.roles };
-          console.log('Current user after login:', this.currentUser); // Debug currentUser
           localStorage.setItem('currentUser', JSON.stringify(this.currentUser)); // Store in localStorage
         } else {
           console.error('Roles missing in backend response');
@@ -67,10 +65,6 @@ export class AuthService {
       Authorization: `Bearer ${this.getToken()}`,
     });
   
-    console.log('Request URL:', updateUserApiUrl);
-    console.log('Request Headers:', headers);
-    console.log('Request Body:', requestBody);
-  
     return this.http.put(updateUserApiUrl, requestBody, { headers }).pipe(
       tap(() => {
         console.log(`Updated role for user ${userId} to ${requestBody.roles}`);
@@ -90,7 +84,6 @@ export class AuthService {
   getCurrentUser(): any {
     if (!this.currentUser) {
       this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
-       console.log('Current user from localStorage:', this.currentUser);
      }
     return this.currentUser || {roles: []}; // Return an empty object if not found
   }

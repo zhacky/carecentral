@@ -53,8 +53,6 @@ export class LoginComponent {
     this.authService.login(username, password).subscribe({
       next: () => {
         const currentUser = this.authService.getCurrentUser() as { roles: string[]; username: string };
-        console.log('Logged in user:', currentUser);
-
         // Check roles and redirect
         if (currentUser.roles.includes('ROLE_ADMIN')) {
           this.router.navigate(['/common/dashboard']).then(success => {
