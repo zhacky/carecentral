@@ -9,6 +9,7 @@ import { SetRoleDialogComponent } from '../../shared/components/set-role-dialog/
 import { AuthService } from '../../core/services/auth.service';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { MatChipsModule } from '@angular/material/chips';
 
 /**
  * @title Table with pagination
@@ -18,7 +19,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: 'accounts.component.css',
   templateUrl: 'accounts.component.html',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, CommonModule, FormsModule, RouterLink],
+  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, MatChipsModule, CommonModule, FormsModule, RouterLink],
 })
 
 export class AccountsManagementComponent implements AfterViewInit, OnInit {
@@ -88,6 +89,23 @@ export class AccountsManagementComponent implements AfterViewInit, OnInit {
   applyFilter(): void {
     this.dataSource.filter = this.searchTerm.trim().toLowerCase();
   }
+
+  getStatusClass(status: string): string {
+  switch (status) {
+    case 'Active':
+      return 'chip-green';
+    case 'Pending':
+      return 'chip-yellow';
+    case 'Suspended':
+      return 'chip-orange';
+    case 'Inactive':
+      return 'chip-blue';
+    case 'Deactivated':
+      return 'chip-red';
+    default:
+      return '';
+  }
+}
 }
 
 

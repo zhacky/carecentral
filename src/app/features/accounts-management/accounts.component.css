@@ -106,6 +106,36 @@ table {
   font-weight: 500;
 }
 
+::ng-deep .chip-green {
+  background-color: #0DCF0D !important;
+  color: white !important;
+}
 
+::ng-deep .chip-yellow {
+  background-color: #ECB933 !important;
+  color: black !important;
+}
 
+::ng-deep .chip-orange {
+  background-color: #E59B1C !important;
+  color: white !important;
+}
+
+::ng-deep .chip-blue {
+  background-color: #1989F7 !important;
+  color: white !important;
+}
+
+::ng-deep .chip-red {
+  background-color: #F14251 !important;
+  color: white !important;
+}
+
+::ng-deep .chip-green .mdc-evolution-chip__text-label {
+  color: white !important;
+}
+
+::ng-deep .chip-blue .mdc-evolution-chip__text-label {
+  color: white !important;
+}
 

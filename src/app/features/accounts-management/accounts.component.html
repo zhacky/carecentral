@@ -148,7 +148,10 @@
         <ng-container matColumnDef="status">
           <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Status</th>
           <td *matCellDef="let element"
-              class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium"> {{ element.status }}
+              class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium">
+              <mat-chip [ngClass]="getStatusClass(element.status)">
+                {{ element.status }}
+              </mat-chip>
           </td>
         </ng-container>
 
