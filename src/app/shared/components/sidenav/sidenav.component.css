@@ -19,12 +19,12 @@ mat-sidenav-content {
   display: flex;
   justify-content: center; /* Centers horizontally */
   align-items: center; /* Centers vertically */
-  padding-top: 24px;
+  padding-top: 10px;
+  padding-bottom: 20px;
   text-align: center;
 }
 
 .sidenav-header img {
-  border-radius: 100%;
   object-fit: cover;
   margin-bottom: 10px;
 }
@@ -116,16 +116,12 @@ body, html {
 }
 
 .brand-name {
-  font-size: 21px;
-  font-weight: bold;
   position: relative;
-  display: flex; /* Use flexbox */
-  align-items: center; /* Center vertically */
-  justify-content: center; /* Center horizontally */
-  width: auto;
-  transition: width 0.3s ease-in-out;
-  overflow: hidden; /* Prevents text overflow */
-  text-align: center;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .brand-name.collapsed {
@@ -142,10 +138,19 @@ body, html {
 .short-text {
   position: absolute;
   top: 50%;
+  font-weight: bold;
+  font-size: 27px;
   left: 50%;
   transform: translate(-50%, -50%); /* Perfect centering */
   opacity: 0;
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.short-text.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1); /* Centered and visible */
+  pointer-events: auto; /* Re-enables interaction */
 }
 
 .blue {
@@ -262,7 +267,7 @@ mat-list-item span {
 }
 
 mat-list-item.selected-menu-item {
-  background: #3371eb !important; /* Highlight color */
+  background: #27cd0d !important; /* Highlight color */
   border-radius: 12px !important; /* Rounded corners */
   color: white !important; /* Text and icon color for active state */
 }
@@ -300,6 +305,20 @@ mat-list-item.selected-menu-item span[matListItemTitle] {
 
 .expand-icon {
   color: #A9A9A9;
+}
+
+.logo {
+  height: 12vh;
+  width: auto;
+}
+
+.logo.main-logo {
+  opacity: 1;
+  transition: opacity 1.3s ease-in-out;
+}
+
+.logo.main-logo.fade-out {
+  opacity: 0;
 }
 
 

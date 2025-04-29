@@ -1,94 +1,19 @@
-<!-- <div class="parent">
-
-  <button mat-flat-button routerLink="/common/accounts/register" class="button">
-    <i class="fa-solid fa-plus"></i> Add Account
-  </button>
-
-    <div class="page-content">
-      <h1 class="title">Accounts Management</h1>
-      <table class="table" mat-table [dataSource]="dataSource">
-
-    
-        <ng-container matColumnDef="position">
-          <th mat-header-cell *matHeaderCellDef> No. </th>
-          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="username">
-          <th mat-header-cell *matHeaderCellDef> Username </th>
-          <td mat-cell *matCellDef="let element"> {{element.username}} </td>
-        </ng-container>
 
 
-        <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef> Email </th>
-          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="firstName">
-          <th mat-header-cell *matHeaderCellDef> First Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="lastName">
-          <th mat-header-cell *matHeaderCellDef> Last Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="role">
-          <th mat-header-cell *matHeaderCellDef> Role </th>
-          <td mat-cell *matCellDef="let element">{{element.role}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef> Status </th>
-          <td mat-cell *matCellDef="let element">{{element.status}}</td>
-        </ng-container> 
-
-        <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef> Action </th>
-          <td mat-cell *matCellDef="let element">
-            <a class="icon-wrapper" aria-label="Edit" (click)="openEditDialog(element)">
-              <i class="fa-solid fa-pen-to-square"></i>
-            </a>
-            <a class="icon-wrapper2" aria-label="Edit">
-              <i class="fa-solid fa-trash fa-3x"></i>
-            </a>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-
-      <mat-paginator [pageSizeOptions]="[7, 20]"
-                     showFirstLastButtons
-                     aria-label="Select page of periodic elements">
-      </mat-paginator>
-    </div>
-    </div> -->
-
-    <!-- Philhealth Table -->
 <div class="p-6 w-full rounded-lg overflow-hidden">
   <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-    <!-- Card Header -->
+
     <div class="px-6 py-4 border-b">
       <div class="flex items-center justify-between md:flex-row">
         <div class="max-w-lg">
           <button
             routerLink="/common/accounts/register"
-            class="bg-green-500 text-white px-4 py-2 rounded"
+            class="add-button text-white px-4 py-2 rounded"
           >
             <i class="fa-solid fa-plus"></i> Add Account
-          </button>
-          <!--          <button-->
-          <!--            routerLink="/common/doctor/details"-->
-          <!--            class="bg-blue-500 text-white px-4 py-2 rounded"-->
-          <!--          >-->
-          <!--            <i class="fa-solid fa-plus"></i> details Doctor-->
-          <!--          </button>-->
+          </button>     
         </div>
-        <!-- Search Bar -->
+  
         <div class="relative w-64">
           <input
             type="text"
@@ -106,7 +31,7 @@
       </div>
     </div>
 
-    <!-- Mat Table -->
+
     <div class="">
       <table mat-table [dataSource]="dataSource" class="w-full table-auto text-sm text-left border border-gray-200">
 
