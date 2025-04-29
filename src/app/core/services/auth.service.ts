@@ -117,4 +117,17 @@ export class AuthService {
     const user = this.getCurrentUser();
     return roles.some((role) => user?.roles?.includes(role));
   }
+
+  addRole(role: { name: string }): Observable<any> {
+    const rolesApiUrl = `${environment.apiUrl}/roles`;
+    return this.http.post(rolesApiUrl, role).pipe(
+      tap(() => {
+        console.log('Role added:', role);
+      }),
+      catchError((error) => {
+        console.error('Error adding role:', error);
+        throw error;
+      })
+    );
+  }
 }
