@@ -1,0 +1,591 @@
+<!-- Room add-philhealth -->
+<div class="p-6 w-full rounded-lg overflow-hidden">
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+
+    <div class="px-6 py-4">
+      <h3 class="text-gray-800 text-xl font-bold sm:text-2xl">Add Philhealth</h3>
+    </div>
+
+    <form #formRef="ngForm" (ngSubmit)="savePhilhealth(formRef)">
+
+      <div *ngIf="currentStep === 1">
+
+        <!-- Member's Information -->
+        <div class="mb-2 px-6">
+          <h4 class="text-lg font-semibold text-gray-700 mb-2">Member's Information</h4>
+
+          <label class="block text-gray-700 py-2">First Name</label>
+          <input
+            type="text"
+            class="w-full px-3 py-2 border rounded-lg"
+            [(ngModel)]="philhealthItem.memFirstName"
+            name="memFirstName"
+            #fieldRef="ngModel"
+            required
+            [ngClass]="{
+            'border-red-500': fieldRef.invalid && fieldRef.touched
+          }"
+          />
+          <p class="text-red-500 text-sm mt-1" *ngIf="fieldRef.invalid && fieldRef.touched">
+            Member's First Name is required.
+          </p>
+
+          <label class="block text-gray-700 py-2">Middle Name</label>
+          <input
+            type="text"
+            class="w-full px-3 py-2 border rounded-lg"
+            [(ngModel)]="philhealthItem.memMiddleName"
+            name="memMiddleName"
+          />
+
+          <label class="block text-gray-700 py-2">Last Name</label>
+          <input
+            type="text"
+            class="w-full px-3 py-2 border rounded-lg"
+            [(ngModel)]="philhealthItem.memLastName"
+            name="memLastName"
+            #fieldRef="ngModel"
+            required
+            [ngClass]="{
+            'border-red-500': fieldRef.invalid && fieldRef.touched
+          }"
+          />
+          <p class="text-red-500 text-sm mt-1" *ngIf="fieldRef.invalid && fieldRef.touched">
+            Member's Last Name is required.
+          </p>
+
+          <label class="block text-gray-700 py-2">PIN Number</label>
+          <input
+            type="text"
+            class="w-full px-3 py-2 border rounded-lg"
+            [(ngModel)]="philhealthItem.memPIN"
+            name="memPIN"
+            #fieldRef="ngModel"
+            required
+            [ngClass]="{
+            'border-red-500': fieldRef.invalid && fieldRef.touched
+          }"
+          />
+          <p class="text-red-500 text-sm mt-1" *ngIf="fieldRef.invalid && fieldRef.touched">
+            Member's PIN is required.
+          </p>
+
+          <label class="block text-gray-700 py-2">Birthdate</label>
+          <input
+            type="date"
+            class="w-full px-3 py-2 border rounded-lg"
+            [(ngModel)]="philhealthItem.memDateOfBirth"
+            name="memDateOfBirth"
+            #fieldRef="ngModel"
+            required
+            [ngClass]="{
+            'border-red-500': fieldRef.invalid && fieldRef.touched
+          }"
+          />
+          <p class="text-red-500 text-sm mt-1" *ngIf="fieldRef.invalid && fieldRef.touched">
+            Member's Birthdate is required.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div *ngIf="currentStep === 2">
+
+        <div class="mb-2 px-6">
+
+          <h4 class="text-lg font-semibold text-gray-700 mb-2">Patient Information I</h4>
+
+          <!-- Patient's First Information -->
+          <label class="block text-gray-700 py-2">First Name</label>
+          <input
+            type="text"
+            class="w-full px-3 py-2 border rounded-lg"
+            [(ngModel)]="philhealthItem.patFirstName"
+            name="patFirstName"
+            #fieldRef="ngModel"
+            required
+            [ngClass]="{
+            'border-red-500': fieldRef.invalid && fieldRef.touched
+          }"
+          />
+          <p class="text-red-500 text-sm mt-1" *ngIf="fieldRef.invalid && fieldRef.touched">
+            Patient's First Name is required.
+          </p>
+
+          <label class="block text-gray-700 py-2">Middle Name</label>
+          <input
+            type="text"
+            class="w-full px-3 py-2 border rounded-lg"
+            [(ngModel)]="philhealthItem.patMiddleName"
+            name="patMiddleName"
+          />
+
+          <label class="block text-gray-700 py-2">Last Name</label>
+          <input
+            type="text"
+            class="w-full px-3 py-2 border rounded-lg"
+            [(ngModel)]="philhealthItem.patLastName"
+            name="patLastName"
+            #fieldRef="ngModel"
+            required
+            [ngClass]="{
+            'border-red-500': fieldRef.invalid && fieldRef.touched
+          }"
+          />
+          <p class="text-red-500 text-sm mt-1" *ngIf="fieldRef.invalid && fieldRef.touched">
+            Patient's Last Name is required.
+          </p>
+
+          <label class="block text-gray-700 py-2">PIN Number</label>
+          <input
+            type="text"
+            class="w-full px-3 py-2 border rounded-lg"
+            [(ngModel)]="philhealthItem.patPIN"
+            name="patPIN"
+            #fieldRef="ngModel"
+            required
+            [ngClass]="{
+            'border-red-500': fieldRef.invalid && fieldRef.touched
+          }"
+          />
+          <p class="text-red-500 text-sm mt-1" *ngIf="fieldRef.invalid && fieldRef.touched">
+            Patient's PIN Number is required.
+          </p>
+
+          <label class="block text-gray-700 py-2">Birthdate</label>
+          <input
+            type="date"
+            class="w-full px-3 py-2 border rounded-lg"
+            [(ngModel)]="philhealthItem.patDateOfBirth"
+            name="patDateOfBirth"
+            #fieldRef="ngModel"
+            required
+            [ngClass]="{
+            'border-red-500': fieldRef.invalid && fieldRef.touched
+          }"
+          />
+          <p class="text-red-500 text-sm mt-1" *ngIf="fieldRef.invalid && fieldRef.touched">
+            Patient's Birthdate is required.
+          </p>
+
+          <label class="block text-gray-700 py-2">Relation To Member</label>
+          <input
+            type="text"
+            class="w-full px-3 py-2 border rounded-lg"
+            [(ngModel)]="philhealthItem.relationToMember"
+            name="relationToMember"
+            #fieldRef="ngModel"
+            required
+            [ngClass]="{
+            'border-red-500': fieldRef.invalid && fieldRef.touched
+          }"
+          />
+          <p class="text-red-500 text-sm mt-1" *ngIf="fieldRef.invalid && fieldRef.touched">
+            Patient's Relation to Member is required.
+          </p>
+
+          <label class="block text-gray-700 py-2">Gender</label>
+          <select
+            class="w-full px-3 py-2 border rounded-lg"
+            [(ngModel)]="philhealthItem.patSex"
+            name="patSex"
+            required
+            #fieldRef="ngModel"
+            [ngClass]="{ 'border-red-500': fieldRef.invalid && fieldRef.touched }"
+          >
+            <option value="" disabled>Select gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+          <p class="text-red-500 text-sm mt-1" *ngIf="fieldRef.invalid && fieldRef.touched">
+            Gender is required.
+          </p>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-gray-700 py-2">Height</label>
+              <input
+                type="number"
+                class="w-full px-3 py-2 border rounded-lg"
+                [(ngModel)]="philhealthItem.patHeight"
+                name="patHeight"
+              />
+            </div>
+
+            <div>
+              <label class="block text-gray-700 py-2">Weight</label>
+              <input
+                type="number"
+                class="w-full px-3 py-2 border rounded-lg"
+                [(ngModel)]="philhealthItem.patWeight"
+                name="patWeight"
+              />
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div *ngIf="currentStep === 3">
+
+        <div class="mb-2 px-6">
+
+          <h4 class="text-lg font-semibold text-gray-700 mb-2">Patient Information II</h4>
+
+          <!-- Patient's Second Information -->
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-gray-700 py-2">1st Case Rate Code</label>
+              <input
+                type="text"
+                class="w-full px-3 py-2 border rounded-lg"
+                [(ngModel)]="philhealthItem.firstCaseRateCode"
+                name="firstCaseRateCode"
+              />
+            </div>
+
+            <div>
+              <label class="block text-gray-700 py-2">2nd Case Rate Code</label>
+              <input
+                type="text"
+                class="w-full px-3 py-2 border rounded-lg"
+                [(ngModel)]="philhealthItem.secondCaseRateCode"
+                name="secondCaseRateCode"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-gray-700 py-2">Date Admitted</label>
+              <input
+                type="date"
+                class="w-full px-3 py-2 border rounded-lg"
+                [(ngModel)]="philhealthItem.dateAdmitted"
+                name="dateAdmitted"
+              />
+            </div>
+
+            <div>
+              <label class="block text-gray-700 py-2">Time Admitted</label>
+              <input
+                type="time"
+                class="w-full px-3 py-2 border rounded-lg"
+                [(ngModel)]="philhealthItem.timeAdmitted"
+                name="timeAdmitted"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-gray-700 py-2">Date Discharged</label>
+              <input
+                type="date"
+                class="w-full px-3 py-2 border rounded-lg"
+                [(ngModel)]="philhealthItem.dateDischarged"
+                name="dateDischarged"
+              />
+            </div>
+
+            <div>
+              <label class="block text-gray-700 py-2">Time Discharged</label>
+              <input
+                type="time"
+                class="w-full px-3 py-2 border rounded-lg"
+                [(ngModel)]="philhealthItem.timeDischarged"
+                name="timeDischarged"
+              />
+            </div>
+          </div>
+
+          <label class="block text-gray-700 py-2">Chief Complaint</label>
+          <textarea
+            class="w-full px-3 py-2 border rounded-lg"
+            [(ngModel)]="philhealthItem.chiefComplaint"
+            name="chiefComplaint"
+            rows="4"
+          ></textarea>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-gray-700 py-2">Admitting Diagnosis</label>
+              <textarea
+                class="w-full px-3 py-2 border rounded-lg"
+                [(ngModel)]="philhealthItem.admittingDiagnosis"
+                name="admittingDiagnosis"
+                rows="4"
+              ></textarea>
+            </div>
+
+            <div>
+              <label class="block text-gray-700 py-2">Discharge Diagnosis</label>
+              <textarea
+                class="w-full px-3 py-2 border rounded-lg"
+                [(ngModel)]="philhealthItem.dischargeDiagnosis"
+                name="dischargeDiagnosis"
+                rows="4"
+              ></textarea>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div *ngIf="currentStep === 4">
+
+        <div class="mb-2 px-6">
+
+          <h4 class="text-lg font-semibold text-gray-700 mb-2">Patient Medical Record I</h4>
+
+          <!-- Patient Medical Record I -->
+          <label class="block text-gray-700 py-2">History of Present Illness</label>
+          <textarea
+            class="w-full px-3 py-2 border rounded-lg"
+            [(ngModel)]="philhealthItem.patPresentHistoryOfIllness"
+            name="patPresentHistoryOfIllness"
+            rows="4"
+          ></textarea>
+
+          <label class="block text-gray-700 py-2">Pertinent Past Medical History</label>
+          <textarea
+            class="w-full px-3 py-2 border rounded-lg"
+            [(ngModel)]="philhealthItem.patPertinentPastMedicalHistory"
+            name="patPertinentPastMedicalHistory"
+            rows="4"
+          ></textarea>
+
+          <label class="block text-gray-700 py-2">Course in the Wards</label>
+          <textarea
+            class="w-full px-3 py-2 border rounded-lg"
+            [(ngModel)]="philhealthItem.courseInTheWards"
+            name="courseInTheWards"
+            rows="4"
+          ></textarea>
+
+          <label class="block text-gray-700 py-2">Pertinent Laboratory and Diagnostic Findings</label>
+          <textarea
+            class="w-full px-3 py-2 border rounded-lg"
+            [(ngModel)]="philhealthItem.diagnosticFindings"
+            name="diagnosticFindings"
+            rows="4"
+          ></textarea>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-gray-700 py-2">Blood Pressure</label>
+              <input
+                type="text"
+                class="w-full px-3 py-2 border rounded-lg"
+                [(ngModel)]="philhealthItem.bloodPressure"
+                name="bloodPressure"
+              />
+            </div>
+
+            <div>
+              <label class="block text-gray-700 py-2">Capillary Refill</label>
+              <input
+                type="text"
+                class="w-full px-3 py-2 border rounded-lg"
+                [(ngModel)]="philhealthItem.capillaryRefill"
+                name="capillaryRefill"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-gray-700 py-2">Heart Rate</label>
+              <input
+                type="number"
+                class="w-full px-3 py-2 border rounded-lg"
+                [(ngModel)]="philhealthItem.heartRate"
+                name="heartRate"
+              />
+            </div>
+
+            <div>
+              <label class="block text-gray-700 py-2">Respiratory Rate</label>
+              <input
+                type="number"
+                class="w-full px-3 py-2 border rounded-lg"
+                [(ngModel)]="philhealthItem.respiratoryRate"
+                name="respiratoryRate"
+              />
+            </div>
+          </div>
+
+          <label class="block text-gray-700 py-2">Temperature</label>
+          <input
+            type="number"
+            class="w-full px-3 py-2 border rounded-lg"
+            [(ngModel)]="philhealthItem.temperature"
+            name="temperature"
+          />
+
+        </div>
+
+      </div>
+
+      <div *ngIf="currentStep === 5">
+
+        <div class="mb-2 px-6">
+
+          <h4 class="text-lg font-semibold text-gray-700 mb-2">Patient Medical Record II</h4>
+
+          <!-- Patient Medical Record I -->
+          <label class="block text-gray-700 py-2">Treatment Outcome</label>
+          <input
+            type="text"
+            class="w-full px-3 py-2 border rounded-lg"
+            [(ngModel)]="philhealthItem.treatmentOutcome"
+            name="treatmentOutcome"
+          />
+
+          <label class="block text-gray-700 py-2">Sign And Symptoms</label>
+          <input
+            class="w-full px-3 py-2 border rounded-lg"
+            matInput
+            placeholder="e.g. fever, cough, headache"
+            [(ngModel)]="symptomsInput"
+            name="symptomsInput"
+            required
+          />
+
+          <label class="block text-gray-700 py-2">General Survey</label>
+          <input
+            class="w-full px-3 py-2 border rounded-lg"
+            matInput
+            placeholder="e.g. fever, cough, headache"
+            [(ngModel)]="generalSurveyInput"
+            name="generalSurvey"
+            required
+          />
+
+          <label class="block text-gray-700 py-2">Heent</label>
+          <input
+            class="w-full px-3 py-2 border rounded-lg"
+            matInput
+            placeholder="e.g. fever, cough, headache"
+            [(ngModel)]="heentInput"
+            name="heent"
+            required
+          />
+
+          <label class="block text-gray-700 py-2">Lungs</label>
+          <input
+            class="w-full px-3 py-2 border rounded-lg"
+            matInput
+            placeholder="e.g. fever, cough, headache"
+            [(ngModel)]="lungsInput"
+            name="lungs"
+            required
+          />
+
+          <label class="block text-gray-700 py-2">CVS</label>
+          <input
+            class="w-full px-3 py-2 border rounded-lg"
+            matInput
+            placeholder="e.g. fever, cough, headache"
+            [(ngModel)]="cvsInput"
+            name="cvs"
+            required
+          />
+
+          <label class="block text-gray-700 py-2">Abdomen</label>
+          <input
+            class="w-full px-3 py-2 border rounded-lg"
+            matInput
+            placeholder="e.g. fever, cough, headache"
+            [(ngModel)]="abdomenInput"
+            name="abdomen"
+            required
+          />
+
+          <label class="block text-gray-700 py-2">GU</label>
+          <input
+            class="w-full px-3 py-2 border rounded-lg"
+            matInput
+            placeholder="e.g. fever, cough, headache"
+            [(ngModel)]="guInput"
+            name="gu"
+            required
+          />
+
+          <label class="block text-gray-700 py-2">Extremities</label>
+          <input
+            class="w-full px-3 py-2 border rounded-lg"
+            matInput
+            placeholder="e.g. fever, cough, headache"
+            [(ngModel)]="extremitiesInput"
+            name="extremities"
+            required
+          />
+
+          <label class="block text-gray-700 py-2">Neuro Exam</label>
+          <input
+            class="w-full px-3 py-2 border rounded-lg"
+            matInput
+            placeholder="e.g. fever, cough, headache"
+            [(ngModel)]="neuroExamInput"
+            name="neuroExam"
+            required
+          />
+
+        </div>
+
+      </div>
+
+      <!-- Actions -->
+      <div class="flex justify-end space-x-2 px-6 py-4 border-b">
+        <div>
+          <button
+            *ngIf="currentStep === 1"
+            type="button"
+            (click)="cancel()"
+            class="bg-gray-400 text-white px-4 py-2 rounded"
+          >
+            Cancel
+          </button>
+
+          <button
+            *ngIf="currentStep > 1"
+            type="button"
+            (click)="prevStep()"
+            class="bg-gray-400 text-white px-4 py-2 rounded"
+          >
+            Previous
+          </button>
+        </div>
+
+        <div>
+          <ng-container *ngIf="currentStep < totalSteps; else saveButton">
+            <button
+              type="button"
+              (click)="nextStep()"
+              class="bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              Next
+            </button>
+          </ng-container>
+
+          <ng-template #saveButton>
+            <button
+              type="submit"
+              class="bg-green-500 text-white px-4 py-2 rounded"
+            >
+              Save
+            </button>
+          </ng-template>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+

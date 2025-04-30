@@ -35,15 +35,15 @@ export class PhilhealthDto {
   temperature: number;
   courseInTheWards: string;
   diagnosticFindings: string;
-  signAndSymptoms: string;
-  generalSurvey: string;
-  heent: string;
-  lungs: string;
-  cvs: string;
-  abdomen: string;
-  gu: string;
-  extremities: string;
-  neuroExam: string;
+  signAndSymptoms: string[];
+  generalSurvey: string[];
+  heent: string[];
+  lungs: string[];
+  cvs: string[];
+  abdomen: string[];
+  gu: string[];
+  extremities: string[];
+  neuroExam: string[];
 
   constructor(
     position: number,
@@ -82,15 +82,15 @@ export class PhilhealthDto {
     temperature: number,
     courseInTheWards: string,
     diagnosticFindings: string,
-    signAndSymptoms: string,
-    generalSurvey: string,
-    heent: string,
-    lungs: string,
-    cvs: string,
-    abdomen: string,
-    gu: string,
-    extremities: string,
-    neuroExam: string
+    signAndSymptoms: string[],
+    generalSurvey: string[],
+    heent: string[],
+    lungs: string[],
+    cvs: string[],
+    abdomen: string[],
+    gu: string[],
+    extremities: string[],
+    neuroExam: string[]
   ) {
     this.position = position;
     this.philhealthId = philhealthId;

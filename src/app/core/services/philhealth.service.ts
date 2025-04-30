@@ -19,7 +19,52 @@ export class PhilhealthService {
   }
 
   // Create a new philhealth
-  createPhilhealth(philhealth: PhilhealthDto): Observable<PhilhealthDto> {
+  createPhilhealth(philhealth: {
+    bloodPressure: string;
+    signAndSymptoms: string[];
+    dateAdmitted: string;
+    memPIN: string;
+    patPertinentPastMedicalHistory: string;
+    memFirstName: string;
+    abdomen: string[];
+    chiefComplaint: string;
+    extremities: string[];
+    patMiddleName: string;
+    firstCaseRateCode: string;
+    patHeight: number;
+    temperature: number;
+    courseInTheWards: string;
+    patPIN: string;
+    lungs: string[];
+    memDateOfBirth: string;
+    timeAdmitted: string;
+    memLastName: string;
+    cvs: string[];
+    dischargeDiagnosis: string;
+    generalSurvey: string[];
+    respiratoryRate: number;
+    heent: string[];
+    secondCaseRateCode: string;
+    neuroExam: string[];
+    patSex: string;
+    timeDischarged: string;
+    gu: string[];
+    philhealthId: number;
+    diagnosticFindings: string;
+    patDateOfBirth: string;
+    patWeight: number;
+    heartRate: number;
+    relationToMember: string;
+    patAge: number;
+    memMiddleName: string;
+    dateDischarged: string;
+    patPresentHistoryOfIllness: string;
+    patLastName: string;
+    treatmentOutcome: string;
+    capillaryRefill: string;
+    patFirstName: string;
+    admittingDiagnosis: string
+  }): Observable<PhilhealthDto> {
     return this.http.post<PhilhealthDto>(this.apiUrl, philhealth);
   }
 
@@ -70,15 +115,15 @@ export class PhilhealthService {
     temperature?: number;
     courseInTheWards?: string;
     diagnosticFindings?: string;
-    signAndSymptoms?: string;
-    generalSurvey?: string;
-    heent?: string;
-    lungs?: string;
-    cvs?: string;
-    abdomen?: string;
-    gu?: string;
-    extremities?: string;
-    neuroExam?: string;
+    signAndSymptoms?: string[];
+    generalSurvey?: string[];
+    heent?: string[];
+    lungs?: string[];
+    cvs?: string[];
+    abdomen?: string[];
+    gu?: string[];
+    extremities?: string[];
+    neuroExam?: string[];
   }): Observable<PhilhealthDto> {
     return this.http.put<PhilhealthDto>(`${this.apiUrl}/${id}`, philhealth);
   }
