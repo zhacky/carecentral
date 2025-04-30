@@ -27,6 +27,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     }
   }
 
+  .add-button {
+    background-color: #27CD0D;
+    border-radius: 20px;
+  }
+
 
 
 

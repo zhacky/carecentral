@@ -77,16 +77,29 @@
 
     <mat-nav-list class="nav-list">
       <div class="main-menu mt-5">
-        <div class="sidenav-header">
-          <span [class.collapsed]="collapsed()" class="brand-name">
-            <span class="text">
-              <span class="blue">Care</span><span>C</span>entral
-            </span>
-            <span class="short-text">
-              <span class="blue">C</span><span>C</span>
-            </span>
+        <div class="sidenav-header relative">
+          <span class="brand-name">
+            
+            <!-- Logo (show when expanded) -->
+            <img
+              *ngIf="!collapsed()"
+              src="assets/logo/SidenavLogo.svg"
+              alt="Logo"
+              class="logo main-logo"
+            />
+        
+            <!-- Short Text (always visible when collapsed) -->
+            <img
+             *ngIf="collapsed()"
+             src="assets/logo/Icon.svg"
+             alt="Short Logo"
+             class="short-logo"
+    />
+        
           </span>
         </div>
+        
+        
 
         <ng-container *ngFor="let item of menuItems()">
           <ng-container *ngIf="(item.label === 'Dashboard' && hasRole('ROLE_ADMIN')) || 
