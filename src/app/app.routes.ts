@@ -31,6 +31,8 @@ import { UnauthorizedComponent } from './core/auth/login/unauthorized.component'
 import { RoleGuard } from './core/auth/login/role.guard';
 import {BillingComponent} from './features/billing/billing.component';
 import {PhilhealthComponent} from './features/philhealth/philhealth.component';
+import {AddPhilhealthComponent} from './shared/components/add-philhealth/add-philhealth.component';
+import {EditPhilhealthComponent} from './shared/components/edit-philhealth/edit-philhealth.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -72,6 +74,8 @@ export const routes: Routes = [
       { path: 'doctor/details/:id', component: DoctorDetailsComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },
       { path: 'doctor/edit/:id', component: EditDoctorComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },
       { path: 'philhealth', component: PhilhealthComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },
+      { path: 'philhealth/add', component: AddPhilhealthComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },
+      { path: 'philhealth/edit/:id', component: EditPhilhealthComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },
       { path: 'unauthorized', component: UnauthorizedComponent },
     ],
   },
