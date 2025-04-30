@@ -89,12 +89,12 @@
             />
         
             <!-- Short Text (always visible when collapsed) -->
-            <span
-              class="short-text"
-              [ngClass]="{'visible': collapsed(), 'hidden': !collapsed()}"
-            >
-              <span class="text-green-500">C</span><span>C</span>
-            </span>
+            <img
+             *ngIf="collapsed()"
+             src="assets/logo/Icon.svg"
+             alt="Short Logo"
+             class="short-logo"
+    />
         
           </span>
         </div>

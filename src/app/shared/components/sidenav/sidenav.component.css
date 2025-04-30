@@ -321,5 +321,10 @@ mat-list-item.selected-menu-item span[matListItemTitle] {
   opacity: 0;
 }
 
+.short-logo {
+  height: 6vh;
+  width: auto;
+}
+
 
 
