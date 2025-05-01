@@ -1,1 +1,78 @@
-<p>appointment works!</p>
+<div class="container mx-auto p-6 max-w-2xl bg-white shadow rounded">
+    <h1 class="text-3xl font-bold mb-6 text-center">Book an Appointment</h1>
+  
+    <form (ngSubmit)="submitAppointment()" #appointmentForm="ngForm">
+      <!-- Patient Name -->
+      <div class="mb-4">
+        <label class="block font-semibold mb-1">Patient Name</label>
+        <input
+          type="text"
+          class="w-full border p-2 rounded"
+          name="patientName"
+          [(ngModel)]="appointment.patientName"
+          required
+        />
+      </div>
+  
+      <!-- Doctor -->
+      <div class="mb-4">
+        <label class="block font-semibold mb-1">Doctor</label>
+        <select
+          class="w-full border p-2 rounded"
+          name="doctor"
+          [(ngModel)]="appointment.doctor"
+          required
+        >
+          <option value="" disabled selected>Select a doctor</option>
+          <option *ngFor="let doc of doctors" [value]="doc">{{ doc }}</option>
+        </select>
+      </div>
+  
+      <!-- Date -->
+      <div class="mb-4">
+        <label class="block font-semibold mb-1">Date</label>
+        <input
+          type="date"
+          class="w-full border p-2 rounded"
+          name="date"
+          [(ngModel)]="appointment.date"
+          required
+        />
+      </div>
+  
+      <!-- Time -->
+      <div class="mb-4">
+        <label class="block font-semibold mb-1">Time</label>
+        <input
+          type="time"
+          class="w-full border p-2 rounded"
+          name="time"
+          [(ngModel)]="appointment.time"
+          required
+        />
+      </div>
+  
+      <!-- Reason -->
+      <div class="mb-4">
+        <label class="block font-semibold mb-1">Reason for Visit</label>
+        <textarea
+          class="w-full border p-2 rounded"
+          name="reason"
+          [(ngModel)]="appointment.reason"
+          rows="3"
+        ></textarea>
+      </div>
+  
+      <!-- Submit Button -->
+      <div class="text-center">
+        <button
+          class="add-button text-white px-6 py-2 rounded hover:bg-green-700"
+          type="submit"
+          [disabled]="!appointmentForm.form.valid"
+        >
+          Book Appointment
+        </button>
+      </div>
+    </form>
+  </div>
+  

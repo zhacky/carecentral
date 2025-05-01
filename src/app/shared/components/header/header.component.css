@@ -3,3 +3,12 @@ mat-toolbar span {
   font-weight: 600;
   font-style: normal;
 }
+
+.fit-name {
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    max-width: 150px; 
+    display: block; 
+    font-size: medium;
+}
