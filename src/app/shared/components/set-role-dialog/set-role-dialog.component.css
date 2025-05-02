@@ -38,9 +38,14 @@
   color: #070404; 
 }
 
-
 button[mat-raised-button] {
   font-weight: bold;
   color: rgb(243, 240, 243);
   background-color: rgb(86, 116, 250);
 }
+
+.spinner ::ng-deep circle {
+  stroke: #ffffff;
+  stroke-width: 20px;
+}
+

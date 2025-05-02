@@ -107,5 +107,10 @@
   margin-top: -10px; 
 }
 
+.spinner ::ng-deep circle {
+  stroke: #ffffff;
+  stroke-width: 20px;
+}
+
 
 

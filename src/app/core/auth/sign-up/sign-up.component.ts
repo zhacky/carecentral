@@ -6,18 +6,20 @@ import { AuthService } from '../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { FormSubmissionGuard } from '../login/form.guard';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-sign-up',
-  imports: [MatCardModule, CommonModule, FormsModule],
+  imports: [MatCardModule, CommonModule, FormsModule, MatProgressSpinnerModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css'
 })
 export class SignUpComponent {
   step = 1;
-  
+  isLoading = false;
   formTouchedStep1 = false;
   formTouchedStep2 = false;
+
   constructor(
     private authService: AuthService, 
     private snackBar: MatSnackBar, 
@@ -36,11 +38,18 @@ export class SignUpComponent {
 
   goToNextStep() {
     this.formTouchedStep1 = true; 
-    
+    this.isLoading = true;
+  
     if (this.formData.firstName && this.formData.lastName && this.formData.email) {
-      this.step = 2; 
+      setTimeout(() => {
+        this.step = 2;
+        this.isLoading = false;
+      }, 1000); // Simulate loading
+    } else {
+      this.isLoading = false; // if validation fails
     }
   }
+
   goBack() {
     this.step = 1; 
   }
@@ -58,7 +67,8 @@ export class SignUpComponent {
         return;
       }
 
-      
+      this.isLoading = true;
+      setTimeout(() => {
       this.authService.register(this.formData).subscribe({
         next: (response) => {
           console.log('Registration successful:', response);
@@ -67,12 +77,14 @@ export class SignUpComponent {
         },
         error: (error) => {
           console.error('Registration failed:', error);
-          this.snackBar.open('Registration failed. Please try again.', 'Close', {
+          this.snackBar.open('Username or Email already exist.', 'Close', {
             duration: 3000,
             panelClass: ['snackbar-error']
           });
+          this.isLoading = false;
         }
       });
+    }, 3000);
     }
   }
 }

@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatButtonModule,
     MatIconModule,
     RouterModule,
+    MatProgressSpinnerModule
   ],
   templateUrl: './login.component.html',
   standalone: true,
@@ -34,6 +36,7 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
   errorMessage: string = '';
+  isLoading = false;
   
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
@@ -48,8 +51,11 @@ export class LoginComponent {
       this.loginForm.markAllAsTouched();
       return;
     }
+
+    this.isLoading = true;
     const username = this.loginForm.value.username;
     const password = this.loginForm.value.password;
+    setTimeout(() => {
     this.authService.login(username, password).subscribe({
       next: () => {
         const currentUser = this.authService.getCurrentUser() as { roles: string[]; username: string };
@@ -73,6 +79,7 @@ export class LoginComponent {
             }
           });
         }
+        this.isLoading = false;
       },
       error: (error) => {
         this.errorMessage = 'Invalid username or password.';
@@ -81,7 +88,9 @@ export class LoginComponent {
           duration: 3000,
           panelClass: ['snackbar-error']
         });
+        this.isLoading = false;
       }
     });
+  }, 2000)
 }
 }

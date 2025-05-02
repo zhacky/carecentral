@@ -42,7 +42,12 @@ html, body {
 }
 
 .signup-button {
+    display: flex;
+    justify-content: center;
+     align-items: center;
     width: 100%;
+    text-align: center;
+    position: relative;
     height: 56px;
     margin-top: 25px;
     background-color: #27CD0D; /* Green background */
@@ -64,3 +69,10 @@ html, body {
     font-size: 12px;
     margin-top: 4px;
 }
+
+.spinner ::ng-deep circle {
+    stroke: #ffffff;
+    stroke-width: 20px;
+}
+
+
