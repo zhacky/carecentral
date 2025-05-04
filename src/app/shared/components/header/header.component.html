@@ -25,10 +25,11 @@
         <mat-icon>notifications</mat-icon>
       </button>
 
+
       <!-- Account icon (assuming an account icon here) -->
       <div class="relative" #profileMenuContainer>
-        <button mat-icon-button (click)="toggleProfileMenu()">
-          <mat-icon>account_circle</mat-icon>
+        <button class="avatar" mat-icon-button (click)="toggleProfileMenu()">
+            {{ currentUser?.firstName?.charAt(0) + currentUser?.lastName?.charAt(0) }}
         </button>
 
         <!-- Dropdown Menu -->
