@@ -74,9 +74,15 @@
           <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Status</th>
           <td *matCellDef="let element"
               class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium">
-              <mat-chip [ngClass]="getStatusClass(element.status)">
-                {{ element.status }}
-              </mat-chip>
+              <span
+              [ngClass]="
+                (element.status === 'Inactive') ? 'bg-red-500 text-white px-3 py-1 rounded text-xs' :
+                (element.status === 'Active') ? 'bg-green-500 text-white px-3 py-1 rounded text-xs' :
+                ''
+              "
+            >
+              {{ element.status }}
+            </span>
           </td>
         </ng-container>
 

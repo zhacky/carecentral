@@ -25,18 +25,19 @@
           Password is required.
         </div>
         <div>
-          <a routerLink="/forgot-password" class="self-start text-sm underline">
+          <a routerLink="/forgot-password"  class="self-start text-sm underline">
             I forgot my password
           </a>
         </div>
-        <button mat-stroked-button color="blue" class="login-button">
-          Sign In
+        <button mat-stroked-button color="blue" [disabled]="isLoading" class="login-button">
+          <span *ngIf="!isLoading">Sign In</span>
+          <mat-spinner *ngIf="isLoading" diameter="20" class="spinner"></mat-spinner>
         </button>
       </form>
       <div class="action-items">
         <mat-card-actions>
           <mat-card-subtitle>Don't have an account?</mat-card-subtitle>
-          <a mat-button routerLink="/register" class="register">Register now!</a>
+          <a mat-button routerLink="/sign-up" class="register">Register now!</a>
         </mat-card-actions>
       </div>
     </div>

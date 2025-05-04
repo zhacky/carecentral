@@ -32,6 +32,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border-radius: 20px;
   }
 
+  .spinner ::ng-deep circle {
+    stroke: rgb(233, 224, 225);
+    color: rgb(233, 224, 225);
+  }
+
+  
+
 
 
 

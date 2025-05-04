@@ -21,8 +21,14 @@ export class AuthService {
     const body = { username: username.trim(), password: password.trim() };
     return this.http.post<any>(this.apiUrl, body, { headers }).pipe(
       tap((response) => {
+        console.log('Login response:', response); // Log the entire response
         if (response.roles) {
-          this.currentUser = { token: response.token, username: response.username, roles: response.roles };
+          this.currentUser = { 
+            token: response.token, 
+            username: response.username, 
+            firstName: response.firstName,
+            lastName: response.lastName, 
+            roles: response.roles };
           localStorage.setItem('currentUser', JSON.stringify(this.currentUser)); // Store in localStorage
         } else {
           console.error('Roles missing in backend response');
@@ -99,6 +105,7 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    console.log('User from localStorage:', user); 
     return !!user.token;
   }
 

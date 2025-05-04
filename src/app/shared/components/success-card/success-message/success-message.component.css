@@ -1,0 +1,59 @@
+/* Reset margin/padding and prevent horizontal scroll */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif; /* optional */
+}
+
+/* Centering container */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full height of screen */
+    background-color: #F6F6F6;
+}
+
+/* Card styling */
+.card {
+    width: 720px;
+    height: 544px;
+    background-color: #FFFFFF;
+    border: #F6F6F6;
+    justify-content: center;
+    align-items: center;
+    font-family: poppins;
+    font-weight: 600;
+    size: 28px;
+    line-height: 40px;
+}
+
+
+.signup-image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.sucess-logo {
+    width: 185px;
+    height: 200px;
+}
+
+.signin-button {
+    width: 165px;
+    height: 56px;
+    margin-top: 25px;
+    background-color: #27CD0D; /* Green background */
+    color: white !important; /* White text */
+    border: none; /* No border */
+    border-radius: 30px; /* Rounds the corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px;
+    display: block; /* Ensure the button behaves like a block element */
+    margin-left: auto; /* Center horizontally */
+    margin-right: auto; /* Center horizontally */
+}

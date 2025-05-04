@@ -29,24 +29,41 @@ import { RoomAssignDetailsComponent } from './shared/components/room-assign-deta
 import {EditRoomComponent} from './shared/components/edit-room/edit-room.component';
 import { UnauthorizedComponent } from './core/auth/login/unauthorized.component';
 import { RoleGuard } from './core/auth/login/role.guard';
+import { LoginGuard } from './core/auth/login/login.guard';
 import {BillingComponent} from './features/billing/billing.component';
 import {PhilhealthComponent} from './features/philhealth/philhealth.component';
 import {AddPhilhealthComponent} from './shared/components/add-philhealth/add-philhealth.component';
 import {EditPhilhealthComponent} from './shared/components/edit-philhealth/edit-philhealth.component';
+import { SignUpComponent } from './core/auth/sign-up/sign-up.component';
+import { SuccessMessageComponent } from './shared/components/success-card/success-message/success-message.component';
+import { FormSubmissionGuard } from './core/auth/login/form.guard';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [AuthGuard],
+    canActivate: [LoginGuard],
   },
+  { 
+    path: 'sign-up', 
+   component: SignUpComponent 
+  },
+
+   { 
+    path: 'success-message', 
+    component: SuccessMessageComponent, 
+    canActivate: [FormSubmissionGuard] 
+   },
+
   {
     path: 'common',
     component: SidenavComponent,
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      
       { path: 'dashboard', component: DashboardComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },
       { path: 'billing', component: BillingComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN', 'ROLE_PATIENT'] } },
       { path: 'profile', component: ProfileComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN', 'ROLE_DOCTOR', 'ROLE_NURSE', 'ROLE_PATIENT'] } },
@@ -73,9 +90,9 @@ export const routes: Routes = [
       { path: 'doctor/add', component: AddDoctorComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },
       { path: 'doctor/details/:id', component: DoctorDetailsComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },
       { path: 'doctor/edit/:id', component: EditDoctorComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },
-      { path: 'philhealth', component: PhilhealthComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },
-      { path: 'philhealth/add', component: AddPhilhealthComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },
-      { path: 'philhealth/edit/:id', component: EditPhilhealthComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN'] } },
+      { path: 'philhealth', component: PhilhealthComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN', 'ROLE_IT Administrator'] } },
+      { path: 'philhealth/add', component: AddPhilhealthComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN', 'ROLE_IT Administrator'] } },
+      { path: 'philhealth/edit/:id', component: EditPhilhealthComponent, canActivate: [RoleGuard], data: { roles: ['ROLE_ADMIN', 'ROLE_IT Administrator'] } },
       { path: 'unauthorized', component: UnauthorizedComponent },
     ],
   },

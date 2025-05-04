@@ -1,0 +1,78 @@
+/* Reset margin/padding and prevent horizontal scroll */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif; /* optional */
+}
+
+/* Centering container */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full height of screen */
+    background-color: #F6F6F6;
+}
+
+/* Card styling */
+.card {
+    width: 720px;
+    height: 737px;
+    padding: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #FFFFFF;
+    border: #F6F6F6;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-input {
+    width: 640px;
+    height: 56px;
+    margin-bottom: 25px;
+    margin-top: 12px;
+    padding: 8px 12px;         /* Adds space inside the input */
+    border: 1px solid rgb(88, 87, 87);   /* Adds a solid border */
+    border-radius: 30px;        /* Rounds the corners */
+    box-sizing: border-box;    /* Ensures padding doesn't exceed width */
+    font-size: 16px;           /* Optional for better readability */
+}
+
+.signup-button {
+    display: flex;
+    justify-content: center;
+     align-items: center;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    height: 56px;
+    margin-top: 25px;
+    background-color: #27CD0D; /* Green background */
+    color: white !important;             /* White text */
+    border: none;             /* No border */
+    border-radius: 30px;      /* Rounds the corners */
+    cursor: pointer;          /* Pointer cursor on hover */
+    font-size: 16px;
+}
+
+.signup-image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.spinner ::ng-deep circle {
+    stroke: #ffffff;
+    stroke-width: 20px;
+}
+
+

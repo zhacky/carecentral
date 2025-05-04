@@ -1,0 +1,73 @@
+<div class="center">
+    <mat-card appearance="outlined" class="card"> 
+        <mat-card-content class="card-content">
+            <ng-container *ngIf="step === 1">
+                <div class="signup-image">
+                    <img src="\assets\logo\SignupIcon.svg" alt="Sign up"/>
+                </div>
+                <p class="text-center font-medium text-2xl mt-4">Welcome! We're excited to <br> 
+                    have you join us.</p>
+                <p class="text-center font-normal text-sm mt-2">Already Registered? <a href="/login" class="text-green-600 hover:underline">
+                    Log in Instead
+                  </a></p>
+                <div class="signup-form"> 
+                    <span class="font-medium">First Name*</span>  
+                    <div>
+                        <input matInput [(ngModel)]="formData.firstName" name="firstName" type="text" class="signup-input" />
+                        <div *ngIf="formTouchedStep1 && !formData.firstName" class="error-message">First Name is required.</div>
+                    </div>
+                    <span class="font-medium">Last Name*</span>            
+                    <div>
+                        <input matInput [(ngModel)]="formData.lastName" name="lastName" type="text" class="signup-input" />
+                        <div *ngIf="formTouchedStep1 && !formData.lastName" class="error-message">Last Name is required.</div>
+                    </div>
+                    <span class="font-medium">Email Address*</span>            
+                    <div>
+                        <input matInput [(ngModel)]="formData.email" name="email" type="email" class="signup-input" />
+                        <div *ngIf="formTouchedStep1 && !formData.email" class="error-message">Email is required.</div>
+                    </div>
+                </div>
+
+                <button mat-stroked-button color="blue" class="signup-button" (click)="goToNextStep()" [disabled]="isLoading">
+                    <span *ngIf="!isLoading">Continue</span>
+                    <mat-spinner *ngIf="isLoading" diameter="20" class="spinner"></mat-spinner>  
+                </button>
+            </ng-container>
+
+            <ng-container *ngIf="step === 2">
+                <div class="signup-image">
+                    <img src="\assets\logo\SignupIcon.svg" alt="Sign up"/>
+                </div>
+                <p class="text-center font-medium text-2xl mt-4">Welcome! We're excited to <br> 
+                    have you join us.</p>
+                <p class="text-center font-normal text-sm mt-2">Already Registered? <a href="/login" class="text-green-600 hover:underline">
+                    Log in Instead
+                  </a></p>
+        
+                <div class="signup-form">
+                    <span class="font-medium">Username*</span>
+                    <input matInput [(ngModel)]="formData.username" name="username" type="text" class="signup-input" />
+                    <div *ngIf="formTouchedStep2 && !formData.username" class="error-message">Username is required.</div>
+
+                    <span class="font-medium">Password*</span>
+                    <input matInput [(ngModel)]="formData.password" name="password" type="password" class="signup-input" />
+                    <div *ngIf="formTouchedStep2 && !formData.password" class="error-message">Password is required.</div>
+        
+                    <span class="font-medium">Confirm Password*</span>
+                    <input matInput [(ngModel)]="formData.confirmPassword" name="confirmPassword" type="password" class="signup-input" />
+                    <div *ngIf="formTouchedStep2 && !formData.confirmPassword" class="error-message">Confirm Password is required.</div>
+                </div>
+        
+                <button mat-stroked-button color="primary" class="signup-button" (click)="submitForm()" [disabled]="isLoading">
+                    <span *ngIf="!isLoading">Submit</span>
+                    <mat-spinner *ngIf="isLoading" diameter="20" class="spinner"></mat-spinner>
+                </button>
+                
+
+                <button mat-button class="mt-2 text-sm text-gray-600" (click)="goBack()">
+                    <span>Back</span>
+                </button>
+            </ng-container>
+        </mat-card-content>
+    </mat-card>
+</div>

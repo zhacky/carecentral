@@ -106,12 +106,7 @@ export class SidenavComponent {
       icon: 'assets/Icons/icon_account.svg',
       label: 'Billing',
       route: 'billing',
-    },
-    {
-      icon: 'assets/Icons/icon_appointment.svg',
-      label: 'Appointments',
-      route: 'appointment',
-    },
+    },  
     {
       icon: 'assets/Icons/icon_doctor.svg',
       label: 'Doctors',
