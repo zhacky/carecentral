@@ -151,6 +151,15 @@ export class EditPhilhealthComponent implements OnInit {
     if (id) {
       this.philhealthService.getPhilhealthById(id).subscribe((item) => {
         this.philhealthItem = item;
+        this.symptomsInput = item.signAndSymptoms.join(', ');
+        this.generalSurveyInput = item.generalSurvey.join(', ');
+        this.heentInput = item.heent.join(', ');
+        this.lungsInput = item.lungs.join(', ');
+        this.cvsInput = item.cvs.join(', ');
+        this.abdomenInput = item.abdomen.join(', ');
+        this.guInput = item.gu.join(', ');
+        this.extremitiesInput = item.extremities.join(', ');
+        this.neuroExamInput = item.neuroExam.join(', ');
       });
     }
   }
