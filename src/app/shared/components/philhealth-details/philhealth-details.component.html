@@ -1,0 +1,244 @@
+<div class="m-6 p-6 bg-white rounded-2xl shadow-lg space-y-8">
+
+  <!-- Member Information -->
+  <div>
+    <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Member's Information</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">First Name</p>
+        <p class="font-medium text-gray-700">{{ member.firstName }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Middle Name</p>
+        <p class="font-medium text-gray-700">{{ member.middleName }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Last Name</p>
+        <p class="font-medium text-gray-700">{{ member.lastName }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">PIN Number</p>
+        <p class="font-medium text-gray-700">{{ member.pin }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Birthdate</p>
+        <p class="font-medium text-gray-700">{{ member.birthDate }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Patient Information I -->
+  <div>
+    <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Patient Information I</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">First Name</p>
+        <p class="font-medium text-gray-700">{{ patient.firstName }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Middle Name</p>
+        <p class="font-medium text-gray-700">{{ patient.middleName }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Last Name</p>
+        <p class="font-medium text-gray-700">{{ patient.lastName }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">PIN Number</p>
+        <p class="font-medium text-gray-700">{{ patient.pin }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Birthdate</p>
+        <p class="font-medium text-gray-700">{{ patient.birthDate }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Relation to Member</p>
+        <p class="font-medium text-gray-700">{{ patient.relation }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Gender</p>
+        <p class="font-medium text-gray-700">{{ patient.gender }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Height</p>
+        <p class="font-medium text-gray-700">{{ patient.height }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Weight</p>
+        <p class="font-medium text-gray-700">{{ patient.weight }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Patient Information II -->
+  <div>
+    <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Patient Information II</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 auto-rows-min">
+
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">1st Case Rate Code</p>
+        <p class="font-medium text-gray-700">{{ admission.caseRate1 }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">2nd Case Rate Code</p>
+        <p class="font-medium text-gray-700">{{ admission.caseRate2 }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Date Admitted</p>
+        <p class="font-medium text-gray-700">{{ admission.admittedDate }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Time Admitted</p>
+        <p class="font-medium text-gray-700">{{ admission.admittedTime }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Date Discharged</p>
+        <p class="font-medium text-gray-700">{{ admission.dischargedDate }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Time Discharged</p>
+        <p class="font-medium text-gray-700">{{ admission.dischargedTime }}</p>
+      </div>
+
+      <!-- Chief Complaint -->
+      <div class="border rounded-lg p-3 col-span-2">
+        <p class="text-xs text-gray-500 mb-1">Chief Complaint</p>
+        <div class="min-h-[100px] whitespace-pre-wrap text-gray-700 font-medium">
+          {{ admission.chiefComplaint }}
+        </div>
+      </div>
+
+      <!-- Admitting Diagnosis -->
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500 mb-1">Admitting Diagnosis</p>
+        <div class="min-h-[100px] whitespace-pre-wrap text-gray-700 font-medium">
+          {{ admission.admittingDiagnosis }}
+        </div>
+      </div>
+
+      <!-- Discharge Diagnosis -->
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500 mb-1">Discharge Diagnosis</p>
+        <div class="min-h-[100px] whitespace-pre-wrap text-gray-700 font-medium">
+          {{ admission.dischargeDiagnosis }}
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Patient Record I -->
+  <div>
+    <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Patient Record I</h2>
+    <div class="space-y-4">
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">History of Present Illness</p>
+        <p class="min-h-[100px] whitespace-pre-wrap text-gray-700 font-medium">{{ recordVitals.history }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Pertinent Past Medical History</p>
+        <p
+          class="min-h-[100px] whitespace-pre-wrap text-gray-700 font-medium">{{ recordVitals.pastHistory }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Course in the Wards</p>
+        <p
+          class="min-h-[100px] whitespace-pre-wrap text-gray-700 font-medium">{{ recordVitals.courseInWard }}</p>
+      </div>
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500">Lab & Diagnostic Findings</p>
+        <p class="min-h-[100px] whitespace-pre-wrap text-gray-700 font-medium">{{ recordVitals.labs }}</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="border rounded-lg p-3">
+          <p class="text-xs text-gray-500">Blood Pressure</p>
+          <p class="font-medium text-gray-700">{{ recordVitals.bloodPressure }}</p>
+        </div>
+        <div class="border rounded-lg p-3">
+          <p class="text-xs text-gray-500">Capillary Refill</p>
+          <p class="font-medium text-gray-700">{{ recordVitals.capillaryRefill }}</p>
+        </div>
+        <div class="border rounded-lg p-3">
+          <p class="text-xs text-gray-500">Heart Rate</p>
+          <p class="font-medium text-gray-700">{{ recordVitals.heartRate }}</p>
+        </div>
+        <div class="border rounded-lg p-3">
+          <p class="text-xs text-gray-500">Respiratory Rate</p>
+          <p class="font-medium text-gray-700">{{ recordVitals.respiratoryRate }}</p>
+        </div>
+        <div class="border rounded-lg p-3">
+          <p class="text-xs text-gray-500">Temperature</p>
+          <p class="font-medium text-gray-700">{{ recordVitals.temperature }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Patient Record II -->
+  <div>
+    <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Patient Record II</h2>
+    <div class="grid grid-cols-1 gap-4">
+
+      <!-- Treatment Outcome -->
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500 mb-2">Treatment Outcome</p>
+        <div class="grid grid-cols-2 md:grid-cols-7 gap-y-1 text-sm">
+          <label *ngFor="let option of treatmentOutcome">
+            <input type="checkbox" [checked]="option.selected" disabled class="mr-2">
+            {{ option.name }}
+          </label>
+        </div>
+        <div class="mt-2 text-sm flex items-center">
+          <span class="mr-2">Specify Reason:</span>
+          <span>{{ patientDetails.treatmentOutcomeReason || 'N/A' }}</span>
+        </div>
+      </div>
+
+      <!-- Signs and Symptoms -->
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500 mb-2">Signs and Symptoms</p>
+        <div class="columns-2 md:columns-4 text-sm space-y-1">
+          <label *ngFor="let symptom of signsAndSymptoms" class="block">
+            <input type="checkbox" [checked]="symptom.selected" disabled class="mr-2">
+            {{ symptom.name }}
+          </label>
+          <label class="block mt-2">
+            <input type="checkbox" [checked]="otherSymptoms.selected" disabled class="mr-2"> Others:
+            <span>{{ otherSymptoms.specify || 'N/A' }}</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="border rounded-lg p-3">
+        <p class="text-xs text-gray-500 mb-2">General Survey</p>
+        <div class="columns-2 md:columns-4 text-sm space-y-1">
+          <label *ngFor="let symptom of generalSurvey" class="block">
+            <input type="checkbox" [checked]="symptom.selected" disabled class="mr-2">
+            {{ symptom.name }}
+          </label>
+        </div>
+      </div>
+
+
+      <!-- Template section -->
+      <ng-container *ngFor="let section of sections">
+        <div class="border rounded-lg p-3">
+          <p class="text-xs text-gray-500 mb-2">{{ section.title }}</p>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-y-1 text-sm">
+            <label *ngFor="let opt of section.options" class="flex items-center">
+              <input type="checkbox" [checked]="opt.selected" disabled class="mr-2"> {{ opt.name }}
+            </label>
+            <label class="m-none">
+              <input type="checkbox" [checked]="otherSymptoms.selected" disabled class="mr-2"> Others:
+              <span>{{ otherSymptoms.specify || 'N/A' }}</span>
+            </label>
+          </div>
+        </div>
+      </ng-container>
+
+    </div>
+  </div>
+
+</div>
