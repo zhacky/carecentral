@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {NgForOf, NgIf} from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {DoctorService} from '../../../core/services/doctor.service';
 
 @Component({
   selector: 'app-doctor-details',
-  imports: [NgForOf, NgIf],
   templateUrl: './doctor-details.component.html',
   standalone: true,
   styleUrl: './doctor-details.component.css',

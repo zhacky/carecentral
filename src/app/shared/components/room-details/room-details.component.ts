@@ -1,12 +1,9 @@
-import { Component } from '@angular/core';
-import {NgForOf, NgIf} from '@angular/common';
+import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {RoomService} from '../../../core/services/room.service';
-import {RoomDto} from '../../../core/models/room.model';
 
 @Component({
   selector: 'app-room-details',
-  imports: [NgForOf, NgIf],
   templateUrl: './room-details.component.html',
   standalone: true,
   styleUrl: './room-details.component.css',
