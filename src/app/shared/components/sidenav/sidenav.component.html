@@ -13,10 +13,10 @@
       </span>
       </div>
 
-   
+
       <div class="main-menu mt-5">
         <ng-container *ngFor="let item of menuItems().slice(0, menuItems().length - 1)">
-        
+
           <ng-container *ngIf="item.children?.length; else singleItem">
             <mat-list-item disableRipple (click)="toggleExpand(item.label)" class="parent-item">
               <img [src]="item.icon" alt="Icon" matListItemIcon/>
@@ -28,7 +28,7 @@
             </span>
             </mat-list-item>
 
-   
+
             <div *ngIf="expandedItems()[item.label]" class="pl-4">
               <mat-list-item
                 *ngFor="let child of item.children"
@@ -41,7 +41,7 @@
             </div>
           </ng-container>
 
-       
+
           <ng-template #singleItem>
             <mat-list-item
               #rla="routerLinkActive"
@@ -79,7 +79,7 @@
       <div class="main-menu mt-5">
         <div class="sidenav-header relative">
           <span class="brand-name">
-            
+
             <!-- Logo (show when expanded) -->
             <img
               *ngIf="!collapsed()"
@@ -87,7 +87,7 @@
               alt="Logo"
               class="logo main-logo"
             />
-        
+
             <!-- Short Text (always visible when collapsed) -->
             <img
              *ngIf="collapsed()"
@@ -95,17 +95,17 @@
              alt="Short Logo"
              class="short-logo"
     />
-        
+
           </span>
         </div>
-        
-        
+
+
 
         <ng-container *ngFor="let item of menuItems()">
-          <ng-container *ngIf="(item.label === 'Dashboard' && hasRole('ROLE_ADMIN')) || 
-                               (item.label === 'Doctors' && hasRole('ROLE_ADMIN')) || 
-                               (item.label === 'Patients' && (hasRole('ROLE_NURSE') || hasRole('ROLE_DOCTOR'))) || 
-                               (item.label === 'Billing' && hasRole('ROLE_PATIENT')) || 
+          <ng-container *ngIf="(item.label === 'Dashboard' && hasRole('ROLE_ADMIN')) ||
+                               (item.label === 'Doctors' && hasRole('ROLE_ADMIN')) ||
+                               (item.label === 'Patients' && (hasRole('ROLE_NURSE') || hasRole('ROLE_DOCTOR'))) ||
+                               (item.label === 'Billing' && hasRole('ROLE_PATIENT')) ||
                                (item.label === 'Rooms' && hasRole('ROLE_NURSE')) || hasRole('ROLE_ADMIN') ||
                                (item.label === 'Philhealth' && hasRole('ROLE_IT Administrator')) || hasRole('ROLE_ADMIN')
                                ">
@@ -119,7 +119,7 @@
               <img [src]="item.icon" alt="Icon" matListItemIcon />
               <span matListItemTitle class="text-[#A9A9A9]">{{ item.label }}</span>
             </mat-list-item>
-    
+
             <!-- Children Menu Items -->
             <ng-container *ngIf="item.children">
               <mat-list-item
@@ -135,7 +135,7 @@
                   </mat-icon>
                 </span>
               </mat-list-item>
-    
+
               <!-- Display Children When Expanded -->
               <div *ngIf="expandedItems()[item.label]" class="pl-4">
                 <mat-list-item
