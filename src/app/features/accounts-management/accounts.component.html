@@ -100,12 +100,16 @@
           <td *matCellDef="let element" class="py-4 px-6 border-b border-gray-200">
             <div class="flex justify-start space-x-2">
               <a (click)="openEditDialog(element)"
-                 class="text-green-400 hover:text-green-700 duration-150 cursor-pointer">
-                 <i class="fa-solid fa-pen-to-square fa-xl"></i>
+                 class="icon-edit">
+                 <img src="assets/Icons/icon_edit.svg" alt="Edit">
               </a>
-              <a href="javascript:void(0)"
-                 class="text-red-400 hover:text-red-700 duration-150">
-                 <i class="fa-solid fa-trash fa-xl"></i>
+              <a 
+                 class="icon-delete">
+                 <img src="assets/Icons/icon_key.svg" alt="Key">
+              </a>
+              <a 
+                 class="icon-delete">
+                 <img src="assets/Icons/icon_delete.svg" alt="Delete">
               </a>
             </div>
           </td>
