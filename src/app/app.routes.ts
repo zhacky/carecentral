@@ -38,6 +38,7 @@ import { EditPhilhealthComponent } from './shared/components/edit-philhealth/edi
 import { SignUpComponent } from './core/auth/sign-up/sign-up.component';
 import { SuccessMessageComponent } from './shared/components/success-card/success-message/success-message.component';
 import { FormSubmissionGuard } from './core/auth/login/form.guard';
+import { EditAccountComponent } from './shared/components/edit-account/edit-account/edit-account.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -407,6 +408,12 @@ export const routes: Routes = [
       {
         path: 'philhealth/edit/:id',
         component: EditPhilhealthComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_IT Administrator'] },
+      },
+      {
+        path: 'accounts/edit/:id',
+        component: EditAccountComponent,
         canActivate: [RoleGuard],
         data: { roles: ['ROLE_ADMIN', 'ROLE_IT Administrator'] },
       },
