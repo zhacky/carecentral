@@ -228,7 +228,7 @@ export const routes: Routes = [
         data: { roles: ['ROLE_ADMIN'] },
       },
       {
-        path: 'philhealth/details',
+        path: 'philhealth/details/:id',
         component: PhilhealthDetailsComponent,
         canActivate: [RoleGuard],
         data: { roles: ['ROLE_ADMIN'] },
