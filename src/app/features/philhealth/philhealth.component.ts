@@ -10,11 +10,8 @@ import {
   MatRowDef,
   MatTable,
   MatTableDataSource
-} from "@angular/material/table";
-import {MatPaginator} from "@angular/material/paginator";
-import {CurrencyPipe, DatePipe, NgClass, NgForOf} from '@angular/common';
-import {MatButton} from '@angular/material/button';
-import {MatIcon} from '@angular/material/icon';
+} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
 import {Router, RouterLink} from '@angular/router';
 import {PhilhealthService} from '../../core/services/philhealth.service';
 import {PhilhealthDto} from '../../core/models/philhealth.model';
@@ -32,8 +29,7 @@ import {PhilhealthDto} from '../../core/models/philhealth.model';
     MatHeaderRow,
     MatRow,
     FormsModule,
-    NgClass,
-    RouterLink,
+    RouterLink
   ],
   templateUrl: './philhealth.component.html',
   standalone: true,

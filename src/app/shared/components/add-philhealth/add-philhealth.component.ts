@@ -3,11 +3,11 @@ import {Router} from '@angular/router';
 import {PhilhealthDto} from '../../../core/models/philhealth.model';
 import {PhilhealthService} from '../../../core/services/philhealth.service';
 import {FormsModule, NgForm} from '@angular/forms';
-import {NgClass, NgForOf, NgIf} from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { MatChipsModule , MatChipInput,} from '@angular/material/chips'
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
 import {MatInput} from '@angular/material/input';
 
 @Component({
@@ -20,8 +20,6 @@ import {MatInput} from '@angular/material/input';
     MatFormFieldModule,
     MatChipsModule,
     MatIconModule,
-    MatChipInput,
-    NgForOf,
     MatInput
   ],
   standalone: true
@@ -196,7 +194,7 @@ export class AddPhilhealthComponent {
 
   savePhilhealth(formRef: NgForm): void {
 
-    if (this.formRef.invalid) {
+    if (formRef.invalid) {
       // Mark all controls as touched to show validation errors
       Object.values(this.formRef.controls).forEach(control => {
         control.markAsTouched();

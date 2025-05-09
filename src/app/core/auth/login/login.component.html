@@ -2,14 +2,14 @@
 
   <div class="left-column">
     <div>
-      <img src="\assets\logo\carecentral.svg" alt="Login" class="login-image" />
+      <img src='assets/logo/carecentral.svg' alt="Login" class="login-image" />
     </div>
     <div class="text-xl font-medium">
       Login to your account
     </div>
     <div>
       <form [formGroup]="loginForm" class="example-form" (ngSubmit)="onLogin()">
-        <span class="self-start font-medium">Email</span>
+        <span class="self-start font-medium">Username</span>
         <input matInput formControlName="username" type="username" class="example-input" />
         <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid" class="error-message">
           Username is required.
@@ -30,14 +30,14 @@
           </a>
         </div>
         <button mat-stroked-button color="blue" [disabled]="isLoading" class="login-button">
-          <span *ngIf="!isLoading">Sign In</span>
+          <span *ngIf="!isLoading">Log In</span>
           <mat-spinner *ngIf="isLoading" diameter="20" class="spinner"></mat-spinner>
         </button>
       </form>
       <div class="action-items">
         <mat-card-actions>
-          <mat-card-subtitle>Don't have an account?</mat-card-subtitle>
-          <a mat-button routerLink="/sign-up" class="register">Register now!</a>
+          <mat-card-subtitle>Access requires an account</mat-card-subtitle>
+          <a mat-button routerLink="/sign-up" class="register">Request an Account</a>
         </mat-card-actions>
       </div>
     </div>
@@ -46,7 +46,7 @@
   <!-- Right Column -->
   <div class="right-column">
     <div>
-      <img src="\assets\Images\hero-logo.svg" alt="hero" class="hero-image" />
+      <img src="assets/Images/hero-logo.svg" alt="hero" class="hero-image" />
     </div>
   </div>
 </div>
