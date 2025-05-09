@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForOf } from '@angular/common';
+import {PhilhealthDto} from '../../../core/models/philhealth.model';
+import {PhilhealthService} from '../../../core/services/philhealth.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-philhealth-details',
@@ -8,7 +11,93 @@ import { NgForOf } from '@angular/common';
   standalone: true,
   styleUrl: './philhealth-details.component.css',
 })
-export class PhilhealthDetailsComponent {
+export class PhilhealthDetailsComponent implements OnInit {
+
+  dto: PhilhealthDto | null = null;
+
+  constructor(private philhealthService: PhilhealthService, private route: ActivatedRoute) {}
+
+  goBack() {
+    window.history.back(); // Or use router.navigate(['/your-route']);
+  }
+
+  ngOnInit(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.philhealthService.getPhilhealthById(id).subscribe({
+      next: (data: PhilhealthDto) => {
+        this.dto = data;
+        this.populateFields(data);
+      },
+      error: (err) => {
+        console.error('Failed to load Philhealth details', err);
+      },
+    });
+  }
+
+  populateFields(dto: PhilhealthDto): void {
+    this.member = {
+      firstName: dto.memFirstName,
+      middleName: dto.memMiddleName,
+      lastName: dto.memLastName,
+      pin: dto.memPIN,
+      birthDate: dto.memDateOfBirth,
+    };
+
+    this.patient = {
+      firstName: dto.patFirstName,
+      middleName: dto.patMiddleName,
+      lastName: dto.patLastName,
+      pin: dto.patPIN,
+      birthDate: dto.patDateOfBirth,
+      relation: dto.relationToMember,
+      gender: dto.patSex,
+      height: `${dto.patHeight} cm`,
+      weight: `${dto.patWeight} kg`,
+    };
+
+    this.admission = {
+      caseRate1: dto.firstCaseRateCode,
+      caseRate2: dto.secondCaseRateCode,
+      admittedDate: dto.dateAdmitted,
+      admittedTime: dto.timeAdmitted,
+      dischargedDate: dto.dateDischarged,
+      dischargedTime: dto.timeDischarged,
+      chiefComplaint: dto.chiefComplaint,
+      admittingDiagnosis: dto.admittingDiagnosis,
+      dischargeDiagnosis: dto.dischargeDiagnosis,
+    };
+
+    this.recordVitals = {
+      history: dto.patPresentHistoryOfIllness,
+      pastHistory: dto.patPertinentPastMedicalHistory,
+      courseInWard: dto.courseInTheWards,
+      labs: dto.diagnosticFindings,
+      bloodPressure: dto.bloodPressure,
+      capillaryRefill: dto.capillaryRefill,
+      heartRate: `${dto.heartRate} bpm`,
+      respiratoryRate: `${dto.respiratoryRate} breaths/min`,
+      temperature: `${dto.temperature}°C`,
+    };
+
+    this.patientDetails.treatmentOutcomeReason = dto.treatmentOutcome;
+
+    this.signsAndSymptoms.forEach((item) => {
+      item.selected = dto.signAndSymptoms.includes(item.name);
+    });
+
+    this.generalSurvey.forEach((item) => {
+      item.selected = dto.generalSurvey.includes(item.name);
+    });
+
+    this.sections.forEach((section) => {
+      const field = section.title.toLowerCase().replace(/ /g, '');
+      const dtoArray = dto[field as keyof PhilhealthDto] as string[] || [];
+      section.options.forEach((opt) => {
+        opt.selected = dtoArray.includes(opt.name);
+      });
+    });
+  }
+
   member = {
     firstName: 'John',
     middleName: 'Alexander',
@@ -206,10 +295,4 @@ export class PhilhealthDetailsComponent {
       ],
     },
   ];
-
-  constructor() {}
-
-  ngOnInit(): void {
-    // Initialize patient details and other data here, if necessary
-  }
 }
