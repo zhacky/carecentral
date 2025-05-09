@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, ViewChild, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {RoomAssignDto, RoomAssignStatus} from '../../../core/models/room-assign.model';
 import {RoomAssignService} from '../../../core/services/room-assign.service';
@@ -21,7 +21,7 @@ import {NgClass, NgForOf, NgIf} from '@angular/common';
   ],
   standalone: true
 })
-export class AddRoomAssignComponent {
+export class AddRoomAssignComponent implements OnInit {
   roomAssignItem: RoomAssignDto = {
     position: 0,
     roomAssignId: 0,

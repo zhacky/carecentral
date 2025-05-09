@@ -25,8 +25,8 @@ export class HeaderComponent implements OnInit {
   // collapsed = signal(false);
   // sidenavWidth = computed(() => (this.collapsed() ? '60px' : '250px'));
   @Output() toggleSidenav = new EventEmitter<void>(); // Create event emitter
-  activeRoute: string = '';
-  currentTime: string = '';
+  activeRoute = '';
+  currentTime = '';
   currentUser: any;
 
   

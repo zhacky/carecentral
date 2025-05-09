@@ -30,10 +30,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  showPassword: boolean = false;
-  username: string = '';
-  password: string = '';
-  errorMessage: string = '';
+  showPassword = false;
+  username = '';
+  password = '';
+  errorMessage = '';
   isLoading = false;
 
 

@@ -53,7 +53,7 @@ export class PhilhealthComponent implements AfterViewInit, OnInit {
   // DataSource for the table (initially empty)
   dataSource = new MatTableDataSource<PhilhealthDto>([]);
 
-  searchTerm: string = '';
+  searchTerm = '';
 
   editPhilhealth(philhealthId: number) {
     this.router.navigate(['/common/philhealth/edit', philhealthId]);

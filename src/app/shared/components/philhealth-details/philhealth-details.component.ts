@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForOf } from '@angular/common';
 
 @Component({
@@ -8,7 +8,7 @@ import { NgForOf } from '@angular/common';
   standalone: true,
   styleUrl: './philhealth-details.component.css',
 })
-export class PhilhealthDetailsComponent {
+export class PhilhealthDetailsComponent implements OnInit {
   member = {
     firstName: 'John',
     middleName: 'Alexander',

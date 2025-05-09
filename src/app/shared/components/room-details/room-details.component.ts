@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {RoomService} from '../../../core/services/room.service';
 
@@ -8,7 +8,7 @@ import {RoomService} from '../../../core/services/room.service';
   standalone: true,
   styleUrl: './room-details.component.css',
 })
-export class RoomDetailsComponent {
+export class RoomDetailsComponent implements OnInit {
   roomInfo: { roomDescription: string; roomCharge: string; roomCapacity: number; roomId: number; roomType: string } = {
     roomId: 0,
     roomType: '',

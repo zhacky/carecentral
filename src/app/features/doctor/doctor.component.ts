@@ -10,11 +10,9 @@ import {
   MatRowDef,
   MatTable,
   MatTableDataSource
-} from "@angular/material/table";
-import {MatPaginator} from "@angular/material/paginator";
-import {CurrencyPipe, DatePipe, NgClass, NgForOf} from '@angular/common';
-import {MatButton} from '@angular/material/button';
-import {MatIcon} from '@angular/material/icon';
+} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
+import {NgClass} from '@angular/common';
 import {Router, RouterLink} from '@angular/router';
 import {DoctorService} from '../../core/services/doctor.service';
 import {DoctorDto, DoctorStatus} from '../../core/models/doctor.model';
@@ -58,7 +56,7 @@ export class DoctorComponent implements AfterViewInit, OnInit {
   // DataSource for the table (initially empty)
   dataSource = new MatTableDataSource<DoctorDto>([]);
 
-  searchTerm: string = '';
+  searchTerm = '';
 
   editDoctor(doctorId: number) {
     this.router.navigate(['/common/doctor/edit', doctorId]);

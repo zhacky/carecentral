@@ -139,15 +139,15 @@ export class AddPhilhealthComponent {
   currentStep = 1;
   totalSteps = 5; // Update this if you add more steps
 
-  symptomsInput: string = '';
-  generalSurveyInput: string = '';
-  heentInput: string = '';
-  lungsInput: string = '';
-  cvsInput: string = '';
-  abdomenInput: string = '';
-  guInput: string = '';
-  extremitiesInput: string = '';
-  neuroExamInput: string = '';
+  symptomsInput = '';
+  generalSurveyInput = '';
+  heentInput = '';
+  lungsInput = '';
+  cvsInput = '';
+  abdomenInput = '';
+  guInput = '';
+  extremitiesInput = '';
+  neuroExamInput = '';
 
   nextStep() {
     const invalidFields = this.getInvalidFieldsForStep(this.currentStep);
@@ -172,7 +172,7 @@ export class AddPhilhealthComponent {
 
   getInvalidFieldsForStep(step: number): string[] {
     // Adjust these based on actual fields in your step layout
-    const stepFields: { [key: number]: string[] } = {
+    const stepFields: Record<number, string[]> = {
       1: ['memFirstName', 'memLastName', 'memPIN', 'memDateOfBirth'], // Example fields in Step 1
       2: ['patFirstName', 'patLastName', 'patDateOfBirth', 'patPIN', 'relationToMember', 'patSex'] // Example fields in Step 2
     };

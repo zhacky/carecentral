@@ -8,15 +8,15 @@ import {MatIconModule} from '@angular/material/icon';
 import {HeaderComponent} from '../header/header.component';
 import {AuthService} from '../../../core/services/auth.service';
 
-export type MenuItem = {
+export interface MenuItem {
   icon: string;
   label: string;
   route?: string;
   children?: MenuItem[];
-};
+}
 
 @Component({
-  selector: 'sidenav-app',
+  selector: 'app-sidenav',
   templateUrl: 'sidenav.component.html',
   styleUrl: 'sidenav.component.css',
   imports: [
