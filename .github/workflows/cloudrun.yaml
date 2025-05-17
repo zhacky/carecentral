@@ -20,17 +20,17 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
         with:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          project_id: project-antajia
 
       - name: Build Docker Image
-        run: docker build -t us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/carecentral/carecentral:latest .
+        run: docker build -t us-central1-docker.pkg.dev/project-antajia/carecentral/carecentral:latest .
 
       - name: Push Docker Image
-        run: docker push us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/carecentral/carecentral:latest
+        run: docker push us-central1-docker.pkg.dev/project-antajia/carecentral/carecentral:latest
 
       - name: Deploy to Cloud Run
         run: |
-          gcloud run deploy ${{ github.event.repository.name }} \
-            --image us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/carecentral/carecentral:latest \
+          gcloud run deploy carecentral \
+            --image us-central1-docker.pkg.dev/project-antajia/carecentral/carecentral:latest \
             --region us-central1 \
             --platform managed
