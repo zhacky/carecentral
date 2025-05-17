@@ -34,6 +34,6 @@ jobs:
             --image us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ github.event.repository.name }}:${{ github.sha }} \
             --region us-central1 \
             --platform managed \
-            --service-account=cloud-build-bot@project-antajia.iam.gserviceaccount.com
+            --service-account=92375345963-compute@developer.gserviceaccount.com
 
           # Add other Cloud Run flags as needed
