@@ -41,7 +41,7 @@ export class AddPatientDialogComponent implements OnInit {
   dataSourceDoc = new MatTableDataSource<DoctorDto>([]);
   showAddPatientForm = false;
 
-  profile: PatientDto = new PatientDto(0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 1); // Default assignedDoctorId is set to 1
+  profile: PatientDto = new PatientDto(0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0); // Default assignedDoctorId is set to 1
 
   doctors: DoctorDto[] = []; // Array to store fetched doctors
 
@@ -98,14 +98,14 @@ export class AddPatientDialogComponent implements OnInit {
 
       return; // Stop here if form is invalid
     }
-    // Ensure the doctor is selected (assignedDoctorId is not empty)
-    if (!this.profile.assignedDoctorId) {
-      this.snackBar.open('Please assign a doctor to the patient.', 'Close', {
-        duration: 5000,
-        panelClass: ['snackbar-error']
-      });
-      return; // Prevent saving if no doctor is assigned
-    }
+    // // Ensure the doctor is selected (assignedDoctorId is not empty)
+    // if (!this.profile.assignedDoctorId) {
+    //   this.snackBar.open('Please assign a doctor to the patient.', 'Close', {
+    //     duration: 5000,
+    //     panelClass: ['snackbar-error']
+    //   });
+    //   return; // Prevent saving if no doctor is assigned
+    // }
 
     // Call the service to create the patient with the assigned doctor ID
     this.patientService.createPatient(this.profile).subscribe((newPatient) => {
