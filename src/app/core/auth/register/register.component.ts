@@ -3,14 +3,11 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
+import {MatCardModule} from '@angular/material/card';
 import {NgIf} from '@angular/common';
-import { AuthService } from '../../services/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { RouterModule } from '@angular/router';
-import { MatOption } from '@angular/material/core';
-import { MatSelect } from '@angular/material/select';
+import {AuthService} from '../../services/auth.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router, RouterModule} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -23,9 +20,7 @@ import { MatSelect } from '@angular/material/select';
     MatError,
     MatLabel,
     MatCardModule,
-    RouterModule,
-    MatOption,
-    MatSelect
+    RouterModule
   ],
   templateUrl: './register.component.html',
   standalone: true,

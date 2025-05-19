@@ -6,18 +6,17 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {Router, RouterModule} from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
 import {HeaderComponent} from '../header/header.component';
-import {PatientchartComponent} from '../../../features/dashboard/patientchart/patientchart.component';
-import { AuthService } from '../../../core/services/auth.service';
+import {AuthService} from '../../../core/services/auth.service';
 
-export type MenuItem = {
+export interface MenuItem {
   icon: string;
   label: string;
   route?: string;
   children?: MenuItem[];
-};
+}
 
 @Component({
-  selector: 'sidenav-app',
+  selector: 'app-sidenav',
   templateUrl: 'sidenav.component.html',
   styleUrl: 'sidenav.component.css',
   imports: [
@@ -27,8 +26,7 @@ export type MenuItem = {
     MatListModule,
     RouterModule,
     MatIconModule,
-    HeaderComponent,
-    PatientchartComponent
+    HeaderComponent
   ],
   standalone: true,
 })
@@ -106,7 +104,7 @@ export class SidenavComponent {
       icon: 'assets/Icons/icon_account.svg',
       label: 'Billing',
       route: 'billing',
-    },  
+    },
     {
       icon: 'assets/Icons/icon_doctor.svg',
       label: 'Doctors',

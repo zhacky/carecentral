@@ -51,7 +51,7 @@ export class RoomAssignComponent implements AfterViewInit, OnInit {
   // DataSource for the table (initially empty)
   dataSource = new MatTableDataSource<RoomAssignDto>([]);
 
-  searchTerm: string = '';
+  searchTerm = '';
 
   applyFilter(): void {
     this.dataSource.filter = this.searchTerm.trim().toLowerCase();

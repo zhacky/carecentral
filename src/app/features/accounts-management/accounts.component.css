@@ -139,4 +139,43 @@ table {
   color: white !important;
 }
 
+.icon-edit {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.icon-edit:hover {
+  transform: scale(1.2);
+  filter: brightness(1.2);
+  cursor: pointer;
+}
+
+.icon-delete {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.icon-delete:hover {
+  transform: scale(1.2);
+  filter: brightness(1.2);
+  cursor: pointer;
+}
+
+.icon-status {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.icon-status:hover {
+  transform: scale(1.2);
+  filter: brightness(1.2);
+  cursor: pointer;
+}
+
+
+
+
 

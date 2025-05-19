@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-import { environment } from '../../../environments/environment.development';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {catchError, tap} from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ export class AuthService {
    private readonly apiUrl = `${environment.apiUrl}/api/auth/login`;
    private currentUser: any;
    private loggedIn = new BehaviorSubject<boolean>(this.isLoggedIn());
-   private loggedIn$ = this.loggedIn.asObservable();
+   // private loggedIn$ = this.loggedIn.asObservable();
   router: any;
 
   constructor(private http: HttpClient) {}
@@ -23,11 +23,11 @@ export class AuthService {
       tap((response) => {
         console.log('Login response:', response); // Log the entire response
         if (response.roles) {
-          this.currentUser = { 
-            token: response.token, 
-            username: response.username, 
+          this.currentUser = {
+            token: response.token,
+            username: response.username,
             firstName: response.firstName,
-            lastName: response.lastName, 
+            lastName: response.lastName,
             roles: response.roles };
           localStorage.setItem('currentUser', JSON.stringify(this.currentUser)); // Store in localStorage
         } else {
@@ -55,7 +55,7 @@ export class AuthService {
     const rolesApiUrl = `${environment.apiUrl}/roles`;
     return this.http.get<string[]>(rolesApiUrl).pipe(
       tap((roles) => {
-        console.log('Fetched roles from backend:', roles); 
+        console.log('Fetched roles from backend:', roles);
       }),
       catchError((error) => {
         console.error('Error fetching roles:', error);
@@ -70,7 +70,7 @@ export class AuthService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.getToken()}`,
     });
-  
+
     return this.http.put(updateUserApiUrl, requestBody, { headers }).pipe(
       tap(() => {
         console.log(`Updated role for user ${userId} to ${requestBody.roles}`);
@@ -105,7 +105,7 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
-    console.log('User from localStorage:', user); 
+    console.log('User from localStorage:', user);
     return !!user.token;
   }
 
@@ -114,12 +114,12 @@ export class AuthService {
     this.currentUser = null;
     this.loggedIn.next(false);
   }
-  
+
   hasRole(role: string): boolean {
     const user = this.getCurrentUser();
     return user?.roles?.includes(role);
   }
-  
+
   hasAnyRole(roles: string[]): boolean {
     const user = this.getCurrentUser();
     return roles.some((role) => user?.roles?.includes(role));

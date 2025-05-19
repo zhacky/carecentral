@@ -12,7 +12,6 @@ import {ActivatedRoute} from '@angular/router';
   styleUrl: './philhealth-details.component.css',
 })
 export class PhilhealthDetailsComponent implements OnInit {
-
   dto: PhilhealthDto | null = null;
 
   constructor(private philhealthService: PhilhealthService, private route: ActivatedRoute) {}

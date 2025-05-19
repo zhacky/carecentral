@@ -1,20 +1,14 @@
-# Use the official Node.js image as the base image
-FROM node:22
-
-# Set the working directory
+# Stage 1: Build the Angular application
+FROM node:lts-alpine AS builder
 WORKDIR /app
-
-# Copy package.json and package-lock.json
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
-
-# Copy the rest of the application code
 COPY . .
+RUN npm run build --omit=dev
 
-# Expose port 4200 for the Angular development server
-EXPOSE 4200
-
-# Start the Angular development server
-CMD ["npm", "start"]
+# Stage 2: Serve the built application with Nginx
+FROM nginx:alpine
+COPY --from=builder /app/dist/carecentral/browser /usr/share/nginx/html
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 8080
+CMD ["nginx", "-g", "daemon off;"]

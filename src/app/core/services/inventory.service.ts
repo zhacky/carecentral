@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { InventoryItem } from '../models/inventory-item.model';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class InventoryService {
-  private apiUrl = 'http://localhost:8083/inventories';  // URL of the Spring Boot API
+  private apiUrl = `${environment.apiUrl}/inventories`;  // URL of the Spring Boot API
 
   constructor(private http: HttpClient) {}
 

@@ -51,7 +51,7 @@ export class RoomComponent implements AfterViewInit, OnInit {
   // DataSource for the table (initially empty)
   dataSource = new MatTableDataSource<RoomDto>([]);
 
-  searchTerm: string = '';
+  searchTerm = '';
 
   editRoom(roomId: number) {
     this.router.navigate(['/common/room/edit', roomId]);

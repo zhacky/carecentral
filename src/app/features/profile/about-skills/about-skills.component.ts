@@ -9,7 +9,7 @@ import { NgClass, NgForOf, NgIf, NgStyle } from '@angular/common';
   styleUrl: './about-skills.component.css',
 })
 export class AboutSkillsComponent {
-  tab: string = 'about';
+  tab = 'about';
 
   skills = [
     {

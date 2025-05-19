@@ -28,7 +28,7 @@ export class AccountsManagementComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['position', 'lastName', 'firstName', 'email', 'username', 'status', 'role', 'action'];
   dataSource = new MatTableDataSource<PeriodicElement>([]);
 
-  searchTerm: string = '';
+  searchTerm = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

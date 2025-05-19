@@ -51,7 +51,7 @@ export class PatientInformationComponent implements AfterViewInit, OnInit {
   // DataSource for the table (initially empty)
   dataSource = new MatTableDataSource<PatientDto>([]);
 
-  searchTerm: string = '';
+  searchTerm = '';
 
   editPatient( patientId: number ) {
     this.router.navigate(['/common/patient/edit', patientId]);

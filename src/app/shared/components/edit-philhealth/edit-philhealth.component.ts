@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import {PhilhealthDto} from '../../../core/models/philhealth.model';
+import {ActivatedRoute, Router} from '@angular/router';
 import {PhilhealthService} from '../../../core/services/philhealth.service';
 import {FormsModule, NgForm} from '@angular/forms';
 import {NgClass, NgIf} from '@angular/common';
@@ -127,15 +126,15 @@ export class EditPhilhealthComponent implements OnInit {
   currentStep = 1;
   totalSteps = 5; // Update this if you add more steps
 
-  symptomsInput: string = '';
-  generalSurveyInput: string = '';
-  heentInput: string = '';
-  lungsInput: string = '';
-  cvsInput: string = '';
-  abdomenInput: string = '';
-  guInput: string = '';
-  extremitiesInput: string = '';
-  neuroExamInput: string = '';
+  symptomsInput = '';
+  generalSurveyInput = '';
+  heentInput = '';
+  lungsInput = '';
+  cvsInput = '';
+  abdomenInput = '';
+  guInput = '';
+  extremitiesInput = '';
+  neuroExamInput = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -187,7 +186,7 @@ export class EditPhilhealthComponent implements OnInit {
 
   getInvalidFieldsForStep(step: number): string[] {
     // Adjust these based on actual fields in your step layout
-    const stepFields: { [key: number]: string[] } = {
+    const stepFields: Record<number, string[]> = {
       1: ['memFirstName', 'memLastName', 'memPIN', 'memDateOfBirth'], // Example fields in Step 1
       2: ['patFirstName', 'patLastName', 'patDateOfBirth', 'patPIN', 'relationToMember', 'patSex'] // Example fields in Step 2
     };

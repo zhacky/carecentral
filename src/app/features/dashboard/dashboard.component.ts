@@ -23,9 +23,9 @@ export class DashboardComponent implements OnInit {
     console.log(this.patientService.getPatients());
     throw new Error('Method not implemented.');
   }
-  searchQueryPatient: string = ''; // Store the search query
-  searchQueryDoctor: string = '';
-  filterStatus: string = ''; // Store the selected filter status
+  searchQueryPatient = ''; // Store the search query
+  searchQueryDoctor = '';
+  filterStatus = ''; // Store the selected filter status
   isNavOpen = true; // Default: open
 
   isRightNavOpen = true;

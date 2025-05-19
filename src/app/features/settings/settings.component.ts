@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgForOf } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
 import { FormsModule } from '@angular/forms';
@@ -11,9 +11,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   standalone: true,
   styleUrl: './settings.component.css',
 })
-export class SettingsComponent {
+export class SettingsComponent implements OnInit {
   roles: { name: string }[] = [];
-  newRoleName: string = '';
+  newRoleName = '';
   constructor(private authService: AuthService, private snackBar: MatSnackBar) {}
   
 
