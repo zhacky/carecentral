@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {DoctorDto, DoctorStatus} from '../../../core/models/doctor.model';
+import {Doctor, DoctorStatus} from '../../../core/models/doctor.model';
 import {DoctorService} from '../../../core/services/doctor.service';
 import {FormsModule, NgForm} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -17,7 +17,7 @@ import {NgClass, NgIf} from '@angular/common';
   standalone: true
 })
 export class AddDoctorComponent {
-  doctorItem: DoctorDto = {
+  doctorItem: Doctor = {
     position: 0,
     doctorId: 0,
     firstName: '',
@@ -65,5 +65,5 @@ export class AddDoctorComponent {
     this.router.navigate(['/common/doctor']); // ✅ Go back on cancel
   }
 
-  protected readonly DoctorDto = DoctorDto;
+  protected readonly DoctorDto = Doctor;
 }

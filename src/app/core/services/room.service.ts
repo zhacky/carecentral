@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {RoomDto, RoomStatus} from '../models/room.model';
+import {Room, RoomStatus} from '../models/room.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,18 +14,18 @@ export class RoomService {
   constructor(private http: HttpClient) {}
 
   // Fetch all rooms
-  getRooms(): Observable<RoomDto[]> {
-    return this.http.get<RoomDto[]>(this.apiUrl);
+  getRooms(): Observable<Room[]> {
+    return this.http.get<Room[]>(this.apiUrl);
   }
 
   // Create a new room
-  createRoom(room: RoomDto): Observable<RoomDto> {
-    return this.http.post<RoomDto>(this.apiUrl, room);
+  createRoom(room: Room): Observable<Room> {
+    return this.http.post<Room>(this.apiUrl, room);
   }
 
   // Get a room by ID
-  getRoomById(id: number): Observable<RoomDto> {
-    return this.http.get<RoomDto>(`${this.apiUrl}/${id}`);
+  getRoomById(id: number): Observable<Room> {
+    return this.http.get<Room>(`${this.apiUrl}/${id}`);
   }
 
   // Delete a room
@@ -41,8 +41,8 @@ export class RoomService {
     roomCapacity: number;
     roomCharge: string;
     status: RoomStatus
-  }): Observable<RoomDto> {
-    return this.http.put<RoomDto>(`${this.apiUrl}/${id}`, room);
+  }): Observable<Room> {
+    return this.http.put<Room>(`${this.apiUrl}/${id}`, room);
   }
 
 }

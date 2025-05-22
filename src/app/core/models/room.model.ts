@@ -1,4 +1,4 @@
-export class RoomDto {
+export class Room {
   position: number;
   roomId: number;
   roomType: string;
@@ -28,9 +28,9 @@ export class RoomDto {
     this.availableCapacity = availableCapacity ?? roomCapacity;
   }
 
-  static fromRoom(room: any, position: number, assignedCount = 0) : RoomDto {
+  static fromRoom(room: any, position: number, assignedCount = 0) : Room {
     const availableCapacity = room.roomCapacity - assignedCount;
-    return new RoomDto (
+    return new Room (
       position,
       room.roomId,
       room.roomType,

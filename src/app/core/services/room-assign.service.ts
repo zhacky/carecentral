@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {RoomAssignDto} from '../models/room-assign.model';
+import {RoomAssign} from '../models/room-assign.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,18 +14,18 @@ export class RoomAssignService {
   constructor(private http: HttpClient) {}
 
   // Fetch all rooms
-  getRoomAssigns(): Observable<RoomAssignDto[]> {
-    return this.http.get<RoomAssignDto[]>(this.apiUrl);
+  getRoomAssigns(): Observable<RoomAssign[]> {
+    return this.http.get<RoomAssign[]>(this.apiUrl);
   }
 
   // Create a new room assign
-  createRoomAssign(roomAssign: RoomAssignDto): Observable<RoomAssignDto> {
-    return this.http.post<RoomAssignDto>(this.apiUrl, roomAssign);
+  createRoomAssign(roomAssign: RoomAssign): Observable<RoomAssign> {
+    return this.http.post<RoomAssign>(this.apiUrl, roomAssign);
   }
 
   // Get a room assign by ID
-  getRoomAssignById(id: number): Observable<RoomAssignDto> {
-    return this.http.get<RoomAssignDto>(`${this.apiUrl}/${id}`);
+  getRoomAssignById(id: number): Observable<RoomAssign> {
+    return this.http.get<RoomAssign>(`${this.apiUrl}/${id}`);
   }
 
   // Delete a room assign
@@ -40,8 +40,8 @@ export class RoomAssignService {
         dischargeDate: string;
         patient: number;
         room: number
-    }): Observable<RoomAssignDto> {
-    return this.http.put<RoomAssignDto>(`${this.apiUrl}/${id}`, roomAssign);
+    }): Observable<RoomAssign> {
+    return this.http.put<RoomAssign>(`${this.apiUrl}/${id}`, roomAssign);
   }
 
 }

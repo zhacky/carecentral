@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {PatientDto} from '../models/patient.model';
+import {Patient} from '../models/patient.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,18 +14,18 @@ export class PatientService {
   constructor(private http: HttpClient) {}
 
   // Fetch all patients
-  getPatients(): Observable<PatientDto[]> {
-    return this.http.get<PatientDto[]>(this.apiUrl);
+  getPatients(): Observable<Patient[]> {
+    return this.http.get<Patient[]>(this.apiUrl);
   }
 
   // Create a new patient
-  createPatient(patient: PatientDto): Observable<PatientDto> {
-    return this.http.post<PatientDto>(this.apiUrl, patient);
+  createPatient(patient: Patient): Observable<Patient> {
+    return this.http.post<Patient>(this.apiUrl, patient);
   }
 
   // Get a patient by ID
-  getPatientById(id: number): Observable<PatientDto> {
-    return this.http.get<PatientDto>(`${this.apiUrl}/${id}`);
+  getPatientById(id: number): Observable<Patient> {
+    return this.http.get<Patient>(`${this.apiUrl}/${id}`);
   }
 
   // Delete a patient
@@ -34,8 +34,8 @@ export class PatientService {
   }
 
   // Update a patient
-  updatePatient(id: number, patient: PatientDto): Observable<PatientDto> {
-    return this.http.put<PatientDto>(`${this.apiUrl}/${id}`, patient);
+  updatePatient(id: number, patient: Patient): Observable<Patient> {
+    return this.http.put<Patient>(`${this.apiUrl}/${id}`, patient);
   }
 
   // Download Patient Data Sheet PDF

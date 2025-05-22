@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForOf } from '@angular/common';
-import {PhilhealthDto} from '../../../core/models/philhealth.model';
+import {Philhealth} from '../../../core/models/philhealth.model';
 import {PhilhealthService} from '../../../core/services/philhealth.service';
 import {ActivatedRoute} from '@angular/router';
 
@@ -12,7 +12,7 @@ import {ActivatedRoute} from '@angular/router';
   styleUrl: './philhealth-details.component.css',
 })
 export class PhilhealthDetailsComponent implements OnInit {
-  dto: PhilhealthDto | null = null;
+  dto: Philhealth | null = null;
 
   constructor(private philhealthService: PhilhealthService, private route: ActivatedRoute) {}
 
@@ -23,7 +23,7 @@ export class PhilhealthDetailsComponent implements OnInit {
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.philhealthService.getPhilhealthById(id).subscribe({
-      next: (data: PhilhealthDto) => {
+      next: (data: Philhealth) => {
         this.dto = data;
         this.populateFields(data);
       },
@@ -33,7 +33,7 @@ export class PhilhealthDetailsComponent implements OnInit {
     });
   }
 
-  populateFields(dto: PhilhealthDto): void {
+  populateFields(dto: Philhealth): void {
     this.member = {
       firstName: dto.memFirstName,
       middleName: dto.memMiddleName,
@@ -90,7 +90,7 @@ export class PhilhealthDetailsComponent implements OnInit {
 
     this.sections.forEach((section) => {
       const field = section.title.toLowerCase().replace(/ /g, '');
-      const dtoArray = dto[field as keyof PhilhealthDto] as string[] || [];
+      const dtoArray = dto[field as keyof Philhealth] as string[] || [];
       section.options.forEach((opt) => {
         opt.selected = dtoArray.includes(opt.name);
       });

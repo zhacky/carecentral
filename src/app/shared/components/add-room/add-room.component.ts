@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {RoomDto, RoomStatus} from '../../../core/models/room.model';
+import {Room, RoomStatus} from '../../../core/models/room.model';
 import {RoomService} from '../../../core/services/room.service';
 import {FormsModule, NgForm} from '@angular/forms';
 import {NgClass, NgIf} from '@angular/common';
@@ -17,7 +17,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   standalone: true
 })
 export class AddRoomComponent {
-  roomItem: RoomDto = {
+  roomItem: Room = {
     position: 0,
     roomId: 0,
     roomType: '',
@@ -61,5 +61,5 @@ export class AddRoomComponent {
     this.router.navigate(['/common/room']); // ✅ Go back on cancel
   }
 
-  protected readonly RoomDto = RoomDto;
+  protected readonly RoomDto = Room;
 }

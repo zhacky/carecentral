@@ -1,6 +1,6 @@
 // patient.dto.model.ts
 
-export class PatientDto {
+export class Patient {
   position: number;
   patientId: number;
   firstName: string;
@@ -75,8 +75,8 @@ export class PatientDto {
     this.assignedDoctorId = assignedDoctorId;
   }
 
-  static fromPatient(patient: any, position: number): PatientDto {
-    return new PatientDto(
+  static fromPatient(patient: any, position: number): Patient {
+    return new Patient(
       position,
       patient.patientId,
       patient.firstName,

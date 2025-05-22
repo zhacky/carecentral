@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {PhilhealthDto} from '../models/philhealth.model';
+import {Philhealth} from '../models/philhealth.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,8 @@ export class PhilhealthService {
   constructor(private http: HttpClient) {}
 
   // Fetch all philhealths
-  getPhilhealths(): Observable<PhilhealthDto[]> {
-    return this.http.get<PhilhealthDto[]>(this.apiUrl);
+  getPhilhealths(): Observable<Philhealth[]> {
+    return this.http.get<Philhealth[]>(this.apiUrl);
   }
 
   // Create a new philhealth
@@ -64,13 +64,13 @@ export class PhilhealthService {
     capillaryRefill: string;
     patFirstName: string;
     admittingDiagnosis: string
-  }): Observable<PhilhealthDto> {
-    return this.http.post<PhilhealthDto>(this.apiUrl, philhealth);
+  }): Observable<Philhealth> {
+    return this.http.post<Philhealth>(this.apiUrl, philhealth);
   }
 
   // Get a philhealth by ID
-  getPhilhealthById(id: number): Observable<PhilhealthDto> {
-    return this.http.get<PhilhealthDto>(`${this.apiUrl}/${id}`);
+  getPhilhealthById(id: number): Observable<Philhealth> {
+    return this.http.get<Philhealth>(`${this.apiUrl}/${id}`);
   }
 
   // Delete a philhealth
@@ -124,7 +124,7 @@ export class PhilhealthService {
     gu?: string[];
     extremities?: string[];
     neuroExam?: string[];
-  }): Observable<PhilhealthDto> {
-    return this.http.put<PhilhealthDto>(`${this.apiUrl}/${id}`, philhealth);
+  }): Observable<Philhealth> {
+    return this.http.put<Philhealth>(`${this.apiUrl}/${id}`, philhealth);
   }
 }

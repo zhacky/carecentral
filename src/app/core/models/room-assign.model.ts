@@ -1,4 +1,4 @@
-export class RoomAssignDto {
+export class RoomAssign {
   position: number;
   roomAssignId: number;
   roomAssignDescription: string;
@@ -34,8 +34,8 @@ export class RoomAssignDto {
     this.patientFullName = patientFullName;
   }
 
-  static fromRoomAssign(roomAssign: any, position: number) : RoomAssignDto {
-    return new RoomAssignDto(
+  static fromRoomAssign(roomAssign: any, position: number) : RoomAssign {
+    return new RoomAssign(
       position,
       roomAssign.roomAssignId,
       roomAssign.roomAssignDescription,

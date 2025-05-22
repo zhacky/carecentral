@@ -15,7 +15,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {NgClass} from '@angular/common';
 import {Router, RouterLink} from '@angular/router';
 import {DoctorService} from '../../core/services/doctor.service';
-import {DoctorDto, DoctorStatus} from '../../core/models/doctor.model';
+import {Doctor, DoctorStatus} from '../../core/models/doctor.model';
 
 @Component({
   selector: 'app-doctor',
@@ -54,7 +54,7 @@ export class DoctorComponent implements AfterViewInit, OnInit {
   ];
 
   // DataSource for the table (initially empty)
-  dataSource = new MatTableDataSource<DoctorDto>([]);
+  dataSource = new MatTableDataSource<Doctor>([]);
 
   searchTerm = '';
 
@@ -74,7 +74,7 @@ export class DoctorComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.filterPredicate = (data: DoctorDto, filter: string) => {
+    this.dataSource.filterPredicate = (data: Doctor, filter: string) => {
       return (
         data.firstName.toLowerCase().includes(filter) ||
         data.lastName.toLowerCase().includes(filter) ||
