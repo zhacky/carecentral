@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8083'
+  apiUrl: 'https://carecentral-api-92375345963.us-central1.run.app'
 };
