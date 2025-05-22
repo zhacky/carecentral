@@ -9,12 +9,12 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatSelectModule} from '@angular/material/select';
-import {PatientDto} from '../../../core/models/patient.model';
+import {Patient} from '../../../core/models/patient.model';
 import {PatientService} from '../../../core/services/patient.service';
 import {Router} from '@angular/router';
 import {DoctorService} from '../../../core/services/doctor.service';
 import {MatTableDataSource} from '@angular/material/table';
-import {DoctorDto} from '../../../core/models/doctor.model'; // Import the DoctorService
+import {Doctor} from '../../../core/models/doctor.model'; // Import the DoctorService
 
 @Component({
   imports: [
@@ -37,13 +37,13 @@ import {DoctorDto} from '../../../core/models/doctor.model'; // Import the Docto
 
 export class AddPatientDialogComponent implements OnInit {
   displayedColumns: string[] = ['position', 'firstName', 'lastName', 'birthday', 'gender'];
-  dataSource: PatientDto[] = [];
-  dataSourceDoc = new MatTableDataSource<DoctorDto>([]);
+  dataSource: Patient[] = [];
+  dataSourceDoc = new MatTableDataSource<Doctor>([]);
   showAddPatientForm = false;
 
-  profile: PatientDto = new PatientDto(0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0); // Default assignedDoctorId is set to 1
+  profile: Patient = new Patient(0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0); // Default assignedDoctorId is set to 1
 
-  doctors: DoctorDto[] = []; // Array to store fetched doctors
+  doctors: Doctor[] = []; // Array to store fetched doctors
 
   constructor(
     private patientService: PatientService,

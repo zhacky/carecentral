@@ -12,7 +12,7 @@ import {
   MatTable,
   MatTableDataSource
 } from '@angular/material/table';
-import {PatientDto} from '../../core/models/patient.model';
+import {Patient} from '../../core/models/patient.model';
 import {PatientService} from '../../core/services/patient.service';
 import {Router} from '@angular/router';
 import {FormsModule} from '@angular/forms'; // Import the service
@@ -44,12 +44,12 @@ export class PatientInformationComponent implements AfterViewInit, OnInit {
   hasRole(role: string): boolean {
     return this.authService.hasRole(role);
   }
-  
+
   // Define the columns for the table (including position, first name, last name, etc.)
   displayedColumns: string[] = ['patientId', 'firstName', 'lastName', 'dateOfBirth', 'gender', 'actions'];
 
   // DataSource for the table (initially empty)
-  dataSource = new MatTableDataSource<PatientDto>([]);
+  dataSource = new MatTableDataSource<Patient>([]);
 
   searchTerm = '';
 
@@ -73,7 +73,7 @@ export class PatientInformationComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.filterPredicate = (data: PatientDto, filter: string) => {
+    this.dataSource.filterPredicate = (data: Patient, filter: string) => {
       return (
         data.firstName.toLowerCase().includes(filter) ||
         data.lastName.toLowerCase().includes(filter) ||

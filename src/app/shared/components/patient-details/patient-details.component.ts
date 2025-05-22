@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PatientService } from '../../../core/services/patient.service';
-import { PatientDto } from '../../../core/models/patient.model';
+import { Patient } from '../../../core/models/patient.model';
 import { NgForOf, NgIf } from '@angular/common';
 
 interface InfoItem {
@@ -80,7 +80,7 @@ export class PatientDetailsComponent implements OnInit {
       this.patientId = id;
 
       this.patientService.getPatientById(id).subscribe({
-        next: (patient: PatientDto) => {
+        next: (patient: Patient) => {
           this.personalInfo = {
             firstName: patient.firstName,
             middleName: patient.middleName,

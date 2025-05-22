@@ -14,7 +14,7 @@ import {
 import {MatPaginator} from '@angular/material/paginator';
 import {Router, RouterLink} from '@angular/router';
 import {PhilhealthService} from '../../core/services/philhealth.service';
-import {PhilhealthDto} from '../../core/models/philhealth.model';
+import {Philhealth} from '../../core/models/philhealth.model';
 
 @Component({
   selector: 'app-philhealth',
@@ -51,7 +51,7 @@ export class PhilhealthComponent implements AfterViewInit, OnInit {
   ];
 
   // DataSource for the table (initially empty)
-  dataSource = new MatTableDataSource<PhilhealthDto>([]);
+  dataSource = new MatTableDataSource<Philhealth>([]);
 
   searchTerm = '';
 
@@ -71,7 +71,7 @@ export class PhilhealthComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.filterPredicate = (data: PhilhealthDto, filter: string) => {
+    this.dataSource.filterPredicate = (data: Philhealth, filter: string) => {
       // filter = filter.trim().toLowerCase();
       return (
         data.patFirstName.toLowerCase().includes(filter) ||

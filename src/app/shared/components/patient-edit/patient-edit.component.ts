@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {PatientDto} from '../../../core/models/patient.model';
+import {Patient} from '../../../core/models/patient.model';
 import {PatientService} from '../../../core/services/patient.service';
 import {FormsModule, NgForm} from '@angular/forms';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {DoctorService} from '../../../core/services/doctor.service';
-import {DoctorDto} from '../../../core/models/doctor.model';
+import {Doctor} from '../../../core/models/doctor.model';
 
 @Component({
   selector: 'app-patient-edit',
@@ -20,12 +20,12 @@ import {DoctorDto} from '../../../core/models/doctor.model';
   standalone: true
 })
 export class EditPatientComponent implements OnInit {
-  patientDto: PatientDto = new PatientDto(
+  patientDto: Patient = new Patient(
     0, // position
     0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0
   );
 
-  doctors: DoctorDto[] = [];
+  doctors: Doctor[] = [];
 
   constructor(
     private route: ActivatedRoute,

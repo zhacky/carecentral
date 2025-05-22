@@ -1,4 +1,4 @@
-export class PhilhealthDto {
+export class Philhealth {
   position: number;
   philhealthId: number;
   patFirstName: string;
@@ -139,8 +139,8 @@ export class PhilhealthDto {
     this.neuroExam = neuroExam;
   }
 
-  static fromPhilhealth(philhealth: any, position: number): PhilhealthDto {
-    return new PhilhealthDto(
+  static fromPhilhealth(philhealth: any, position: number): Philhealth {
+    return new Philhealth(
       position,
       philhealth.philhealthId,
       philhealth.patFirstName,

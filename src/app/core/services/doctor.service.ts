@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {DoctorDto, DoctorStatus} from '../models/doctor.model';
+import {Doctor, DoctorStatus} from '../models/doctor.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,18 +14,18 @@ export class DoctorService {
   constructor(private http: HttpClient) {}
 
   // Fetch all doctors
-  getDoctors(): Observable<DoctorDto[]> {
-    return this.http.get<DoctorDto[]>(this.apiUrl);
+  getDoctors(): Observable<Doctor[]> {
+    return this.http.get<Doctor[]>(this.apiUrl);
   }
 
   // Create a new doctor
-  createDoctor(doctor: DoctorDto): Observable<DoctorDto> {
-    return this.http.post<DoctorDto>(this.apiUrl, doctor);
+  createDoctor(doctor: Doctor): Observable<Doctor> {
+    return this.http.post<Doctor>(this.apiUrl, doctor);
   }
 
   // Get a doctor by ID
-  getDoctorById(id: number): Observable<DoctorDto> {
-    return this.http.get<DoctorDto>(`${this.apiUrl}/${id}`);
+  getDoctorById(id: number): Observable<Doctor> {
+    return this.http.get<Doctor>(`${this.apiUrl}/${id}`);
   }
 
   // Delete a doctor
@@ -45,8 +45,8 @@ export class DoctorService {
     dateOfBirth: string;
     email: string;
     status: DoctorStatus
-  }): Observable<DoctorDto> {
-    return this.http.put<DoctorDto>(`${this.apiUrl}/${id}`, doctor);
+  }): Observable<Doctor> {
+    return this.http.put<Doctor>(`${this.apiUrl}/${id}`, doctor);
   }
 
 }

@@ -15,10 +15,10 @@ import {MatPaginator} from '@angular/material/paginator';
 import {Router, RouterLink} from '@angular/router';
 import {CommonModule, NgClass} from '@angular/common';
 import {RoomService} from '../../core/services/room.service';
-import {RoomDto, RoomStatus} from '../../core/models/room.model';
+import {Room, RoomStatus} from '../../core/models/room.model';
 import { AuthService } from '../../core/services/auth.service';
 import {RoomAssignService} from '../../core/services/room-assign.service';
-import {RoomAssignDto} from '../../core/models/room-assign.model';
+import {RoomAssign} from '../../core/models/room-assign.model';
 
 @Component({
   selector: 'app-room',
@@ -44,9 +44,9 @@ import {RoomAssignDto} from '../../core/models/room-assign.model';
 export class RoomComponent implements AfterViewInit, OnInit {
   constructor(private roomService: RoomService, private roomAssignService: RoomAssignService, private router: Router, private authService: AuthService) {}
 
-  rooms: RoomDto[] = [];
-  assignments: RoomAssignDto[] = [];
-  dataSource = new MatTableDataSource<RoomDto>();
+  rooms: Room[] = [];
+  assignments: RoomAssign[] = [];
+  dataSource = new MatTableDataSource<Room>();
 
   hasRole(role: string): boolean {
     return this.authService.hasRole(role);
@@ -75,7 +75,7 @@ export class RoomComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.filterPredicate = (data: RoomDto, filter: string) => {
+    this.dataSource.filterPredicate = (data: Room, filter: string) => {
       return (
         data.roomType.toLowerCase().includes(filter) ||
         data.roomCapacity.toString().includes(filter) ||
@@ -111,10 +111,10 @@ export class RoomComponent implements AfterViewInit, OnInit {
     // Assuming you fetch both rooms and assignments from backend
     this.roomService.getRooms().subscribe((roomsData: any[]) => {
       this.roomAssignService.getRoomAssigns().subscribe((assignmentsData: any[]) => {
-        this.assignments = assignmentsData.map((a, index) => RoomAssignDto.fromRoomAssign(a, index + 1));
+        this.assignments = assignmentsData.map((a, index) => RoomAssign.fromRoomAssign(a, index + 1));
 
         this.rooms = roomsData.map((room, index) => {
-          const roomDto = RoomDto.fromRoom(room, index + 1);
+          const roomDto = Room.fromRoom(room, index + 1);
           const assignedCount = this.assignments.filter(a => a.room === roomDto.roomId && a.status === 'ACTIVE').length;
           roomDto.availableCapacity = roomDto.roomCapacity - assignedCount;
           return roomDto;

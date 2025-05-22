@@ -1,13 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import {RoomAssignStatus} from '../../../core/models/room-assign.model';
+import {ActivatedRoute, Router} from '@angular/router';
 import {RoomAssignService} from '../../../core/services/room-assign.service';
 import {FormsModule, NgForm} from '@angular/forms';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {forkJoin} from 'rxjs';
-import {RoomDto} from '../../../core/models/room.model';
-import {PatientDto} from '../../../core/models/patient.model';
+import {Room} from '../../../core/models/room.model';
+import {Patient} from '../../../core/models/patient.model';
 import {RoomService} from '../../../core/services/room.service';
 import {PatientService} from '../../../core/services/patient.service';
 
@@ -37,8 +36,8 @@ export class EditRoomAssignComponent implements OnInit {
     room: 0,
   };
 
-  patients: PatientDto[] = [];
-  rooms: RoomDto[] = [];
+  patients: Patient[] = [];
+  rooms: Room[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -89,7 +88,7 @@ export class EditRoomAssignComponent implements OnInit {
           .filter(room => room.status === 'ACTIVE')
           .map((room, idx) => {
             const assignedCount = activeAssignments.filter(a => a.room === room.roomId).length;
-            return RoomDto.fromRoom(room, idx + 1, assignedCount);
+            return Room.fromRoom(room, idx + 1, assignedCount);
           })
           .filter(room => {
             const hasCapacity = (room.availableCapacity ?? 0) > 0;

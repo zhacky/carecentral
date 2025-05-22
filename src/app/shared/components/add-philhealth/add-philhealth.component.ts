@@ -1,6 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
-import {PhilhealthDto} from '../../../core/models/philhealth.model';
+import {Philhealth} from '../../../core/models/philhealth.model';
 import {PhilhealthService} from '../../../core/services/philhealth.service';
 import {FormsModule, NgForm} from '@angular/forms';
 import {NgClass, NgIf} from '@angular/common';
@@ -264,5 +264,5 @@ export class AddPhilhealthComponent {
     this.router.navigate(['/common/philhealth']); // ✅ Go back on cancel
   }
 
-  protected readonly philhealthDto = PhilhealthDto;
+  protected readonly philhealthDto = Philhealth;
 }

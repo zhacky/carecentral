@@ -15,7 +15,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {Router, RouterLink} from '@angular/router';
 import {CommonModule, NgClass} from '@angular/common';
 import {RoomAssignService} from '../../core/services/room-assign.service';
-import {RoomAssignDto, RoomAssignStatus} from '../../core/models/room-assign.model';
+import {RoomAssign, RoomAssignStatus} from '../../core/models/room-assign.model';
 import { AuthService } from '../../core/services/auth.service';
 import { forkJoin } from 'rxjs';
 import {PatientService} from '../../core/services/patient.service';
@@ -51,7 +51,7 @@ export class RoomAssignComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['roomAssignId', 'daysOfStay', 'assignedDate', 'dischargeDate', 'status', 'actions'];
 
   // DataSource for the table (initially empty)
-  dataSource = new MatTableDataSource<RoomAssignDto>([]);
+  dataSource = new MatTableDataSource<RoomAssign>([]);
 
   searchTerm = '';
 
@@ -71,7 +71,7 @@ export class RoomAssignComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.filterPredicate = (data: RoomAssignDto, filter: string) => {
+    this.dataSource.filterPredicate = (data: RoomAssign, filter: string) => {
       return (
         data.daysOfStay.toString().includes(filter) ||
         data.assignedDate.toLowerCase().includes(filter) ||

@@ -1,4 +1,4 @@
-export class DoctorDto {
+export class Doctor {
   position: number;
   doctorId: number;
   firstName: string;
@@ -37,8 +37,8 @@ export class DoctorDto {
     this.status = status;
   }
 
-  static fromDoctor(doctor: any, position: number): DoctorDto {
-    return new DoctorDto(
+  static fromDoctor(doctor: any, position: number): Doctor {
+    return new Doctor(
       position,
       doctor.doctorId,
       doctor.firstName,

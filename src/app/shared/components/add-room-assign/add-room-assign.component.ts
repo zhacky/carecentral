@@ -1,12 +1,12 @@
 import {Component, ViewChild, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {RoomAssignDto, RoomAssignStatus} from '../../../core/models/room-assign.model';
+import {RoomAssign, RoomAssignStatus} from '../../../core/models/room-assign.model';
 import {RoomAssignService} from '../../../core/services/room-assign.service';
 import {FormsModule, NgForm} from '@angular/forms';
 import {PatientService} from '../../../core/services/patient.service';
 import {RoomService} from '../../../core/services/room.service';
-import {PatientDto} from '../../../core/models/patient.model';
-import {RoomDto} from '../../../core/models/room.model';
+import {Patient} from '../../../core/models/patient.model';
+import {Room} from '../../../core/models/room.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
 import { forkJoin } from 'rxjs';
@@ -23,7 +23,7 @@ import { forkJoin } from 'rxjs';
   standalone: true
 })
 export class AddRoomAssignComponent implements OnInit {
-  roomAssignItem: RoomAssignDto = {
+  roomAssignItem: RoomAssign = {
     position: 0,
     roomAssignId: 0,
     roomAssignDescription: '',
@@ -35,8 +35,8 @@ export class AddRoomAssignComponent implements OnInit {
     room: 0
   };
 
-  patients: PatientDto[] = [];
-  rooms: RoomDto[] = [];
+  patients: Patient[] = [];
+  rooms: Room[] = [];
 
   constructor(
     private roomAssignService: RoomAssignService,
@@ -112,7 +112,7 @@ export class AddRoomAssignComponent implements OnInit {
           .filter(r => r.status === 'ACTIVE')
           .map((room, idx) => {
             const assigned = activeAssignments.filter(a => a.room === room.roomId).length;
-            return RoomDto.fromRoom(room, idx + 1, assigned);   // capacity already set
+            return Room.fromRoom(room, idx + 1, assigned);   // capacity already set
           })
           .filter(r => r.availableCapacity! > 0);
 
@@ -166,5 +166,5 @@ export class AddRoomAssignComponent implements OnInit {
     this.router.navigate(['/common/roomAssign']); // ✅ Go back on cancel
   }
 
-  protected readonly RoomAssignDto = RoomAssignDto;
+  protected readonly RoomAssignDto = RoomAssign;
 }
