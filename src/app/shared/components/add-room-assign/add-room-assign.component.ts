@@ -9,6 +9,7 @@ import {PatientDto} from '../../../core/models/patient.model';
 import {RoomDto} from '../../../core/models/room.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-add-room-assign',
@@ -52,26 +53,73 @@ export class AddRoomAssignComponent implements OnInit {
     this.loadRooms();
   }
 
+  // loadPatients(): void {
+  //   this.patientService.getPatients().subscribe(
+  //     (patients) => {
+  //       // Store fetched patients in the `patients` array
+  //       this.patients = patients; // Now available for the dropdown
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching patients:', error);
+  //     }
+  //   );
+  // }
   loadPatients(): void {
-    this.patientService.getPatients().subscribe(
-      (patients) => {
-        // Store fetched patients in the `patients` array
-        this.patients = patients; // Now available for the dropdown
+    forkJoin({
+      patients: this.patientService.getPatients(),
+      assignments: this.roomAssignService.getRoomAssigns(),
+      rooms: this.roomService.getRooms()
+    }).subscribe(
+      ({ patients, assignments, rooms }) => {
+        const roomMap = new Map<number, string>();
+        rooms.forEach(room => roomMap.set(room.roomId, room.status));
+
+        // Filter out patients who are:
+        // - NOT in any assignment
+        // - OR assigned to a room that is INACTIVE
+        const assignedPatientIds = assignments
+          .filter(a => a.status === 'ACTIVE') // only consider active assignments
+          .map(a => ({
+            patientId: a.patient,
+            roomStatus: roomMap.get(a.room)
+          }));
+
+        const assignedSet = new Set(
+          assignedPatientIds
+            .filter(ar => ar.roomStatus === 'ACTIVE') // keep those with ACTIVE room
+            .map(ar => ar.patientId)
+        );
+
+        this.patients = patients.filter(p => !assignedSet.has(p.patientId));
       },
-      (error) => {
-        console.error('Error fetching patients:', error);
+      error => {
+        console.error('Error loading patients, assignments, or rooms:', error);
       }
     );
   }
 
   loadRooms(): void {
-    this.roomService.getRooms().subscribe(
-      (rooms) => {
-        // Store fetched rooms in the `rooms` array
-        this.rooms = rooms; // Now available for the dropdown
+    forkJoin({
+      rooms: this.roomService.getRooms(),
+      assignments: this.roomAssignService.getRoomAssigns()
+    }).subscribe(
+      ({ rooms, assignments }) => {
+        // Filter only ACTIVE assignments
+        const activeAssignments = assignments.filter(a => a.status === 'ACTIVE');
+
+        // Process and filter rooms
+        this.rooms = rooms
+          .filter(r => r.status === 'ACTIVE')
+          .map((room, idx) => {
+            const assigned = activeAssignments.filter(a => a.room === room.roomId).length;
+            return RoomDto.fromRoom(room, idx + 1, assigned);   // capacity already set
+          })
+          .filter(r => r.availableCapacity! > 0);
+
+        // `this.rooms` now contains only available & active rooms
       },
       (error) => {
-        console.error('Error fetching rooms:', error);
+        console.error('Error fetching rooms or assignments:', error);
       }
     );
   }

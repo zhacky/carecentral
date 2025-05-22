@@ -7,7 +7,8 @@ export class RoomAssignDto {
   dischargeDate: string;
   status: RoomAssignStatus;
   patient: number;
-  room: number
+  room: number;
+  patientFullName?: string;
 
   constructor(
     position: number,
@@ -18,7 +19,8 @@ export class RoomAssignDto {
     dischargeDate: string,
     status: RoomAssignStatus,
     patient: number,
-    room: number
+    room: number,
+    patientFullName?: string,
   ) {
     this.position = position;
     this.roomAssignId = roomAssignId;
@@ -29,6 +31,7 @@ export class RoomAssignDto {
     this.status = status;
     this.patient = patient;
     this.room = room;
+    this.patientFullName = patientFullName;
   }
 
   static fromRoomAssign(roomAssign: any, position: number) : RoomAssignDto {
@@ -41,7 +44,8 @@ export class RoomAssignDto {
       roomAssign.dischargeDate,
       roomAssign.status as RoomAssignStatus,
       roomAssign.patient,
-      roomAssign.room
+      roomAssign.room,
+      roomAssign.patientFullName
     )
   }
 }

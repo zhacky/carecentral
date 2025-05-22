@@ -12,11 +12,13 @@ import {
   MatTableDataSource
 } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {CommonModule, NgClass} from '@angular/common';
 import {RoomAssignService} from '../../core/services/room-assign.service';
 import {RoomAssignDto, RoomAssignStatus} from '../../core/models/room-assign.model';
 import { AuthService } from '../../core/services/auth.service';
+import { forkJoin } from 'rxjs';
+import {PatientService} from '../../core/services/patient.service';
 
 @Component({
   selector: 'app-room',
@@ -40,7 +42,7 @@ import { AuthService } from '../../core/services/auth.service';
   styleUrl: './room-assign.component.css'
 })
 export class RoomAssignComponent implements AfterViewInit, OnInit {
-  constructor(private roomAssignService: RoomAssignService, private authService: AuthService) {}
+  constructor(private roomAssignService: RoomAssignService, private patientService: PatientService, private authService: AuthService, private router: Router) {}
 
   hasRole(role: string): boolean {
     return this.authService.hasRole(role);
@@ -55,6 +57,14 @@ export class RoomAssignComponent implements AfterViewInit, OnInit {
 
   applyFilter(): void {
     this.dataSource.filter = this.searchTerm.trim().toLowerCase();
+  }
+
+  viewRoomAssign(roomAssignId: number) {
+    this.router.navigate(['/common/roomAssign/details', roomAssignId]);
+  }
+
+  editRoomAssign(roomAssignId: number) {
+    this.router.navigate(['/common/roomAssign/edit', roomAssignId]);
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -78,17 +88,30 @@ export class RoomAssignComponent implements AfterViewInit, OnInit {
 
   // Load the patients using the service
   loadRoomAssigns(): void {
-    this.roomAssignService.getRoomAssigns().subscribe(
-      (roomAssigns) => {
-        // Add position dynamically
-        this.dataSource.data = roomAssigns.map((room, index) => ({
-          ...room,
-          position: index + 1,  // Position starts at 1 and increments
+    forkJoin({
+      roomAssigns: this.roomAssignService.getRoomAssigns(),
+      patients: this.patientService.getPatients()
+    }).subscribe(
+      ({ roomAssigns, patients }) => {
+        // Create a map of patient IDs to names
+        const patientMap = new Map<number, string>();
+        // patients.forEach(p => patientMap.set(p.patientId, `${p.firstName} ${p.lastName}`));
+        patients.forEach(p => {
+          const middleInitial = p.middleName ? `${p.middleName.charAt(0)}.` : '';
+          patientMap.set(p.patientId, `${p.firstName} ${middleInitial} ${p.lastName}`.replace(/\s+/g, ' ').trim());
+        });
+
+        // Add position and patient name
+        this.dataSource.data = roomAssigns.map((roomAssign, index) => ({
+          ...roomAssign,
+          position: index + 1,
+          patientName: patientMap.get(roomAssign.patient) ?? 'Unknown'
         }));
+
         this.dataSource.paginator = this.paginator;
       },
       (error) => {
-        console.error('Error fetching doctors:', error);
+        console.error('Error fetching room assignments or patients:', error);
       }
     );
   }
