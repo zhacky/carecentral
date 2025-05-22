@@ -34,7 +34,13 @@ export class RoomAssignService {
   }
 
   // Update a room assign
-  updateRoomAssign(id: number, roomAssign: RoomAssignDto): Observable<RoomAssignDto> {
+    updateRoomAssign(id: number, roomAssign: {
+        roomAssignId: number;
+        roomAssignDescription: string;
+        dischargeDate: string;
+        patient: number;
+        room: number
+    }): Observable<RoomAssignDto> {
     return this.http.put<RoomAssignDto>(`${this.apiUrl}/${id}`, roomAssign);
   }
 

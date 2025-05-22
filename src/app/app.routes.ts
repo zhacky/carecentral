@@ -39,6 +39,7 @@ import { SignUpComponent } from './core/auth/sign-up/sign-up.component';
 import { SuccessMessageComponent } from './shared/components/success-card/success-message/success-message.component';
 import { FormSubmissionGuard } from './core/auth/login/form.guard';
 import { EditAccountComponent } from './shared/components/edit-account/edit-account/edit-account.component';
+import { EditRoomAssignComponent } from './shared/components/edit-room-assign/edit-room-assign.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -199,7 +200,13 @@ export const routes: Routes = [
         data: { roles: ['ROLE_ADMIN'] },
       },
       {
-        path: 'roomAssign/details',
+        path: 'roomAssign/edit/:id',
+        component: EditRoomAssignComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['ROLE_ADMIN'] },
+      },
+      {
+        path: 'roomAssign/details/:id',
         component: RoomAssignDetailsComponent,
         canActivate: [RoleGuard],
         data: { roles: ['ROLE_ADMIN'] },

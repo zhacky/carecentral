@@ -6,6 +6,7 @@ export class RoomDto {
   roomCapacity: number;
   roomCharge: string;
   status: RoomStatus;
+  availableCapacity?: number;
 
   constructor(
     position: number,
@@ -14,7 +15,8 @@ export class RoomDto {
     roomDescription: string,
     roomCapacity: number,
     roomCharge: string,
-    status: RoomStatus
+    status: RoomStatus,
+    availableCapacity?: number
   ) {
     this.position = position;
     this.roomId = roomId;
@@ -23,9 +25,11 @@ export class RoomDto {
     this.roomCapacity = roomCapacity;
     this.roomCharge = roomCharge;
     this.status = status;
+    this.availableCapacity = availableCapacity ?? roomCapacity;
   }
 
-  static fromRoom(room: any, position: number) : RoomDto {
+  static fromRoom(room: any, position: number, assignedCount = 0) : RoomDto {
+    const availableCapacity = room.roomCapacity - assignedCount;
     return new RoomDto (
       position,
       room.roomId,
@@ -33,7 +37,8 @@ export class RoomDto {
       room.roomDescription,
       room.roomCapacity,
       room.roomCharge,
-      room.status as RoomStatus
+      room.status as RoomStatus,
+      availableCapacity
     )
   }
 }

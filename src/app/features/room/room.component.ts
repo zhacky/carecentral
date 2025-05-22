@@ -17,6 +17,8 @@ import {CommonModule, NgClass} from '@angular/common';
 import {RoomService} from '../../core/services/room.service';
 import {RoomDto, RoomStatus} from '../../core/models/room.model';
 import { AuthService } from '../../core/services/auth.service';
+import {RoomAssignService} from '../../core/services/room-assign.service';
+import {RoomAssignDto} from '../../core/models/room-assign.model';
 
 @Component({
   selector: 'app-room',
@@ -40,7 +42,11 @@ import { AuthService } from '../../core/services/auth.service';
   styleUrl: './room.component.css'
 })
 export class RoomComponent implements AfterViewInit, OnInit {
-  constructor(private roomService: RoomService, private router: Router, private authService: AuthService) {}
+  constructor(private roomService: RoomService, private roomAssignService: RoomAssignService, private router: Router, private authService: AuthService) {}
+
+  rooms: RoomDto[] = [];
+  assignments: RoomAssignDto[] = [];
+  dataSource = new MatTableDataSource<RoomDto>();
 
   hasRole(role: string): boolean {
     return this.authService.hasRole(role);
@@ -49,7 +55,7 @@ export class RoomComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['roomId', 'roomType', 'roomCapacity', 'roomCharge', 'status', 'actions'];
 
   // DataSource for the table (initially empty)
-  dataSource = new MatTableDataSource<RoomDto>([]);
+  // dataSource = new MatTableDataSource<RoomDto>([]);
 
   searchTerm = '';
 
@@ -85,20 +91,38 @@ export class RoomComponent implements AfterViewInit, OnInit {
   }
 
   // Load the patients using the service
-  loadRooms(): void {
-    this.roomService.getRooms().subscribe(
-      (rooms) => {
-        // Add position dynamically
-        this.dataSource.data = rooms.map((room, index) => ({
-          ...room,
-          position: index + 1,  // Position starts at 1 and increments
-        }));
-        this.dataSource.paginator = this.paginator;
-      },
-      (error) => {
-        console.error('Error fetching doctors:', error);
-      }
-    );
+  // loadRooms(): void {
+  //   this.roomService.getRooms().subscribe(
+  //     (rooms) => {
+  //       // Add position dynamically
+  //       this.dataSource.data = rooms.map((room, index) => ({
+  //         ...room,
+  //         position: index + 1,  // Position starts at 1 and increments
+  //       }));
+  //       this.dataSource.paginator = this.paginator;
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching doctors:', error);
+  //     }
+  //   );
+  // }
+
+  loadRooms() {
+    // Assuming you fetch both rooms and assignments from backend
+    this.roomService.getRooms().subscribe((roomsData: any[]) => {
+      this.roomAssignService.getRoomAssigns().subscribe((assignmentsData: any[]) => {
+        this.assignments = assignmentsData.map((a, index) => RoomAssignDto.fromRoomAssign(a, index + 1));
+
+        this.rooms = roomsData.map((room, index) => {
+          const roomDto = RoomDto.fromRoom(room, index + 1);
+          const assignedCount = this.assignments.filter(a => a.room === roomDto.roomId && a.status === 'ACTIVE').length;
+          roomDto.availableCapacity = roomDto.roomCapacity - assignedCount;
+          return roomDto;
+        });
+
+        this.dataSource.data = this.rooms;
+      });
+    });
   }
 
   // Function to delete a doctor
