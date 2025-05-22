@@ -3,40 +3,46 @@
   
     <!-- Patient Info -->
     <section class="mb-6">
-      <h2 class="text-xl font-semibold mb-2">Patient Information</h2>
-      <p><strong>Name:</strong> {{ patient.name }}</p>
-      <p><strong>Patient ID:</strong> {{ patient.id }}</p>
-      <p><strong>Admission Date:</strong> {{ patient.admissionDate }}</p>
-      <p><strong>Room No:</strong> {{ patient.room }}</p>
-    </section>
-  
-    <!-- Services Table -->
-    <section class="mb-6">
-      <h2 class="text-xl font-semibold mb-2">Services Rendered</h2>
-      <table class="w-full border-collapse text-left">
-        <thead>
-          <tr class="border-b font-semibold">
-            <th class="py-2">Service</th>
-            <th class="py-2">Quantity</th>
-            <th class="py-2">Unit Price</th>
-            <th class="py-2">Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of services" class="border-b">
-            <td class="py-2">{{ item.description }}</td>
-            <td class="py-2">{{ item.quantity }}</td>
-            <td class="py-2">${{ item.price }}</td>
-            <td class="py-2">${{ item.price * item.quantity | number:'1.2-2' }}</td>
-          </tr>
-        </tbody>
-      </table>
+ <h2 class="text-xl font-semibold mb-4">Billing Information</h2>
+ <div *ngIf="billings && billings.length > 0">
+ <div *ngFor="let billing of billings" class="mb-8 p-4 border rounded shadow-sm bg-white">
+ <h3 class="text-lg font-bold mb-2">{{ billing.patientName }} (ID: {{ billing.id }})</h3>
+ <p class="text-sm mb-2">Date: {{ billing.date | date:'shortDate' }} | Amount: ${{ billing.amount | number:'1.2-2' }}</p>
+
+ <!-- Services Table -->
+ <section class="mb-4">
+ <h4 class="text-md font-semibold mb-2">Services Rendered</h4>
+ <table class="w-full border-collapse text-left">
+ <thead>
+ <tr class="border-b font-semibold text-sm">
+ <th class="py-2 px-2">Description</th>
+ <th class="py-2 px-2">Quantity</th>
+ <th class="py-2 px-2">Unit Price</th>
+ <th class="py-2 px-2 text-right">Total</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr *ngFor="let item of patient.services" class="border-b text-sm">
+ <td class="py-2 px-2">{{ item.name }}</td>
+ <td class="py-2 px-2">{{ item.quantity }}</td>
+ <td class="py-2 px-2">${{ item.price | number:'1.2-2' }}</td>
+ <td class="py-2 px-2 text-right">${{ item.price * item.quantity | number:'1.2-2' }}</td>
+ </tr>
+ </tbody>
+ </table>
+ </section>
+
+ <!-- Total Amount for Patient -->
+ <section class="flex justify-end items-center mt-2">
+ <h4 class="text-lg font-bold">Total Bill: ${{ calculateTotal(billing.services) | number:'1.2-2' }}</h4>
+ </section>
+ </div>
+ </div>
     </section>
   
     <!-- Total Amount -->
     <section class="flex justify-between items-center mt-4">
-      <h2 class="text-xl font-bold">Total: ${{ totalAmount | number:'1.2-2' }}</h2>
-      <button class="add-button text-white px-4 py-2 rounded hover:bg-green-700" (click)="processPayment()">
+      <button class="add-button text-white px-4 py-2 rounded hover:bg-green-700" (click)="processPayment(billing)">
         Process Payment
       </button>
     </section>

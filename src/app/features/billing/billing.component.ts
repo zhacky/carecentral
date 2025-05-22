@@ -1,33 +1,34 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BillingService } from '../../core/services/billing.service';
+import { Billing } from '../../core/models/billing.model';
 
 @Component({
   selector: 'app-billing',
-  imports: [CommonModule],
+  imports: [CommonModule ],
   templateUrl: './billing.component.html',
   styleUrl: './billing.component.css'
 })
-export class BillingComponent {
-  patient = {
-    name: 'Amina Mahdi',
-    id: 'HSP-102938',
-    admissionDate: '2025-04-27',
-    room: 'Room 305'
-  };
+export class BillingComponent implements OnInit {
+  billings: Billing[] = [];
 
-  services = [
-    { description: 'Doctor Consultation', quantity: 1, price: 100 },
-    { description: 'X-Ray', quantity: 1, price: 150 },
-    { description: 'Blood Test', quantity: 2, price: 50 },
-    { description: 'Medication', quantity: 5, price: 20 },
-    { description: 'Room Charges (per day)', quantity: 3, price: 200 }
-  ];
+  constructor(private billingService: BillingService) {}
 
-  get totalAmount(): number {
-    return this.services.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  ngOnInit(): void {
+    this.billingService.getBillings().subscribe(
+      (data: Billing[]) => {
+        this.billings = data;
+ console.log(this.billings)
+      },
+      (error: any) => {
+        console.error('Error fetching billings:', error);
+      }
+    );
   }
-
-  processPayment() {
-    alert(`Payment of $${this.totalAmount.toFixed(2)} has been processed.`);
+  calculateTotal(services: { name: string; price: number; quantity: number }[]): number {
+    return services.reduce((total, service) => total + (service.price * service.quantity), 0);
+  }
+  processPayment(): void {
+    console.log('Processing payment...');
   }
 }
