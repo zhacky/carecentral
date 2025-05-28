@@ -53,7 +53,7 @@ export class AuthService {
 
   getRoles(): Observable<string[]> {
     const rolesApiUrl = `${environment.apiUrl}/roles`;
-    return this.http.get<string[]>(rolesApiUrl).pipe(
+    const roles = this.http.get<string[]>(rolesApiUrl).pipe(
       tap((roles) => {
         console.log('Fetched roles from backend:', roles);
       }),
@@ -62,6 +62,7 @@ export class AuthService {
         throw error;
       })
     );
+    return roles;
   }
 
   updateUserRole(userId: string, requestBody: any): Observable<any> {
@@ -133,6 +134,41 @@ export class AuthService {
       }),
       catchError((error) => {
         console.error('Error adding role:', error);
+        throw error;
+      })
+    );
+  }
+
+  updateRolePermissions(roleName: string, permissions: string[]): Observable<any> {
+    const updatePermissionsUrl = `${environment.apiUrl}/roles/${roleName}/permissions`;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.getToken()}`
+    });
+
+    return this.http.put(updatePermissionsUrl, { permissions }, { headers }).pipe(
+      tap((response) => {
+        console.log(`Updated permissions for role ${roleName}:`, response);
+      }),
+      catchError((error) => {
+        console.error('Error updating role permissions:', error);
+        throw error;
+      })
+    );
+  }
+
+  getRolePermissions(roleName: string): Observable<string[]> {
+    const permissionsUrl = `${environment.apiUrl}/roles/${roleName}/permissions`;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken()}`
+    });
+
+    return this.http.get<string[]>(permissionsUrl, { headers }).pipe(
+      tap((permissions) => {
+        console.log(`Fetched permissions for role ${roleName}:`, permissions);
+      }),
+      catchError((error) => {
+        console.error('Error fetching role permissions:', error);
         throw error;
       })
     );
