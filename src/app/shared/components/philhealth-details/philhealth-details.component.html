@@ -3,10 +3,65 @@
   <!-- Member Information -->
   <div>
     <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Member's Information</h2>
-    <!-- Go Back Button -->
-    <button (click)="goBack()" class="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium rounded-lg shadow-sm mb-6">
-      ← Go Back
-    </button>
+    <div class="flex justify-between items-center mb-6">
+
+      <!-- Go Back Button -->
+      <button (click)="goBack()" class="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium rounded-lg shadow-sm mb-6">
+        ← Go Back
+      </button>
+
+      <!-- Print Dropdown -->
+      <div class="relative" tabindex="0">
+        <button
+          (click)="toggleDropdown()"
+          class="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg shadow-sm"
+        >
+          Print
+          <!-- ▼ Icon -->
+          <svg
+            class="w-4 h-4 transition-transform duration-200"
+            [class.rotate-180]="showDropdown"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        <div
+          *ngIf="showDropdown"
+          class="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-lg z-10"
+        >
+          <button
+            class="w-full flex items-center gap-2 text-left px-4 py-2 hover:bg-gray-100 hover:text-blue-600 text-sm"
+            (click)="printPdf('philhealthCF3')"
+          >
+            <span class="text-xs">•</span>
+            Philhealth CF3
+          </button>
+
+          <button
+            class="w-full flex items-center gap-2 text-left px-4 py-2 hover:bg-gray-100 hover:text-blue-600 text-sm"
+            (click)="printPdf('notAvailable')"
+          >
+            <span class="text-xs">•</span>
+            Not Available
+          </button>
+
+          <button
+            class="w-full flex items-center gap-2 text-left px-4 py-2 hover:bg-gray-100 hover:text-blue-600 text-sm"
+            (click)="printPdf('noAvailable2')"
+          >
+            <span class="text-xs">•</span>
+            Not Available
+          </button>
+        </div>
+      </div>
+
+    </div>
+
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="border rounded-lg p-3">
         <p class="text-xs text-gray-500">First Name</p>

@@ -127,4 +127,9 @@ export class PhilhealthService {
   }): Observable<Philhealth> {
     return this.http.put<Philhealth>(`${this.apiUrl}/${id}`, philhealth);
   }
+
+  // Download Philhealth CF3 PDF
+  printPhilhealthCF3Pdf(id: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/philhealthCF3Pdf/${id}`, { responseType: 'blob' });
+  }
 }
