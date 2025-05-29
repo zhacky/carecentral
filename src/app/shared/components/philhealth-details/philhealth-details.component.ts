@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForOf } from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 import {Philhealth} from '../../../core/models/philhealth.model';
 import {PhilhealthService} from '../../../core/services/philhealth.service';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-philhealth-details',
-  imports: [NgForOf],
+  imports: [NgForOf, NgIf],
   templateUrl: './philhealth-details.component.html',
   standalone: true,
   styleUrl: './philhealth-details.component.css',
 })
 export class PhilhealthDetailsComponent implements OnInit {
   dto: Philhealth | null = null;
+  philhealthId! : number;
 
   constructor(private philhealthService: PhilhealthService, private route: ActivatedRoute) {}
 
@@ -20,8 +21,15 @@ export class PhilhealthDetailsComponent implements OnInit {
     window.history.back(); // Or use router.navigate(['/your-route']);
   }
 
+  showDropdown = false;
+
+  toggleDropdown() {
+    this.showDropdown = !this.showDropdown;
+  }
+
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.philhealthId = id;
     this.philhealthService.getPhilhealthById(id).subscribe({
       next: (data: Philhealth) => {
         this.dto = data;
@@ -31,6 +39,54 @@ export class PhilhealthDetailsComponent implements OnInit {
         console.error('Failed to load Philhealth details', err);
       },
     });
+  }
+
+  // printPdf() {
+  //   const philhealthId = this.philhealthId; // Ensure this ID is available
+  //
+  //   const openPdfPreview = (blob: Blob) => {
+  //     const url = window.URL.createObjectURL(blob);
+  //     window.open(url, '_blank'); // Open PDF in new tab
+  //   };
+  //
+  //   this.philhealthService.printPhilhealthCF3Pdf(philhealthId).subscribe(blob => {
+  //     openPdfPreview(blob);
+  //   });
+  // }
+
+  printPdf(type: 'philhealthCF3' | 'notAvailable' | 'noAvailable2') {
+    this.showDropdown = false;
+    const philhealthId = this.philhealthId; // make sure this ID is available
+
+    // const handleBlob = (blob: Blob, filename: string) => {
+    //   const url = window.URL.createObjectURL(blob);
+    //   const a = document.createElement('a');
+    //   a.href = url;
+    //   a.download = filename;
+    //   a.click();
+    //   window.URL.revokeObjectURL(url);
+    // };
+    const openPdfPreview = (blob: Blob) => {
+      const url = window.URL.createObjectURL(blob);
+      window.open(url, '_blank'); // Open PDF in new tab
+    };
+
+    if (type === 'philhealthCF3') {
+      this.philhealthService.printPhilhealthCF3Pdf(philhealthId).subscribe(blob => {
+        // handleBlob(blob, `PatientDataSheet_${this.personalInfo.firstName + this.personalInfo.lastName}.pdf`);
+        openPdfPreview(blob);
+      });
+    } else if (type === 'notAvailable') {
+      // this.philhealthService.printEmergencyRoomPdf(patientId).subscribe(blob => {
+      //   // handleBlob(blob, `EmergencyRoomPatient_${this.personalInfo.firstName + this.personalInfo.lastName}.pdf`);
+      //   openPdfPreview(blob);
+      // });
+    } else if (type == 'noAvailable2') {
+      // this.philhealthService.printAuthorizationSurgicalTreatmentPdf(patientId).subscribe(blob => {
+      //   // handleBlob(blob, `AuthorizationSurgicalTreatment_${this.personalInfo.firstName + this.personalInfo.lastName}.pdf`);
+      //   openPdfPreview(blob);
+      // })
+    }
   }
 
   populateFields(dto: Philhealth): void {
