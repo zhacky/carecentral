@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
@@ -169,6 +169,25 @@ export class AuthService {
       }),
       catchError((error) => {
         console.error('Error fetching role permissions:', error);
+        throw error;
+      })
+    );
+  }
+
+  changePassword(currentPassword: string, newPassword: string): Observable<any> {
+    const url = `${environment.apiUrl}/api/auth/change-password`;
+    const body = { currentPassword, newPassword };
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+
+    return this.http.post(url, body, { headers }).pipe(
+      tap(() => {
+        // Password changed successfully
+        console.log('Password changed successfully');
+      }),
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error changing password:', error);
         throw error;
       })
     );

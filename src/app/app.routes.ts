@@ -40,6 +40,7 @@ import { SuccessMessageComponent } from './shared/components/success-card/succes
 import { FormSubmissionGuard } from './core/auth/login/form.guard';
 import { EditAccountComponent } from './shared/components/edit-account/edit-account/edit-account.component';
 import { EditRoomAssignComponent } from './shared/components/edit-room-assign/edit-room-assign.component';
+import { ChangePasswordComponent } from './features/change-password/change-password.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -65,6 +66,11 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      {
+        path: 'change-password',
+        component: ChangePasswordComponent,
+        canActivate: [AuthGuard],
+      },
       {
         path: 'dashboard',
         component: DashboardComponent,
