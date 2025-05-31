@@ -104,22 +104,24 @@ export class ChangePasswordComponent {
     this.isLoading = true;
     const { currentPassword, newPassword } = this.changePasswordForm.value;
 
-    this.authService.changePassword(currentPassword, newPassword).subscribe({
-      next: () => {
+   this.authService.changePassword(currentPassword, newPassword).subscribe({
+      next: (res) => {
+        console.log('Password change success:', res);
         this.snackBar.open('Password changed successfully', 'Close', {
           duration: 3000,
           panelClass: ['snackbar-success']
         });
-        this.router.navigate(['/common/profile']);
+        this.router.navigate(['/common/dashboard']);
       },
       error: (error) => {
+        console.error('Password change error:', error);
         this.snackBar.open(error.error?.message || 'Failed to change password', 'Close', {
           duration: 3000,
           panelClass: ['snackbar-error']
         });
         this.isLoading = false;
       }
-    });
+});
   }
 
   onCancel() {

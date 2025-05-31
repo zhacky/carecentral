@@ -4,6 +4,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {PatientvisitComponent} from './patientvisit/patientvisit.component';
 import {PatientdataComponent} from './patientdata/patientdata.component';
 import {PatientService} from '../../core/services/patient.service';
+import { Patient } from '../../core/models/patient.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,9 +20,18 @@ import {PatientService} from '../../core/services/patient.service';
 })
 export class DashboardComponent implements OnInit {
   constructor(private patientService: PatientService) {}
+  
+  tableItems: Patient[] = []; // Now holds real patient data
+
   ngOnInit(): void {
-    console.log(this.patientService.getPatients());
-    throw new Error('Method not implemented.');
+    this.patientService.getPatients().subscribe({
+      next: (patients) => {
+        this.tableItems = patients;
+      },
+      error: (err) => {
+        console.error('Failed to fetch patients:', err);
+      }
+    });
   }
   searchQueryPatient = ''; // Store the search query
   searchQueryDoctor = '';
@@ -29,48 +39,48 @@ export class DashboardComponent implements OnInit {
   isNavOpen = true; // Default: open
 
   isRightNavOpen = true;
-  tableItems = [
-    {
-      patientId: 'P001',
-      name: 'John Doe',
-      dob: '1985-06-15',
-      gender: 'Male',
-      phone: '(555) 123-4567',
-      medicalCondition: 'Hypertension',
-    },
-    {
-      patientId: 'P002',
-      name: 'Jane Smith',
-      dob: '1990-11-20',
-      gender: 'Female',
-      phone: '(555) 234-5678',
-      medicalCondition: 'Diabetes',
-    },
-    {
-      patientId: 'P003',
-      name: 'Michael Johnson',
-      dob: '1982-07-30',
-      gender: 'Male',
-      phone: '(555) 345-6789',
-      medicalCondition: 'Asthma',
-    },
-    {
-      patientId: 'P004',
-      name: 'Emily Davis',
-      dob: '1975-03-10',
-      gender: 'Female',
-      phone: '(555) 456-7890',
-      medicalCondition: 'Chronic Fatigue',
-    },
-    {
-      patientId: 'P005',
-      name: 'David Lee',
-      dob: '2000-05-25',
-      gender: 'Male',
-      phone: '(555) 567-8901',
-      medicalCondition: 'Allergy',
-    },
-  ];
+  // tableItems = [
+  //   {
+  //     patientId: 'P001',
+  //     name: 'John Doe',
+  //     dob: '1985-06-15',
+  //     gender: 'Male',
+  //     phone: '(555) 123-4567',
+  //     medicalCondition: 'Hypertension',
+  //   },
+  //   {
+  //     patientId: 'P002',
+  //     name: 'Jane Smith',
+  //     dob: '1990-11-20',
+  //     gender: 'Female',
+  //     phone: '(555) 234-5678',
+  //     medicalCondition: 'Diabetes',
+  //   },
+  //   {
+  //     patientId: 'P003',
+  //     name: 'Michael Johnson',
+  //     dob: '1982-07-30',
+  //     gender: 'Male',
+  //     phone: '(555) 345-6789',
+  //     medicalCondition: 'Asthma',
+  //   },
+  //   {
+  //     patientId: 'P004',
+  //     name: 'Emily Davis',
+  //     dob: '1975-03-10',
+  //     gender: 'Female',
+  //     phone: '(555) 456-7890',
+  //     medicalCondition: 'Chronic Fatigue',
+  //   },
+  //   {
+  //     patientId: 'P005',
+  //     name: 'David Lee',
+  //     dob: '2000-05-25',
+  //     gender: 'Male',
+  //     phone: '(555) 567-8901',
+  //     medicalCondition: 'Allergy',
+  //   },
+  // ];
 
   doctorList = [
     {
@@ -108,13 +118,14 @@ export class DashboardComponent implements OnInit {
   get filteredItems() {
     return this.tableItems.filter(
       (item) =>
-        item.name
+        item.firstName
           .toLowerCase()
           .includes(this.searchQueryPatient.toLowerCase()) ||
-        item.patientId
+        String(item.patientId)
           .toLowerCase()
           .includes(this.searchQueryPatient.toLowerCase()) ||
-        item.medicalCondition
+        // Replace 'medicalCondition' with an existing property, e.g., 'lastName'
+        item.lastName
           .toLowerCase()
           .includes(this.searchQueryPatient.toLowerCase()),
     );
