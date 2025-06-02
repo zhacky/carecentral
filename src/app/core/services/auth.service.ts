@@ -96,7 +96,10 @@ export class AuthService {
   }
 
   getUsers(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/users`).pipe(
+    const headers = new HttpHeaders({
+    Authorization: `Bearer ${this.getToken()}`
+  });
+    return this.http.get<any[]>(`${environment.apiUrl}/api/users`, { headers }).pipe(
       catchError((error) => {
         console.error('Error fetching users', error);
         throw error;
@@ -181,7 +184,7 @@ export class AuthService {
       'Authorization': `Bearer ${this.getToken()}`
     });
 
-    return this.http.post(url, body, { headers }).pipe(
+    return this.http.post(url, body, { headers, responseType: 'text' }).pipe(
       tap(() => {
         // Password changed successfully
         console.log('Password changed successfully');
