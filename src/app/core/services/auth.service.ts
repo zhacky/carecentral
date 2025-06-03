@@ -66,7 +66,7 @@ export class AuthService {
   }
 
   updateUserRole(userId: string, requestBody: any): Observable<any> {
-    const updateUserApiUrl = `${environment.apiUrl}/update/${userId}`;
+    const updateUserApiUrl = `${environment.apiUrl}/api/users/${userId}`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.getToken()}`,
