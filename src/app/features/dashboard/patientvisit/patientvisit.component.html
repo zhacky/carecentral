@@ -2,10 +2,10 @@
   <div class="flex justify-between items-center mb-5 mt-2">
     <h3 class="text-lg font-semibold">Patient Visit</h3>
     <div class="relative">
-      <select class="border rounded px-2 py-1 text-sm">
-        <option>Monthly</option>
-        <option>Weekly</option>
-        <option>Daily</option>
+      <select class="border rounded px-2 py-1 text-sm" [(ngModel)]="selectedRange" (change)="onRangeChange()">
+        <option value="monthly">Monthly</option>
+        <option value="weekly">Weekly</option>
+        <option value="daily">Daily</option>
       </select>
     </div>
   </div>

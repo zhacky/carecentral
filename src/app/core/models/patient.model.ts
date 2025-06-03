@@ -24,6 +24,8 @@ export class Patient {
   toNotifyName: string;
   toNotifyAddress: string;
   assignedDoctorId: number;
+  createdAt: any;
+  registrationDate: any;
 
   constructor(
     position: number,
@@ -48,7 +50,9 @@ export class Patient {
     motherAddress: string,
     toNotifyName: string,
     toNotifyAddress: string,
-    assignedDoctorId: number
+    assignedDoctorId: number,
+    createdAt: any,
+    registrationDate: any,
   ) {
     this.position = position;
     this.patientId = patientId;
@@ -73,8 +77,10 @@ export class Patient {
     this.toNotifyName = toNotifyName;
     this.toNotifyAddress = toNotifyAddress;
     this.assignedDoctorId = assignedDoctorId;
+    this.createdAt = createdAt; 
+    this.registrationDate = registrationDate;
   }
-
+  
   static fromPatient(patient: any, position: number): Patient {
     return new Patient(
       position,
@@ -99,7 +105,10 @@ export class Patient {
       patient.motherAddress,
       patient.toNotifyName,
       patient.toNotifyAddress,
-      patient.assignedDoctorId
+      patient.assignedDoctorId,
+      patient.createdAt,
+      patient.registrationDate
     );
   }
 }
+  

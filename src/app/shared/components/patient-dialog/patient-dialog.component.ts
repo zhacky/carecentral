@@ -41,7 +41,33 @@ export class AddPatientDialogComponent implements OnInit {
   dataSourceDoc = new MatTableDataSource<Doctor>([]);
   showAddPatientForm = false;
 
-  profile: Patient = new Patient(0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0); // Default assignedDoctorId is set to 1
+  profile: Patient = new Patient(
+    0, // id
+    0, // assignedDoctorId
+    '', // firstName
+    '', // lastName
+    '', // birthday
+    '', // gender
+    '', // address
+    '', // city
+    '', // state
+    '', // zip
+    '', // phone
+    '', // email
+    '', // insurance
+    '', // policyNumber
+    '', // emergencyContact
+    '', // emergencyPhone
+    '', // allergies
+    '', // medications
+    '', // medicalHistory
+    '', // notes
+    '', // status
+    '', // createdAt
+    0, // updatedAt
+    '', // deletedAt
+    0   // someNumberField (ensure this matches your model)
+  ); // Default assignedDoctorId is set to 1
 
   doctors: Doctor[] = []; // Array to store fetched doctors
 

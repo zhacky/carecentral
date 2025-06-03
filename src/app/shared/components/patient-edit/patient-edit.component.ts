@@ -22,7 +22,7 @@ import {Doctor} from '../../../core/models/doctor.model';
 export class EditPatientComponent implements OnInit {
   patientDto: Patient = new Patient(
     0, // position
-    0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0
+    0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 0, null, null
   );
 
   doctors: Doctor[] = [];

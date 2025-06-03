@@ -5,6 +5,9 @@ import {PatientvisitComponent} from './patientvisit/patientvisit.component';
 import {PatientdataComponent} from './patientdata/patientdata.component';
 import {PatientService} from '../../core/services/patient.service';
 import { Patient } from '../../core/models/patient.model';
+import { RoomService } from '../../core/services/room.service';
+import { RoomAssignService } from '../../core/services/room-assign.service';
+import { Room } from '../../core/models/room.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +22,12 @@ import { Patient } from '../../core/models/patient.model';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  constructor(private patientService: PatientService) {}
+  availableBeds: number = 0;
+  constructor(
+    private patientService: PatientService,
+    private roomService: RoomService,
+    private roomAssignService: RoomAssignService
+  ) {}
   
   tableItems: Patient[] = []; // Now holds real patient data
 
@@ -31,6 +39,17 @@ export class DashboardComponent implements OnInit {
       error: (err) => {
         console.error('Failed to fetch patients:', err);
       }
+    });
+
+    this.roomService.getRooms().subscribe((rooms: Room[]) => {
+      this.roomAssignService.getRoomAssigns().subscribe((assignments: any[]) => {
+        let totalAvailable = 0;
+        rooms.forEach(room => {
+          const assignedCount = assignments.filter(a => a.room === room.roomId && a.status === 'ACTIVE').length;
+          totalAvailable += (room.roomCapacity - assignedCount);
+        });
+        this.availableBeds = totalAvailable;
+      });
     });
   }
   searchQueryPatient = ''; // Store the search query
@@ -151,6 +170,8 @@ export class DashboardComponent implements OnInit {
       return matchesSearchQuery && matchesStatusFilter;
     });
   }
+
+
 
   // Toggle the popup visibility
   togglePopup(index: number): void {
