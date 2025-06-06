@@ -6,12 +6,12 @@
     <div class="px-6 py-4 border-b">
       <div class="flex items-center justify-between md:flex-row">
         <div class="max-w-lg">
-          <button
+          <!-- <button
             routerLink="/common/accounts/register"
             class="add-button text-white px-4 py-2 rounded"
           >
             <i class="fa-solid fa-plus"></i> Add Account
-          </button>     
+          </button>      -->
         </div>
   
         <div class="relative w-64">
@@ -76,11 +76,11 @@
               class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium">
               <span
               [ngClass]="
-                (element.status === 'Inactive') ? 'bg-red-500 text-white px-3 py-1 rounded text-xs' :
-                (element.status === 'Active') ? 'bg-green-500 text-white px-3 py-1 rounded text-xs' :
-                (element.status === 'Pending') ? 'bg-yellow-500 text-white px-3 py-1 rounded text-xs' :
-                (element.status === 'Suspended') ? 'bg-gray-950 text-white px-3 py-1 rounded text-xs' :
-                (element.status === 'Deactivated') ? 'bg-rose-600 text-white px-3 py-1 rounded text-xs' :
+                (element.status === 'INACTIVE') ? 'bg-red-500 text-white px-3 py-1 rounded text-xs' :
+                (element.status === 'ACTIVE') ? 'bg-green-500 text-white px-3 py-1 rounded text-xs' :
+                (element.status === 'PENDING') ? 'bg-yellow-500 text-white px-3 py-1 rounded text-xs' :
+                (element.status === 'SUSPENDED') ? 'bg-gray-950 text-white px-3 py-1 rounded text-xs' :
+                (element.status === 'DEACTIVATED') ? 'bg-rose-600 text-white px-3 py-1 rounded text-xs' :
                 ''
               "
             >
