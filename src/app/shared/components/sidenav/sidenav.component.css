@@ -267,9 +267,12 @@ mat-list-item span {
 }
 
 mat-list-item.selected-menu-item {
-  background: #27cd0d !important; /* Highlight color */
+  background: #229111 !important; /* Highlight color */
   border-radius: 12px !important; /* Rounded corners */
   color: white !important; /* Text and icon color for active state */
+}
+mat-list-item.selected-menu-item:hover {
+  background: #27cd0d !important; /* Highlight color */
 }
 
 mat-list-item.selected-menu-item img[matListItemIcon] {

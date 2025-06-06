@@ -51,11 +51,6 @@ export class SidenavComponent {
       [label]: !items[label],
     }));
   }
-
-  // sideNavCollapsed = signal(false);
-  // @Input() set collapse(val: boolean) {
-  //   this.sideNavCollapsed.set(val);
-  // }
   sideNavCollapsed = signal(false);
   logoPicSize = computed(() => (this.collapsed() ? '40px' : '150px'));
 
@@ -126,7 +121,7 @@ export class SidenavComponent {
         },
         {
           icon: 'assets/Icons/icon_dot.svg',
-          label: 'Room Assignment',
+          label: 'Assign Room',
           route: 'roomAssign',
         },
       ],
@@ -137,8 +132,8 @@ export class SidenavComponent {
       route: 'philhealth',
     },
     {
-      icon: 'assets/Icons/icon_report.svg',
-      label: 'Reports',
+      icon: 'assets/Icons/icon_inventory.svg',
+      label: 'Inventory',
       route: 'inventory',
     },
     {

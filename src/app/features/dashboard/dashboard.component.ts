@@ -2,20 +2,18 @@ import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {PatientvisitComponent} from './patientvisit/patientvisit.component';
-import {PatientdataComponent} from './patientdata/patientdata.component';
 import {PatientService} from '../../core/services/patient.service';
-import { Patient } from '../../core/models/patient.model';
-import { RoomService } from '../../core/services/room.service';
-import { RoomAssignService } from '../../core/services/room-assign.service';
-import { Room } from '../../core/models/room.model';
+import {Patient} from '../../core/models/patient.model';
+import {RoomService} from '../../core/services/room.service';
+import {RoomAssignService} from '../../core/services/room-assign.service';
+import {Room} from '../../core/models/room.model';
 
 @Component({
   selector: 'app-dashboard',
   imports: [
     FormsModule,
     MatSidenavModule,
-    PatientvisitComponent,
-    PatientdataComponent
+    PatientvisitComponent
   ],
   templateUrl: './dashboard.component.html',
   standalone: true,
@@ -28,7 +26,7 @@ export class DashboardComponent implements OnInit {
     private roomService: RoomService,
     private roomAssignService: RoomAssignService
   ) {}
-  
+
   tableItems: Patient[] = []; // Now holds real patient data
 
   ngOnInit(): void {

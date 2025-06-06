@@ -19,7 +19,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
       --mat-mdc-snack-bar-button-color: white;
       --mdc-snackbar-supporting-text-color: white;
     }
-    
+
     &.snackbar-error {
       --mdc-snackbar-container-color: red;
       --mat-mdc-snack-bar-button-color: white;
@@ -28,8 +28,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 
   .add-button {
-    background-color: #27CD0D;
+    background-color: #229111;
     border-radius: 20px;
+  }
+  .add-button:hover {
+    background-color: #27CD0D;
   }
 
   .spinner ::ng-deep circle {
@@ -37,7 +40,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: rgb(233, 224, 225);
   }
 
-  
+
 
 
 
