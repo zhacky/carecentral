@@ -28,7 +28,9 @@ export class AuthService {
             username: response.username,
             firstName: response.firstName,
             lastName: response.lastName,
-            roles: response.roles };
+            roles: response.roles,
+            status: response.status
+          };
           localStorage.setItem('currentUser', JSON.stringify(this.currentUser)); // Store in localStorage
         } else {
           console.error('Roles missing in backend response');
@@ -43,7 +45,7 @@ export class AuthService {
 
   register(userData: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<any>(`${environment.apiUrl}/register`, userData, { headers }).pipe(
+    return this.http.post<any>(`${environment.apiUrl}/api/register`, userData, { headers }).pipe(
       catchError((error) => {
         console.error('Registration error', error);
         throw error;
@@ -72,6 +74,7 @@ export class AuthService {
       Authorization: `Bearer ${this.getToken()}`,
     });
 
+    console.log('Token', this.getToken())
     return this.http.put(updateUserApiUrl, requestBody, { headers }).pipe(
       tap(() => {
         console.log(`Updated role for user ${userId} to ${requestBody.roles}`);
@@ -82,6 +85,8 @@ export class AuthService {
       })
     );
   }
+
+
 
   getToken(): string {
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');

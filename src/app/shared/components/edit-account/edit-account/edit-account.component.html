@@ -12,34 +12,35 @@
           </svg>
         </div>
         <div class="flex flex-col ml-4 text-left">
-          <p class="font-medium text-gray-800">Jonathan Smith</p>
-          <p class="text-sm text-gray-500">johnsmith.doctor&#64;gmail.com</p>
+          <p class="font-medium text-gray-800">{{ user?.firstName }} {{ user?.lastName }}</p>
+          <p class="text-sm text-gray-500">{{user?.email}}</p>
         </div>    
       </div>
   
       <!-- Assign Role -->
       <div class="pb-3 pt-3">
-        <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Assign Role *</label>
-        <select id="role" [(ngModel)]="selectedRole"
-          class="w-full border h-[56px] border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 appearance-none">
-          <option value="" disabled selected>Select Role</option>
-          <option value="admin">Admin</option>
-          <option value="editor">Editor</option>
-          <option value="viewer">Viewer</option>
-        </select>
-      </div>
+      <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Assign Role *</label>
+      <select id="role" [(ngModel)]="selectedRoleId" name="role"
+        class="w-full border h-[56px] border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 appearance-none">
+        <option value="" disabled>Select Role</option>
+        <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
+      </select>
+
+    </div>
   
       <!-- Account Status -->
-      <div class="pb-3">
-        <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Account Status *</label>
-        <select id="status" [(ngModel)]="accountStatus"
-          class="w-full border h-[56px] border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 appearance-none">
-          <option value="" disabled selected>Select Status</option>
-          <option value="active">Active</option>
-          <option value="inactive">Inactive</option>
-          <option value="suspended">Suspended</option>
-        </select>
-      </div>
+       <div class="pb-3">
+      <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Account Status *</label>
+      <select id="status" [(ngModel)]="accountStatus"
+        class="w-full border h-[56px] border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 appearance-none">
+        <option value="" disabled>Select Status</option>
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+        <option value="Suspended">Suspended</option>
+        <option value="Pending">Pending</option>
+        <option value="Deactivated">Deactivated</option>
+      </select>
+    </div>
   
       <!-- Buttons -->
       <div class="flex justify-between pt-2">
@@ -48,8 +49,14 @@
           Cancel
         </button>
         <button (click)="onSave()"
-          class="w-[48%] bg-green-500 text-white rounded-full py-2 text-sm font-medium hover:bg-green-600 transition">
-          Save Changes
+          class="w-[48%] bg-green-500 text-white rounded-full py-2 text-sm font-medium hover:bg-green-600 transition flex items-center justify-center relative">
+          <mat-progress-spinner
+            *ngIf="isLoading"
+            diameter="20"
+            mode="indeterminate"
+            class="spinner absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          </mat-progress-spinner>
+          <span *ngIf="!isLoading">Save Changes</span>
         </button>
       </div>
     </div>
