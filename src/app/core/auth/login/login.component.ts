@@ -56,8 +56,20 @@ export class LoginComponent {
     setTimeout(() => {
     this.authService.login(username, password).subscribe({
       next: () => {
-        const currentUser = this.authService.getCurrentUser() as { roles: string[]; username: string };
+        const currentUser = this.authService.getCurrentUser() as { roles: string[]; username: string; status: string };
         // Check roles and redirect
+         if (currentUser.status && currentUser.status.toLowerCase() !== 'active') {
+          this.snackBar.open('Your account is not active. Please contact admin.', 'Close', {
+            duration: 3000,
+            panelClass: ['snackbar-error']
+          });
+          
+          this.isLoading = false;
+          // Optionally, log out the user if token is set
+          this.authService.logout();
+          return;
+        }
+
         if (currentUser.roles.includes('ROLE_ADMIN')) {
           this.router.navigate(['/common/dashboard']).then(success => {
             if (success) {

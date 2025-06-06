@@ -7,7 +7,7 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { SetRoleDialogComponent } from '../../shared/components/set-role-dialog/set-role-dialog.component';
 import { AuthService } from '../../core/services/auth.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 
@@ -23,7 +23,7 @@ import { MatChipsModule } from '@angular/material/chips';
 })
 
 export class AccountsManagementComponent implements AfterViewInit, OnInit {
-  constructor(private dialog: MatDialog, private authService: AuthService) {}
+  constructor(private dialog: MatDialog, private authService: AuthService, private router: Router) {}
 
   displayedColumns: string[] = ['position', 'lastName', 'firstName', 'email', 'username', 'status', 'role', 'action'];
   dataSource = new MatTableDataSource<PeriodicElement>([]);
@@ -84,6 +84,10 @@ export class AccountsManagementComponent implements AfterViewInit, OnInit {
         }
       }
     });
+  }
+
+   setRoleAndStatus(id: number) {
+    this.router.navigate(['/common/accounts/edit', id]);
   }
 
   applyFilter(): void {

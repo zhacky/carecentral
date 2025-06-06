@@ -78,6 +78,9 @@
               [ngClass]="
                 (element.status === 'Inactive') ? 'bg-red-500 text-white px-3 py-1 rounded text-xs' :
                 (element.status === 'Active') ? 'bg-green-500 text-white px-3 py-1 rounded text-xs' :
+                (element.status === 'Pending') ? 'bg-yellow-500 text-white px-3 py-1 rounded text-xs' :
+                (element.status === 'Suspended') ? 'bg-gray-950 text-white px-3 py-1 rounded text-xs' :
+                (element.status === 'Deactivated') ? 'bg-rose-600 text-white px-3 py-1 rounded text-xs' :
                 ''
               "
             >
@@ -99,13 +102,12 @@
           <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Action</th>
           <td *matCellDef="let element" class="py-4 px-6 border-b border-gray-200">
             <div class="flex justify-start space-x-2">
-              <a (click)="openEditDialog(element)"
-                 class="icon-edit">
+              <a class="icon-edit">
                  <img src="assets/Icons/icon_edit.svg" alt="Edit">
               </a>
               <a 
                  class="icon-delete"
-                 routerLink="/common/accounts/edit/{{element.id}}"
+                 (click)="setRoleAndStatus(element.id)"
                  >
                  <img src="assets/Icons/icon_key.svg" alt="Key">
               </a>
