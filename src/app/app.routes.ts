@@ -41,6 +41,7 @@ import { FormSubmissionGuard } from './core/auth/login/form.guard';
 import { EditAccountComponent } from './shared/components/edit-account/edit-account/edit-account.component';
 import { EditRoomAssignComponent } from './shared/components/edit-room-assign/edit-room-assign.component';
 import { ChangePasswordComponent } from './features/change-password/change-password.component';
+import { BillingDetailsComponent } from './features/billing/billing-details/billing-details.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -80,6 +81,12 @@ export const routes: Routes = [
       {
         path: 'billing',
         component: BillingComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_PATIENT'] },
+      },
+      {
+        path: 'billing/details/:id',
+        component: BillingDetailsComponent,
         canActivate: [RoleGuard],
         data: { roles: ['ROLE_ADMIN', 'ROLE_PATIENT'] },
       },
@@ -257,6 +264,12 @@ export const routes: Routes = [
       {
         path: 'billing',
         component: BillingComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_PATIENT'] },
+      },
+      {
+        path: 'billing/details/:id',
+        component: BillingDetailsComponent,
         canActivate: [RoleGuard],
         data: { roles: ['ROLE_ADMIN', 'ROLE_PATIENT'] },
       },

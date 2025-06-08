@@ -12,5 +12,6 @@ export interface Billing {
   billingId: number;
   patientId: number;
   billingDate: string;
+  totalAmount: number;
   items: BillingItem[];
 } 

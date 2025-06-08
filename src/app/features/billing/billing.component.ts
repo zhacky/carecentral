@@ -12,8 +12,7 @@ import {PatientService} from '../../core/services/patient.service';
 import {BillingService} from '../../core/services/billing.service';
 import {Patient} from '../../core/models/patient.model';
 import {Billing} from '../../core/models/billing.model';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import {BillingDetailsDialogComponent} from './billing-details-dialog/billing-details-dialog.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-billing',
@@ -37,8 +36,7 @@ import {BillingDetailsDialogComponent} from './billing-details-dialog/billing-de
     NgIf,
     CurrencyPipe,
     FormsModule,
-    MatPaginatorModule,
-    MatDialogModule
+    MatPaginatorModule
   ],
   styleUrls: ['./billing.component.css'],
   standalone: true
@@ -51,14 +49,37 @@ export class BillingComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  displayedColumns: string[] = ['billingId', 'billingDate', 'items', 'actions'];
+  displayedColumns: string[] = ['billingId', 'billingDate', 'items', 'totalAmount', 'actions'];
 
   constructor(
     private patientService: PatientService,
     private billingService: BillingService,
-    private dialog: MatDialog
+    private router: Router
   ) {
     this.dataSource = new MatTableDataSource<Billing>([]);
+    this.dataSource.filterPredicate = (data: Billing, filter: string) => {
+      const searchString = filter.trim().toLowerCase();
+
+      // Check top-level properties
+      const topLevelMatch =
+        data.billingId.toString().toLowerCase().includes(searchString) ||
+        data.billingDate.toLowerCase().includes(searchString) ||
+        data.totalAmount.toString().toLowerCase().includes(searchString);
+
+      if (topLevelMatch) {
+        return true;
+      }
+
+      // Check items array
+      const itemsMatch = data.items.some(item =>
+        item.itemName.toLowerCase().includes(searchString) ||
+        item.itemDescription.toLowerCase().includes(searchString) ||
+        item.billedBy.toLowerCase().includes(searchString) ||
+        item.amount.toString().toLowerCase().includes(searchString)
+      );
+
+      return itemsMatch;
+    };
   }
 
   ngOnInit(): void {
@@ -92,9 +113,6 @@ export class BillingComponent implements OnInit, AfterViewInit {
   }
 
   viewBillingDetails(billing: Billing): void {
-    this.dialog.open(BillingDetailsDialogComponent, {
-      data: billing,
-      width: '800px'
-    });
+    this.router.navigate(['/common/billing/details', billing.billingId]);
   }
 }

@@ -15,4 +15,8 @@ export class BillingService {
   getBillingsForPatient(patientId: number): Observable<Billing[]> {
     return this.http.get<Billing[]>(`${this.apiUrl}/${patientId}/billings`);
   }
+
+  getBillingById(billingId: number): Observable<Billing> {
+    return this.http.get<Billing>(`${environment.apiUrl}/billings/${billingId}`);
+  }
 } 
