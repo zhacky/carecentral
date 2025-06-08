@@ -1,15 +1,15 @@
-import {AfterViewInit, Component, ViewChild, OnInit} from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialog } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialog} from '@angular/material/dialog';
+import {MatIconModule} from '@angular/material/icon';
+import {CommonModule} from '@angular/common';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import { SetRoleDialogComponent } from '../../shared/components/set-role-dialog/set-role-dialog.component';
-import { AuthService } from '../../core/services/auth.service';
-import { Router, RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { MatChipsModule } from '@angular/material/chips';
+import {SetRoleDialogComponent} from '../../shared/components/set-role-dialog/set-role-dialog.component';
+import {AuthService} from '../../core/services/auth.service';
+import {Router} from '@angular/router';
+import {FormsModule} from '@angular/forms';
+import {MatChipsModule} from '@angular/material/chips';
 
 /**
  * @title Table with pagination
@@ -19,7 +19,7 @@ import { MatChipsModule } from '@angular/material/chips';
   styleUrl: 'accounts.component.css',
   templateUrl: 'accounts.component.html',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, MatChipsModule, CommonModule, FormsModule, RouterLink],
+  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, MatChipsModule, CommonModule, FormsModule]
 })
 
 export class AccountsManagementComponent implements AfterViewInit, OnInit {
@@ -44,7 +44,7 @@ export class AccountsManagementComponent implements AfterViewInit, OnInit {
     this.authService.getUsers().subscribe({
       next: (users) => {
         this.dataSource.data = users.map((user, index) => ({
-          id: user.id, 
+          id: user.id,
           position: index + 1,
           username: user.username,
           firstName: user.firstName,
@@ -71,16 +71,16 @@ export class AccountsManagementComponent implements AfterViewInit, OnInit {
         firstName: element.firstName,
         lastName: element.lastName,
         status: element.status,
-        email: element.email, 
+        email: element.email,
       },
     });
-  
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         const index = this.dataSource.data.findIndex((item) => item.position === element.position);
         if (index !== -1) {
           this.dataSource.data[index].role = result.role;
-          this.dataSource.data = [...this.dataSource.data]; 
+          this.dataSource.data = [...this.dataSource.data];
         }
       }
     });
@@ -114,7 +114,7 @@ export class AccountsManagementComponent implements AfterViewInit, OnInit {
 
 
 export interface PeriodicElement {
-  id: string; 
+  id: string;
   username: string;
   position: number;
   email: string;

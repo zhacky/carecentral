@@ -37,9 +37,9 @@ import { AuthService } from '../../../core/services/auth.service';
     </mat-dialog-content>
     <mat-dialog-actions align="end">
       <button mat-button mat-dialog-close>Cancel</button>
-      <button 
-        mat-raised-button 
-        color="primary" 
+      <button
+        mat-raised-button
+        color="primary"
         (click)="savePermissions()"
         [disabled]="isLoading">
         <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
@@ -64,22 +64,18 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class EditPermissionsDialogComponent implements OnInit {
   availablePermissions: string[] = [
-    'VIEW_PATIENTS',
-    'EDIT_PATIENTS',
-    'DELETE_PATIENTS',
-    'VIEW_DOCTORS',
-    'EDIT_DOCTORS',
-    'DELETE_DOCTORS',
-    'VIEW_INVENTORY',
-    'EDIT_INVENTORY',
-    'DELETE_INVENTORY',
-    'VIEW_ROOMS',
-    'EDIT_ROOMS',
-    'DELETE_ROOMS',
-    'MANAGE_USERS',
-    'MANAGE_ROLES'
+    'PATIENT_READ',
+    'PATIENT_WRITE',
+    'DOCTOR_READ',
+    'DOCTOR_WRITE',
+    'INVENTORY_READ',
+    'INVENTORY_WRITE',
+    'ROOM_READ',
+    'ROOM_WRITE',
+    'USER_MANAGE',
+    'ROLE_MANAGE'
   ];
-  
+
   selectedPermissions: { [key: string]: boolean } = {};
   isLoading = false;
 
@@ -138,4 +134,4 @@ export class EditPermissionsDialogComponent implements OnInit {
       }
     });
   }
-} 
+}

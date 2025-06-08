@@ -1,37 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule, NgForOf } from '@angular/common';
-import { AuthService } from '../../core/services/auth.service';
-import { FormsModule } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog } from '@angular/material/dialog';
-import { EditPermissionsDialogComponent } from '../../shared/components/edit-permissions-dialog/edit-permissions-dialog.component';
+import {Component, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AuthService} from '../../core/services/auth.service';
+import {FormsModule} from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {MatDialog} from '@angular/material/dialog';
+import {
+  EditPermissionsDialogComponent
+} from '../../shared/components/edit-permissions-dialog/edit-permissions-dialog.component';
+import {UserRolesSettingsComponent} from './cards/user-roles-settings/user-roles-settings.component';
 
 @Component({
   selector: 'app-settings',
-  imports: [NgForOf, CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, UserRolesSettingsComponent],
   templateUrl: './settings.component.html',
   standalone: true,
   styleUrl: './settings.component.css',
 })
 export class SettingsComponent implements OnInit {
   roles: { name: string }[] = [];
-  newRoleName = '';
-  
+
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog
   ) {}
-
-  days = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ];
 
   ngOnInit(): void {
     this.fetchRoles();
@@ -63,15 +55,14 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  addRole(): void {
-    if (!this.newRoleName.trim()) {
+  addRole(newRoleName: string): void {
+    if (!newRoleName.trim()) {
       alert('Role name cannot be empty!');
       return;
     }
 
-    const newRole = { name: this.newRoleName.trim() };
+    const newRole = { name: newRoleName.trim() };
     this.roles.push(newRole);
-    this.newRoleName = '';
 
     this.authService.addRole(newRole).subscribe({
       next: () => {
