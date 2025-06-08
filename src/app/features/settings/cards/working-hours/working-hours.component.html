@@ -1,0 +1,19 @@
+<!-- Working Hours -->
+<div class="bg-white rounded-lg shadow p-6">
+  <h2 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+    <svg class="w-5 h-5 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    Working Hours
+  </h2>
+  <div class="space-y-4">
+    <div *ngFor="let day of days" class="flex items-center">
+      <span class="w-24 text-gray-600">{{ day }}</span>
+      <input type="time" class="px-2 py-1 border border-gray-300 rounded-md mr-2">
+      <span class="text-gray-500">to</span>
+      <input type="time" class="px-2 py-1 border border-gray-300 rounded-md ml-2">
+    </div>
+    <button class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Update Hours</button>
+  </div>
+</div>

@@ -147,14 +147,14 @@ export class AuthService {
     );
   }
 
-  updateRolePermissions(roleName: string, permissions: string[]): Observable<any> {
+  updateRolePermissions(roleName: string, permissionNames: string[]): Observable<any> {
     const updatePermissionsUrl = `${environment.apiUrl}/roles/${roleName}/permissions`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.getToken()}`
     });
 
-    return this.http.put(updatePermissionsUrl, { permissions }, { headers }).pipe(
+    return this.http.put(updatePermissionsUrl, { permissionNames }, { headers }).pipe(
       tap((response) => {
         console.log(`Updated permissions for role ${roleName}:`, response);
       }),
