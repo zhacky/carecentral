@@ -5,11 +5,12 @@ import { Billing } from '../../../core/models/billing.model';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { CurrencyPipe } from '@angular/common';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-billing-details',
   standalone: true,
-  imports: [CommonModule, MatTableModule, CurrencyPipe],
+  imports: [CommonModule, MatTableModule, CurrencyPipe, MatTooltipModule],
   templateUrl: './billing-details.component.html',
   styleUrl: './billing-details.component.css'
 })
