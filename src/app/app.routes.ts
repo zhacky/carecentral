@@ -42,6 +42,7 @@ import { EditAccountComponent } from './shared/components/edit-account/edit-acco
 import { EditRoomAssignComponent } from './shared/components/edit-room-assign/edit-room-assign.component';
 import { ChangePasswordComponent } from './features/change-password/change-password.component';
 import { BillingDetailsComponent } from './features/billing/billing-details/billing-details.component';
+import { BillingEditComponent } from './features/billing/billing-edit/billing-edit.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -89,6 +90,12 @@ export const routes: Routes = [
         component: BillingDetailsComponent,
         canActivate: [RoleGuard],
         data: { roles: ['ROLE_ADMIN', 'ROLE_PATIENT'] },
+      },
+      {
+        path: 'billing/edit/:id',
+        component: BillingEditComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['ROLE_ADMIN'] },
       },
       {
         path: 'profile',
@@ -253,177 +260,6 @@ export const routes: Routes = [
         component: PhilhealthDetailsComponent,
         canActivate: [RoleGuard],
         data: { roles: ['ROLE_ADMIN'] },
-      },
-
-      {
-        path: 'dashboard',
-        component: DashboardComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN'] },
-      },
-      {
-        path: 'billing',
-        component: BillingComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN', 'ROLE_PATIENT'] },
-      },
-      {
-        path: 'billing/details/:id',
-        component: BillingDetailsComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN', 'ROLE_PATIENT'] },
-      },
-      {
-        path: 'profile',
-        component: ProfileComponent,
-        canActivate: [RoleGuard],
-        data: {
-          roles: ['ROLE_ADMIN', 'ROLE_DOCTOR', 'ROLE_NURSE', 'ROLE_PATIENT'],
-        },
-      },
-      {
-        path: 'appointment',
-        component: AppointmentComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN'] },
-      },
-      {
-        path: 'doctor',
-        component: DoctorComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN', 'ROLE_DOCTOR'] },
-      },
-      {
-        path: 'patient',
-        component: PatientInformationComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN', 'ROLE_NURSE', 'ROLE_DOCTOR'] },
-      },
-      {
-        path: 'report',
-        component: ReportComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN', 'ROLE_NURSE'] },
-      },
-      {
-        path: 'settings',
-        component: SettingsComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN'] },
-      },
-      {
-        path: 'accounts',
-        component: AccountsManagementComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN'] },
-      },
-      {
-        path: 'accounts/register',
-        component: RegisterComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN'] },
-      },
-      {
-        path: 'inventory',
-        component: InventoryComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN'] },
-      },
-      {
-        path: 'patient/add',
-        component: AddPatientDialogComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN', 'ROLE_NURSE'] },
-      },
-      {
-        path: 'patient/details/:id',
-        component: PatientDetailsComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN', 'ROLE_DOCTOR', 'ROLE_NURSE'] },
-      },
-      {
-        path: 'patient/edit/:id',
-        component: EditPatientComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN', 'ROLE_NURSE'] },
-      },
-      {
-        path: 'inventory/add',
-        component: AddInventoryComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN'] },
-      },
-      {
-        path: 'inventory/edit/:id',
-        component: EditInventoryComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN'] },
-      },
-      {
-        path: 'room',
-        component: RoomComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN', 'ROLE_NURSE'] },
-      },
-      {
-        path: 'room/add',
-        component: AddRoomComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN'] },
-      },
-      {
-        path: 'room/details/:id',
-        component: RoomDetailsComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN', 'ROLE_NURSE'] },
-      },
-      {
-        path: 'room/edit/:id',
-        component: EditRoomComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN'] },
-      },
-      {
-        path: 'roomAssign',
-        component: RoomAssignComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN', 'ROLE_NURSE'] },
-      },
-      {
-        path: 'roomAssign/add',
-        component: AddRoomAssignComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN'] },
-      },
-      {
-        path: 'roomAssign/details',
-        component: RoomAssignDetailsComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN'] },
-      },
-      {
-        path: 'doctor/add',
-        component: AddDoctorComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN'] },
-      },
-      {
-        path: 'doctor/details/:id',
-        component: DoctorDetailsComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN'] },
-      },
-      {
-        path: 'doctor/edit/:id',
-        component: EditDoctorComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN'] },
-      },
-      {
-        path: 'philhealth',
-        component: PhilhealthComponent,
-        canActivate: [RoleGuard],
-        data: { roles: ['ROLE_ADMIN', 'ROLE_IT Administrator'] },
       },
       {
         path: 'philhealth/add',

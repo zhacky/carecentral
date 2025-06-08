@@ -115,4 +115,8 @@ export class BillingComponent implements OnInit, AfterViewInit {
   viewBillingDetails(billing: Billing): void {
     this.router.navigate(['/common/billing/details', billing.billingId]);
   }
+
+  editBilling(billing: Billing): void {
+    this.router.navigate(['/common/billing/edit', billing.billingId]);
+  }
 }

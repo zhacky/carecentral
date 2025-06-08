@@ -1,0 +1,55 @@
+<div class="p-6">
+  <h2 class="text-2xl font-bold mb-4">Edit Billing</h2>
+  <form [formGroup]="billingForm" (ngSubmit)="onSubmit()">
+    <div class="grid grid-cols-2 gap-4 mb-6">
+      <mat-form-field>
+        <mat-label>Billing ID</mat-label>
+        <input matInput formControlName="billingId">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Patient ID</mat-label>
+        <input matInput formControlName="patientId">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Billing Date</mat-label>
+        <input matInput type="date" formControlName="billingDate">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Total Amount</mat-label>
+        <input matInput formControlName="totalAmount">
+      </mat-form-field>
+    </div>
+
+    <h3 class="text-xl font-bold mb-4">Billing Items</h3>
+    <div formArrayName="items">
+      <table class="w-full">
+        <thead>
+          <tr>
+            <th>Item Name</th>
+            <th>Description</th>
+            <th>Billed By</th>
+            <th>Amount</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items.controls; let i=index" [formGroupName]="i">
+            <td><mat-form-field><input matInput formControlName="itemName"></mat-form-field></td>
+            <td><mat-form-field><input matInput formControlName="itemDescription"></mat-form-field></td>
+            <td><mat-form-field><input matInput formControlName="billedBy"></mat-form-field></td>
+            <td><mat-form-field><input matInput type="number" formControlName="amount"></mat-form-field></td>
+            <td><button mat-icon-button (click)="removeItem(i)"><mat-icon>delete</mat-icon></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-4">
+      <button mat-stroked-button (click)="addItem()">Add Item</button>
+    </div>
+
+    <div class="mt-6 flex justify-end">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!billingForm.valid">Save</button>
+    </div>
+  </form>
+</div>

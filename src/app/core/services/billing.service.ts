@@ -19,4 +19,8 @@ export class BillingService {
   getBillingById(billingId: number): Observable<Billing> {
     return this.http.get<Billing>(`${environment.apiUrl}/billings/${billingId}`);
   }
+
+  updateBilling(billingId: number, billing: Billing): Observable<Billing> {
+    return this.http.put<Billing>(`${environment.apiUrl}/billings/${billingId}`, billing);
+  }
 } 
