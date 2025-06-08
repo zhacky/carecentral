@@ -5,7 +5,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
 import { RouterModule } from '@angular/router';
+import { MatTableModule } from '@angular/material/table';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +20,8 @@ import { RouterModule } from '@angular/router';
     MatListModule,
     RouterModule,
     FormsModule,
+    MatSelectModule,
+    MatTableModule
   ],
   templateUrl: './app.component.html',
   standalone: true,
