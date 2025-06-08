@@ -12,7 +12,7 @@ import {PatientService} from '../../core/services/patient.service';
 import {BillingService} from '../../core/services/billing.service';
 import {Patient} from '../../core/models/patient.model';
 import {Billing} from '../../core/models/billing.model';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-billing',
@@ -54,7 +54,8 @@ export class BillingComponent implements OnInit, AfterViewInit {
   constructor(
     private patientService: PatientService,
     private billingService: BillingService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.dataSource = new MatTableDataSource<Billing>([]);
     this.dataSource.filterPredicate = (data: Billing, filter: string) => {
@@ -93,6 +94,11 @@ export class BillingComponent implements OnInit, AfterViewInit {
   loadPatients(): void {
     this.patientService.getPatients().subscribe(patients => {
       this.patients = patients;
+      const patientId = this.route.snapshot.queryParamMap.get('patientId');
+      if (patientId) {
+        this.selectedPatientId = Number(patientId);
+        this.onPatientChange();
+      }
     });
   }
 
@@ -117,6 +123,6 @@ export class BillingComponent implements OnInit, AfterViewInit {
   }
 
   editBilling(billing: Billing): void {
-    this.router.navigate(['/common/billing/edit', billing.billingId]);
+    this.router.navigate(['/common/billing/edit', billing.billingId], { queryParams: { patientId: this.selectedPatientId } });
   }
 }

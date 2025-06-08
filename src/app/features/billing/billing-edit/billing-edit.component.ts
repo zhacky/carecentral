@@ -9,6 +9,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-billing-edit',
@@ -20,7 +22,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   templateUrl: './billing-edit.component.html',
   styleUrls: ['./billing-edit.component.css']
@@ -28,32 +31,45 @@ import { MatIconModule } from '@angular/material/icon';
 export class BillingEditComponent implements OnInit {
   billingForm!: FormGroup;
   billingId!: number;
+  patientIdForRedirect: number | null = null;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
-    private billingService: BillingService
+    private billingService: BillingService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.billingId = Number(this.route.snapshot.paramMap.get('id'));
+    const patientId = this.route.snapshot.queryParamMap.get('patientId');
+    if (patientId) {
+        this.patientIdForRedirect = Number(patientId);
+    }
+
     this.billingForm = this.fb.group({
       billingId: [{ value: '', disabled: true }],
       patientId: [{ value: '', disabled: true }],
       billingDate: ['', Validators.required],
-      totalAmount: [{ value: '', disabled: true }],
+      totalAmount: [{ value: 0, disabled: true }],
       items: this.fb.array([])
     });
 
     if (this.billingId) {
       this.billingService.getBillingById(this.billingId).subscribe(billing => {
         this.billingForm.patchValue(billing);
-        billing.items.forEach(item => {
-          this.items.push(this.createItem(item));
-        });
+        this.billingForm.setControl('items', this.fb.array(billing.items.map(item => this.createItem(item))));
+        this.updateTotalAmount();
       });
     }
+    
+    this.items.valueChanges.subscribe(() => this.updateTotalAmount());
+  }
+
+  updateTotalAmount(): void {
+    const total = this.items.value.reduce((acc: any, item: { amount: any; }) => acc + (item.amount || 0), 0);
+    this.billingForm.get('totalAmount')?.setValue(total, { emitEvent: false });
   }
 
   get items(): FormArray {
@@ -86,14 +102,37 @@ export class BillingEditComponent implements OnInit {
   }
 
   removeItem(index: number): void {
-    this.items.removeAt(index);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Delete Billing Item',
+        message: 'Are you sure you want to delete this item?'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.items.removeAt(index);
+      }
+    });
   }
 
   onSubmit(): void {
     if (this.billingForm.valid) {
       this.billingService.updateBilling(this.billingId, this.billingForm.getRawValue()).subscribe(() => {
-        this.router.navigate(['/common/billing']);
+        if(this.patientIdForRedirect) {
+            this.router.navigate(['/common/billing'], { queryParams: { patientId: this.patientIdForRedirect } });
+        } else {
+            this.router.navigate(['/common/billing']);
+        }
       });
+    }
+  }
+
+  onCancel(): void {
+    if (this.patientIdForRedirect) {
+      this.router.navigate(['/common/billing'], { queryParams: { patientId: this.patientIdForRedirect } });
+    } else {
+      this.router.navigate(['/common/billing']);
     }
   }
 }
