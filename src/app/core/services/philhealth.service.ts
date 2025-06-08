@@ -132,4 +132,9 @@ export class PhilhealthService {
   printPhilhealthCF3Pdf(id: number): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/philhealthCF3Pdf/${id}`, { responseType: 'blob' });
   }
+
+  // Download Philhealth CF4 PDF
+  printPhilhealthCF4Pdf(id: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/philhealthCF4Pdf/${id}`, { responseType: 'blob' });
+  }
 }

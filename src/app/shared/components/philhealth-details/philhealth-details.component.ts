@@ -54,7 +54,7 @@ export class PhilhealthDetailsComponent implements OnInit {
   //   });
   // }
 
-  printPdf(type: 'philhealthCF3' | 'notAvailable' | 'noAvailable2') {
+  printPdf(type: 'philhealthCF3' | 'philhealthCF4') {
     this.showDropdown = false;
     const philhealthId = this.philhealthId; // make sure this ID is available
 
@@ -76,16 +76,11 @@ export class PhilhealthDetailsComponent implements OnInit {
         // handleBlob(blob, `PatientDataSheet_${this.personalInfo.firstName + this.personalInfo.lastName}.pdf`);
         openPdfPreview(blob);
       });
-    } else if (type === 'notAvailable') {
-      // this.philhealthService.printEmergencyRoomPdf(patientId).subscribe(blob => {
-      //   // handleBlob(blob, `EmergencyRoomPatient_${this.personalInfo.firstName + this.personalInfo.lastName}.pdf`);
-      //   openPdfPreview(blob);
-      // });
-    } else if (type == 'noAvailable2') {
-      // this.philhealthService.printAuthorizationSurgicalTreatmentPdf(patientId).subscribe(blob => {
-      //   // handleBlob(blob, `AuthorizationSurgicalTreatment_${this.personalInfo.firstName + this.personalInfo.lastName}.pdf`);
-      //   openPdfPreview(blob);
-      // })
+    } else if (type === 'philhealthCF4') {
+      this.philhealthService.printPhilhealthCF4Pdf(philhealthId).subscribe(blob => {
+        // handleBlob(blob, `PatientDataSheet_${this.personalInfo.firstName + this.personalInfo.lastName}.pdf`);
+        openPdfPreview(blob);
+      });
     }
   }
 
