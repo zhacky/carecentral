@@ -43,6 +43,7 @@ import { EditRoomAssignComponent } from './shared/components/edit-room-assign/ed
 import { ChangePasswordComponent } from './features/change-password/change-password.component';
 import { BillingDetailsComponent } from './features/billing/billing-details/billing-details.component';
 import { BillingEditComponent } from './features/billing/billing-edit/billing-edit.component';
+import { BillingAddComponent } from './features/billing/billing-add/billing-add.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -94,6 +95,12 @@ export const routes: Routes = [
       {
         path: 'billing/edit/:id',
         component: BillingEditComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['ROLE_ADMIN'] },
+      },
+      {
+        path: 'billing/add',
+        component: BillingAddComponent,
         canActivate: [RoleGuard],
         data: { roles: ['ROLE_ADMIN'] },
       },

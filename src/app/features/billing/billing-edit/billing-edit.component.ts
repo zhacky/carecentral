@@ -102,27 +102,28 @@ export class BillingEditComponent implements OnInit {
   }
 
   removeItem(index: number): void {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: {
-        title: 'Delete Billing Item',
-        message: 'Are you sure you want to delete this item?'
-      }
-    });
+    // const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+    //   data: {
+    //     title: 'Delete Billing Item',
+    //     message: 'Are you sure you want to delete this item?'
+    //   }
+    // });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.items.removeAt(index);
-      }
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (result) {
+    //     this.items.removeAt(index);
+    //   }
+    // });
+    this.items.removeAt(index);
   }
 
   onSubmit(): void {
     if (this.billingForm.valid) {
       this.billingService.updateBilling(this.billingId, this.billingForm.getRawValue()).subscribe(() => {
-        if(this.patientIdForRedirect) {
+        if(this.patientIdForRedirect && this.items.length > 0) {
             this.router.navigate(['/common/billing'], { queryParams: { patientId: this.patientIdForRedirect } });
         } else {
-            this.router.navigate(['/common/billing']);
+            //this.router.navigate(['/common/billing']);
         }
       });
     }

@@ -13,6 +13,8 @@ import {BillingService} from '../../core/services/billing.service';
 import {Patient} from '../../core/models/patient.model';
 import {Billing} from '../../core/models/billing.model';
 import {Router, ActivatedRoute} from '@angular/router';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {ConfirmationDialogComponent} from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-billing',
@@ -36,7 +38,8 @@ import {Router, ActivatedRoute} from '@angular/router';
     NgIf,
     CurrencyPipe,
     FormsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule
   ],
   styleUrls: ['./billing.component.css'],
   standalone: true
@@ -55,7 +58,8 @@ export class BillingComponent implements OnInit, AfterViewInit {
     private patientService: PatientService,
     private billingService: BillingService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ) {
     this.dataSource = new MatTableDataSource<Billing>([]);
     this.dataSource.filterPredicate = (data: Billing, filter: string) => {
@@ -124,5 +128,26 @@ export class BillingComponent implements OnInit, AfterViewInit {
 
   editBilling(billing: Billing): void {
     this.router.navigate(['/common/billing/edit', billing.billingId], { queryParams: { patientId: this.selectedPatientId } });
+  }
+
+  addBilling(): void {
+    this.router.navigate(['/common/billing/add'], { queryParams: { patientId: this.selectedPatientId } });
+  }
+
+  deleteBilling(billing: Billing): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Delete Billing Record',
+        message: `Are you sure you want to delete billing record #${billing.billingId}?`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.billingService.deleteBilling(billing.billingId).subscribe(() => {
+          this.dataSource.data = this.dataSource.data.filter(b => b.billingId !== billing.billingId);
+        });
+      }
+    });
   }
 }

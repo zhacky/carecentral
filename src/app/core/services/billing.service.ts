@@ -23,4 +23,12 @@ export class BillingService {
   updateBilling(billingId: number, billing: Billing): Observable<Billing> {
     return this.http.put<Billing>(`${environment.apiUrl}/billings/${billingId}`, billing);
   }
+
+  deleteBilling(billingId: number): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}/billings/${billingId}`);
+  }
+
+  createBilling(billing: Billing): Observable<Billing> {
+    return this.http.post<Billing>(`${environment.apiUrl}/billings`, billing);
+  }
 } 
