@@ -27,7 +27,7 @@
       <td class="px-4 py-2 border">{{ item.inventoryId }}</td>
       <td class="px-4 py-2 border">{{ item.inventoryName }}</td>
       <td class="px-4 py-2 border">{{ item.quantity }}</td>
-      <td class="px-4 py-2 border">{{ item.price | currency }}</td>
+      <td class="px-4 py-2 border">{{ item.price | currency: 'PHP' }}</td>
       <td class="px-4 py-2 border">{{ item.expirationDate | date: 'MM/dd/yyyy' }}</td>
       <td class="px-4 py-2 border">
       <button

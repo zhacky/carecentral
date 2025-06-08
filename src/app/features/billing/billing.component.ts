@@ -12,6 +12,8 @@ import {PatientService} from '../../core/services/patient.service';
 import {BillingService} from '../../core/services/billing.service';
 import {Patient} from '../../core/models/patient.model';
 import {Billing} from '../../core/models/billing.model';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {BillingDetailsDialogComponent} from './billing-details-dialog/billing-details-dialog.component';
 
 @Component({
   selector: 'app-billing',
@@ -35,7 +37,8 @@ import {Billing} from '../../core/models/billing.model';
     NgIf,
     CurrencyPipe,
     FormsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule
   ],
   styleUrls: ['./billing.component.css'],
   standalone: true
@@ -48,11 +51,12 @@ export class BillingComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  displayedColumns: string[] = ['billingId', 'billingDate', 'items'];
+  displayedColumns: string[] = ['billingId', 'billingDate', 'items', 'actions'];
 
   constructor(
     private patientService: PatientService,
-    private billingService: BillingService
+    private billingService: BillingService,
+    private dialog: MatDialog
   ) {
     this.dataSource = new MatTableDataSource<Billing>([]);
   }
@@ -85,5 +89,12 @@ export class BillingComponent implements OnInit, AfterViewInit {
 
   applyFilter() {
     this.dataSource.filter = this.searchTerm.trim().toLowerCase();
+  }
+
+  viewBillingDetails(billing: Billing): void {
+    this.dialog.open(BillingDetailsDialogComponent, {
+      data: billing,
+      width: '800px'
+    });
   }
 }
