@@ -1,0 +1,47 @@
+<div class="billing-container p-4">
+  <!-- Patient Selector -->
+  <mat-form-field class="w-full" appearance="fill">
+    <mat-label>Select Patient</mat-label>
+    <mat-select [(value)]="selectedPatientId" (selectionChange)="onPatientChange()">
+      <mat-option *ngFor="let patient of patients" [value]="patient.patientId">
+        {{ patient.name }} (ID: {{ patient.patientId }})
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Billing Table -->
+  <div class="mt-6">
+    <table mat-table [dataSource]="filteredBillings" class="mat-elevation-z8 w-full" *ngIf="filteredBillings.length > 0">
+      <!-- Billing ID Column -->
+      <ng-container matColumnDef="billingId">
+        <th mat-header-cell *matHeaderCellDef> Billing ID </th>
+        <td mat-cell *matCellDef="let billing"> {{ billing.billingId }} </td>
+      </ng-container>
+
+      <!-- Billing Date Column -->
+      <ng-container matColumnDef="billingDate">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let billing"> {{ billing.billingDate }} </td>
+      </ng-container>
+
+      <!-- Billing Items Column -->
+      <ng-container matColumnDef="items">
+        <th mat-header-cell *matHeaderCellDef> Items </th>
+        <td mat-cell *matCellDef="let billing">
+          <ul>
+            <li *ngFor="let item of billing.items">
+              {{ item.itemName }} - {{ item.amount | currency }}
+            </li>
+          </ul>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <p *ngIf="filteredBillings.length === 0" class="text-gray-500 mt-4">
+      No billing records for the selected patient.
+    </p>
+  </div>
+</div>

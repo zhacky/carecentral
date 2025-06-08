@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
@@ -55,7 +55,7 @@ export class AuthService {
 
   getRoles(): Observable<string[]> {
     const rolesApiUrl = `${environment.apiUrl}/roles`;
-    const roles = this.http.get<string[]>(rolesApiUrl).pipe(
+    return this.http.get<string[]>(rolesApiUrl).pipe(
       tap((roles) => {
         console.log('Fetched roles from backend:', roles);
       }),
@@ -64,7 +64,6 @@ export class AuthService {
         throw error;
       })
     );
-    return roles;
   }
 
   updateUserRole(userId: string, requestBody: any): Observable<any> {
