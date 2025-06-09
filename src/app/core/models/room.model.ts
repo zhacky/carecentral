@@ -44,6 +44,6 @@ export class Room {
 }
 
 export enum RoomStatus {
-  ACTIVE = 'ACTIVE',
-  INACTIVE = 'INACTIVE'
+  OCCUPIED = 'OCCUPIED',
+  AVAILABLE = 'AVAILABLE'
 }

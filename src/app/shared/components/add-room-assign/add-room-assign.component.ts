@@ -109,7 +109,7 @@ export class AddRoomAssignComponent implements OnInit {
 
         // Process and filter rooms
         this.rooms = rooms
-          .filter(r => r.status === 'ACTIVE')
+          .filter(r => r.status === 'AVAILABLE')
           .map((room, idx) => {
             const assigned = activeAssignments.filter(a => a.room === room.roomId).length;
             return Room.fromRoom(room, idx + 1, assigned);   // capacity already set
