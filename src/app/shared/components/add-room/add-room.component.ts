@@ -24,7 +24,7 @@ export class AddRoomComponent {
     roomDescription: '',
     roomCapacity: 0,
     roomCharge: '',
-    status: RoomStatus.ACTIVE,
+    status: RoomStatus.AVAILABLE,
   };
 
   constructor(

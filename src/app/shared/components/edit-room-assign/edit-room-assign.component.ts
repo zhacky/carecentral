@@ -85,7 +85,7 @@ export class EditRoomAssignComponent implements OnInit {
         const activeAssignments = assignments.filter(a => a.status === 'ACTIVE');
 
         this.rooms = rooms
-          .filter(room => room.status === 'ACTIVE')
+          .filter(room => room.status === 'AVAILABLE')
           .map((room, idx) => {
             const assignedCount = activeAssignments.filter(a => a.room === room.roomId).length;
             return Room.fromRoom(room, idx + 1, assignedCount);
