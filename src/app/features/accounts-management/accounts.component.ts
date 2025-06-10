@@ -10,6 +10,8 @@ import {AuthService} from '../../core/services/auth.service';
 import {Router} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {MatChipsModule} from '@angular/material/chips';
+import { ConfirmDialogComponent } from '../../shared/components/dialog/confirm-dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 /**
  * @title Table with pagination
@@ -23,7 +25,7 @@ import {MatChipsModule} from '@angular/material/chips';
 })
 
 export class AccountsManagementComponent implements AfterViewInit, OnInit {
-  constructor(private dialog: MatDialog, private authService: AuthService, private router: Router) {}
+  constructor(private dialog: MatDialog, private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {}
 
   displayedColumns: string[] = ['position', 'lastName', 'firstName', 'email', 'username', 'status', 'role', 'action'];
   dataSource = new MatTableDataSource<PeriodicElement>([]);
@@ -93,6 +95,37 @@ export class AccountsManagementComponent implements AfterViewInit, OnInit {
   applyFilter(): void {
     this.dataSource.filter = this.searchTerm.trim().toLowerCase();
   }
+
+  deleteUser(userId: string) {
+  const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    width: '350px',
+    data: {
+      title: 'Delete Account',
+      message: 'Are you sure you want to delete this account?'
+    }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.authService.deleteUser(userId).subscribe({
+        next: () => {
+          this.fetchUsers();
+          this.snackBar.open('Account successfully deleted.', 'Close', {
+            duration: 3000,
+            panelClass: ['snackbar-success']
+          });
+        },
+        error: (err) => {
+           this.snackBar.open('Account successfully deleted.', 'Close', {
+            duration: 3000,
+            panelClass: ['snackbar-success']
+          });
+          console.error(err);
+        }
+      });
+    }
+  });
+}
 
   getStatusClass(status: string): string {
   switch (status) {

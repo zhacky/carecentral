@@ -102,11 +102,21 @@
               <a
                  class="icon-delete"
                  (click)="setRoleAndStatus(element.id)"
+                 (keyup.enter)="setRoleAndStatus(element.id)"
+                 tabindex="0"
+                 role="button"
+                 aria-label="Set Role and Status"
                  >
                  <img src="assets/Icons/icon_key.svg" alt="Key">
               </a>
               <a
-                 class="icon-delete">
+                 class="icon-delete"
+                 (click)="deleteUser(element.id)"
+                 (keyup.enter)="deleteUser(element.id)"
+                 tabindex="0"
+                 role="button"
+                  aria-label="Delete User"
+                 >
                  <img src="assets/Icons/icon_delete.svg" alt="Delete">
               </a>
             </div>

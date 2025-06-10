@@ -199,4 +199,19 @@ export class AuthService {
       })
     );
   }
+
+  deleteUser(userId: string): Observable<any> {
+  const url = `${environment.apiUrl}/api/register/${userId}`;
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${this.getToken()}`
+  });
+  // Set responseType to 'text' to handle empty responses
+  return this.http.delete(url, { headers, responseType: 'text' as 'json' }).pipe(
+    tap(() => {
+    }),
+    catchError((error) => {
+      throw error;
+    })
+  );
+}
 }
