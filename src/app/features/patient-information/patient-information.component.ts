@@ -77,7 +77,6 @@ export class PatientInformationComponent implements AfterViewInit, OnInit {
       return (
         data.firstName.toLowerCase().includes(filter) ||
         data.lastName.toLowerCase().includes(filter) ||
-        data.gender.toLowerCase().includes(filter) ||
         data.patientId.toString().includes(filter)
       );
     };

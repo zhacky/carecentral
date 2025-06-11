@@ -78,7 +78,6 @@ export class DoctorComponent implements AfterViewInit, OnInit {
       return (
         data.firstName.toLowerCase().includes(filter) ||
         data.lastName.toLowerCase().includes(filter) ||
-        data.gender.toLowerCase().includes(filter) ||
         data.doctorId.toString().includes(filter)
       );
     };
