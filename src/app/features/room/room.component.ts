@@ -90,25 +90,25 @@ export class RoomComponent implements AfterViewInit, OnInit {
     this.loadRooms();
   }
 
-  // Load the patients using the service
-  // loadRooms(): void {
-  //   this.roomService.getRooms().subscribe(
-  //     (rooms) => {
-  //       // Add position dynamically
-  //       this.dataSource.data = rooms.map((room, index) => ({
-  //         ...room,
-  //         position: index + 1,  // Position starts at 1 and increments
-  //       }));
-  //       this.dataSource.paginator = this.paginator;
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching doctors:', error);
-  //     }
-  //   );
+  // loadRooms() {
+  //   // Assuming you fetch both rooms and assignments from backend
+  //   this.roomService.getRooms().subscribe((roomsData: any[]) => {
+  //     this.roomAssignService.getRoomAssigns().subscribe((assignmentsData: any[]) => {
+  //       this.assignments = assignmentsData.map((a, index) => RoomAssign.fromRoomAssign(a, index + 1));
+  //
+  //       this.rooms = roomsData.map((room, index) => {
+  //         const roomDto = Room.fromRoom(room, index + 1);
+  //         const assignedCount = this.assignments.filter(a => a.room === roomDto.roomId && a.status === 'ACTIVE').length;
+  //         roomDto.availableCapacity = roomDto.roomCapacity - assignedCount;
+  //         return roomDto;
+  //       });
+  //
+  //       this.dataSource.data = this.rooms;
+  //     });
+  //   });
   // }
 
   loadRooms() {
-    // Assuming you fetch both rooms and assignments from backend
     this.roomService.getRooms().subscribe((roomsData: any[]) => {
       this.roomAssignService.getRoomAssigns().subscribe((assignmentsData: any[]) => {
         this.assignments = assignmentsData.map((a, index) => RoomAssign.fromRoomAssign(a, index + 1));
@@ -117,6 +117,27 @@ export class RoomComponent implements AfterViewInit, OnInit {
           const roomDto = Room.fromRoom(room, index + 1);
           const assignedCount = this.assignments.filter(a => a.room === roomDto.roomId && a.status === 'ACTIVE').length;
           roomDto.availableCapacity = roomDto.roomCapacity - assignedCount;
+
+          const desiredStatus = roomDto.availableCapacity === 0 ? RoomStatus.OCCUPIED : RoomStatus.AVAILABLE;
+
+          if (roomDto.status !== desiredStatus) {
+            const updatedRoomPayload = {
+              roomId: roomDto.roomId,
+              roomType: roomDto.roomType,
+              roomDescription: roomDto.roomDescription,
+              roomCapacity: roomDto.roomCapacity,
+              roomCharge: roomDto.roomCharge,
+              status: desiredStatus
+            };
+
+            this.roomService.updateRoom(roomDto.roomId, updatedRoomPayload).subscribe({
+              next: () => console.log(`Room ${roomDto.roomId} status updated to ${desiredStatus}`),
+              error: err => console.error(`Failed to update room ${roomDto.roomId}:`, err)
+            });
+
+            roomDto.status = desiredStatus; // Update local object immediately
+          }
+
           return roomDto;
         });
 
