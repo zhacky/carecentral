@@ -7,6 +7,21 @@
     </div>
 
     <form #formRef="ngForm" (ngSubmit)="savePhilhealth(formRef)">
+      <!-- Patient Selection Dropdown -->
+      <div class="mb-4 px-6">
+        <label class="block text-gray-700 py-2">Select Patient</label>
+        <select
+          class="w-full px-3 py-2 border rounded-lg"
+          [(ngModel)]="selectedPatientId"
+          (ngModelChange)="onPatientSelect($event)"
+          name="selectedPatient"
+        >
+          <option value="">Select a patient</option>
+          <option *ngFor="let patient of patients" [value]="patient.patientId">
+            {{patient.firstName}} {{patient.middleName}} {{patient.lastName}}
+          </option>
+        </select>
+      </div>
 
       <div *ngIf="currentStep === 1">
 
@@ -588,4 +603,3 @@
 
   </div>
 </div>
-
