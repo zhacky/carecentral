@@ -3,12 +3,14 @@ import {Router} from '@angular/router';
 import {Philhealth} from '../../../core/models/philhealth.model';
 import {PhilhealthService} from '../../../core/services/philhealth.service';
 import {FormsModule, NgForm} from '@angular/forms';
-import {NgClass, NgIf} from '@angular/common';
+import {NgClass, NgFor, NgIf} from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInput} from '@angular/material/input';
+import {PatientService} from '../../../core/services/patient.service';
+import {Patient} from '../../../core/models/patient.model';
 
 @Component({
   selector: 'app-add-philhealth',
@@ -17,6 +19,7 @@ import {MatInput} from '@angular/material/input';
     FormsModule,
     NgClass,
     NgIf,
+    NgFor,
     MatFormFieldModule,
     MatChipsModule,
     MatIconModule,
@@ -25,14 +28,15 @@ import {MatInput} from '@angular/material/input';
   standalone: true
 })
 export class AddPhilhealthComponent {
+  selectedPatientId: number = 0;
   philhealthItem : {
     bloodPressure: string;
-    signAndSymptoms: string[];
+    signAndSymptoms: string[] | any;
     dateAdmitted: string;
     memPIN: string;
     patPertinentPastMedicalHistory: string;
     memFirstName: string;
-    abdomen: string[];
+    abdomen: string[] | any;
     chiefComplaint: string;
     extremities: string[];
     patMiddleName: string;
@@ -41,20 +45,20 @@ export class AddPhilhealthComponent {
     temperature: number;
     courseInTheWards: string;
     patPIN: string;
-    lungs: string[];
+    lungs: string[] | any;
     memDateOfBirth: string;
     timeAdmitted: string;
     memLastName: string;
-    cvs: string[];
+    cvs: string[] | any;
     dischargeDiagnosis: string;
-    generalSurvey: string[];
+    generalSurvey: string[] | any;
     respiratoryRate: number;
-    heent: string[];
+    heent: string[] | any;
     secondCaseRateCode: string;
     neuroExam: string[];
     patSex: string;
     timeDischarged: string;
-    gu: string[];
+    gu: string[] | any;
     philhealthId: number;
     diagnosticFindings: string;
     patDateOfBirth: string;
@@ -66,7 +70,7 @@ export class AddPhilhealthComponent {
     dateDischarged: string;
     patPresentHistoryOfIllness: string;
     patLastName: string;
-    treatmentOutcome: string;
+    treatmentOutcome: string | '';
     capillaryRefill: string;
     patFirstName: string;
     admittingDiagnosis: string
@@ -129,8 +133,10 @@ export class AddPhilhealthComponent {
     extremities: [],
     neuroExam: []
   };
+  patients: Patient[] = [];
 
   constructor(
+    private patientService: PatientService,
     private philhealthService: PhilhealthService,
     private router: Router,
     private snackBar: MatSnackBar
@@ -263,6 +269,36 @@ export class AddPhilhealthComponent {
   cancel(): void {
     this.router.navigate(['/common/philhealth']); // ✅ Go back on cancel
   }
+  onPatientSelect(patientId: number): void {
+    // If you have a patient service, you could load the patient details
+    this.patientService.getPatientById(patientId).subscribe(patient => {
+      // Populate the form fields with patient data
+      this.philhealthItem.memFirstName = patient.firstName;
+      this.philhealthItem.memMiddleName = patient.middleName;
+      this.philhealthItem.memLastName = patient.lastName;
+      this.philhealthItem.memDateOfBirth = patient.dateOfBirth;
+      this.philhealthItem.patFirstName = patient.firstName;
+      this.philhealthItem.patMiddleName = patient.middleName;
+      this.philhealthItem.patLastName = patient.lastName;
+      this.philhealthItem.patDateOfBirth = patient.dateOfBirth;
+      this.philhealthItem.patSex = patient.gender;
+
+      // ... other field assignments
+    });
+  }
+  ngOnInit(): void {
+    // Load patients when component initializes
+    this.patientService.getPatients().subscribe({
+      next: (patients) => {
+        this.patients = patients;
+      },
+      error: (error) => {
+        console.error('Error loading patients:', error);
+        // Handle error appropriately
+      }
+    });
+  }
+
 
   protected readonly philhealthDto = Philhealth;
 }
