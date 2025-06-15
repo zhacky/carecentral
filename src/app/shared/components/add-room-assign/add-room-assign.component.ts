@@ -6,7 +6,7 @@ import {FormsModule, NgForm} from '@angular/forms';
 import {PatientService} from '../../../core/services/patient.service';
 import {RoomService} from '../../../core/services/room.service';
 import {Patient} from '../../../core/models/patient.model';
-import {Room} from '../../../core/models/room.model';
+import {Room, RoomStatus} from '../../../core/models/room.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {NgClass, NgForOf, NgIf} from '@angular/common';
 import { forkJoin } from 'rxjs';
@@ -54,16 +54,35 @@ export class AddRoomAssignComponent implements OnInit {
   }
 
   // loadPatients(): void {
-  //   this.patientService.getPatients().subscribe(
-  //     (patients) => {
-  //       // Store fetched patients in the `patients` array
-  //       this.patients = patients; // Now available for the dropdown
+  //   forkJoin({
+  //     patients: this.patientService.getPatients(),
+  //     assignments: this.roomAssignService.getRoomAssigns(),
+  //     rooms: this.roomService.getRooms()
+  //   }).subscribe(
+  //     ({ patients, assignments, rooms }) => {
+  //       const roomMap = new Map<number, RoomStatus>();
+  //       rooms.forEach(room => roomMap.set(room.roomId, room.status));
+  //
+  //       const assignedSet = new Set<number>();
+  //
+  //       assignments.forEach(assign => {
+  //         const roomStatus = roomMap.get(assign.room);
+  //         if (
+  //           assign.status === RoomAssignStatus.ACTIVE &&
+  //           roomStatus === RoomStatus.AVAILABLE
+  //         ) {
+  //           assignedSet.add(assign.patient);
+  //         }
+  //       });
+  //
+  //       this.patients = patients.filter(p => !assignedSet.has(p.patientId));
   //     },
-  //     (error) => {
-  //       console.error('Error fetching patients:', error);
+  //     error => {
+  //       console.error('Error loading patients, assignments, or rooms:', error);
   //     }
   //   );
   // }
+
   loadPatients(): void {
     forkJoin({
       patients: this.patientService.getPatients(),
@@ -71,25 +90,16 @@ export class AddRoomAssignComponent implements OnInit {
       rooms: this.roomService.getRooms()
     }).subscribe(
       ({ patients, assignments, rooms }) => {
-        const roomMap = new Map<number, string>();
-        rooms.forEach(room => roomMap.set(room.roomId, room.status));
+        const assignedSet = new Set<number>();
 
-        // Filter out patients who are:
-        // - NOT in any assignment
-        // - OR assigned to a room that is INACTIVE
-        const assignedPatientIds = assignments
-          .filter(a => a.status === 'ACTIVE') // only consider active assignments
-          .map(a => ({
-            patientId: a.patient,
-            roomStatus: roomMap.get(a.room)
-          }));
+        // Add all patients that are actively assigned to any room
+        assignments.forEach(assign => {
+          if (assign.status === RoomAssignStatus.ACTIVE) {
+            assignedSet.add(assign.patient);
+          }
+        });
 
-        const assignedSet = new Set(
-          assignedPatientIds
-            .filter(ar => ar.roomStatus === 'ACTIVE') // keep those with ACTIVE room
-            .map(ar => ar.patientId)
-        );
-
+        // Only include patients who are NOT actively assigned
         this.patients = patients.filter(p => !assignedSet.has(p.patientId));
       },
       error => {
