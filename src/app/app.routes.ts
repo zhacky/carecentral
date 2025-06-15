@@ -44,6 +44,7 @@ import { ChangePasswordComponent } from './features/change-password/change-passw
 import { BillingDetailsComponent } from './features/billing/billing-details/billing-details.component';
 import { BillingEditComponent } from './features/billing/billing-edit/billing-edit.component';
 import { BillingAddComponent } from './features/billing/billing-add/billing-add.component';
+import { PharmacyComponent } from './features/pharmacy/pharmacy.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -157,6 +158,12 @@ export const routes: Routes = [
       {
         path: 'inventory',
         component: InventoryComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['ROLE_ADMIN'] },
+      },
+      {
+        path: 'pharmacy',
+        component: PharmacyComponent,
         canActivate: [RoleGuard],
         data: { roles: ['ROLE_ADMIN'] },
       },

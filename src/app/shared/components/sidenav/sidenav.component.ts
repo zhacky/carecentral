@@ -59,31 +59,6 @@ export class SidenavComponent {
     return this.router.url === '/common/dashboard';
   }
 
-  doctors = signal([
-    { id: 1, name: 'Dr. Smith', status: 'present' },
-    { id: 2, name: 'Dr. Johnson', status: 'absent' },
-    { id: 3, name: 'Dr. Williams', status: 'present' },
-    { id: 4, name: 'Dr. Brown', status: 'absent' },
-    { id: 5, name: 'Dr. Garcia', status: 'present' },
-    { id: 6, name: 'Dr. Martinez', status: 'absent' },
-    { id: 7, name: 'Dr. Anderson', status: 'present' },
-    { id: 8, name: 'Dr. Thomas', status: 'absent' },
-    { id: 9, name: 'Dr. Clark', status: 'present' },
-    { id: 10, name: 'Dr. Walker', status: 'absent' },
-    { id: 11, name: 'Dr. Lewis', status: 'present' },
-    { id: 12, name: 'Dr. Lee', status: 'absent' },
-    { id: 13, name: 'Dr. Harris', status: 'present' },
-    { id: 14, name: 'Dr. Nelson', status: 'absent' },
-    { id: 15, name: 'Dr. Carter', status: 'present' },
-    { id: 16, name: 'Dr. Mitchell', status: 'absent' },
-    { id: 17, name: 'Dr. Perez', status: 'present' },
-    { id: 18, name: 'Dr. Robinson', status: 'absent' },
-    { id: 19, name: 'Dr. Lee', status: 'present' },
-    { id: 20, name: 'Dr. Young', status: 'absent' },
-    { id: 21, name: 'Dr. King', status: 'present' },
-    { id: 22, name: 'Dr. Scott', status: 'absent' },
-  ]);
-
   menuItems = signal<MenuItem[]>([
     {
       icon: 'assets/Icons/icon_dashboard.svg',
@@ -135,6 +110,11 @@ export class SidenavComponent {
       icon: 'assets/Icons/icon_inventory.svg',
       label: 'Inventory',
       route: 'inventory',
+    },
+    {
+      icon: 'assets/Icons/icon_inventory.svg',
+      label: 'Pharmacy',
+      route: 'pharmacy',
     },
     {
       icon: 'assets/Icons/icon_settings.svg',
