@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import {CurrencyPipe} from '@angular/common';
+import {AsyncPipe, CurrencyPipe} from '@angular/common';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from '@angular/material/card';
 import {MatFormField} from '@angular/material/form-field';
-import {MatAutocomplete, MatAutocompleteTrigger} from '@angular/material/autocomplete';
+import {MatAutocomplete, MatAutocompleteTrigger, MatOption} from '@angular/material/autocomplete';
 import {
   MatCell, MatCellDef,
   MatColumnDef,
@@ -19,6 +19,7 @@ import {MatButton, MatIconButton} from '@angular/material/button';
 import {InventoryItem} from '../../core/models/inventory-item.model';
 import {HttpErrorResponse} from '@angular/common/http';
 import {InventoryService} from '../../core/services/inventory.service';
+import {map, Observable, startWith} from 'rxjs';
 
 @Component({
   selector: 'app-pharmacy',
@@ -45,7 +46,9 @@ import {InventoryService} from '../../core/services/inventory.service';
     MatHeaderRowDef,
     MatRowDef,
     MatHeaderCellDef,
-    MatCellDef
+    MatCellDef,
+    AsyncPipe,
+    MatOption
   ],
   templateUrl: './pharmacy.component.html',
   styleUrl: './pharmacy.component.css'
@@ -55,16 +58,31 @@ export class PharmacyComponent {
   salesForm: FormGroup;
   cartItems: any[] = [];
   displayedColumns: string[] = ['item', 'quantity', 'price', 'total', 'actions'];
+  filteredItems: Observable<InventoryItem[]>;
 
   constructor(private fb: FormBuilder,private inventoryService: InventoryService) {
     this.salesForm = this.fb.group({
       searchProduct: [''],
       quantity: [1]
     });
+    this.filteredItems = this.salesForm.get('searchProduct')!.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    )
   }
 
   ngOnInit(): void {
     this.loadInventory();
+    this.filteredItems = this.salesForm.get('searchProduct')!.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+  }
+
+  private _filter(value: string): InventoryItem[] {
+    const filterValue = value.toLowerCase();
+    return this.inventoryItems.filter(item =>
+      item.inventoryName.toLowerCase().includes(filterValue));
   }
 
   // Load inventory items from the backend

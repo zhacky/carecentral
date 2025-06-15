@@ -15,7 +15,9 @@
                      formControlName="searchProduct"
                      [matAutocomplete]="auto">
               <mat-autocomplete #auto="matAutocomplete">
-                <!-- Add autocomplete options here -->
+                @for ( item of filteredItems | async; track item.inventoryId) {
+                  <mat-option [value]='item.inventoryName'>{{ item.inventoryName }}</mat-option>
+                }
               </mat-autocomplete>
             </mat-form-field>
 
