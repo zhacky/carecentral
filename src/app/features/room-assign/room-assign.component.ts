@@ -19,6 +19,7 @@ import {RoomAssign, RoomAssignStatus} from '../../core/models/room-assign.model'
 import { AuthService } from '../../core/services/auth.service';
 import { forkJoin } from 'rxjs';
 import {PatientService} from '../../core/services/patient.service';
+import {RoomService} from '../../core/services/room.service';
 
 @Component({
   selector: 'app-room',
@@ -42,13 +43,19 @@ import {PatientService} from '../../core/services/patient.service';
   styleUrl: './room-assign.component.css'
 })
 export class RoomAssignComponent implements AfterViewInit, OnInit {
-  constructor(private roomAssignService: RoomAssignService, private patientService: PatientService, private authService: AuthService, private router: Router) {}
+  constructor(
+    private roomAssignService: RoomAssignService,
+    private patientService: PatientService,
+    private roomService: RoomService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   hasRole(role: string): boolean {
     return this.authService.hasRole(role);
   }
 
-  displayedColumns: string[] = ['roomAssignId', 'daysOfStay', 'assignedDate', 'dischargeDate', 'status', 'actions'];
+  displayedColumns: string[] = ['roomAssignId', 'daysOfStay', 'roomType', 'dischargeDate', 'status', 'actions'];
 
   // DataSource for the table (initially empty)
   dataSource = new MatTableDataSource<RoomAssign>([]);
@@ -86,26 +93,40 @@ export class RoomAssignComponent implements AfterViewInit, OnInit {
     this.loadRoomAssigns();
   }
 
-  // Load the patients using the service
-  loadRoomAssigns(): void {
+  loadRoomAssigns(highlightedId?: number): void {
     forkJoin({
       roomAssigns: this.roomAssignService.getRoomAssigns(),
-      patients: this.patientService.getPatients()
+      patients: this.patientService.getPatients(),
+      rooms: this.roomService.getRooms()
     }).subscribe(
-      ({ roomAssigns, patients }) => {
-        // Create a map of patient IDs to names
+      ({ roomAssigns, patients, rooms }) => {
+        // Create a map of patient IDs to full names
         const patientMap = new Map<number, string>();
-        // patients.forEach(p => patientMap.set(p.patientId, `${p.firstName} ${p.lastName}`));
         patients.forEach(p => {
           const middleInitial = p.middleName ? `${p.middleName.charAt(0)}.` : '';
-          patientMap.set(p.patientId, `${p.firstName} ${middleInitial} ${p.lastName}`.replace(/\s+/g, ' ').trim());
+          const fullName = `${p.firstName} ${middleInitial} ${p.lastName}`.replace(/\s+/g, ' ').trim();
+          patientMap.set(p.patientId, fullName);
         });
 
-        // Add position and patient name
+        const roomMap = new Map<number, string>();
+        rooms.forEach(r => {
+          const room = r.roomType;
+          roomMap.set(r.roomId, room);
+        });
+
+        // Sort by status: ACTIVE first, INACTIVE last
+        roomAssigns.sort((a, b) => {
+          if (a.status === 'ACTIVE' && b.status !== 'ACTIVE') return -1;
+          if (a.status !== 'ACTIVE' && b.status === 'ACTIVE') return 1;
+          return 0;
+        });
+
+        // Map data to dataSource with patient names and index position
         this.dataSource.data = roomAssigns.map((roomAssign, index) => ({
           ...roomAssign,
           position: index + 1,
-          patientName: patientMap.get(roomAssign.patient) ?? 'Unknown'
+          patientName: patientMap.get(roomAssign.patient) ?? 'Unknown',
+          roomType: roomMap.get(roomAssign.room) ?? 'Unknown'
         }));
 
         this.dataSource.paginator = this.paginator;

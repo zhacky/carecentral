@@ -267,7 +267,10 @@ export class EditPhilhealthComponent implements OnInit {
       .filter(s => s.length > 0);
 
     this.philhealthService.updatePhilhealth(this.philhealthItem.philhealthId, this.philhealthItem).subscribe(() => {
-      alert('Philhealth updated successfully!'); // Optional Snackbar
+      this.snackBar.open('Philhealth updated successfully!', 'Close', {
+        duration: 5000,
+        panelClass: ['snackbar-success']
+      });
       this.router.navigate(['/common/philhealth']); // ✅ Redirect after update
     });
   }

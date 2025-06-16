@@ -56,7 +56,10 @@ export class AddDoctorComponent {
     }
 
     this.doctorService.createDoctor(this.doctorItem).subscribe(() => {
-      alert('Doctor added successfully!'); // Optional Snackbar
+      this.snackBar.open('Doctor added successfully!', 'Close', {
+        duration: 5000,
+        panelClass: ['snackbar-success']
+      });
       this.router.navigate(['/common/doctor']); // ✅ Redirect after save
     });
   }

@@ -53,36 +53,6 @@ export class AddRoomAssignComponent implements OnInit {
     this.loadRooms();
   }
 
-  // loadPatients(): void {
-  //   forkJoin({
-  //     patients: this.patientService.getPatients(),
-  //     assignments: this.roomAssignService.getRoomAssigns(),
-  //     rooms: this.roomService.getRooms()
-  //   }).subscribe(
-  //     ({ patients, assignments, rooms }) => {
-  //       const roomMap = new Map<number, RoomStatus>();
-  //       rooms.forEach(room => roomMap.set(room.roomId, room.status));
-  //
-  //       const assignedSet = new Set<number>();
-  //
-  //       assignments.forEach(assign => {
-  //         const roomStatus = roomMap.get(assign.room);
-  //         if (
-  //           assign.status === RoomAssignStatus.ACTIVE &&
-  //           roomStatus === RoomStatus.AVAILABLE
-  //         ) {
-  //           assignedSet.add(assign.patient);
-  //         }
-  //       });
-  //
-  //       this.patients = patients.filter(p => !assignedSet.has(p.patientId));
-  //     },
-  //     error => {
-  //       console.error('Error loading patients, assignments, or rooms:', error);
-  //     }
-  //   );
-  // }
-
   loadPatients(): void {
     forkJoin({
       patients: this.patientService.getPatients(),
@@ -167,7 +137,10 @@ export class AddRoomAssignComponent implements OnInit {
     }
 
     this.roomAssignService.createRoomAssign(this.roomAssignItem).subscribe(() => {
-      alert('Room Assignment added successfully!'); // Optional Snackbar
+      this.snackBar.open('Room Assignment added successfully!', 'Close', {
+        duration: 5000,
+        panelClass: ['snackbar-success']
+      });
       this.router.navigate(['/common/roomAssign']); // ✅ Redirect after save
     });
   }

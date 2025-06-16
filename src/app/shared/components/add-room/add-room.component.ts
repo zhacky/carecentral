@@ -52,7 +52,10 @@ export class AddRoomComponent {
     }
 
     this.roomService.createRoom(this.roomItem).subscribe(() => {
-      alert('Room added successfully!'); // Optional Snackbar
+      this.snackBar.open('Room added successfully!', 'Close', {
+        duration: 5000,
+        panelClass: ['snackbar-success']
+      });
       this.router.navigate(['/common/room']); // ✅ Redirect after save
     });
   }
