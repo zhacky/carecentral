@@ -12,12 +12,6 @@
           >
             <i class="fa-solid fa-plus"></i> Add Room
           </button>
-<!--          <button-->
-<!--            routerLink="/common/room/details"-->
-<!--            class="bg-blue-500 text-white px-4 py-2 rounded"-->
-<!--          >-->
-<!--            <i class="fa-solid fa-plus"></i> Details Room-->
-<!--          </button>-->
          </ng-container>
         </div>
         <!-- Search Bar -->
@@ -50,7 +44,7 @@
         </ng-container>
 
         <ng-container matColumnDef="roomType">
-          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Type</th>
+          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Room</th>
           <td *matCellDef="let element"
               class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium"> {{ element.roomType }}
           </td>

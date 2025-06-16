@@ -261,7 +261,10 @@ export class AddPhilhealthComponent {
       .filter(s => s.length > 0);
 
     this.philhealthService.createPhilhealth(this.philhealthItem).subscribe(() => {
-      alert('Philhealth added successfully!'); // Optional Snackbar
+      this.snackBar.open('Philhealth added successfully!', 'Close', {
+        duration: 5000,
+        panelClass: ['snackbar-success']
+      });
       this.router.navigate(['/common/philhealth']); // ✅ Redirect after save
     });
   }

@@ -77,7 +77,10 @@ export class EditPatientComponent implements OnInit {
     }
 
     this.patientService.updatePatient(this.patientDto.patientId, this.patientDto).subscribe(() => {
-      alert('Patient updated successfully!'); // Optional Snackbar
+      this.snackBar.open('Patient updated successfully!', 'Close', {
+        duration: 5000,
+        panelClass: ['snackbar-success']
+      });
       this.router.navigate(['/common/patient']); // ✅ Redirect after update
     });
   }

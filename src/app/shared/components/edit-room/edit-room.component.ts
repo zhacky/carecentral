@@ -68,7 +68,10 @@ export class EditRoomComponent implements OnInit {
     }
 
     this.roomService.updateRoom(this.roomDto.roomId, this.roomDto).subscribe(() => {
-      alert('Room updated successfully!'); // Optional Snackbar
+      this.snackBar.open('Room updated successfully!', 'Close', {
+        duration: 5000,
+        panelClass: ['snackbar-success']
+      });
       this.router.navigate(['/common/room']); // ✅ Redirect after update
     });
   }

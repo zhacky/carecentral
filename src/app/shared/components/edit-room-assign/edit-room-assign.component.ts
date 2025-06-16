@@ -118,7 +118,10 @@ export class EditRoomAssignComponent implements OnInit {
     }
 
     this.roomAssignService.updateRoomAssign(this.roomAssignDto.roomAssignId, this.roomAssignDto).subscribe(() => {
-      alert('Room updated successfully!'); // Optional Snackbar
+      this.snackBar.open('Room assignment updated successfully!', 'Close', {
+        duration: 5000,
+        panelClass: ['snackbar-success']
+      });
       this.router.navigate(['/common/roomAssign']); // ✅ Redirect after update
     });
   }

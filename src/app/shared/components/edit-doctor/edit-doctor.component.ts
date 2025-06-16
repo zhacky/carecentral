@@ -76,7 +76,10 @@ export class EditDoctorComponent implements OnInit {
     }
 
     this.doctorService.updateDoctor(this.doctorDto.doctorId, this.doctorDto).subscribe(() => {
-      alert('Doctor updated successfully!'); // Optional Snackbar
+      this.snackBar.open('Doctor updated successfully!', 'Close', {
+        duration: 5000,
+        panelClass: ['snackbar-success']
+      });
       this.router.navigate(['/common/doctor']); // ✅ Redirect after update
     });
   }
