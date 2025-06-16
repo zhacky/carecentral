@@ -1,25 +1,32 @@
-/* src/app/inventory/inventory.component.css */
-.inventory-container {
-  margin: 20px;
-}
-
-table {
+.table {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
+  height: 100%;
 }
 
-th, td {
-  padding: 8px 12px;
-  text-align: left;
-  border: 1px solid #ddd;
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #554e4e;
 }
 
-th {
-  background-color: #f4f4f4;
-  font-weight: bold;
+.button {
+  margin-bottom: 10px;
+
 }
 
-tr:nth-child(even) {
-  background-color: #f9f9f9;
+.page-content {
+  border: 1px solid grey;
+  border-radius: 20px;
+  width: 90%;
+  overflow: hidden;
+  box-sizing: border-box; /* Includes border in the width */
 }
+
+.parent {
+  margin-left: 130px;
+  padding: 20px;
+  flex-direction: column;
+  height: 100vh;
+}
+
