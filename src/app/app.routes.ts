@@ -45,6 +45,7 @@ import { BillingDetailsComponent } from './features/billing/billing-details/bill
 import { BillingEditComponent } from './features/billing/billing-edit/billing-edit.component';
 import { BillingAddComponent } from './features/billing/billing-add/billing-add.component';
 import { PharmacyComponent } from './features/pharmacy/pharmacy.component';
+import { ResetFormComponent } from './shared/components/reset-password/reset-form/reset-form.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -290,6 +291,12 @@ export const routes: Routes = [
       {
         path: 'accounts/edit/:id',
         component: EditAccountComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_IT Administrator'] },
+      },
+      {
+        path: 'accounts/reset/:id',
+        component: ResetFormComponent,
         canActivate: [RoleGuard],
         data: { roles: ['ROLE_ADMIN', 'ROLE_IT Administrator'] },
       },

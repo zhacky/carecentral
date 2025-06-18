@@ -206,10 +206,29 @@ export class AuthService {
     Authorization: `Bearer ${this.getToken()}`
   });
   // Set responseType to 'text' to handle empty responses
-  return this.http.delete(url, { headers, responseType: 'text' as 'json' }).pipe(
+    return this.http.delete(url, { headers, responseType: 'text' as 'json' }).pipe(
+      tap(() => {
+      }),
+      catchError((error) => {
+        throw error;
+      })
+    );
+  }
+
+  adminChangePassword(userId: string, newPassword: string): Observable<any> {
+  const url = `${environment.apiUrl}/api/users/${userId}/admin-change-password`;
+  const body = { newPassword };
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${this.getToken()}`,
+    'Content-Type': 'application/json'
+  });
+
+  return this.http.put(url, body, { headers, responseType: 'text' }).pipe(
     tap(() => {
+      console.log('Admin changed password for user', userId);
     }),
-    catchError((error) => {
+    catchError((error: HttpErrorResponse) => {
+      console.error('Error changing user password:', error);
       throw error;
     })
   );
