@@ -92,6 +92,10 @@ export class AccountsManagementComponent implements AfterViewInit, OnInit {
     this.router.navigate(['/common/accounts/edit', id]);
   }
 
+   changePassword(id: number) {
+    this.router.navigate(['/common/accounts/reset', id]);
+  }
+
   applyFilter(): void {
     this.dataSource.filter = this.searchTerm.trim().toLowerCase();
   }

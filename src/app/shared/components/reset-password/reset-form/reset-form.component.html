@@ -1,0 +1,49 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="w-[480px] h-[600px] bg-white shadow-md rounded-xl p-8 flex flex-col justify-start space-y-4">
+      <!-- Header -->
+      <h2 class="text-xl font-semibold text-gray-800">Edit Account</h2>
+  
+      <!-- User Profile -->
+      <div class="bg-gray-50 rounded-3xl border h-[144px] border-gray-200 flex flex-row items-center py-3 px-3">
+        <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 text-xl">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a8.25 8.25 0 1115 0" />
+          </svg>
+        </div>
+        <div class="flex flex-col ml-4 text-left">
+          <p class="font-medium text-gray-800">{{ user?.firstName }} {{ user?.lastName }}</p>
+          <p class="text-sm text-gray-500">{{user?.email}}</p>
+        </div>    
+      </div>
+  
+      <!-- Assign Role -->
+      <div class="pb-3 pt-3">
+      <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Reset Password *</label>
+      <input
+        type="text"
+        class="w-full border h-[56px] border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 appearance-none"
+        [(ngModel)]="newPassword"
+        placeholder="eg. 12345678"
+       />
+  
+      <!-- Buttons -->
+      <div class="flex justify-between pt-2">
+        <button (click)="onCancel()"
+          class="w-[48%] border border-green-500 text-green-600 rounded-full py-2 text-sm font-medium hover:bg-green-50">
+          Cancel
+        </button>
+        <button (click)="adminChangePassword()"
+          class="w-[48%] bg-green-500 text-white rounded-full py-2 text-sm font-medium hover:bg-green-600 transition flex items-center justify-center relative">
+          <mat-progress-spinner
+            *ngIf="isLoading"
+            diameter="20"
+            mode="indeterminate"
+            class="spinner absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          </mat-progress-spinner>
+          <span *ngIf="!isLoading">Reset Password</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  

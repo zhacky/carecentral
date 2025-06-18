@@ -96,16 +96,22 @@
           <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Action</th>
           <td *matCellDef="let element" class="py-4 px-6 border-b border-gray-200">
             <div class="flex justify-start space-x-2">
-              <a class="icon-edit">
-                 <img src="assets/Icons/icon_edit.svg" alt="Edit">
-              </a>
-              <a
-                 class="icon-delete"
-                 (click)="setRoleAndStatus(element.id)"
+              <a class="icon-edit"
+              (click)="setRoleAndStatus(element.id)"
                  (keyup.enter)="setRoleAndStatus(element.id)"
                  tabindex="0"
                  role="button"
                  aria-label="Set Role and Status"
+              >
+                 <img src="assets/Icons/icon_edit.svg" alt="Edit">
+              </a>
+              <a
+                 class="icon-delete"
+                  (click)="changePassword(element.id)"
+                  (keyup.enter)="changePassword(element.id)"
+                  tabindex="0"
+                  role="button"
+                  aria-label="Reset Password"
                  >
                  <img src="assets/Icons/icon_key.svg" alt="Key">
               </a>
