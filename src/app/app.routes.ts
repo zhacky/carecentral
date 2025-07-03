@@ -45,6 +45,8 @@ import { BillingDetailsComponent } from './features/billing/billing-details/bill
 import { BillingEditComponent } from './features/billing/billing-edit/billing-edit.component';
 import { BillingAddComponent } from './features/billing/billing-add/billing-add.component';
 import { PharmacyComponent } from './features/pharmacy/pharmacy.component';
+import {LaboratoryComponent} from './features/laboratory/laboratory.component';
+import {AddLaboratoryComponent} from './shared/components/add-laboratory/add-laboratory.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -162,6 +164,12 @@ export const routes: Routes = [
         data: { roles: ['ROLE_ADMIN'] },
       },
       {
+        path: 'laboratory',
+        component: LaboratoryComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['ROLE_ADMIN'] },
+      },
+      {
         path: 'pharmacy',
         component: PharmacyComponent,
         canActivate: [RoleGuard],
@@ -260,6 +268,12 @@ export const routes: Routes = [
       {
         path: 'doctor/edit/:id',
         component: EditDoctorComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['ROLE_ADMIN'] },
+      },
+      {
+        path: 'laboratory/add',
+        component: AddLaboratoryComponent,
         canActivate: [RoleGuard],
         data: { roles: ['ROLE_ADMIN'] },
       },

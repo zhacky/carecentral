@@ -113,6 +113,11 @@ export class SidenavComponent {
     },
     {
       icon: 'assets/Icons/icon_inventory.svg',
+      label: 'Laboratory',
+      route: 'laboratory',
+    },
+    {
+      icon: 'assets/Icons/icon_inventory.svg',
       label: 'Pharmacy',
       route: 'pharmacy',
     },

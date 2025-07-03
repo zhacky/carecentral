@@ -3,7 +3,6 @@ import {InventoryService} from '../../core/services/inventory.service';
 import {InventoryItem} from '../../core/models/inventory-item.model';
 import {CurrencyPipe, DatePipe} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {MatIcon} from '@angular/material/icon';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router, RouterLink} from '@angular/router';
 import {
@@ -27,7 +26,6 @@ import {MatPaginator} from '@angular/material/paginator';
     CurrencyPipe,
     FormsModule,
     DatePipe,
-    MatIcon,
     RouterLink,
     MatTable,
     MatColumnDef,

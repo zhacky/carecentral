@@ -34,7 +34,8 @@
                                (item.label === 'Billing' && hasRole('ROLE_PATIENT')) ||
                                (item.label === 'Rooms' && hasRole('ROLE_NURSE')) || hasRole('ROLE_ADMIN') ||
                                (item.label === 'Philhealth' && hasRole('ROLE_IT Administrator')) || hasRole('ROLE_ADMIN') ||
-                               (item.label === 'Inventory' && hasRole('ROLE_BILLING')) || hasRole('ROLE_ADMIN')
+                               (item.label === 'Inventory' && hasRole('ROLE_BILLING')) || hasRole('ROLE_ADMIN') ||
+                               (item.label === 'Laboratory' && hasRole('ROLE_BILLING')) || hasRole('ROLE_ADMIN')
                                ">
             <mat-list-item
               #rla="routerLinkActive"
