@@ -5,4 +5,5 @@ export interface Laboratory {
   date: Date;
   status: 'Pending' | 'Completed' | 'Cancelled';
   // Add other relevant fields as needed
+  
 }

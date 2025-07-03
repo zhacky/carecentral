@@ -2,102 +2,42 @@ import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {PatientvisitComponent} from './patientvisit/patientvisit.component';
-import {PatientService} from '../../core/services/patient.service';
-import {Patient} from '../../core/models/patient.model';
-import {RoomService} from '../../core/services/room.service';
-import {RoomAssignService} from '../../core/services/room-assign.service';
-import {Room} from '../../core/models/room.model';
+import {EarningsComponent} from '../../shared/components/dashboard/earnings/earnings.component';
+import {NewPatientsComponent} from '../../shared/components/dashboard/new-patients/new-patients.component';
+import {AvailableBedsComponent} from '../../shared/components/dashboard/available-beds/available-beds.component';
+import {QuickLinksComponent} from '../../shared/components/dashboard/quick-links/quick-links.component';
 
 @Component({
   selector: 'app-dashboard',
   imports: [
     FormsModule,
     MatSidenavModule,
-    PatientvisitComponent
+    PatientvisitComponent,
+    EarningsComponent,
+    NewPatientsComponent,
+    AvailableBedsComponent,
+    QuickLinksComponent
   ],
   templateUrl: './dashboard.component.html',
   standalone: true,
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  availableBeds: number = 0;
+
   constructor(
-    private patientService: PatientService,
-    private roomService: RoomService,
-    private roomAssignService: RoomAssignService
+
   ) {}
 
-  tableItems: Patient[] = []; // Now holds real patient data
+
 
   ngOnInit(): void {
-    this.patientService.getPatients().subscribe({
-      next: (patients) => {
-        this.tableItems = patients;
-      },
-      error: (err) => {
-        console.error('Failed to fetch patients:', err);
-      }
-    });
 
-    this.roomService.getRooms().subscribe((rooms: Room[]) => {
-      this.roomAssignService.getRoomAssigns().subscribe((assignments: any[]) => {
-        let totalAvailable = 0;
-        rooms.forEach(room => {
-          const assignedCount = assignments.filter(a => a.room === room.roomId && a.status === 'ACTIVE').length;
-          totalAvailable += (room.roomCapacity - assignedCount);
-        });
-        this.availableBeds = totalAvailable;
-      });
-    });
+
   }
   searchQueryPatient = ''; // Store the search query
   searchQueryDoctor = '';
   filterStatus = ''; // Store the selected filter status
   isNavOpen = true; // Default: open
-
-  isRightNavOpen = true;
-  // tableItems = [
-  //   {
-  //     patientId: 'P001',
-  //     name: 'John Doe',
-  //     dob: '1985-06-15',
-  //     gender: 'Male',
-  //     phone: '(555) 123-4567',
-  //     medicalCondition: 'Hypertension',
-  //   },
-  //   {
-  //     patientId: 'P002',
-  //     name: 'Jane Smith',
-  //     dob: '1990-11-20',
-  //     gender: 'Female',
-  //     phone: '(555) 234-5678',
-  //     medicalCondition: 'Diabetes',
-  //   },
-  //   {
-  //     patientId: 'P003',
-  //     name: 'Michael Johnson',
-  //     dob: '1982-07-30',
-  //     gender: 'Male',
-  //     phone: '(555) 345-6789',
-  //     medicalCondition: 'Asthma',
-  //   },
-  //   {
-  //     patientId: 'P004',
-  //     name: 'Emily Davis',
-  //     dob: '1975-03-10',
-  //     gender: 'Female',
-  //     phone: '(555) 456-7890',
-  //     medicalCondition: 'Chronic Fatigue',
-  //   },
-  //   {
-  //     patientId: 'P005',
-  //     name: 'David Lee',
-  //     dob: '2000-05-25',
-  //     gender: 'Male',
-  //     phone: '(555) 567-8901',
-  //     medicalCondition: 'Allergy',
-  //   },
-  // ];
 
   doctorList = [
     {
@@ -131,22 +71,7 @@ export class DashboardComponent implements OnInit {
 
   popupIndex: number | null = null; // Track which row's popup should be displayed
 
-  // Getter for filtered items based on search query
-  get filteredItems() {
-    return this.tableItems.filter(
-      (item) =>
-        item.firstName
-          .toLowerCase()
-          .includes(this.searchQueryPatient.toLowerCase()) ||
-        String(item.patientId)
-          .toLowerCase()
-          .includes(this.searchQueryPatient.toLowerCase()) ||
-        // Replace 'medicalCondition' with an existing property, e.g., 'lastName'
-        item.lastName
-          .toLowerCase()
-          .includes(this.searchQueryPatient.toLowerCase()),
-    );
-  }
+
 
   get filteredDoctors() {
     return this.doctorList.filter((doctor) => {
