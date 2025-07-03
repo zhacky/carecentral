@@ -2,10 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {RoomService} from '../../../../core/services/room.service';
 import {RoomAssignService} from '../../../../core/services/room-assign.service';
 import {Room} from '../../../../core/models/room.model';
+import {DashboardItemComponent} from '../dashboard-item/dashboard-item.component';
 
 @Component({
   selector: 'app-available-beds',
-  imports: [],
+  imports: [
+    DashboardItemComponent
+  ],
   templateUrl: './available-beds.component.html',
   styleUrl: './available-beds.component.css'
 })

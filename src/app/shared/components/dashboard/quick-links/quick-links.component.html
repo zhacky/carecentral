@@ -1,23 +1,18 @@
-<div class="bg-white px-6 py-5 rounded-xl shadow-md flex items-start w-72">
-  <div class="flex flex-col flex-grow">
-    <!-- Icon -->
-    <div class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center">
-      <img src="assets/Icons/icon_newappointment.svg" alt="Earnings Icon" class="w-6 h-6"/>
-    </div>
-    <!-- Title -->
-    <p class="text-gray-500 text-sm my-5">Quick Links</p>
-    <!-- Quick Links -->
-    <div class="flex justify-between items-center mt-1">
-        <button
-          routerLink="/common/patient/add"
-          class="add-button text-white px-4 py-2 rounded"
-        >
-          <i class="fa-solid fa-plus"></i> Add New Patient
-        </button>
-      <div class="flex items-center text-green-500 text-sm font-medium">
-        <!-- <span class="text-md">&#9650;</span>
-        <span class="ml-1">+51</span> -->
-      </div>
-    </div>
+<app-dashboard-item>
+  <!-- Icon -->
+  <div class="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center" icon>
+    <img src="assets/Icons/icon_links.svg" alt="Earnings Icon" class="w-6 h-6"/>
   </div>
-</div>
+  <!-- Title -->
+  <div title>Quick Links</div>
+  <!-- Quick Links -->
+  <div class="flex justify-between items-center mt-1">
+    <button
+      routerLink="/common/patient/add"
+      class="add-button text-white px-4 py-2 rounded text-sm"
+    >
+      <i class="fa-solid fa-plus"></i> Add New Patient
+    </button>
+  </div>
+
+</app-dashboard-item>

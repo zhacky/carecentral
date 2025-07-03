@@ -1,10 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Patient} from '../../../../core/models/patient.model';
 import {PatientService} from '../../../../core/services/patient.service';
+import {DashboardItemComponent} from '../dashboard-item/dashboard-item.component';
 
 @Component({
   selector: 'app-new-patients',
-  imports: [],
+  imports: [
+    DashboardItemComponent
+  ],
   templateUrl: './new-patients.component.html',
   styleUrl: './new-patients.component.css'
 })
