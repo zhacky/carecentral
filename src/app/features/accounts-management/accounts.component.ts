@@ -10,8 +10,9 @@ import {AuthService} from '../../core/services/auth.service';
 import {Router} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {MatChipsModule} from '@angular/material/chips';
-import { ConfirmDialogComponent } from '../../shared/components/dialog/confirm-dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {ConfirmDialogComponent} from '../../shared/components/dialog/confirm-dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {SearchInputComponent} from './accounts/search-input/search-input.component';
 
 /**
  * @title Table with pagination
@@ -21,11 +22,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: 'accounts.component.css',
   templateUrl: 'accounts.component.html',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, MatChipsModule, CommonModule, FormsModule]
+  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, MatChipsModule, CommonModule, FormsModule, SearchInputComponent]
 })
 
 export class AccountsManagementComponent implements AfterViewInit, OnInit {
-  constructor(private dialog: MatDialog, private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {}
+  constructor(private dialog: MatDialog, private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
+  }
 
   displayedColumns: string[] = ['position', 'lastName', 'firstName', 'email', 'username', 'status', 'role', 'action'];
   dataSource = new MatTableDataSource<PeriodicElement>([]);
@@ -73,8 +75,8 @@ export class AccountsManagementComponent implements AfterViewInit, OnInit {
         firstName: element.firstName,
         lastName: element.lastName,
         status: element.status,
-        email: element.email,
-      },
+        email: element.email
+      }
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -88,61 +90,45 @@ export class AccountsManagementComponent implements AfterViewInit, OnInit {
     });
   }
 
-   setRoleAndStatus(id: number) {
+  setRoleAndStatus(id: number) {
     this.router.navigate(['/common/accounts/edit', id]);
   }
 
-  applyFilter(): void {
-    this.dataSource.filter = this.searchTerm.trim().toLowerCase();
+  applyFilter(searchValue: string): void {
+    this.searchTerm = searchValue;
+    this.dataSource.filter = searchValue.trim().toLowerCase();
   }
 
   deleteUser(userId: string) {
-  const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-    width: '350px',
-    data: {
-      title: 'Delete Account',
-      message: 'Are you sure you want to delete this account?'
-    }
-  });
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: 'Delete Account',
+        message: 'Are you sure you want to delete this account?'
+      }
+    });
 
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      this.authService.deleteUser(userId).subscribe({
-        next: () => {
-          this.fetchUsers();
-          this.snackBar.open('Account successfully deleted.', 'Close', {
-            duration: 3000,
-            panelClass: ['snackbar-success']
-          });
-        },
-        error: (err) => {
-           this.snackBar.open('Account successfully deleted.', 'Close', {
-            duration: 3000,
-            panelClass: ['snackbar-success']
-          });
-          console.error(err);
-        }
-      });
-    }
-  });
-}
-
-  getStatusClass(status: string): string {
-  switch (status) {
-    case 'Active':
-      return 'chip-green';
-    case 'Pending':
-      return 'chip-yellow';
-    case 'Suspended':
-      return 'chip-orange';
-    case 'Inactive':
-      return 'chip-blue';
-    case 'Deactivated':
-      return 'chip-red';
-    default:
-      return '';
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.authService.deleteUser(userId).subscribe({
+          next: () => {
+            this.fetchUsers();
+            this.snackBar.open('Account successfully deleted.', 'Close', {
+              duration: 3000,
+              panelClass: ['snackbar-success']
+            });
+          },
+          error: (err) => {
+            this.snackBar.open('Account successfully deleted.', 'Close', {
+              duration: 3000,
+              panelClass: ['snackbar-success']
+            });
+            console.error(err);
+          }
+        });
+      }
+    });
   }
-}
 }
 
 
@@ -156,4 +142,3 @@ export interface PeriodicElement {
   status: string;
   role: string;
 }
-
