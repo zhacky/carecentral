@@ -1,9 +1,6 @@
-<!-- Room Assign Table -->
-<div class="p-6 w-full rounded-lg overflow-hidden">
-  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+<app-page-template>
     <!-- Card Header -->
-    <div class="px-6 py-4 border-b">
-      <div class="flex items-center justify-between md:flex-row">
+      <div class="flex items-center justify-between md:flex-row" page-header>
         <div class="max-w-lg">
           <ng-container *ngIf="hasRole('ROLE_ADMIN')">
           <button
@@ -36,10 +33,9 @@
           </svg>
         </div>
       </div>
-    </div>
 
     <!-- Mat Table -->
-    <div class="">
+    <div class="" page-body>
       <table mat-table [dataSource]="dataSource" class="w-full table-auto text-sm text-left border border-gray-200">
 
         <ng-container matColumnDef="roomAssignId">
@@ -116,5 +112,4 @@
       <!-- Paginator -->
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
-  </div>
-</div>
+</app-page-template>

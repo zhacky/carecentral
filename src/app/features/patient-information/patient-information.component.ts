@@ -18,6 +18,7 @@ import {Router} from '@angular/router';
 import {FormsModule} from '@angular/forms'; // Import the service
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
+import {PageTemplateComponent} from '../../shared/components/page-template/page-template.component';
 
 @Component({
   selector: 'app-patient-information',
@@ -34,7 +35,8 @@ import { AuthService } from '../../core/services/auth.service';
     MatHeaderRow,
     MatRow,
     FormsModule,
-    CommonModule
+    CommonModule,
+    PageTemplateComponent
   ],
   standalone: true
 })

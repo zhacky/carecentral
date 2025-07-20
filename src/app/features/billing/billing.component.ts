@@ -15,6 +15,7 @@ import {Billing} from '../../core/models/billing.model';
 import {Router, ActivatedRoute} from '@angular/router';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {ConfirmationDialogComponent} from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import {PageTemplateComponent} from '../../shared/components/page-template/page-template.component';
 
 @Component({
   selector: 'app-billing',
@@ -39,7 +40,8 @@ import {ConfirmationDialogComponent} from '../../shared/components/confirmation-
     CurrencyPipe,
     FormsModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
+    PageTemplateComponent
   ],
   styleUrls: ['./billing.component.css'],
   standalone: true

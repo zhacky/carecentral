@@ -10,6 +10,7 @@ import { Laboratory } from '../../core/models/laboratory.model';
 import { LaboratoryService } from '../../core/services/laboratory.service';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
+import {PageTemplateComponent} from '../../shared/components/page-template/page-template.component';
 
 @Component({
   selector: 'app-laboratory',
@@ -26,7 +27,8 @@ import {MatInput} from '@angular/material/input';
     RouterLink,
     MatFormField,
     MatLabel,
-    MatInput
+    MatInput,
+    PageTemplateComponent
   ]
 })
 export class LaboratoryComponent implements AfterViewInit, OnInit {

@@ -19,6 +19,7 @@ import {Room, RoomStatus} from '../../core/models/room.model';
 import { AuthService } from '../../core/services/auth.service';
 import {RoomAssignService} from '../../core/services/room-assign.service';
 import {RoomAssign} from '../../core/models/room-assign.model';
+import {PageTemplateComponent} from '../../shared/components/page-template/page-template.component';
 
 @Component({
   selector: 'app-room',
@@ -35,7 +36,8 @@ import {RoomAssign} from '../../core/models/room-assign.model';
     FormsModule,
     NgClass,
     RouterLink,
-    CommonModule
+    CommonModule,
+    PageTemplateComponent
   ],
   templateUrl: './room.component.html',
   standalone: true,

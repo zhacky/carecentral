@@ -25,8 +25,9 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {InventoryService} from '../../core/services/inventory.service';
 import {PharmacyService} from '../../core/services/pharmacy.service';
 import {CartItem, PharmacySale} from '../../core/models/pharmacy.model';
-import {map, Observable, startWith} from 'rxjs';
+import {map, startWith} from 'rxjs';
 import {MatPaginator} from '@angular/material/paginator';
+import {PageTemplateComponent} from '../../shared/components/page-template/page-template.component';
 
 @Component({
   selector: 'app-pharmacy',
@@ -54,9 +55,9 @@ import {MatPaginator} from '@angular/material/paginator';
     MatRowDef,
     MatHeaderCellDef,
     MatCellDef,
-    AsyncPipe,
     MatOption,
-    MatPaginator
+    MatPaginator,
+    PageTemplateComponent
   ],
   templateUrl: './pharmacy.component.html',
   styleUrl: './pharmacy.component.css'
@@ -66,7 +67,7 @@ export class PharmacyComponent implements AfterViewInit, OnInit {
   salesForm: FormGroup;
   cartItems: CartItem[] = [];
   displayedColumns: string[] = ['item', 'quantity', 'price', 'total', 'actions'];
-  filteredItems: Observable<InventoryItem[]>;
+  filteredItems: InventoryItem[] | undefined;
   dataSource = new MatTableDataSource<CartItem>();
   constructor(
     private fb: FormBuilder,
@@ -78,19 +79,24 @@ export class PharmacyComponent implements AfterViewInit, OnInit {
       searchProduct: [''],
       quantity: [1]
     });
-    this.filteredItems = this.salesForm.get('searchProduct')!.valueChanges.pipe(
+    this.salesForm.get('searchProduct')!.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
-    )
+    ).subscribe(items => {
+      this.filteredItems = items
+    })
   }
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
     this.loadInventory();
-    this.filteredItems = this.salesForm.get('searchProduct')!.valueChanges.pipe(
+    this.salesForm.get('searchProduct')!.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
-    );
+    ).subscribe(items => {
+      this.filteredItems = items
+    })
+    ;
     this.dataSource.data = this.cartItems;
   }
 

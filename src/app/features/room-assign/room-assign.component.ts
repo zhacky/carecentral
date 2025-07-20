@@ -20,6 +20,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { forkJoin } from 'rxjs';
 import {PatientService} from '../../core/services/patient.service';
 import {RoomService} from '../../core/services/room.service';
+import {PageTemplateComponent} from '../../shared/components/page-template/page-template.component';
 
 @Component({
   selector: 'app-room',
@@ -36,7 +37,8 @@ import {RoomService} from '../../core/services/room.service';
     RouterLink,
     FormsModule,
     NgClass,
-    CommonModule
+    CommonModule,
+    PageTemplateComponent
   ],
   templateUrl: './room-assign.component.html',
   standalone: true,

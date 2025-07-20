@@ -17,6 +17,7 @@ import {
   MatTableDataSource
 } from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
+import {PageTemplateComponent} from '../../shared/components/page-template/page-template.component';
 
 @Component({
   selector: 'app-inventory',
@@ -35,7 +36,8 @@ import {MatPaginator} from '@angular/material/paginator';
     MatRow,
     MatHeaderRowDef,
     MatRowDef,
-    MatPaginator
+    MatPaginator,
+    PageTemplateComponent
   ],
   standalone: true
 })

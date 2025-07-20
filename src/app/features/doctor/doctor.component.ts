@@ -16,6 +16,7 @@ import {NgClass} from '@angular/common';
 import {Router, RouterLink} from '@angular/router';
 import {DoctorService} from '../../core/services/doctor.service';
 import {Doctor, DoctorStatus} from '../../core/models/doctor.model';
+import {PageTemplateComponent} from '../../shared/components/page-template/page-template.component';
 
 @Component({
   selector: 'app-doctor',
@@ -32,6 +33,7 @@ import {Doctor, DoctorStatus} from '../../core/models/doctor.model';
     FormsModule,
     NgClass,
     RouterLink,
+    PageTemplateComponent
   ],
   templateUrl: './doctor.component.html',
   standalone: true,
