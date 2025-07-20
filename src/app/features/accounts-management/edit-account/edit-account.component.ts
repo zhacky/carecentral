@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../../../core/services/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgFor } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -32,7 +32,7 @@ export class EditAccountComponent implements OnInit {
     this.userId = this.route.snapshot.paramMap.get('id') || '';
     if (this.userId) {
       this.fetchRoles();
-      this.fetchUser();    
+      this.fetchUser();
     }
   }
 
