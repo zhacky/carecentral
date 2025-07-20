@@ -12,41 +12,42 @@ import { SettingsComponent } from './features/settings/settings.component';
 import { ReportComponent } from './features/report/report.component';
 import { InventoryComponent } from './features/inventory/inventory.component';
 import { AddPatientDialogComponent } from './shared/components/patient-dialog/patient-dialog.component';
-import { AddInventoryComponent } from './shared/components/add-inventory/add-inventory.component';
-import { EditInventoryComponent } from './shared/components/edit-inventory/edit-inventory.component';
-import { AddDoctorComponent } from './shared/components/add-doctor/add-doctor.component';
+import { AddInventoryComponent } from './features/inventory/add-inventory/add-inventory.component';
+import { EditInventoryComponent } from './features/inventory/edit-inventory/edit-inventory.component';
+import { AddDoctorComponent } from './features/doctor/add-doctor/add-doctor.component';
 import { AuthGuard } from './core/auth/login/route.guard';
 import { RoomComponent } from './features/room/room.component';
-import { AddRoomComponent } from './shared/components/add-room/add-room.component';
+import { AddRoomComponent } from './features/room/add-room/add-room.component';
 import { RoomAssignComponent } from './features/room-assign/room-assign.component';
-import { AddRoomAssignComponent } from './shared/components/add-room-assign/add-room-assign.component';
-import { PatientDetailsComponent } from './shared/components/patient-details/patient-details.component';
-import { EditDoctorComponent } from './shared/components/edit-doctor/edit-doctor.component';
-import { EditPatientComponent } from './shared/components/patient-edit/patient-edit.component';
-import { DoctorDetailsComponent } from './shared/components/doctor-details/doctor-details.component';
-import { RoomDetailsComponent } from './shared/components/room-details/room-details.component';
-import { RoomAssignDetailsComponent } from './shared/components/room-assign-details/room-assign-details.component';
-import { EditRoomComponent } from './shared/components/edit-room/edit-room.component';
+import { AddRoomAssignComponent } from './features/room-assign/add-room-assign/add-room-assign.component';
+import { PatientDetailsComponent } from './features/patient-information/patient-details/patient-details.component';
+import { EditDoctorComponent } from './features/doctor/edit-doctor/edit-doctor.component';
+import { EditPatientComponent } from './features/patient-information/patient-edit/patient-edit.component';
+import { DoctorDetailsComponent } from './features/doctor/doctor-details/doctor-details.component';
+import { RoomDetailsComponent } from './features/room/room-details/room-details.component';
+import { RoomAssignDetailsComponent } from './features/room-assign/room-assign-details/room-assign-details.component';
+import { EditRoomComponent } from './features/room/edit-room/edit-room.component';
 import { UnauthorizedComponent } from './core/auth/login/unauthorized.component';
 import { RoleGuard } from './core/auth/login/role.guard';
 import { BillingComponent } from './features/billing/billing.component';
 import { PhilhealthComponent } from './features/philhealth/philhealth.component';
-import { PhilhealthDetailsComponent } from './shared/components/philhealth-details/philhealth-details.component';
+import { PhilhealthDetailsComponent } from './features/philhealth/philhealth-details/philhealth-details.component';
 import { LoginGuard } from './core/auth/login/login.guard';
-import { AddPhilhealthComponent } from './shared/components/add-philhealth/add-philhealth.component';
-import { EditPhilhealthComponent } from './shared/components/edit-philhealth/edit-philhealth.component';
+import { AddPhilhealthComponent } from './features/philhealth/add-philhealth/add-philhealth.component';
+import { EditPhilhealthComponent } from './features/philhealth/edit-philhealth/edit-philhealth.component';
 import { SignUpComponent } from './core/auth/sign-up/sign-up.component';
 import { SuccessMessageComponent } from './shared/components/success-card/success-message/success-message.component';
 import { FormSubmissionGuard } from './core/auth/login/form.guard';
-import { EditAccountComponent } from './shared/components/edit-account/edit-account/edit-account.component';
-import { EditRoomAssignComponent } from './shared/components/edit-room-assign/edit-room-assign.component';
+import { EditAccountComponent } from './features/accounts-management/edit-account/edit-account.component';
+import { EditRoomAssignComponent } from './features/room-assign/edit-room-assign/edit-room-assign.component';
 import { ChangePasswordComponent } from './features/change-password/change-password.component';
 import { BillingDetailsComponent } from './features/billing/billing-details/billing-details.component';
 import { BillingEditComponent } from './features/billing/billing-edit/billing-edit.component';
 import { BillingAddComponent } from './features/billing/billing-add/billing-add.component';
 import { PharmacyComponent } from './features/pharmacy/pharmacy.component';
 import {LaboratoryComponent} from './features/laboratory/laboratory.component';
-import {AddLaboratoryComponent} from './shared/components/add-laboratory/add-laboratory.component';
+import {AddLaboratoryComponent} from './features/laboratory/add-laboratory/add-laboratory.component';
+import {PatientRecordComponent} from './features/patient-record/patient-record.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -130,6 +131,12 @@ export const routes: Routes = [
       {
         path: 'patient',
         component: PatientInformationComponent,
+        canActivate: [RoleGuard],
+        data: { roles: ['ROLE_ADMIN', 'ROLE_NURSE', 'ROLE_DOCTOR'] },
+      },
+      {
+        path: 'patientRecords',
+        component: PatientRecordComponent,
         canActivate: [RoleGuard],
         data: { roles: ['ROLE_ADMIN', 'ROLE_NURSE', 'ROLE_DOCTOR'] },
       },

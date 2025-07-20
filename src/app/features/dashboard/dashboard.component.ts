@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {PatientvisitComponent} from './patientvisit/patientvisit.component';
-import {EarningsComponent} from '../../shared/components/dashboard/earnings/earnings.component';
 import {NewPatientsComponent} from '../../shared/components/dashboard/new-patients/new-patients.component';
 import {AvailableBedsComponent} from '../../shared/components/dashboard/available-beds/available-beds.component';
 import {QuickLinksComponent} from '../../shared/components/dashboard/quick-links/quick-links.component';
@@ -13,7 +12,6 @@ import {QuickLinksComponent} from '../../shared/components/dashboard/quick-links
     FormsModule,
     MatSidenavModule,
     PatientvisitComponent,
-    EarningsComponent,
     NewPatientsComponent,
     AvailableBedsComponent,
     QuickLinksComponent

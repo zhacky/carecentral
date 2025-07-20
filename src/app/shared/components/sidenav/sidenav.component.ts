@@ -83,7 +83,18 @@ export class SidenavComponent {
     {
       icon: 'assets/Icons/icon_patient.svg',
       label: 'Patients',
-      route: 'patient',
+      children: [
+        {
+          icon: 'assets/Icons/icon_dot.svg',
+          label: 'Patient List',
+          route: 'patient',
+        },
+        {
+          icon: 'assets/Icons/icon_dot.svg',
+          label: 'Patient Records',
+          route: 'patientRecords',
+        }
+      ]
     },
     {
       icon: 'assets/Icons/icon_room.svg',
