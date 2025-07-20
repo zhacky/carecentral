@@ -1,17 +1,8 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {
-  MatCellDef,
-  MatColumnDef, MatHeaderCellDef,
-  MatHeaderRow,
-  MatHeaderRowDef,
-  MatRowDef,
-  MatTable,
-  MatTableDataSource
-} from '@angular/material/table';
+import {MatCellDef, MatColumnDef, MatHeaderCellDef, MatTable, MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {PatientRecord} from '../../core/models/patient-record.model';
-import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
 
 @Component({
