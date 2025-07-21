@@ -10,6 +10,9 @@ import {MatOption} from '@angular/material/core';
 import {MatSelect} from '@angular/material/select';
 import {NgForOf, NgIf} from '@angular/common';
 import {Patient} from '../../core/models/patient.model';
+import {MatButton} from '@angular/material/button';
+import {PatientService} from '../../core/services/patient.service';
+import {PatientRecordService} from '../../core/services/patient-record.service';
 
 @Component({
   selector: 'app-patient-record',
@@ -28,7 +31,8 @@ import {Patient} from '../../core/models/patient.model';
     MatOption,
     MatSelect,
     NgForOf,
-    NgIf
+    NgIf,
+    MatButton
   ],
   standalone: true
 })
@@ -36,14 +40,22 @@ export class PatientRecordComponent implements AfterViewInit {
   patients: Patient[] = [];
   selectedPatientId: number | null = null;
   searchTerm: string = '';
-
-  constructor(private router: Router,) {
-  }
-  dataSource = new MatTableDataSource<PatientRecord>([]);
+  dataSource: MatTableDataSource<PatientRecord>;
 
   displayedColumns: string[] = ['patientId', 'visitDate'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(
+    private patientService: PatientService,
+    private patientRecordService: PatientRecordService,
+    private router: Router) {
+
+    this.dataSource = new MatTableDataSource<PatientRecord>([]);
+
+  }
+
+
 
 
   //region Events
@@ -57,6 +69,7 @@ export class PatientRecordComponent implements AfterViewInit {
 
     }
   }
+
   //endregion
 
 
@@ -69,6 +82,6 @@ export class PatientRecordComponent implements AfterViewInit {
   }
 
   addPatientRecord(): void {
-    this.router.navigate(['/common/patient-record/add'], { queryParams: { patientId: this.selectedPatientId } });
+    this.router.navigate(['/common/patient-record/add'], {queryParams: {patientId: this.selectedPatientId}});
   }
 }
