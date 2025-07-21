@@ -13,6 +13,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {ConfirmDialogComponent} from '../../shared/components/dialog/confirm-dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {SearchInputComponent} from './accounts/search-input/search-input.component';
+import {PageTemplateComponent} from '../../shared/components/page-template/page-template.component';
 
 /**
  * @title Table with pagination
@@ -22,7 +23,7 @@ import {SearchInputComponent} from './accounts/search-input/search-input.compone
   styleUrl: 'accounts.component.css',
   templateUrl: 'accounts.component.html',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, MatChipsModule, CommonModule, FormsModule, SearchInputComponent]
+  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule, MatChipsModule, CommonModule, FormsModule, SearchInputComponent, PageTemplateComponent]
 })
 
 export class AccountsManagementComponent implements AfterViewInit, OnInit {

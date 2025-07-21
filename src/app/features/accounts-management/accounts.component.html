@@ -1,53 +1,45 @@
-<div class="p-6 w-full rounded-lg overflow-hidden">
-  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-
-
-<app-search-input (search)="applyFilter($event)"></app-search-input>
-
-    <div class="">
-      <table mat-table [dataSource]="dataSource" class="w-full table-auto text-sm text-left border border-gray-200">
-
-        <ng-container matColumnDef="position">
-          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> ID</th>
-          <td *matCellDef="let element"
-              class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium"> {{ element.position }}
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="lastName">
-          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Last Name</th>
-          <td *matCellDef="let element"
-              class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium"> {{ element.lastName }}
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="firstName">
-          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> First Name</th>
-          <td *matCellDef="let element"
-              class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium"> {{ element.firstName }}
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="email">
-          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold">Email</th>
-          <td *matCellDef="let element"
-              class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium"> {{ element.email }}
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="username">
-          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Username</th>
-          <td *matCellDef="let element"
-              class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium"> {{ element.username }}
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="status">
-          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Status</th>
-          <td *matCellDef="let element"
-              class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium">
+<app-page-template>
+  <div page-header>
+    <app-search-input (search)='applyFilter($event)'></app-search-input>
+  </div>
+  <div page-body>
+    <table mat-table [dataSource]='dataSource' class='w-full table-auto text-sm text-left border border-gray-200'>
+      <ng-container matColumnDef='position'>
+        <th *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'> ID</th>
+        <td *matCellDef='let element'
+            class='py-4 px-6 border-b border-gray-200 text-gray-600 font-medium'> {{ element.position }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef='lastName'>
+        <th *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'> Last Name</th>
+        <td *matCellDef='let element'
+            class='py-4 px-6 border-b border-gray-200 text-gray-600 font-medium'> {{ element.lastName }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef='firstName'>
+        <th *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'> First Name</th>
+        <td *matCellDef='let element'
+            class='py-4 px-6 border-b border-gray-200 text-gray-600 font-medium'> {{ element.firstName }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef='email'>
+        <th *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'>Email</th>
+        <td *matCellDef='let element'
+            class='py-4 px-6 border-b border-gray-200 text-gray-600 font-medium'> {{ element.email }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef='username'>
+        <th *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'> Username</th>
+        <td *matCellDef='let element'
+            class='py-4 px-6 border-b border-gray-200 text-gray-600 font-medium'> {{ element.username }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef='status'>
+        <th *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'> Status</th>
+        <td *matCellDef='let element'
+            class='py-4 px-6 border-b border-gray-200 text-gray-600 font-medium'>
               <span
-              [ngClass]="
+                [ngClass]="
                 (element.status === 'INACTIVE') ? 'bg-red-500 text-white px-3 py-1 rounded text-xs' :
                 (element.status === 'ACTIVE') ? 'bg-green-500 text-white px-3 py-1 rounded text-xs' :
                 (element.status === 'PENDING') ? 'bg-yellow-500 text-white px-3 py-1 rounded text-xs' :
@@ -55,58 +47,52 @@
                 (element.status === 'DEACTIVATED') ? 'bg-rose-600 text-white px-3 py-1 rounded text-xs' :
                 ''
               "
-            >
+              >
               {{ element.status }}
             </span>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="role">
-          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Role</th>
-          <td *matCellDef="let element"
-              class="py-4 px-6 border-b border-gray-200 text-gray-600 font-medium"> {{ element.role }}
-          </td>
-        </ng-container>
-
-
-        <!-- Actions Column -->
-        <ng-container matColumnDef="action">
-          <th *matHeaderCellDef class="py-3 px-6 border-b -200 text-gray-600 font-bold"> Action</th>
-          <td *matCellDef="let element" class="py-4 px-6 border-b border-gray-200">
-            <div class="flex justify-start space-x-2">
-              <a class="icon-edit">
-                 <img src="assets/Icons/icon_edit.svg" alt="Edit">
-              </a>
-              <a
-                 class="icon-delete"
-                 (click)="setRoleAndStatus(element.id)"
-                 (keyup.enter)="setRoleAndStatus(element.id)"
-                 tabindex="0"
-                 role="button"
-                 aria-label="Set Role and Status"
-                 >
-                 <img src="assets/Icons/icon_key.svg" alt="Key">
-              </a>
-              <a
-                 class="icon-delete"
-                 (click)="deleteUser(element.id)"
-                 (keyup.enter)="deleteUser(element.id)"
-                 tabindex="0"
-                 role="button"
-                  aria-label="Delete User"
-                 >
-                 <img src="assets/Icons/icon_delete.svg" alt="Delete">
-              </a>
-            </div>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="bg-gray-50"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover:bg-gray-50 transition"></tr>
-      </table>
-
-      <!-- Paginator -->
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-    </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef='role'>
+        <th *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'> Role</th>
+        <td *matCellDef='let element'
+            class='py-4 px-6 border-b border-gray-200 text-gray-600 font-medium'> {{ element.role }}
+        </td>
+      </ng-container>
+      <!-- Actions Column -->
+      <ng-container matColumnDef='action'>
+        <th *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'> Action</th>
+        <td *matCellDef='let element' class='py-4 px-6 border-b border-gray-200'>
+          <div class='flex justify-start space-x-2'>
+            <a class='icon-edit'>
+              <img src='assets/Icons/icon_edit.svg' alt='Edit'>
+            </a>
+            <a
+              class='icon-delete'
+              (click)='setRoleAndStatus(element.id)'
+              (keyup.enter)='setRoleAndStatus(element.id)'
+              tabindex='0'
+              role='button'
+              aria-label='Set Role and Status'
+            >
+              <img src='assets/Icons/icon_key.svg' alt='Key'>
+            </a>
+            <a
+              class='icon-delete'
+              (click)='deleteUser(element.id)'
+              (keyup.enter)='deleteUser(element.id)'
+              tabindex='0'
+              role='button'
+              aria-label='Delete User'
+            >
+              <img src='assets/Icons/icon_delete.svg' alt='Delete'>
+            </a>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef='displayedColumns' class='bg-gray-50'></tr>
+      <tr mat-row *matRowDef='let row; columns: displayedColumns;' class='hover:bg-gray-50 transition'></tr>
+    </table>
+    <!-- Paginator -->
+    <mat-paginator [pageSizeOptions]='[5, 10, 20]' showFirstLastButtons></mat-paginator>
   </div>
-</div>
+</app-page-template>

@@ -15,6 +15,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {Router, RouterLink} from '@angular/router';
 import {PhilhealthService} from '../../core/services/philhealth.service';
 import {Philhealth} from '../../core/models/philhealth.model';
+import {PageTemplateComponent} from '../../shared/components/page-template/page-template.component';
 
 @Component({
   selector: 'app-philhealth',
@@ -29,7 +30,8 @@ import {Philhealth} from '../../core/models/philhealth.model';
     MatHeaderRow,
     MatRow,
     FormsModule,
-    RouterLink
+    RouterLink,
+    PageTemplateComponent
   ],
   templateUrl: './philhealth.component.html',
   standalone: true,

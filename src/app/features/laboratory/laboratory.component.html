@@ -1,5 +1,5 @@
-<div class="container mx-auto p-4">
-  <div class="flex justify-between items-center mb-4">
+<app-page-template>
+  <div class="flex justify-between items-center mb-4" page-header>
     <h1 class="text-2xl font-bold">Laboratory Records</h1>
     <button
       mat-raised-button
@@ -22,7 +22,7 @@
     </mat-form-field>
   </div>
 
-  <div class="mat-elevation-z8">
+  <div class="mat-elevation-z8" page-body>
     <table mat-table [dataSource]="dataSource" class="w-full">
       <!-- Lab ID Column -->
       <ng-container matColumnDef="labId">
@@ -86,4 +86,4 @@
     >
     </mat-paginator>
   </div>
-</div>
+</app-page-template>
