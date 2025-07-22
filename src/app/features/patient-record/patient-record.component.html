@@ -1,7 +1,7 @@
 <app-page-template>
   <!-- Card Header -->
   <div class='flex items-center justify-between md:flex-row' page-header>
-    <div class='max-w-lg'>
+    <div class='flex items-center'>
       <!-- Patient Selector -->
       <mat-form-field class='w-auto' appearance='fill'>
         <mat-label>Select Patient</mat-label>
@@ -12,7 +12,7 @@
         </mat-select>
       </mat-form-field>
       <button mat-raised-button color='primary' (click)='addPatientRecord()' *ngIf='selectedPatientId' class='ml-4'>
-        Add Billing
+        Add Patient Record
       </button>
     </div>
     <!-- Search Bar -->
@@ -33,48 +33,68 @@
   </div>
   <!-- Mat Table -->
   <div class='' page-body>
-    <table mat-table [dataSource]='dataSource' class='w-full table-auto text-sm text-left border border-gray-200'>
-      <ng-container matColumnDef='patientId'>
-        <th *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'> Patient ID</th>
-        <td *matCellDef='let element'
-            class='py-4 px-6 border-b border-gray-200 text-gray-600 font-medium'> {{ element.patientId }}
+    <table mat-table [dataSource]='dataSource' class='w-full table-auto text-sm text-left border border-gray-200'
+           *ngIf='dataSource.data.length > 0'>
+      <!-- Patient Record ID Column -->
+      <ng-container matColumnDef='patientRecordId'>
+        <th mat-header-cell *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'> Patient Record ID</th>
+        <td mat-cell *matCellDef='let element'
+            class='py-4 px-6 border-b border-gray-200 text-gray-600 font-medium'> {{ element.patientRecordId }}
         </td>
       </ng-container>
-      <ng-container matColumnDef='firstName'>
-        <th *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'> First Name</th>
-        <td *matCellDef='let element'
-            class='py-4 px-6 border-b border-gray-200 text-gray-600 font-medium'> {{ element.firstName }}
+      <!-- Visit Date Column -->
+      <ng-container matColumnDef='visitDate'>
+        <th mat-header-cell *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'> Visit Date</th>
+        <td mat-cell *matCellDef='let element'
+            class='py-4 px-6 border-b border-gray-200 text-gray-600 font-medium'> {{ element.visiteDate }}
         </td>
       </ng-container>
-      <ng-container matColumnDef='lastName'>
-        <th *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'> Last Name</th>
-        <td *matCellDef='let element'
-            class='py-4 px-6 border-b border-gray-200 text-gray-600 font-medium'> {{ element.lastName }}
+      <!-- Diagnosis Column -->
+      <ng-container matColumnDef='diagnosis'>
+        <th mat-header-cell *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'> Diagnosis</th>
+        <td mat-cell *matCellDef='let element'
+            class='py-4 px-6 border-b border-gray-200 text-gray-600 font-medium'> {{ element.diagnosis }}
         </td>
       </ng-container>
-      <ng-container matColumnDef='dateOfBirth'>
-        <th *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'> Birthdate</th>
-        <td *matCellDef='let element'
-            class='py-4 px-6 border-b border-gray-200 text-gray-600 font-medium'> {{ element.dateOfBirth }}
+      <!-- Prescription Column -->
+      <ng-container matColumnDef='prescription'>
+        <th mat-header-cell *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'> Prescription</th>
+        <td mat-cell *matCellDef='let element'
+            class='py-4 px-6 border-b border-gray-200 text-gray-600 font-medium'> {{ element.prescription }}
         </td>
       </ng-container>
-      <ng-container matColumnDef='gender'>
-        <th *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'> Gender</th>
-        <td *matCellDef='let element'
-            class='py-4 px-6 border-b border-gray-200 text-gray-600 font-medium'> {{ element.gender }}
+      <!-- Note Column -->
+      <ng-container matColumnDef='note'>
+        <th mat-header-cell *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'> Note</th>
+        <td mat-cell *matCellDef='let element'
+            class='py-4 px-6 border-b border-gray-200 text-gray-600 font-medium'> {{ element.note }}
         </td>
       </ng-container>
       <!-- Actions Column -->
       <ng-container matColumnDef='actions'>
-        <th *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'> Action</th>
-        <td *matCellDef='let element' class='py-4 px-6 border-b border-gray-200'>
-          <div class='flex justify-start space-x-2'>
-          </div>
+        <th mat-header-cell *matHeaderCellDef class='py-3 px-6 border-b -200 text-gray-600 font-bold'> Action</th>
+        <td mat-cell *matCellDef='let element'
+            class='py-4 px-6 border-b border-gray-200'>
+          <button (click)='viewPatientRecordDetails(element)'
+                  class='text-blue-600 hover:text-blue-500 duration-150 cursor-pointer'>
+            <i class='fas fa-eye w-5 h-5'></i>
+          </button>
+          <button (click)='editPatientRecord(element)'
+                  class='text-blue-600 hover:text-blue-500 duration-150 cursor-pointer ml-2'>
+            <i class='fas fa-edit w-5 h-5'></i>
+          </button>
+          <button (click)='deletePatientRecord(element)'
+                  class='text-red-600 hover:text-red-500 duration-150 cursor-pointer ml-2'>
+            <i class='fas fa-trash w-5 h-5'></i>
+          </button>
         </td>
       </ng-container>
-      <!--        <tr mat-header-row *matHeaderRowDef='displayedColumns' class='bg-gray-50'></tr>-->
-      <!--        <tr mat-row *matRowDef='let row; columns: displayedColumns;' class='hover:bg-gray-50 transition'></tr>-->
+      <tr mat-header-row *matHeaderRowDef='displayedColumns' class='bg-gray-50'></tr>
+      <tr mat-row *matRowDef='let row; columns: displayedColumns;' class='hover:bg-gray-50 transition'></tr>
     </table>
+    <p *ngIf='dataSource.data.length === 0' class='text-gray-500 mt-4 p-6'>
+      No patient records for the selected patient.
+    </p>
     <!-- Paginator -->
     <mat-paginator [pageSizeOptions]='[5, 10, 20]' showFirstLastButtons></mat-paginator>
   </div>

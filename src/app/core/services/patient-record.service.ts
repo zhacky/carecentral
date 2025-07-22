@@ -13,7 +13,7 @@ export class PatientRecordService {
   constructor(private http: HttpClient) {}
 
   getPatientRecordsForPatient(patientId: number): Observable<PatientRecord[]> {
-    return this.http.get<PatientRecord[]>(`${this.apiUrl}/patients/${patientId}/patientRecords`);
+    return this.http.get<PatientRecord[]>(`${this.apiUrl}/patients/${patientId}/patient-records`);
   }
 
   getPatientRecordById(patientRecordId: number): Observable<PatientRecord> {
