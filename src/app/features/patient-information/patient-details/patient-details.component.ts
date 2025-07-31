@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { PatientService } from '../../../core/services/patient.service';
 import { Patient } from '../../../core/models/patient.model';
 import { NgForOf, NgIf } from '@angular/common';
+import {PatientRecord} from '../../../core/models/patient-record.model';
+import {PatientRecordService} from '../../../core/services/patient-record.service';
 
 interface InfoItem {
   label: string;
@@ -23,13 +25,27 @@ export class PatientDetailsComponent implements OnInit {
   familyInfo: InfoItem[] = [];
   emergencyInfo = { fullName: '', address: '' };
   patientId!: number;
+  selectedTab = 'patientInformation';
+  showDropdown = false;
+  patientRecordList: InfoItem[][] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private patientService: PatientService
+    private patientService: PatientService,
+    private patientRecordService: PatientRecordService
   ) {}
 
-  showDropdown = false;
+  tabs = [
+    {key: 'patientInformation', label: 'Patient Information', icon: 'fa fa-user',},
+    {key: 'patientRecords', label: 'Patient Records', icon: 'fa fa-book',},
+    {key: 'patientPhilhealth', label: 'PhilHealth', icon: 'fa fa-medkit',},
+    {key: 'patientChart', label: 'PatientChart', icon: 'fa fa-wifi',},
+  ];
+
+
+  selectTab(tab: string) {
+    this.selectedTab = tab;
+  }
 
   toggleDropdown() {
     this.showDropdown = !this.showDropdown;
@@ -43,14 +59,6 @@ export class PatientDetailsComponent implements OnInit {
     this.showDropdown = false;
     const patientId = this.patientId; // make sure this ID is available
 
-    // const handleBlob = (blob: Blob, filename: string) => {
-    //   const url = window.URL.createObjectURL(blob);
-    //   const a = document.createElement('a');
-    //   a.href = url;
-    //   a.download = filename;
-    //   a.click();
-    //   window.URL.revokeObjectURL(url);
-    // };
     const openPdfPreview = (blob: Blob) => {
       const url = window.URL.createObjectURL(blob);
       window.open(url, '_blank'); // Open PDF in new tab
@@ -120,6 +128,34 @@ export class PatientDetailsComponent implements OnInit {
           console.error('Failed to load patient:', err);
         },
       });
+      this.patientRecordService.getPatientRecordsForPatient(id).subscribe({
+        next: (records: PatientRecord[]) => {
+          this.patientRecordList = records.map(record => {
+            return [
+              {label: 'Visit Date', value: record.visitDate },
+              {label: 'Note', value: record.note }
+            ]
+          });
+        },
+        error: (err) => {
+          console.error('Failed to load patient records:', err);
+        },
+      });
     }
+  }
+
+
+  editPersonalInfo() {
+    // go to /patient/edit/:id
+    const id = this.patientId;
+    if (id) {
+      window.location.href = `/common/patient/edit/${id}`;
+    } else {
+      console.error('Patient ID is not available for editing.');
+    }
+  }
+
+  addRecord() {
+
   }
 }

@@ -1,125 +1,162 @@
 <div class="m-6 p-6 bg-white rounded-2xl shadow-lg space-y-8">
 
-  <!-- Personal Information -->
-  <div>
-    <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Patient Information</h2>
-    <div class="flex justify-between items-center mb-6">
-      <!-- Go Back Button -->
-      <button (click)="goBack()" class="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium rounded-lg shadow-sm">
-        ← Go Back
+  <div class="flex justify-between items-center mb-6">
+    <!-- Go Back Button -->
+    <button (click)="goBack()"
+            class="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium rounded-lg shadow-sm">
+      ← Go Back
+    </button>
+
+    <!-- Print Dropdown -->
+    <div class="relative" tabindex="0">
+      <button
+        (click)="toggleDropdown()"
+        class="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg shadow-sm"
+      >
+        Print
+        <!-- ▼ Icon -->
+        <svg
+          class="w-4 h-4 transition-transform duration-200"
+          [class.rotate-180]="showDropdown"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
       </button>
 
-      <!-- Print Dropdown -->
-      <div class="relative" tabindex="0">
+      <div
+        *ngIf="showDropdown"
+        class="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-lg z-10"
+      >
         <button
-          (click)="toggleDropdown()"
-          class="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg shadow-sm"
+          class="w-full flex items-center gap-2 text-left px-4 py-2 hover:bg-gray-100 hover:text-blue-600 text-sm"
+          (click)="printPdf('patient')"
         >
-          Print
-          <!-- ▼ Icon -->
-          <svg
-            class="w-4 h-4 transition-transform duration-200"
-            [class.rotate-180]="showDropdown"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
+          <span class="text-xs">•</span>
+          Patient Data Sheet
         </button>
 
-        <div
-          *ngIf="showDropdown"
-          class="absolute right-0 mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-lg z-10"
+        <button
+          class="w-full flex items-center gap-2 text-left px-4 py-2 hover:bg-gray-100 hover:text-blue-600 text-sm"
+          (click)="printPdf('emergency')"
         >
-          <button
-            class="w-full flex items-center gap-2 text-left px-4 py-2 hover:bg-gray-100 hover:text-blue-600 text-sm"
-            (click)="printPdf('patient')"
-          >
-            <span class="text-xs">•</span>
-            Patient Data Sheet
-          </button>
+          <span class="text-xs">•</span>
+          Emergency Room Info
+        </button>
 
-          <button
-            class="w-full flex items-center gap-2 text-left px-4 py-2 hover:bg-gray-100 hover:text-blue-600 text-sm"
-            (click)="printPdf('emergency')"
-          >
-            <span class="text-xs">•</span>
-            Emergency Room Info
-          </button>
+        <button
+          class="w-full flex items-center gap-2 text-left px-4 py-2 hover:bg-gray-100 hover:text-blue-600 text-sm"
+          (click)="printPdf('surgicalTreatment')"
+        >
+          <span class="text-xs">•</span>
+          Authorization Surgical Treatment
+        </button>
+      </div>
+    </div>
+  </div>
 
-          <button
-            class="w-full flex items-center gap-2 text-left px-4 py-2 hover:bg-gray-100 hover:text-blue-600 text-sm"
-            (click)="printPdf('surgicalTreatment')"
-          >
-            <span class="text-xs">•</span>
-            Authorization Surgical Treatment
-          </button>
+  <div class="flex border-b mb-4">
+    <button
+      *ngFor="let tab of tabs"
+      (click)="selectTab(tab.key)"
+      [class.text-blue-600]="selectedTab === tab.key"
+      [class.border-blue-600]="selectedTab === tab.key"
+      class="px-4 py-2 text-gray-600 border-2 hover:text-blue-600">
+      {{ tab.label}}
+    </button>
+  </div>
+  <div *ngIf="selectedTab === 'patientInformation'" class="space-y-6">
+    <!-- Personal Information -->
+    <div>
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Patient Information</h2>
+        <button (click)="editPersonalInfo()"
+          class="rounded-lg py-2 px-4 text-blue-500 bg-blue-100 hover:bg-blue-200 hover:text-blue-900">
+          <i class="fas fa-edit"></i>
+          Edit</button>
+      </div>
+
+
+      <!-- Name Row -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <div class="border rounded-lg p-3">
+          <p class="text-xs text-gray-500">First Name</p>
+          <p class="font-medium text-gray-700">{{ personalInfo.firstName }}</p>
+        </div>
+        <div class="border rounded-lg p-3">
+          <p class="text-xs text-gray-500">Middle Name</p>
+          <p class="font-medium text-gray-700">{{ personalInfo.middleName }}</p>
+        </div>
+        <div class="border rounded-lg p-3">
+          <p class="text-xs text-gray-500">Last Name</p>
+          <p class="font-medium text-gray-700">{{ personalInfo.lastName }}</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div *ngFor="let item of personalInfoList" class="border rounded-lg p-3">
+          <p class="text-xs text-gray-500">{{ item.label }}</p>
+          <p class="font-medium text-gray-700">{{ item.value }}</p>
         </div>
       </div>
     </div>
 
-
-    <!-- Name Row -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-      <div class="border rounded-lg p-3">
-        <p class="text-xs text-gray-500">First Name</p>
-        <p class="font-medium text-gray-700">{{ personalInfo.firstName }}</p>
-      </div>
-      <div class="border rounded-lg p-3">
-        <p class="text-xs text-gray-500">Middle Name</p>
-        <p class="font-medium text-gray-700">{{ personalInfo.middleName }}</p>
-      </div>
-      <div class="border rounded-lg p-3">
-        <p class="text-xs text-gray-500">Last Name</p>
-        <p class="font-medium text-gray-700">{{ personalInfo.lastName }}</p>
+    <!-- Contact Information -->
+    <div>
+      <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Contact Information</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div *ngFor="let item of contactInfo" class="border rounded-lg p-3">
+          <p class="text-xs text-gray-500">{{ item.label }}</p>
+          <p class="font-medium text-gray-700">{{ item.value }}</p>
+        </div>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div *ngFor="let item of personalInfoList" class="border rounded-lg p-3">
-        <p class="text-xs text-gray-500">{{ item.label }}</p>
-        <p class="font-medium text-gray-700">{{ item.value }}</p>
+    <!-- Family Information -->
+    <div>
+      <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Family Information</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div *ngFor="let item of familyInfo" class="border rounded-lg p-3">
+          <p class="text-xs text-gray-500">{{ item.label }}</p>
+          <p class="font-medium text-gray-700">{{ item.value }}</p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Contact Information -->
-  <div>
-    <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Contact Information</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div *ngFor="let item of contactInfo" class="border rounded-lg p-3">
-        <p class="text-xs text-gray-500">{{ item.label }}</p>
-        <p class="font-medium text-gray-700">{{ item.value }}</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Family Information -->
-  <div>
-    <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Family Information</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div *ngFor="let item of familyInfo" class="border rounded-lg p-3">
-        <p class="text-xs text-gray-500">{{ item.label }}</p>
-        <p class="font-medium text-gray-700">{{ item.value }}</p>
+    <!-- In Case of Emergency -->
+    <div>
+      <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">In Case of Emergency</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="border rounded-lg p-3">
+          <p class="text-xs text-gray-500">Full Name</p>
+          <p class="font-medium text-gray-700">{{ emergencyInfo.fullName }}</p>
+        </div>
+        <div class="border rounded-lg p-3">
+          <p class="text-xs text-gray-500">Address</p>
+          <p class="font-medium text-gray-700">{{ emergencyInfo.address }}</p>
+        </div>
       </div>
     </div>
   </div>
+  <div *ngIf="selectedTab === 'patientRecords'" class="space-y-6">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Patient Records</h2>
+      <button (click)="addRecord()"
+        class="rounded-lg py-2 px-4 text-blue-500 bg-blue-100 hover:bg-blue-200 hover:text-blue-900">
+        <i class="fas fa-plus"></i>
+        Add Record</button>
+    </div>
 
-  <!-- In Case of Emergency -->
-  <div>
-    <h2 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">In Case of Emergency</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="border rounded-lg p-3">
-        <p class="text-xs text-gray-500">Full Name</p>
-        <p class="font-medium text-gray-700">{{ emergencyInfo.fullName }}</p>
-      </div>
-      <div class="border rounded-lg p-3">
-        <p class="text-xs text-gray-500">Address</p>
-        <p class="font-medium text-gray-700">{{ emergencyInfo.address }}</p>
-      </div>
+    <div *ngFor="let record of patientRecordList[0]" class="border rounded-lg p-4 mb-4">
+      <h3 class="text-lg font-semibold text-gray-700">{{ record.label }}</h3>
+      <p class="text-sm text-gray-500">{{ record.label }}</p>
+      <p class="text-xs text-gray-400">{{ record.label }}</p>
     </div>
   </div>
-
+  <div *ngIf="selectedTab === 'patientPhilhealth'" class="space-y-6">
+  </div>
+  <div *ngIf="selectedTab === 'patientChart'" class="space-y-6">
+  </div>
 </div>
