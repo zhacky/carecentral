@@ -5,6 +5,7 @@ import { Patient } from '../../../core/models/patient.model';
 import { NgForOf, NgIf } from '@angular/common';
 import {PatientRecord} from '../../../core/models/patient-record.model';
 import {PatientRecordService} from '../../../core/services/patient-record.service';
+import {AddRecordModalComponent} from './add-record-modal/add-record-modal.component';
 
 interface InfoItem {
   label: string;
@@ -14,7 +15,7 @@ interface InfoItem {
 @Component({
   selector: 'app-patient-details',
   standalone: true,
-  imports: [NgForOf, NgIf],
+  imports: [NgForOf, NgIf, AddRecordModalComponent],
   templateUrl: './patient-details.component.html',
   styleUrl: './patient-details.component.css',
 })
@@ -27,7 +28,8 @@ export class PatientDetailsComponent implements OnInit {
   patientId!: number;
   selectedTab = 'patientInformation';
   showDropdown = false;
-  patientRecordList: InfoItem[][] = [];
+  patientRecords: PatientRecord[] = [];
+  showAddRecordModal = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -130,12 +132,7 @@ export class PatientDetailsComponent implements OnInit {
       });
       this.patientRecordService.getPatientRecordsForPatient(id).subscribe({
         next: (records: PatientRecord[]) => {
-          this.patientRecordList = records.map(record => {
-            return [
-              {label: 'Visit Date', value: record.visitDate },
-              {label: 'Note', value: record.note }
-            ]
-          });
+          this.patientRecords = records;
         },
         error: (err) => {
           console.error('Failed to load patient records:', err);
@@ -156,6 +153,26 @@ export class PatientDetailsComponent implements OnInit {
   }
 
   addRecord() {
+    this.showAddRecordModal = true;
+  }
 
+  closeAddRecordModal() {
+    this.showAddRecordModal = false;
+  }
+  saveNewRecord(newRecord: PatientRecord) {
+    // Optionally, call a service to persist the new record
+    if (this.patientId !== null && this.patientId !== undefined) {
+      this.patientRecordService.addPatientRecord(this.patientId, newRecord).subscribe({
+        next: (record) => {
+          this.patientRecords.push(record);
+          this.showAddRecordModal = false;
+        },
+        error: (err) => {
+          console.error('Failed to save new record:', err);
+        }
+      });
+    }
+    // this.patientRecords.push(newRecord);
+    this.showAddRecordModal = false;
   }
 }

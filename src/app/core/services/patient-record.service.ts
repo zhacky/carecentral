@@ -19,4 +19,8 @@ export class PatientRecordService {
   getPatientRecordById(patientRecordId: number): Observable<PatientRecord> {
     return this.http.get<PatientRecord>(`${this.apiUrl}/patientRecords/${patientRecordId}`);
   }
+
+  addPatientRecord(patientId: number, record: PatientRecord): Observable<PatientRecord> {
+    return this.http.post<PatientRecord>(`${this.apiUrl}/patients/${patientId}/patient-records`, record);
+  }
 }
